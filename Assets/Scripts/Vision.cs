@@ -1,45 +1,47 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/* Vision.cs
+ * 
+ * Creates a cone of vision from the scripted object to the player using raycasts with a give angle and distance.
+ * - Joel Lee
+ */
 public class Vision : MonoBehaviour {
-    public float viewAngle;
-    public float viewDist = 50.0f;
+    public float viewAngle;				//The angle of our cone. Should be half the intended since we calculate the angle of between the player and the foward.
+    public float viewDist = 50.0f;		//How far our raycast will be drwn
 
-    private RaycastHit hit;
-    private Vector3 playerLoc;
-    private GameObject player;
-	// Use this for initialization
+    private RaycastHit _hit;
+    private Vector3 _playerLoc, _rayDirection, _startVec, _startVecFwd;
+    private GameObject _player;
+
 	void Start () {
-        player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag("Player");
     }
 	
 	// Update is called once per frame
 	void Update () {
-        Vector3 startVec = transform.position;
-        Vector3 startVecFwd = transform.forward;    //the raycast direction
+        _startVec = transform.position;
+		_startVecFwd = transform.right;    //the raycast direction. right is in the direction of the X axis.
 
-        //construct a new vector2, since position returns a vector3
-        playerLoc = new Vector2(player.transform.position.x , player.transform.position.y);
+		_playerLoc = _player.transform.position;
+        _rayDirection = _playerLoc - _startVec;
 
-        Vector3 rayDirection = playerLoc - startVec;
-        //Debug.DrawRay(startVec, rayDirection, Color.red, 5.0f);
-        //raycast to the player, checking our angle with the first condition and the distance/hit with the second
-        if ((Vector3.Angle(rayDirection, startVecFwd)) < viewAngle)
+		Debug.DrawRay(_startVec, _startVecFwd, Color.black, 1.0f); //Black line to show our ""forward"" (which is actually the right since we are in 2d)
+		Debug.DrawRay(_startVec, _rayDirection, Color.red, 5.0f); 
+
+        //raycast to the player, checking our angle with the first condition and the distance/hit with the second (Raycast returns a boolean)
+		//please use the 3D colliders over the 2D. it breaks raycasts for some unknown reason.
+		if ((Vector3.Angle(_rayDirection, _startVecFwd)) < viewAngle && Physics.Raycast(_startVec, _rayDirection, out _hit, viewDist))
         {
-            Debug.Log("A");
-            if (Physics.Raycast(startVec, rayDirection, out hit, viewDist))
+			//Debug.Log(hit.collider.name);
+			Debug.DrawRay(_startVec, _rayDirection, Color.green, 5.0f);
+            if (_hit.collider.gameObject == _player)
+			{
+            	Debug.DrawRay(_startVec, _rayDirection, Color.blue, 5.0f);
+                Debug.Log("I see the player.");
+			}
+            else
             {
-                Debug.Log("B");
-                //Debug.DrawRay(startVec, rayDirection, Color.green, 5.0f);
-                if (hit.collider.gameObject == player.gameObject)
-                {
-                    Debug.DrawRay(startVec, rayDirection, Color.blue, 5.0f);
-                    Debug.Log("I see the player.");
-                }
-                else
-                {
-                    Debug.Log("I don't see the player.");
-                }
+			    Debug.Log("I don't see the player.");
             }
         }
 	}
