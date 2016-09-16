@@ -3,6 +3,7 @@ using System.Collections;
 /* Vision.cs
  * 
  * Creates a cone of vision from the scripted object to the player using raycasts with a give angle and distance.
+ * If the player is seen, rotates to face them.
  * - Joel Lee
  */
 public class Vision : MonoBehaviour {
@@ -11,7 +12,7 @@ public class Vision : MonoBehaviour {
 
     private RaycastHit _hit;
     private Vector3 _playerLoc, _rayDirection, _startVec, _startVecFwd;
-    private GameObject _player;
+	private GameObject _player;
 
 	void Start () {
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -36,6 +37,9 @@ public class Vision : MonoBehaviour {
 			Debug.DrawRay(_startVec, _rayDirection, Color.green, 5.0f);
             if (_hit.collider.gameObject == _player)
 			{
+				//because our forward is on the unused z axis, we can't use lookAt()
+				//so we have to get a (distance) vector by subtracting the two points and rotate to this vector 
+				transform.right = _player.transform.position - transform.position;
             	Debug.DrawRay(_startVec, _rayDirection, Color.blue, 5.0f);
                 Debug.Log("I see the player.");
 			}
