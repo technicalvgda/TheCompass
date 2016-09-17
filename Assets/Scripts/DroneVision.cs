@@ -2,7 +2,7 @@
 using System.Collections;
 
 
-//Drone Vision script is used for drones that tracks players who are in range
+// Drone Vision script is used for drones that tracks players who are in range
 public class DroneVision : MonoBehaviour {
 
     public float visionRange; // range that a drone can find the player
@@ -10,12 +10,15 @@ public class DroneVision : MonoBehaviour {
 
     private GameObject player; // player game object reference
     private CircleCollider2D droneCollider; // drone collider
+    private LineRenderer sightCone;
     
 	// Use this for initialization
 	void Start ()
     {
-        droneCollider = GetComponent<CircleCollider2D>(); 
+        droneCollider = GetComponent<CircleCollider2D>();
+        sightCone = GetComponentInChildren<LineRenderer>();
         droneCollider.radius = visionRange; // set the radius of the collider to vision range
+        sightCone.SetPosition(1, new Vector3(visionRange, 0, 0));
 	}
 	
 
@@ -46,7 +49,7 @@ public class DroneVision : MonoBehaviour {
     {
         Debug.Log(Vector2.Angle(transform.right, player.transform.position - transform.position));
 
-        if (Vector2.Angle(transform.right, player.transform.position - transform.position) < visionConeAngle)
+        if (Vector2.Angle(transform.right, player.transform.position - transform.position) < visionConeAngle / 2)
         {
             transform.right = player.transform.position - transform.position;
         }
