@@ -10,15 +10,12 @@ public class DroneVision : MonoBehaviour {
 
     private GameObject player; // player game object reference
     private CircleCollider2D droneCollider; // drone collider
-    private LineRenderer sightCone;
     
 	// Use this for initialization
 	void Start ()
     {
         droneCollider = GetComponent<CircleCollider2D>();
-        sightCone = GetComponentInChildren<LineRenderer>();
         droneCollider.radius = visionRange; // set the radius of the collider to vision range
-        sightCone.SetPosition(1, new Vector3(visionRange, 0, 0));
 	}
 	
 
