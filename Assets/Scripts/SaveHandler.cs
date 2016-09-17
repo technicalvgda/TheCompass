@@ -1,30 +1,38 @@
-﻿using UnityEngine;
+﻿/*
+Script that handles the Save Features via a "Master" gameobject called Save Handler
+*/ 
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-public class SaveHandler : MonoBehaviour {
+public class SaveHandler : MonoBehaviour 
+{
+	/* Stores the slotText aka the middle button */ 
 	public Text slotText;
+
+	/* Stores the gameobject of the onScreenPrompt */ 
 	public GameObject onScreenPrompt;
+
+	/* Display what PlayerPref's "onLevel" is storing and sets the prompt to inactive */ 
 	void Start()
 	{
 		slotText.text = PlayerPrefs.GetString ("onLevel");
 		onScreenPrompt.SetActive (false);
 	}
 
+	/* Prompt the user if they want to overwrite */ 
 	public void onSave() 
 	{
 		onScreenPrompt.SetActive (true);
 	}
 
-	public void onLoad() 
-	{
-		Debug.Log ("Loading: " + PlayerPrefs.GetString("onLevel"));
-	}
 
+	/* Goes back to previous scene */ 
 	public void onBack()
 	{
-		//No menu to go back to yet
+		Debug.Log ("Back!");
 	}
 
+	/* Saves the level */ 
 	public void promptYes()
 	{
 		//Random number generator to test the saving feature
@@ -34,6 +42,7 @@ public class SaveHandler : MonoBehaviour {
 		onScreenPrompt.SetActive (false);
 	}
 
+	/* Closes the prompt */ 
 	public void promptNo() 
 	{
 		onScreenPrompt.SetActive (false);
