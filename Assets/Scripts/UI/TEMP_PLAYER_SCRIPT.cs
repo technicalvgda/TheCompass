@@ -5,9 +5,8 @@ using System.Collections;
 Purpose of this script is to avoid merge conflicts since other people
 could be working on the same Player.cs script*/
 public class TEMP_PLAYER_SCRIPT : MonoBehaviour {
-	public float playerHealth = 100f;
+	public float playerHealth;
 	const float PLAYER_SPEED = 0.1f;
-	public VirtualJoystick joystick;
 	// Use this for initialization
 	void Start () {
 
@@ -16,15 +15,6 @@ public class TEMP_PLAYER_SCRIPT : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		if (Input.GetKey (KeyCode.UpArrow)) 
-		{
-			playerHealth += Time.deltaTime*13f;
-		}
-		if (Input.GetKey (KeyCode.DownArrow)) 
-		{
-			playerHealth -= Time.deltaTime*13f;
-		}
-				
 		if(Input.GetKey(KeyCode.A))
 		{
 			transform.Rotate(new Vector3(0,0,5));
