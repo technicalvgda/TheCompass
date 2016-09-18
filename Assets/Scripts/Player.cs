@@ -5,6 +5,7 @@ public class Player : MonoBehaviour {
 
     const float PLAYER_SPEED = 40.0f;
     const float BRAKE_SPEED = 20.0f;
+    const float ROTATION_SPEED = 5.0f;
     private Rigidbody2D rb2d;
 
 	// Use this for initialization
@@ -20,23 +21,13 @@ public class Player : MonoBehaviour {
 			A and D rotates player
 			W and S accelerates and decelerates player
 		*/
-        if(Input.GetKey(KeyCode.A))
-        {
-            transform.Rotate(new Vector3(0,0,5));
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Rotate(new Vector3(0, 0, -5));
-        }
-        if (Input.GetKey(KeyCode.W))
-        {
-            rb2d.AddForce (transform.up * PLAYER_SPEED);
+        float rotation = Input.GetAxis("Horizontal");
+        float acceleration = Input.GetAxis("Vertical");
 
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            rb2d.AddForce (-transform.up * BRAKE_SPEED);
+        transform.Rotate(new Vector3(0,0,-ROTATION_SPEED * rotation));
 
-        }
+        rb2d.AddForce (transform.up * PLAYER_SPEED * acceleration);
+
+
     }
 }

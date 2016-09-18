@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour {
     public Transform target;
     
     private float _dampTime = 0.15f;
-    private float _xVelRatio = 1.0f;
+    private float _xVelRatio = 2.0f;
     private float _yVelRatio = 2.0f;
     private Vector3 _velocity = Vector3.zero;
  
