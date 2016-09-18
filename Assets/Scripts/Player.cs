@@ -3,16 +3,23 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-    const float PLAYER_SPEED = 0.1f;
+    const float PLAYER_SPEED = 40.0f;
+    const float BRAKE_SPEED = 20.0f;
+    private Rigidbody2D rb2d;
+
 	// Use this for initialization
-	void Start () {
-	
+	void Start () 
+	{
+		rb2d = GetComponent<Rigidbody2D> ();
 	}
-	
-	// Update is called once per frame
+
 	void Update ()
     {
-	
+		/*
+		Controls player movement
+			A and D rotates player
+			W and S accelerates and decelerates player
+		*/
         if(Input.GetKey(KeyCode.A))
         {
             transform.Rotate(new Vector3(0,0,5));
@@ -23,11 +30,13 @@ public class Player : MonoBehaviour {
         }
         if (Input.GetKey(KeyCode.W))
         {
-            transform.position += (transform.right * PLAYER_SPEED);
+            rb2d.AddForce (transform.up * PLAYER_SPEED);
+
         }
         if (Input.GetKey(KeyCode.S))
         {
-            transform.position += (-transform.right * PLAYER_SPEED);
+            rb2d.AddForce (-transform.up * BRAKE_SPEED);
+
         }
     }
 }
