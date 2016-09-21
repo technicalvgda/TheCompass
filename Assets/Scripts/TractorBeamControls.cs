@@ -33,8 +33,10 @@ public class TractorBeamControls : MonoBehaviour {
         {
 
             _MouseClickedPoint = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+            Debug.Log("ship" + transform.position);
+            Debug.Log("mouse"+_MouseClickedPoint);
             //sends ray out to check if it hits an object when it does it records which object it hit
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, _MouseClickedPoint, _tractorlength);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, _MouseClickedPoint - transform.position, _tractorlength);
             if (_tractorlength < 10 && !_hitDebris)
             {
                 Debug.DrawLine(transform.position, _MouseClickedPoint, Color.red);
@@ -61,7 +63,7 @@ public class TractorBeamControls : MonoBehaviour {
                 {
                     Debug.DrawLine(transform.position, _tractorStick.transform.position);
                     //keeps count of how far the length between the object and the ship for graphical purposes later if needed
-                    _tractorlength = (int)(Vector2.Distance(transform.position, _tractorStick.transform.position));
+                    //_tractorlength = (int)(Vector2.Distance(transform.position, _tractorStick.transform.position));
                     //Debug.Log(_tractorlength);
                     //if the debris is tagged small then the object moves 2x speen
                     if (_tractorStick.collider.CompareTag("small"))
