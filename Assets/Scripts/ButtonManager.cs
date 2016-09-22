@@ -5,13 +5,14 @@ using UnityEngine.SceneManagement; // Allows to load scenes using specific synta
 
 public class ButtonManager : MonoBehaviour {
 
-    public Canvas optionMenu;
+    public Canvas optionMenu,loadMenu;
     
 	// Use this for initialization
 	void Start ()
     {
         optionMenu = optionMenu.GetComponent<Canvas>();  // Refer to the option canvas
         optionMenu.enabled = false;
+		loadMenu.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -31,17 +32,22 @@ public class ButtonManager : MonoBehaviour {
     }
 
     // Enables the option menu canvas
-    public void OptionBtn()
+    public void OptionBtnEnable()
     {
         optionMenu.enabled = true;
 
     }
+	public void OptionBtnDisable()
+	{
+		optionMenu.enabled = false;
+
+	}
 
     // Filler for the credit scene
     public void CreditBtn(string startCredit)
     {
-        Debug.Log("Credits");
-       // SceneManager.LoadScene(startCredit);
+       // Debug.Log("Credits");
+        SceneManager.LoadScene(startCredit);
     }
 
     // Application closes
@@ -49,6 +55,15 @@ public class ButtonManager : MonoBehaviour {
     {
         Application.Quit();
     }
+
+	public void LoadBtnEnable()
+	{
+		loadMenu.enabled = true;
+	}
+	public void LoadBtnDisable()
+	{
+		loadMenu.enabled = false;
+	}
 
 
 }
