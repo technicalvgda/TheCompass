@@ -4,21 +4,31 @@ using System.Collections;
 public class TractorBeamControls : MonoBehaviour {
 
     //tractor beam variables
-    private RaycastHit2D _tractorStick;
+    private RaycastHit2D _tractorStick; //< the object that is stuck to tractor beam
     private Vector3 _MouseClickedPoint;
-    private bool _hitDebris;
-    private int _tractorlength;
-    //private int massModifier;
+    private bool _hitDebris = false;
+    private int _tractorlength = 0;//<the current length of the tractor beam
+
+    private const float PULL_SPEED = 10;
+    private const float MAX_TRACTOR_LENGTH = 20;
+
+    //PLAYER COMPONENTS
+    private LineRenderer _tractorLine;
+
 
     // Use this for initialization
-    void Start () {
-        _tractorlength = 0;
-        _hitDebris = false;
+    void Start ()
+    {
+        _tractorLine = GetComponent<LineRenderer>();
 
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
+        //update tractor beam line renderer
+        TractorBeamRender();
+
         /* Tractor Beam Controls Below 
          *    click to send out a tractor beam in that direction 
          *    when it connects with debris it will stick to it and 
@@ -31,14 +41,14 @@ public class TractorBeamControls : MonoBehaviour {
         //when left mouse button is clicked and held
         if (Input.GetMouseButton(0))
         {
-
+            //get mouse click in world coordinates
             _MouseClickedPoint = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
-            Debug.Log("ship" + transform.position);
-            Debug.Log("mouse"+_MouseClickedPoint);
+
             //sends ray out to check if it hits an object when it does it records which object it hit
             RaycastHit2D hit = Physics2D.Raycast(transform.position, _MouseClickedPoint - transform.position, _tractorlength);
-            if (_tractorlength < 10 && !_hitDebris)
+            if (_tractorlength < MAX_TRACTOR_LENGTH && !_hitDebris)
             {
+               
                 Debug.DrawLine(transform.position, _MouseClickedPoint, Color.red);
                 _tractorlength++;
             }
@@ -47,41 +57,30 @@ public class TractorBeamControls : MonoBehaviour {
             if (!_hitDebris && hit)
             {
                 _tractorStick = hit;
-                //if the beam hits an immovable object first it does not count it
-                if (!_tractorStick.collider.CompareTag("immovable"))
-                {
-                    _hitDebris = true;
-                }
-
+                _hitDebris = true;
             }
 
             //uses the initial object that was hit by the beam
             if (_hitDebris)
             {
-                //if the beam hit object called debris the object will move towards the mouse
-                if (_tractorStick.collider.name == "debris")
+                //create a script for the held object
+                MoveableObject objectScript;
+                //if the object has a MoveableObject script, store it and handle physics
+                if (objectScript = _tractorStick.collider.GetComponent<MoveableObject>())
                 {
+                    //draw a line to show tractor beam connection
                     Debug.DrawLine(transform.position, _tractorStick.transform.position);
-                    //keeps count of how far the length between the object and the ship for graphical purposes later if needed
-                    //_tractorlength = (int)(Vector2.Distance(transform.position, _tractorStick.transform.position));
-                    //Debug.Log(_tractorlength);
-                    //if the debris is tagged small then the object moves 2x speen
-                    if (_tractorStick.collider.CompareTag("small"))
-                    {
-                        _tractorStick.rigidbody.AddForce(((_MouseClickedPoint - _tractorStick.rigidbody.transform.position).normalized) * 2);
-
-                    }
-                    else if (_tractorStick.collider.CompareTag("big"))//if the object is tagged big the object will move at 1/2 speed
-                    {
-                        _tractorStick.rigidbody.AddForce(((_MouseClickedPoint - _tractorStick.rigidbody.transform.position).normalized) / 2);
-
-                    }
+                    
+                    //move debris in direction of mouse with force (pullspeed/objectsize)
+                    _tractorStick.rigidbody.AddForce(((_MouseClickedPoint - _tractorStick.rigidbody.transform.position).normalized) * PULL_SPEED / objectScript.objectSize );
+                    
                     //if the distance between the _mouse clicked point and the object is <1 the object will stop moving
                     if (Vector2.Distance(_MouseClickedPoint, _tractorStick.transform.position) < 1)
                     {
                         _tractorStick.rigidbody.velocity = Vector2.zero;
                     }
                 }
+               
             }
         }
 
@@ -95,5 +94,64 @@ public class TractorBeamControls : MonoBehaviour {
             _tractorlength = 0;
         }
 
+    }
+
+    private void TractorBeamRender()
+    {
+        
+        //if the tractor beam is active
+        if (Input.GetMouseButton(0))
+        {
+            //enable the beam
+            _tractorLine.enabled = true;
+
+            //get mouse click in world coordinates
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+
+            //make sure starting position of tractor beam is at the ship
+            _tractorLine.SetPosition(0, transform.position);
+          
+            //if the tractor beam is connected
+            if (_hitDebris == true)
+            {
+                //set the color of the beam to white
+                _tractorLine.SetColors(Color.white, Color.white);
+                //draw a line to show tractor beam connection
+                _tractorLine.SetPosition(1, _tractorStick.transform.position);
+               
+            }
+            else
+            {
+                //find direction vector from ship to mouse
+                Vector2 mouseDir = mousePos - (Vector2)transform.position;
+                //make a variable for the end position
+                Vector2 endPoint;
+                //if the mouse if further away than the max length of the beam
+                if (mouseDir.magnitude > MAX_TRACTOR_LENGTH)
+                {
+                    //get a position in the direction of the mouse 
+                    endPoint = (Vector2)transform.position + (mouseDir.normalized * MAX_TRACTOR_LENGTH);
+                }
+                else
+                {
+                    //get the mouse position
+                    endPoint = mousePos;
+                }
+               
+                //set the end of the beam to be where the endpoint variable is
+                _tractorLine.SetPosition(1, endPoint);
+                //set the color of the beam to blue
+                _tractorLine.SetColors(Color.blue, Color.blue);
+            }
+           
+        }
+        else
+        {
+            _tractorLine.SetPosition(1, transform.position);
+            _tractorLine.enabled = false;
+        }
+           
+
+       
     }
 }
