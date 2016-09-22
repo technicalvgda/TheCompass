@@ -6,7 +6,7 @@ public class Player : MonoBehaviour {
     const float PLAYER_SPEED = 0.1f;
 	// Use this for initialization
 	void Start () {
-	
+	    
 	}
 	
 	// Update is called once per frame
