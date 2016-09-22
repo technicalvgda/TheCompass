@@ -149,6 +149,7 @@ GameObject:
   - 114: {fileID: 701567884}
   - 50: {fileID: 701567883}
   - 120: {fileID: 701567885}
+  - 58: {fileID: 701567886}
   m_Layer: 0
   m_Name: PlayerPlaceholder
   m_TagString: Player
@@ -230,7 +231,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &701567884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,6 +285,20 @@ LineRenderer:
       serializedVersion: 2
       rgba: 4294967295
   m_UseWorldSpace: 1
+--- !u!58 &701567886
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 701567879}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.2
 --- !u!1 &1246104576
 GameObject:
   m_ObjectHideFlags: 0
