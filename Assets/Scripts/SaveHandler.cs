@@ -24,7 +24,10 @@ public class SaveHandler : MonoBehaviour
 	{
 		onScreenPrompt.SetActive (true);
 	}
-
+	public void Onload()
+	{
+		Debug.Log ("Loaded " + PlayerPrefs.GetString ("onLevel"));
+	}
 
 	/* Goes back to previous scene */ 
 	public void onBack()

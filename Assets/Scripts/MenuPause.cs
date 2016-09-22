@@ -4,6 +4,7 @@ using System.Collections;
 public class MenuPause : MonoBehaviour {
 
     public GameObject PauseUI;
+	public Canvas optionsCanvas;
 
     //boolean value determining pause state
     private bool isPaused = false;
@@ -12,6 +13,7 @@ public class MenuPause : MonoBehaviour {
     void Start()
     {
         PauseUI.SetActive(false);
+		optionsCanvas.enabled = false;
     }
 
     //runs once every frame
@@ -34,6 +36,8 @@ public class MenuPause : MonoBehaviour {
         if (!isPaused)
         {
             PauseUI.SetActive(false);
+			if (optionsCanvas.enabled == true)
+				optionsCanvas.enabled = false;
             Time.timeScale = 1;
         }
     }
@@ -47,7 +51,8 @@ public class MenuPause : MonoBehaviour {
     //Options button method, pushes log message to assure button has been pressed. Will implement later
     public void Options()
     {
-        Debug.Log("Options menu has been accessed");
+        //Debug.Log("Options menu has been accessed");
+		optionsCanvas.enabled = !optionsCanvas.enabled;
     }
 
     //Quit button method, closes game
