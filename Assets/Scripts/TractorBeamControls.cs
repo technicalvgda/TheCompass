@@ -9,7 +9,7 @@ public class TractorBeamControls : MonoBehaviour {
     private bool _hitDebris = false;
     private int _tractorlength = 0;//<the current length of the tractor beam
 
-    private const float PULL_SPEED = 10;
+    private const float PULL_SPEED = 3;
     private const float MAX_TRACTOR_LENGTH = 20;
 
     //PLAYER COMPONENTS
@@ -49,7 +49,7 @@ public class TractorBeamControls : MonoBehaviour {
             if (_tractorlength < MAX_TRACTOR_LENGTH && !_hitDebris)
             {
                
-                Debug.DrawLine(transform.position, _MouseClickedPoint, Color.red);
+                //Debug.DrawLine(transform.position, _MouseClickedPoint, Color.red);
                 _tractorlength++;
             }
 
@@ -72,8 +72,10 @@ public class TractorBeamControls : MonoBehaviour {
                     Debug.DrawLine(transform.position, _tractorStick.transform.position);
                     
                     //move debris in direction of mouse with force (pullspeed/objectsize)
-                    _tractorStick.rigidbody.AddForce(((_MouseClickedPoint - _tractorStick.rigidbody.transform.position).normalized) * PULL_SPEED / objectScript.objectSize );
-                    
+                    //_tractorStick.rigidbody.AddForce(((_MouseClickedPoint - _tractorStick.rigidbody.transform.position).normalized) * PULL_SPEED / objectScript.objectSize );
+
+                    _tractorStick.rigidbody.velocity = Vector2.Lerp(_MouseClickedPoint - _tractorStick.transform.position, _tractorStick.transform.position, PULL_SPEED / objectScript.objectSize * Time.deltaTime);
+
                     //if the distance between the _mouse clicked point and the object is <1 the object will stop moving
                     if (Vector2.Distance(_MouseClickedPoint, _tractorStick.transform.position) < 1)
                     {
