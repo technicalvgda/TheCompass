@@ -1,5 +1,4 @@
-﻿#if UNITY_IOS || UNITY_ANDROID
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
@@ -120,5 +119,3 @@ public class VirtualJoystickTether : MonoBehaviour
 		}
 	}
 }
-
-#endif
