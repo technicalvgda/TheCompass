@@ -24,11 +24,11 @@ public class HUDManager : MonoBehaviour
 	//The actual count down timer
 	private float _waveTimer;
 	//The text box to display the time
-	private Text _waveTimerText;
+	public Text _waveTimerText;
 	//The player
 	private GameObject _player;
 	//The temporary player controller, switch to actual player controller after merging, delete this controller script
-	private TEMP_PLAYER_SCRIPT _playerCont;
+	private Player _playerCont;
 	//The image of the gradient
 	private Image _hurtEffectImg;
 	//Temp color for alpha changing
@@ -39,8 +39,8 @@ public class HUDManager : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		_player = GameObject.Find ("Player");
-		_playerCont = _player.GetComponent<TEMP_PLAYER_SCRIPT> ();
+		_player = GameObject.Find ("PlayerPlaceholder");
+		_playerCont = _player.GetComponent<Player> ();
 		_hurtEffectImg = hurtEffectObject.GetComponent<Image> ();
 		_waveTimerText = timerTextBox.GetComponent<Text> ();
 		_waveTimer = startingWaveTimer;
@@ -60,7 +60,7 @@ public class HUDManager : MonoBehaviour
 			_waveTimer = startingWaveTimer;
 		}
 		//If the player is not in critical health
-		if (_playerCont.playerHealth > criticalHealthLevel) 
+		if (_playerCont.getHealth() > criticalHealthLevel) 
 		{
 			//stops the coroutine if it is active
 			if (_flashingCoroutineActive) 
@@ -69,7 +69,7 @@ public class HUDManager : MonoBehaviour
 				StopCoroutine ("FlashingHealth");
 			}
 			//increase the intensity of the gradient as the player gets hurt
-			_tempColor.a = Mathf.Abs (_playerCont.playerHealth - 100f) * 0.01f;
+			_tempColor.a = Mathf.Abs (_playerCont.getHealth() - 100f) * 0.01f;
 			_hurtEffectImg.color = _tempColor;
 		} 
 		else 
@@ -86,7 +86,7 @@ public class HUDManager : MonoBehaviour
 	//Used to test the gradient code in Update by using a slider bar to control health
 	public void sliderBarChangeHealth()
 	{
-		_playerCont.playerHealth = slider.value * 100f;
+		_playerCont.setHealth (slider.value * 100f);
 	}
 
 	//The IEnumertor to control the flashing. Oscillates back and forth between the extremes of min and max alpha
@@ -94,7 +94,7 @@ public class HUDManager : MonoBehaviour
 	{
 		bool _fadeIn = true;
 		_tempColor.a = _hurtEffectImg.color.a;
-		while (_playerCont.playerHealth <= criticalHealthLevel) 
+		while (_playerCont.getHealth() <= criticalHealthLevel) 
 		{
 			if (_fadeIn) 
 			{

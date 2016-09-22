@@ -32,6 +32,10 @@ public class Player : MonoBehaviour {
     {
         //Function to handle player movement
         ControlPlayer();
+		if (Input.GetKeyDown (KeyCode.U))
+			playerHealth += 5f;
+		if (Input.GetKeyDown (KeyCode.J))
+			playerHealth -= 5f;
 
     }
 
@@ -60,4 +64,12 @@ public class Player : MonoBehaviour {
     {
         playerHealth -= damage;
     }
+	public float getHealth()
+	{
+		return playerHealth;
+	}
+	public void setHealth(float h)
+	{
+		playerHealth = h;
+	}
 }

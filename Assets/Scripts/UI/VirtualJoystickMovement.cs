@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_IOS || UNITY_ANDROID
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
@@ -34,6 +35,7 @@ public class VirtualJoystickMovement : MonoBehaviour
 	private Vector3 _touchPos, _worldPos, _padPos;
 	//The varible to hold the name of the parent. This is to check for correct touch position for movement and tether joysticks
 	private string _parentName;
+
 	//Initialization
 	void Start()
 	{
@@ -120,4 +122,7 @@ public class VirtualJoystickMovement : MonoBehaviour
 			}
 		}
 	}	
+
 }
+
+#endif
