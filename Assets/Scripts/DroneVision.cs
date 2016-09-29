@@ -5,10 +5,13 @@ using System.Collections;
 // Drone Vision script is used for drones that tracks players who are in range
 public class DroneVision : MonoBehaviour {
 
+    public delegate void FollowPlayerAction();
+    public static event FollowPlayerAction FollowPlayer;
+
     public float visionRange; // range that a drone can find the player
     public float visionConeAngle; // cone angle that drone can detect enemies within the range
 
-    private GameObject player; // player game object reference
+    private static GameObject player; // player game object reference
     private CircleCollider2D droneCollider; // drone collider
     
 	// Use this for initialization
@@ -44,11 +47,16 @@ public class DroneVision : MonoBehaviour {
     // When enemy detected in range, drone keeps looking for the player if it is in sight, then starts rotating to the player until player is out of range
     IEnumerator LookForPlayer()
     {
-        Debug.Log(Vector2.Angle(transform.right, player.transform.position - transform.position));
+        //Debug.Log(Vector2.Angle(transform.right, player.transform.position - transform.position));
 
         if (Vector2.Angle(transform.right, player.transform.position - transform.position) < visionConeAngle / 2)
         {
             transform.right = player.transform.position - transform.position;
+            if (Vector2.Distance(transform.position, player.transform.position) > 5) // constant will be replaced with attack range
+            {
+                FollowPlayer();
+            }
+                
         }
 
         yield return new WaitForSeconds(0);
@@ -58,5 +66,10 @@ public class DroneVision : MonoBehaviour {
             StartCoroutine(LookForPlayer());
         }
         
+    }
+
+    public static GameObject GetPlayer()
+    {
+        return player;
     }
 }
