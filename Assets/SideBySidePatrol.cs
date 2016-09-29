@@ -6,6 +6,7 @@ public class SideBySidePatrol : MonoBehaviour {
     private int patrolDistance;
     public bool facingRight;
 
+
 	// Use this for initialization
 	void Start () {
         //totalDistance = 5;
