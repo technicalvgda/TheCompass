@@ -7,6 +7,7 @@ public class CircularPatrol : MonoBehaviour {
     private int patrolDistance;
     public int totalDistance; // Can be changed in unity
     private int patrol;
+
 	// Use this for initialization
 	void Start () {
         controller = 5;
