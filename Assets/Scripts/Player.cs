@@ -85,12 +85,12 @@ public class Player : MonoBehaviour {
 	}
 
 
-    void gainHealth(float health)
+    public void gainHealth(float health)
     {
         playerHealth += health;
     }
 
-    void takeDamage(float damage)
+    public void takeDamage(float damage)
     {
         playerHealth -= damage;
     }

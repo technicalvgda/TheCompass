@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MenuPause : MonoBehaviour {
 
-    public GameObject PauseUI;
+	public Canvas PauseUI;
 	public Canvas optionsCanvas;
 
     //boolean value determining pause state
@@ -12,7 +12,7 @@ public class MenuPause : MonoBehaviour {
     //hides pause menu at the start and duration of the game
     void Start()
     {
-        PauseUI.SetActive(false);
+		PauseUI.enabled = false;
 		optionsCanvas.enabled = false;
     }
 
@@ -28,14 +28,14 @@ public class MenuPause : MonoBehaviour {
         //if paused, bring up pause menu && stop game time
         if (isPaused)
         {
-            PauseUI.SetActive(true);
+			PauseUI.enabled = true;
             Time.timeScale = 0;
         }
 
         //if not paused, deactivate pause menu && continue game time
         if (!isPaused)
         {
-            PauseUI.SetActive(false);
+			PauseUI.enabled = false;
 			if (optionsCanvas.enabled == true)
 				optionsCanvas.enabled = false;
             Time.timeScale = 1;
