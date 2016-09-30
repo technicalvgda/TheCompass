@@ -11,6 +11,8 @@ using System.Collections;
 public class Vision : MonoBehaviour {
     public float viewAngle;				//The angle of our cone. Should be half the intended since we calculate the angle of between the player and the foward.
     public float viewDist = 50.0f;		//How far our raycast will be drwn
+	public bool sight = false;
+	public Vector3 sightPos;
 
     private RaycastHit2D _hit;
     private Vector3 _playerLoc, _rayDirection, _startVec, _startVecFwd;
@@ -43,6 +45,8 @@ public class Vision : MonoBehaviour {
 				//so we have to get a (distance) vector by subtracting the two points and rotate to this vector 
 				transform.right = _player.transform.position - transform.position;
             	Debug.DrawRay(_startVec, _rayDirection, Color.blue, 5.0f);
+				sightPos = _hit.transform.position;
+				sight = true;
                 //Debug.Log("I see the player.");
 			}
             else
