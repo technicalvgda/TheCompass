@@ -51,8 +51,13 @@ public class Vision : MonoBehaviour {
 			}
             else
             {
-			    //Debug.Log("I don't see the player.");
+                //Debug.Log("I don't see the player.");
+                sight = false;
             }
+        }
+        else
+        {
+            sight = false;
         }
 	}
 }
