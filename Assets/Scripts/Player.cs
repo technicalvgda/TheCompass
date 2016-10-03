@@ -7,10 +7,6 @@ using System.Collections;
 */
 public class Player : MonoBehaviour {
 
-	private float currentuTurnTime = 0;
-	private Vector2 playerExitPos = new Vector2 (0, 0);
-	const float U_TURN_TIME = 0.2f;
-
     //PLAYER COMPONENTS
     private Rigidbody2D rb2d;
 
@@ -25,6 +21,13 @@ public class Player : MonoBehaviour {
     public float playerStartingHealth;//< the amount of health the player begins with
     private float playerHealth;//< the player's current health
     bool alive = true; //<bool for whether player is alive
+
+	//Used for making U-Turns
+	private float currentuTurnTime = 0;
+	const float U_TURN_TIME = 0.01f;
+	private Vector2 playerExitPos = new Vector2 (0, 0);
+	private Vector2 oppositeDirection = new Vector2 (0,0);
+	private bool disablePlayerControl = false;
 
     // Use this for initialization
     void Start () 
@@ -48,6 +51,7 @@ public class Player : MonoBehaviour {
 
     private void ControlPlayer()
     {
+		//Removes player control if doing U-Turn for a set time
 		if (currentuTurnTime <= 0) {
 			if (playerMovementControlScheme == 1) {
 				/*
@@ -62,11 +66,27 @@ public class Player : MonoBehaviour {
 
 				rb2d.AddForce (transform.up * PLAYER_SPEED * acceleration);
 			} else if (playerMovementControlScheme == 2) {
+
+
 				//Store the current horizontal input in the float moveHorizontal.
 				float moveHorizontal = Input.GetAxis ("Horizontal");
 
 				//Store the current vertical input in the float moveVertical.
 				float moveVertical = Input.GetAxis ("Vertical");
+		
+
+				/*
+				 * Disables player control until player is either not inputting movement or away from where they were initially heading
+				 * NOTE: the reason why the comparison is  <= 0 is because the opposite direction is inversed when passing the point of entry
+				 */ 
+				if (disablePlayerControl) {
+					if ((moveHorizontal * oppositeDirection.x) <= 0 && (moveVertical * oppositeDirection.y) <= 0) {
+						disablePlayerControl = false;
+					} else {
+						moveVertical = 0;
+						moveHorizontal = 0;
+					}
+				}
 
 				//Use the two store floats to create a new Vector2 variable movement.
 				Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
@@ -86,31 +106,18 @@ public class Player : MonoBehaviour {
 		currentuTurnTime = uTurnPlayer (currentuTurnTime);
 
 	}
-		
 
+	//Turns the player around back to point of entry and returns time remaining
 	private float uTurnPlayer (float lengthOfTime)
 	{
 		if (lengthOfTime > 0)
 		{
-			int xMov = 0;
-			int yMov = 0;
 			lengthOfTime -= Time.deltaTime;
 
-
-			if (transform.position.x < 0) {
-				xMov = 1;
-			} else {
-				xMov = -1;
-			}
-			if (transform.position.y < 0) {
-				yMov = 1;
-			} else {
-				yMov = -1;
-			}
-
-			Vector2 oppositeDirection = (playerExitPos - (Vector2)transform.position).normalized;
+			//The unit vector of the opposite the direction the player was initialling heading
+			oppositeDirection = (playerExitPos - (Vector2)transform.position).normalized;
 			rb2d.AddForce (oppositeDirection * (PLAYER_SPEED));
-
+			disablePlayerControl = true;
 			if (rb2d.velocity != Vector2.zero)
 			{
 				float angle = Mathf.Atan2(-(oppositeDirection.x), oppositeDirection.y) * Mathf.Rad2Deg;
