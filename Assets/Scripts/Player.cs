@@ -6,13 +6,14 @@ using System.Collections;
 *
 */
 public class Player : MonoBehaviour {
-
+    
     //PLAYER COMPONENTS
     private Rigidbody2D rb2d;
 
-	//Determines which control scheme to use.  Set to 1 or 2
-	public int playerMovementControlScheme = 1;
+	//Determines which control scheme to use.  Set to 1 or 2 (2 being the default value)
+	public int playerMovementControlScheme = 2;
 
+    
     // STAT VARIABLES
     const float PLAYER_SPEED = 40.0f;
     const float BRAKE_SPEED = 20.0f;
@@ -21,6 +22,12 @@ public class Player : MonoBehaviour {
     public float playerStartingHealth;//< the amount of health the player begins with
     private float playerHealth;//< the player's current health
     bool alive = true; //<bool for whether player is alive
+
+
+#if UNITY_IOS || UNITY_ANDROID
+    //if being built to a mobile platform creates the joystick variable
+    public VirtualJoystickMovement joystick;
+#endif
 
     // Use this for initialization
     void Start () 
@@ -46,6 +53,7 @@ public class Player : MonoBehaviour {
     {
     	if(playerMovementControlScheme == 1)
 	    {
+#if UNITY_STANDALONE || UNITY_WEBPLAYER
 	        /*
 			Controls player movement
 				A and D rotates player
@@ -57,9 +65,23 @@ public class Player : MonoBehaviour {
 	        transform.Rotate(new Vector3(0, 0, -ROTATION_SPEED * rotation));
 
 	        rb2d.AddForce(transform.up * PLAYER_SPEED * acceleration);
-		}
-		else if (playerMovementControlScheme == 2)
+#elif UNITY_IOS || UNITY_ANDROID
+            /*for mobile build the movement is determined by the joystick 
+             * left or right rotates the player
+             * up accelerates the player and down decelerates the player
+            */
+            float rotation = joystick.inputValue().x;
+            float acceleration = joystick.inputValue().y;
+
+            transform.Rotate(new Vector3(0, 0, -ROTATION_SPEED * rotation));
+
+            rb2d.AddForce(transform.up * PLAYER_SPEED * acceleration);
+#endif
+
+        }
+        else if (playerMovementControlScheme == 2)
 		{
+#if UNITY_STANDALONE || UNITY_WEBPLAYER
 			//Store the current horizontal input in the float moveHorizontal.
 			float moveHorizontal = Input.GetAxis ("Horizontal");
 
@@ -80,10 +102,26 @@ public class Player : MonoBehaviour {
 				float angle = Mathf.Atan2(-movement.x, movement.y) * Mathf.Rad2Deg;
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(angle,Vector3.forward), Time.deltaTime * ROTATION_SPEED);
 			}
-			
-		}
-	}
+#elif UNITY_IOS || UNITY_ANDROID
+            
 
+            //use the joystick input to create movement vector
+            Vector2 movement = joystick.inputValue().normalized;
+            Debug.Log(rb2d.velocity.magnitude);
+
+
+            //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
+            rb2d.AddForce(movement * PLAYER_SPEED);
+
+            //Rotates front of ship to direction of movement
+            if (movement != Vector2.zero)
+            {
+                float angle = Mathf.Atan2(-movement.x, movement.y) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * ROTATION_SPEED);
+            }
+#endif
+        }
+    }
 
     public void gainHealth(float health)
     {

@@ -197,7 +197,7 @@ public class TractorBeamControls : MonoBehaviour
                 if (mouseDir.magnitude > MAX_TRACTOR_LENGTH)
                 {
                     //get a position in the direction of the mouse 
-                    endPoint = (Vector2)transform.position + (mouseDir.normalized * MAX_TRACTOR_LENGTH);
+                    endPoint = (Vector2)transform.position + (mouseDir.normalized * _tractorlength);
                 }
                 else
                 {
@@ -242,7 +242,7 @@ public class TractorBeamControls : MonoBehaviour
                 //find direction that the joystick is going 
                 Vector2 mouseDir = joystick.inputValue().normalized;
                 //make a variable for the end position
-                Vector2 endPoint = (Vector2)transform.position + (mouseDir.normalized * MAX_TRACTOR_LENGTH);
+                Vector2 endPoint = (Vector2)transform.position + (mouseDir.normalized * _tractorlength);
                 
 
                 //set the end of the beam to be where the endpoint variable is
