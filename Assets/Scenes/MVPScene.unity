@@ -721,6 +721,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010351355696, guid: c2a22ae9536cd3447b04f7ed90817852,
+        type: 2}
+      propertyPath: objectSize
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2a22ae9536cd3447b04f7ed90817852, type: 2}
   m_IsPrefabParent: 0
@@ -1418,6 +1423,11 @@ Prefab:
     - target: {fileID: 1000010663599838, guid: c2a22ae9536cd3447b04f7ed90817852, type: 2}
       propertyPath: m_Name
       value: Asteroid (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010351355696, guid: c2a22ae9536cd3447b04f7ed90817852,
+        type: 2}
+      propertyPath: objectSize
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2a22ae9536cd3447b04f7ed90817852, type: 2}
@@ -2584,6 +2594,21 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: ed22c6f684a8f544393c8820d94157e6,
         type: 3}
+    - target: {fileID: 114000013033125168, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: playerMovementControlScheme
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013033125168, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: joystick
+      value: 
+      objectReference: {fileID: 355264600}
+    - target: {fileID: 114000013033125168, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b0b7fba286815dc44b0ba11b680392c4, type: 2}
   m_IsPrefabParent: 0
@@ -2830,6 +2855,11 @@ Prefab:
     - target: {fileID: 1000010663599838, guid: c2a22ae9536cd3447b04f7ed90817852, type: 2}
       propertyPath: m_Name
       value: Asteroid (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010351355696, guid: c2a22ae9536cd3447b04f7ed90817852,
+        type: 2}
+      propertyPath: objectSize
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2a22ae9536cd3447b04f7ed90817852, type: 2}
