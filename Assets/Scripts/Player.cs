@@ -69,7 +69,7 @@ public class Player : MonoBehaviour {
         {
             if (playerMovementControlScheme == 1)
 	        {
-                 #if UNITY_STANDALONE || UNITY_WEBPLAYER
+#if UNITY_STANDALONE || UNITY_WEBPLAYER
 	            /*
 			    Controls player movement
 				    A and D rotates player
@@ -81,7 +81,7 @@ public class Player : MonoBehaviour {
 	            transform.Rotate(new Vector3(0, 0, -ROTATION_SPEED * rotation));
 
 	            rb2d.AddForce(transform.up * PLAYER_SPEED * acceleration);
-                #elif UNITY_IOS || UNITY_ANDROID
+#elif UNITY_IOS || UNITY_ANDROID
                 /*for mobile build the movement is determined by the joystick 
                  * left or right rotates the player
                  * up accelerates the player and down decelerates the player
@@ -92,12 +92,12 @@ public class Player : MonoBehaviour {
                 transform.Rotate(new Vector3(0, 0, -ROTATION_SPEED * rotation));
 
                 rb2d.AddForce(transform.up * PLAYER_SPEED * acceleration);
-                #endif
+#endif
 
             }
             else if (playerMovementControlScheme == 2)
 		    {
-                #if UNITY_STANDALONE || UNITY_WEBPLAYER
+#if UNITY_STANDALONE || UNITY_WEBPLAYER
 			    //Store the current horizontal input in the float moveHorizontal.
 			    float moveHorizontal = Input.GetAxis ("Horizontal");
 
@@ -118,15 +118,8 @@ public class Player : MonoBehaviour {
 				    float angle = Mathf.Atan2(-movement.x, movement.y) * Mathf.Rad2Deg;
 				    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(angle,Vector3.forward), Time.deltaTime * ROTATION_SPEED);
 			    }
-#elif UNITY_IOS || UNITY_ANDROID
 
-                //Store the current horizontal input in the float moveHorizontal.
-                float moveHorizontal = Input.GetAxis("Horizontal");
-
-                //Store the current vertical input in the float moveVertical.
-                float moveVertical = Input.GetAxis("Vertical");
-
-                /*
+                  /*
                  * Disables player control until player is either not inputting movement or away from where they were initially heading
                  * NOTE: the reason why the comparison is  <= 0 is because the opposite direction is inversed when passing the point of entry
                  */
@@ -142,9 +135,11 @@ public class Player : MonoBehaviour {
                         moveHorizontal = 0;
                     }
                 }
+#elif UNITY_IOS || UNITY_ANDROID
 
-                //Use the two store floats to create a new Vector2 variable movement.
-                Vector2 movement = new Vector2(moveHorizontal, moveVertical);
+                //use the joystick input to create movement vector
+                Vector2 movement = joystick.inputValue().normalized;
+                Debug.Log(rb2d.velocity.magnitude);
 
 
                 //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
@@ -156,7 +151,9 @@ public class Player : MonoBehaviour {
                     float angle = Mathf.Atan2(-movement.x, movement.y) * Mathf.Rad2Deg;
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * ROTATION_SPEED);
                 }
-                #endif
+#endif
+
+              
 
             }
 
