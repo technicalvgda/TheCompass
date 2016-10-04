@@ -32,10 +32,11 @@ public class Player : MonoBehaviour {
     private Vector2 oppositeDirection = new Vector2(0, 0);
     private bool disablePlayerControl = false;
 
-#if UNITY_IOS || UNITY_ANDROID
-    //if being built to a mobile platform creates the joystick variable
+
+    //Joystick Variable
+    // only applies if being built to a mobile platform creates 
     public VirtualJoystickMovement joystick;
-#endif
+
 
     // Use this for initialization
     void Start () 
