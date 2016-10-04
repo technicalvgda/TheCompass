@@ -17,6 +17,7 @@ public class LaserEmitter : MonoBehaviour
     private RaycastHit2D _hit;
     private Vector3 _startVec, _startVecFwd;
     private Player _playerscript;
+    private int killCounter; // keeps track of kill counter 
     // Use this for initialization
     void Start()
     {
@@ -63,6 +64,17 @@ public class LaserEmitter : MonoBehaviour
                     * 1 Unit = 10% damage reduction
                     **/
                     rayDamage = rayDamage * (100 - (100 * (0.1f * _hit.distance)));
+
+                    //This is a sample for enemies killed from the ray.
+                    if (rayDamage == 100) 
+                    {
+                        killCounter++;
+                        if (killCounter <= 3)
+                        {
+                            Debug.Log("Congrats!, You have killed 3 enemies");
+                        }
+                    }
+
                 }
             }
         }
