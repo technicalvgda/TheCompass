@@ -117,7 +117,7 @@ public class Player : MonoBehaviour {
 				    float angle = Mathf.Atan2(-movement.x, movement.y) * Mathf.Rad2Deg;
 				    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(angle,Vector3.forward), Time.deltaTime * ROTATION_SPEED);
 			    }
-                #elif UNITY_IOS || UNITY_ANDROID
+#elif UNITY_IOS || UNITY_ANDROID
 
                 //Store the current horizontal input in the float moveHorizontal.
                 float moveHorizontal = Input.GetAxis("Horizontal");
@@ -155,9 +155,10 @@ public class Player : MonoBehaviour {
                     float angle = Mathf.Atan2(-movement.x, movement.y) * Mathf.Rad2Deg;
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * ROTATION_SPEED);
                 }
+                #endif
 
             }
-                #endif
+
         }
         currentuTurnTime = uTurnPlayer(currentuTurnTime); 
     }
