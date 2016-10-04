@@ -14,6 +14,8 @@ public class TractorBeamControls : MonoBehaviour
     private RaycastHit2D _tractorStick; //< the object that is stuck to tractor beam
     private Vector3 _MouseClickedPoint;
     private bool _hitDebris = false;
+    private double objectHealth = 100.00; //default health for object
+    private int killCounter = 0; //initial count for kills
     private int _tractorlength = 0;//<the current length of the tractor beam
     private const float MAX_TRACTOR_LENGTH = 20;
 #if UNITY_STANDALONE || UNITY_WEBPLAYER
@@ -81,6 +83,18 @@ public class TractorBeamControls : MonoBehaviour
             //uses the initial object that was hit by the beam
             if (_hitDebris)
             {
+                //As long as the tractor hits an object, the object's (debris) health decreases.
+                --objectHealth;
+                if (objectHealth == 0.00)
+                {
+                    killCounter++; //When the object's health is zero, kill counter increases.
+                    if (killCounter <= 3)
+                    {
+                        Debug.Log("Congrats!, You have killed 3 enemies"); ; //display notification for 3 kills
+                    }
+                }
+
+
                 //create a script for the held object
                 
                 
@@ -99,8 +113,8 @@ public class TractorBeamControls : MonoBehaviour
                     {
                         _tractorStick.rigidbody.velocity = Vector2.zero;
                     }
-                
 
+                
             }
         }
 
