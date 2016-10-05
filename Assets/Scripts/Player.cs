@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 /* 
 *   Script to handle all player controls
@@ -83,6 +84,14 @@ public class Player : MonoBehaviour {
 			
 		}
 	}
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "SceneLoader")
+        {
+            SceneManager.LoadScene("TitleMenu");
+        }
+    }
 
 
     public void gainHealth(float health)
