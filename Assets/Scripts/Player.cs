@@ -39,7 +39,6 @@ public class Player : MonoBehaviour {
 			playerHealth += 5f;
 		if (Input.GetKeyDown (KeyCode.J))
 			playerHealth -= 5f;
-
     }
 
     private void ControlPlayer()
