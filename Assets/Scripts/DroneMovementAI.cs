@@ -17,11 +17,11 @@ public class DroneMovementAI : MonoBehaviour
     private bool isFollowing = false; // state of drone
 
     [Header("Patrolling")]
-    public int patrolDistance;
-    public enum PatrolStyle { Circular, Square, SideBySide}
-    public PatrolStyle style;
-    public float circularRotationAngle;
-    public enum PatrolDirection { Left, Right};
+    public int patrolDistance; // distance the drone will move before making a turn
+    public enum PatrolPattern { Circular, Square, SideBySide} // patrolling patterns
+    public PatrolPattern pattern;
+    public float circularRotationAngle; // rotation angle for the circular pattern
+    public enum PatrolDirection { Left, Right}; // direction for square patrol
     public PatrolDirection direction;
 
     private bool isPatrolling = false; // state of drone
@@ -103,20 +103,21 @@ public class DroneMovementAI : MonoBehaviour
 
     IEnumerator Patrolling()
     {
-        if (style == PatrolStyle.Circular)
+        if (pattern == PatrolPattern.Circular)
         {
-            transform.position = Vector2.MoveTowards(transform.position, transform.position + transform.right, speed * Time.deltaTime);
-            transform.Rotate(new Vector3(0, 0, circularRotationAngle / 10));
+            transform.position = Vector2.MoveTowards(transform.position, transform.position + transform.right, speed * Time.deltaTime); // for circular patrolling, moves the drone 1 unit
+            transform.Rotate(new Vector3(0, 0, circularRotationAngle / 10)); // then rotates the object 1/10 of a given angle, this is effected by the speed of the drone in gameplay
         }
 
-        if (style == PatrolStyle.Square)
+        if (pattern == PatrolPattern.Square)
         {
             if (Vector3.Distance(initialPositionBeforeTurn, transform.position) < patrolDistance)
             {
-                transform.position = Vector2.MoveTowards(transform.position, transform.position + (transform.right * patrolDistance), speed * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, transform.position + (transform.right * patrolDistance), speed * Time.deltaTime); // move the drone for given distance
             }
             else
             {
+                //then depends on the direction, turn the drone either right or left
                 if (direction == PatrolDirection.Left)
                 {
                     transform.Rotate(new Vector3(0, 0, 90));
@@ -130,15 +131,15 @@ public class DroneMovementAI : MonoBehaviour
             }
         }
 
-        if (style == PatrolStyle.SideBySide)
+        if (pattern == PatrolPattern.SideBySide)
         {
             if (Vector3.Distance(initialPositionBeforeTurn, transform.position) < patrolDistance)
             {
-                transform.position = Vector2.MoveTowards(transform.position, transform.position + (transform.right * patrolDistance), speed * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, transform.position + (transform.right * patrolDistance), speed * Time.deltaTime); // move the drone for given distance
             }
             else
             {
-                transform.Rotate(new Vector3(0, 0, transform.rotation.z + 180 * -1));
+                transform.Rotate(new Vector3(0, 0, transform.rotation.z + 180 * -1)); // rotate back the drone
 
                 initialPositionBeforeTurn = transform.position;
             }
