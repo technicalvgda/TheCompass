@@ -14,8 +14,8 @@ public class EditorGrid : MonoBehaviour
     public float numOfCellsX = 200;
     public float numOfCellsY = 200;
 
-    public int xIndex;
-    public int yIndex;
+    public int xIndex = 1 ;
+    public string yIndex = "A";
 
     public GameObject cellSelector;
 

@@ -55,27 +55,92 @@ public class GridEditor : Editor
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
-        GUILayout.Label("Coordinates of Cell (X,Y)");
+        GUILayout.Label("Coordinates of Cell (1-200, A-GR)");
+        //type an int for x coordinate
         grid.xIndex = EditorGUILayout.IntField(grid.xIndex, GUILayout.Width(50));
-        grid.yIndex = EditorGUILayout.IntField(grid.yIndex, GUILayout.Width(50));
+        //type a string for y coordinate (A- GR for sheets)
+        grid.yIndex = EditorGUILayout.TextField(grid.yIndex.ToUpper(), GUILayout.Width(50));
         GUILayout.EndHorizontal();
+
+       
+      
+        
+       
 
         if (GUILayout.Button("Jump To Cell", GUILayout.Width(255)))
         {
-            float startingPosX = -grid.numOfCellsX/2 * grid.width;
-            float startingPosy = -grid.numOfCellsY/2 * grid.height;
-            float offsetX = grid.width / 2;
-            float offsetY = grid.height / 2;
 
-            Vector3 position = SceneView.lastActiveSceneView.pivot;
-            position.x = startingPosX + grid.xIndex * grid.width + offsetX;
-            position.y = startingPosy + grid.yIndex * grid.height + offsetY;
-            position.z = -100;
-            grid.cellSelector.transform.position = position;
+            if (grid.xIndex > 200 || grid.xIndex < 1)
+            {
+                Debug.Log("Invalid coordinate for X index on editor grid");
+            }
+            else if (grid.yIndex.Length > 2)
+            {
+                Debug.Log("Invalid coordinate for y index on editor grid");
+            }
+            else
+            {
+                int firstInt = 0;
+                int secondInt = 0;
+                //get int values from Y index
+                if (grid.yIndex.Length == 1)
+                {
+                   
+                    //Get characters from y index
+                    char firstLetter = grid.yIndex[0];
+                    //convert to ints (ASCII A is 65, so subtract 64 to start at 1)
+                    firstInt = System.Convert.ToInt32(firstLetter) - 64;
+                    
+                    
+                }
+                else if (grid.yIndex.Length > 1)
+                {
+                    
+                    //Get characters from y index
+                    char firstLetter = grid.yIndex[1];
+                    //convert to ints (ASCII A is 65, so subtract 64 to start at 1)
+                    firstInt = System.Convert.ToInt32(firstLetter) - 64;
+                   
+                    char secondLetter = grid.yIndex[0];
+                    //convert to ints
+                    //get value of second int
+                    secondInt = System.Convert.ToInt32(secondLetter) - 64;
+                    //each letter up is another set of 26
+                    secondInt *= 26;
+                   
+                }
 
-            SceneView.lastActiveSceneView.pivot = position;
-            SceneView.lastActiveSceneView.size = 10;
-            SceneView.lastActiveSceneView.Repaint();
+                int yIndexInt = firstInt + secondInt;
+
+                
+
+                if(grid.xIndex > 200 || grid.xIndex < 1)
+                {
+                    Debug.Log("Invalid X Index Value");
+                    return;
+                }
+                if (yIndexInt >200 || yIndexInt < 1)
+                {
+                    Debug.Log("Invalid Y Index Value");
+                    return;
+                }
+
+                //start in upper left corner
+                float startingPosX = -grid.numOfCellsX / 2 * grid.width;
+                float startingPosy = grid.numOfCellsY / 2 * grid.height;
+                float offsetX = grid.width / 2;
+                float offsetY = grid.height / 2;
+
+                Vector3 position = SceneView.lastActiveSceneView.pivot;
+                position.x = startingPosX + (yIndexInt-1) * grid.width + offsetX;
+                position.y = startingPosy - (grid.xIndex) * grid.height + offsetY;
+                position.z = -100;
+                grid.cellSelector.transform.position = position;
+
+                SceneView.lastActiveSceneView.pivot = position;
+                SceneView.lastActiveSceneView.size = 10;
+                SceneView.lastActiveSceneView.Repaint();
+            }
         }
 
         GUILayout.BeginHorizontal();
