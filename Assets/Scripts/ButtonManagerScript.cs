@@ -11,10 +11,12 @@ public class ButtonManagerScript : MonoBehaviour {
 	public Text slotText;
 
 	/* Stores the gameobjects of the UI elements */ 
-	public GameObject saveMenu, optionMenu, loadMenu;
+	public GameObject saveMenu, optionMenu, loadMenu,pauseMenu;
 
 	/* Stores the active screen (To be used in the onBack()) */ 
 	public GameObject activeOnScreen;
+
+	private bool _isPaused;
 
 	/* Finds the UI elements and sets them to inactive. Also sets the slot text to the level that the user is on. */ 
 	void Start()
@@ -22,12 +24,47 @@ public class ButtonManagerScript : MonoBehaviour {
 		saveMenu = GameObject.FindGameObjectWithTag ("SaveMenu");
 		optionMenu = GameObject.FindGameObjectWithTag ("OptionMenu");
 		loadMenu = GameObject.FindGameObjectWithTag ("LoadMenu");
+		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
 		slotText.text = PlayerPrefs.GetString ("onLevel");
 		saveMenu.SetActive (false);
 		optionMenu.SetActive(false);
-		loadMenu.SetActive(false);
+		if(loadMenu != null)
+			loadMenu.SetActive(false);
+		pauseMenu.SetActive (false);
 	}
+	void Update()
+	{
+		//if ESC button is pressed, change the pause state
+		if (Input.GetButtonDown("Pause"))
+		{
+			_isPaused = !_isPaused;
+		}
 
+		//if paused, bring up pause menu && stop game time
+		if (_isPaused)
+		{
+			pauseMenu.SetActive (true);
+			//PauseUI.enabled = true;
+			Time.timeScale = 0;
+		}
+
+		//if not paused, deactivate pause menu && continue game time
+		if (!_isPaused)
+		{
+			pauseMenu.SetActive (false);
+			//PauseUI.enabled = false;
+			if (optionMenu.activeSelf == true)
+				optionMenu.SetActive (false);
+			if (saveMenu.activeSelf == true)
+				saveMenu.SetActive (false);
+			Time.timeScale = 1;
+
+			/*
+			if (optionsCanvas.enabled == true)
+				optionsCanvas.enabled = false;
+			Time.timeScale = 1;*/
+		}
+	}
 	/* Loads the level */ 
 	public void onLoad() 
 	{
@@ -38,13 +75,23 @@ public class ButtonManagerScript : MonoBehaviour {
 	public void onSave() 
 	{
 		saveMenu.SetActive (true);
+
+		activeOnScreen = saveMenu;
 	}
 		
 	/* Universal Back button that uses the activeOnScreen gameObject */ 
 	public void onBack()
 	{
-		activeOnScreen.SetActive (false);
-		activeOnScreen = null;
+		if (saveMenu.activeSelf == true) 
+		{
+			activeOnScreen.SetActive (false);
+			activeOnScreen = optionMenu;
+		} 
+		else 
+		{
+			activeOnScreen.SetActive (false);
+			activeOnScreen = null;
+		}
 	}
 
 	/* Saves the level */ 
@@ -96,6 +143,12 @@ public class ButtonManagerScript : MonoBehaviour {
 	public void QuitBtn()
 	{
 		Application.Quit();
+	}
+
+	//Resume button method, changes pause state to original
+	public void Resume()
+	{
+		_isPaused = false;
 	}
 
 
