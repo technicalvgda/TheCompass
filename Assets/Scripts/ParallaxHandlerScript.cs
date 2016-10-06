@@ -17,6 +17,8 @@ public class ParallaxHandlerScript : MonoBehaviour {
     public float levelSizeX = 200.0f;
     public float levelSizeY = 200.0f;
 
+    Vector3 centerPos;
+
     Camera mainCamera;
     GameObject player;
     Vector2 playerPos;
@@ -51,7 +53,7 @@ public class ParallaxHandlerScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-
+        //Get corner positions
         bottomLeft = new Vector3(-levelSizeX / 2 * unit, -levelSizeY / 2 * unit, 0);
         bottomRight = new Vector3(levelSizeX / 2 * unit, -levelSizeY / 2 * unit, 0);
         topLeft = new Vector3(-levelSizeX / 2 * unit, levelSizeY / 2 * unit, 0);
@@ -66,6 +68,7 @@ public class ParallaxHandlerScript : MonoBehaviour {
         //assign camera and player variable
         mainCamera = Camera.main;
         player = GameObject.FindGameObjectWithTag("Player");
+        centerPos = mainCamera.transform.position;
 
         //layer1Children = new Transform[layer1.transform.childCount];
         //layer2Children = new Transform[layer2.transform.childCount];
@@ -114,17 +117,23 @@ public class ParallaxHandlerScript : MonoBehaviour {
     void HandleLayerMovement(Transform currentLayer, float halfWidth, float halfHeight,
                              float maxX, float maxY)
     {
+        //width of layer
         float width = currentLayer.GetComponent<RectTransform>().rect.width;
+        //height of layer
         float height = currentLayer.GetComponent<RectTransform>().rect.height;
 
-        float shiftRatioX = halfWidth / (levelSizeX * unit);  //0.2f;
-        float shiftRatioY = halfHeight / (levelSizeY * unit);//0.2f;
+        //float shiftRatioX = halfWidth / (levelSizeX * unit);  //0.2f;
+        //float shiftRatioY = halfHeight / (levelSizeY * unit);//0.2f;
+
+        float shiftRatioX = 1 - ((levelSizeX * unit / 2) - mainCamera.transform.position.x) / (levelSizeX * unit / 2) - centerPos.x;
+        float shiftRatioY = 1 - ((levelSizeY * unit / 2) - mainCamera.transform.position.y) / (levelSizeY * unit / 2) - centerPos.y;
         //needs to shift by a certain degree so that it starts centered
         //and shifts just enough to reach its edge at the edge of the map
-        currentLayer.position = mainCamera.transform.position + new Vector3
-                                (-mainCamera.transform.position.x * shiftRatioX, 
-                                 -mainCamera.transform.position.y * shiftRatioY, 
-                                  transform.position.z);
+
+        float layerXPos = mainCamera.transform.position.x - (width / 2 * shiftRatioX);
+        float layerYPos = mainCamera.transform.position.y - (height / 2 * shiftRatioY);
+
+        currentLayer.position = new Vector2(layerXPos,layerYPos);
 
         
 
