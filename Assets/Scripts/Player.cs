@@ -19,7 +19,12 @@ public class Player : MonoBehaviour {
     const float ROTATION_SPEED = 5.0f;
 
     public float playerStartingHealth;//< the amount of health the player begins with
-    private float playerHealth;//< the player's current health
+    public float playerHealth;//< the player's current health
+    public float playerMaxHealth;//< the maximum health the player can have
+
+    public float healthRegen = 0;//Health to be healed over time
+    public float RegenDuration = 0;//The duration of each tick of heal
+
     bool alive = true; //<bool for whether player is alive
 
     // Use this for initialization
@@ -40,6 +45,10 @@ public class Player : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.J))
 			playerHealth -= 5f;
 
+        // The health regen will only occur when we are below max health
+        if (alive && (playerHealth < playerMaxHealth)) {
+            healOverTime(healthRegen, RegenDuration);
+        }
     }
 
     private void ControlPlayer()
@@ -84,6 +93,19 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+    public void healOverTime(float healAmount, float duration) {
+        StartCoroutine(healOverTimeCoroutine(healAmount, duration));
+    }
+
+    IEnumerator healOverTimeCoroutine(float healAmount, float duration) {
+        float amountHealed = 0;
+        float amountPerLoop = healAmount / duration;
+        while (amountHealed < healAmount) {
+            gainHealth(amountPerLoop);
+            amountHealed += amountPerLoop;
+            yield return new WaitForSeconds(1f);
+        }
+    }
 
     public void gainHealth(float health)
     {
