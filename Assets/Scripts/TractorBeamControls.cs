@@ -16,7 +16,7 @@ public class TractorBeamControls : MonoBehaviour
     private bool _hitDebris = false;
     private int _tractorlength = 0;//<the current length of the tractor beam
     private const float MAX_TRACTOR_LENGTH = 20;
-#if UNITY_STANDALONE || UNITY_WEBPLAYER
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
     private const float PULL_SPEED = 1;
     
 #elif UNITY_IOS || UNITY_ANDROID
@@ -41,7 +41,7 @@ public class TractorBeamControls : MonoBehaviour
         TractorBeamRender();
 
 
-#if UNITY_STANDALONE || UNITY_WEBPLAYER
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         /* Tractor Beam Controls Below 
          *    click to send out a tractor beam in that direction 
          *    when it connects with debris it will stick to it and 
@@ -165,7 +165,7 @@ public class TractorBeamControls : MonoBehaviour
     private void TractorBeamRender()
     {
 
-#if UNITY_STANDALONE || UNITY_WEBPLAYER
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         //if the tractor beam is active
         if (Input.GetMouseButton(0))
         {
@@ -197,7 +197,7 @@ public class TractorBeamControls : MonoBehaviour
                 if (mouseDir.magnitude > MAX_TRACTOR_LENGTH)
                 {
                     //get a position in the direction of the mouse 
-                    endPoint = (Vector2)transform.position + (mouseDir.normalized * MAX_TRACTOR_LENGTH);
+                    endPoint = (Vector2)transform.position + (mouseDir.normalized * _tractorlength);
                 }
                 else
                 {
@@ -242,7 +242,7 @@ public class TractorBeamControls : MonoBehaviour
                 //find direction that the joystick is going 
                 Vector2 mouseDir = joystick.inputValue().normalized;
                 //make a variable for the end position
-                Vector2 endPoint = (Vector2)transform.position + (mouseDir.normalized * MAX_TRACTOR_LENGTH);
+                Vector2 endPoint = (Vector2)transform.position + (mouseDir.normalized * _tractorlength);
                 
 
                 //set the end of the beam to be where the endpoint variable is
