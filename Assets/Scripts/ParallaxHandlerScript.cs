@@ -6,9 +6,9 @@ public class ParallaxHandlerScript : MonoBehaviour {
     //1 is closest layer, 3 is furthest layer (background panel)
     public GameObject layer1, layer2, layer3;
 
-    Transform[] layer1Children;
-    Transform[] layer2Children;
-    Transform[] layer3Children;
+    //Transform[] layer1Children;
+    //Transform[] layer2Children;
+    //Transform[] layer3Children;
 
     //unit to measure size of map by (5 is value used by editor grid for 1 cell)
     public float unit = 5.0f;
@@ -67,9 +67,9 @@ public class ParallaxHandlerScript : MonoBehaviour {
         mainCamera = Camera.main;
         player = GameObject.FindGameObjectWithTag("Player");
 
-        layer1Children = new Transform[layer1.transform.childCount];
-        layer2Children = new Transform[layer2.transform.childCount];
-        layer3Children = new Transform[layer3.transform.childCount];
+        //layer1Children = new Transform[layer1.transform.childCount];
+        //layer2Children = new Transform[layer2.transform.childCount];
+        //layer3Children = new Transform[layer3.transform.childCount];
 
        //set sorting layers of all children to each layer
         foreach (Transform child in layer1.transform)
