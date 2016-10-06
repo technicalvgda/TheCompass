@@ -30,39 +30,39 @@ public class ButtonManagerScript : MonoBehaviour {
 		optionMenu.SetActive(false);
 		if(loadMenu != null)
 			loadMenu.SetActive(false);
-		pauseMenu.SetActive (false);
+		if(pauseMenu != null)
+			pauseMenu.SetActive(false);
 	}
 	void Update()
 	{
 		//if ESC button is pressed, change the pause state
-		if (Input.GetButtonDown("Pause"))
-		{
-			_isPaused = !_isPaused;
-		}
+		if (Application.loadedLevelName == "MVPScene") {
+			if (Input.GetButtonDown ("Pause")) {
+				_isPaused = !_isPaused;
+			}
 
-		//if paused, bring up pause menu && stop game time
-		if (_isPaused)
-		{
-			pauseMenu.SetActive (true);
-			//PauseUI.enabled = true;
-			Time.timeScale = 0;
-		}
+			//if paused, bring up pause menu && stop game time
+			if (_isPaused) {
+				pauseMenu.SetActive (true);
+				//PauseUI.enabled = true;
+				Time.timeScale = 0;
+			}
 
-		//if not paused, deactivate pause menu && continue game time
-		if (!_isPaused)
-		{
-			pauseMenu.SetActive (false);
-			//PauseUI.enabled = false;
-			if (optionMenu.activeSelf == true)
-				optionMenu.SetActive (false);
-			if (saveMenu.activeSelf == true)
-				saveMenu.SetActive (false);
-			Time.timeScale = 1;
+			//if not paused, deactivate pause menu && continue game time
+			if (!_isPaused) {
+				pauseMenu.SetActive (false);
+				//PauseUI.enabled = false;
+				if (optionMenu.activeSelf == true)
+					optionMenu.SetActive (false);
+				if (saveMenu.activeSelf == true)
+					saveMenu.SetActive (false);
+				Time.timeScale = 1;
 
-			/*
+				/*
 			if (optionsCanvas.enabled == true)
 				optionsCanvas.enabled = false;
 			Time.timeScale = 1;*/
+			}
 		}
 	}
 	/* Loads the level */ 
