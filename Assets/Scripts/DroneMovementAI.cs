@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DroneMovementAI : MonoBehaviour
-{
+public class DroneMovementAI : MonoBehaviour {
 
-    public enum DroneMovementState { Idle, Patrolling, Following };
+    public enum DroneMovementState { Idle, Patrolling, Following, ReturnBase };
     public DroneMovementState droneState;
 
     public float speed; //speed of the drone
 
-
     [Header("Following")]
+    public int followDistance;
     private RaycastHit2D hit; //raycast hit output
     private GameObject player; // player game object
     private GameObject nonPlayer; // non player game object stored after raycasting
@@ -18,20 +17,30 @@ public class DroneMovementAI : MonoBehaviour
 
     [Header("Patrolling")]
     public int patrolDistance; // distance the drone will move before making a turn
-    public enum PatrolPattern { Circular, Square, SideBySide} // patrolling patterns
+    public enum PatrolPattern { Circular, Square, SideBySide, Snake, IdleScan} // patrolling patterns
     public PatrolPattern pattern;
     public float circularRotationAngle; // rotation angle for the circular pattern
+    public int idleScanAngle;
+    public int idleScanSpeed;
     public enum PatrolDirection { Left, Right}; // direction for square patrol
     public PatrolDirection direction;
 
     private bool isPatrolling = false; // state of drone
+    private bool isTriggerEntered = false;
+    private int tempPatrolDistance;
     private Vector3 initialPositionBeforeTurn;
+    private Vector3 initialPositionOnStart;
+    private DroneMovementState initialDroneMovementState;
+    private bool canRaycast = true;
+    private float idleScanAngleCounter;
 
 
     void Start ()
     {
         //DroneVision.FollowPlayer += StartFollowing;
-
+        tempPatrolDistance = patrolDistance;
+        initialPositionOnStart = transform.position;
+        initialDroneMovementState = droneState;
         if(droneState == DroneMovementState.Patrolling)
         {
             StartPatrolling();
@@ -55,8 +64,17 @@ public class DroneMovementAI : MonoBehaviour
     {
         droneState = DroneMovementState.Patrolling;
         initialPositionBeforeTurn = transform.position;
-        StartCoroutine(Patrolling());
+        idleScanAngleCounter = 0;
+        StartCoroutine(Patrol());
     }
+
+    void StartReturningBase()
+    {
+        GetComponent<CircleCollider2D>().enabled = false;
+        droneState = DroneMovementState.ReturnBase;
+        StartCoroutine(ReturnBase());
+    }
+
 
     IEnumerator FollowPlayer()
     {
@@ -64,6 +82,7 @@ public class DroneMovementAI : MonoBehaviour
         //check the distance between the player and the drone to give a stopping distance
         if(Vector2.Distance(transform.position, player.transform.position) > 5) // constant will be replaced with attack range
         {
+            
             hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position); // get the raycast
 
             //Debug.DrawRay(transform.position, player.transform.position - transform.position, Color.red);
@@ -86,6 +105,12 @@ public class DroneMovementAI : MonoBehaviour
                 nonPlayer = null;
                 transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime); // after avoiding, keep following the player
             }
+
+            if (Vector2.Distance(transform.position, player.transform.position) > followDistance)
+            {
+                StartReturningBase();
+                isFollowing = false;
+            }
         }
         else
         {
@@ -101,7 +126,7 @@ public class DroneMovementAI : MonoBehaviour
         
     }
 
-    IEnumerator Patrolling()
+    IEnumerator Patrol()
     {
         if (pattern == PatrolPattern.Circular)
         {
@@ -111,7 +136,7 @@ public class DroneMovementAI : MonoBehaviour
 
         if (pattern == PatrolPattern.Square)
         {
-            if (Vector3.Distance(initialPositionBeforeTurn, transform.position) < patrolDistance)
+            if (Vector2.Distance(initialPositionBeforeTurn, transform.position) < patrolDistance)
             {
                 transform.position = Vector2.MoveTowards(transform.position, transform.position + (transform.right * patrolDistance), speed * Time.deltaTime); // move the drone for given distance
             }
@@ -133,7 +158,7 @@ public class DroneMovementAI : MonoBehaviour
 
         if (pattern == PatrolPattern.SideBySide)
         {
-            if (Vector3.Distance(initialPositionBeforeTurn, transform.position) < patrolDistance)
+            if (Vector2.Distance(initialPositionBeforeTurn, transform.position) < patrolDistance)
             {
                 transform.position = Vector2.MoveTowards(transform.position, transform.position + (transform.right * patrolDistance), speed * Time.deltaTime); // move the drone for given distance
             }
@@ -145,13 +170,149 @@ public class DroneMovementAI : MonoBehaviour
             }
         }
 
+        if (pattern == PatrolPattern.Snake) // will have an implementation defining the borders of patrol area
+        {
+            Debug.DrawRay(transform.right + transform.position, (transform.position + transform.right * tempPatrolDistance) - transform.position);
 
-        yield return new WaitForSeconds(0);
+            if (Vector2.Distance(initialPositionBeforeTurn, transform.position) < patrolDistance)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, transform.position + (transform.right * patrolDistance), speed * Time.deltaTime); // move the drone for given distance
+            }
+            else
+            {
+
+                PickRandomDirection();
+
+                initialPositionBeforeTurn = transform.position;
+
+                patrolDistance = tempPatrolDistance;
+                hit = Physics2D.Raycast(transform.right + transform.position, (transform.position + transform.right * tempPatrolDistance * 2) - transform.position); // get the raycast
+                
+                if(hit.transform)
+                {
+                    if (hit.distance < patrolDistance)
+                    {
+                        tempPatrolDistance = patrolDistance;
+                        patrolDistance = Mathf.CeilToInt(hit.distance / 3);
+                    }
+                }
+                
+                
+            }
+        }
+
+        if(pattern == PatrolPattern.IdleScan)
+        {
+
+            if(idleScanAngleCounter > 0 && idleScanAngleCounter < idleScanAngle)
+            {
+                idleScanAngleCounter += idleScanSpeed / 10f;
+                transform.Rotate(new Vector3(0, 0, idleScanSpeed / 10f));
+
+                if(idleScanAngleCounter >= idleScanAngle)
+                {
+                    idleScanAngleCounter = -idleScanAngle;
+                }
+            }
+            else
+            {
+                idleScanAngleCounter += idleScanSpeed / 10f;
+                transform.Rotate(new Vector3(0, 0, -idleScanSpeed / 10f));
+            }
+            
+        }
+            yield return new WaitForSeconds(0);
 
         if(droneState == DroneMovementState.Patrolling)
         {
-            StartCoroutine(Patrolling());
+            StartCoroutine(Patrol());
+        }
+
+
+        
+    }
+
+    IEnumerator ReturnBase()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, initialPositionOnStart, speed * Time.deltaTime); // move the drone for given distance
+        
+
+        yield return new WaitForSeconds(0);
+
+        if (Vector2.Distance(initialPositionOnStart, transform.position) > 0)
+        {
+            StartCoroutine(ReturnBase());
+        }
+        else
+        {
+            GetComponent<CircleCollider2D>().enabled = true;
+            StartPatrolling(); // this will change to an event for a dynamic call or a plain if statement
+        }
+    }
+
+    void PickRandomDirection()
+    {
+        switch (Mathf.FloorToInt(Random.Range(0, 3)))
+        {
+            case 0:
+                transform.Rotate(new Vector3(0, 0, 90));
+                break;
+            case 1:
+                transform.Rotate(new Vector3(0, 0, -90));
+                break;
+            case 2:
+                break;
+        }
+
+        canRaycast = true;
+    }
+
+
+    void RaycastInFront(Transform _object)
+    {
+        if (canRaycast)
+        {
+            canRaycast = false;
+
+            hit = Physics2D.Raycast(transform.right + transform.position, (transform.position + transform.right * tempPatrolDistance * 2) - transform.position); // get the raycast
+            if (hit.transform)
+            {
+                if (hit.distance < tempPatrolDistance)
+                {
+                    PickRandomDirection();
+                }
+            }
+
         }
         
+        
+    }
+
+    void OnTriggerEnter2D(Collider2D _object)
+    {
+        if (!_object.transform.CompareTag("Player"))
+        {
+            RaycastInFront(_object.transform);
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D _object)
+    {
+        if (_object.transform.CompareTag("small"))
+        {
+            if (Vector2.Distance(_object.transform.position, transform.position) < _object.GetComponent<CircleCollider2D>().radius + 1)
+            {
+
+
+                RaycastInFront(_object.transform);
+
+            }
+
+        }
+    }
+
+    void OnParticleTrigger()
+    {
+        Debug.Log("hello");
     }
 }
