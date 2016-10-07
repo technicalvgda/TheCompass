@@ -30,6 +30,7 @@ public class DroneMovementAI : MonoBehaviour {
     private int tempPatrolDistance;
     private Vector3 initialPositionBeforeTurn;
     private Vector3 initialPositionOnStart;
+    private Quaternion initialRotationOnStart;
     private DroneMovementState initialDroneMovementState;
     private bool canRaycast = true;
     private float idleScanAngleCounter;
@@ -40,6 +41,7 @@ public class DroneMovementAI : MonoBehaviour {
         //DroneVision.FollowPlayer += StartFollowing;
         tempPatrolDistance = patrolDistance;
         initialPositionOnStart = transform.position;
+        initialRotationOnStart = transform.rotation;
         initialDroneMovementState = droneState;
         if(droneState == DroneMovementState.Patrolling)
         {
@@ -235,7 +237,7 @@ public class DroneMovementAI : MonoBehaviour {
     IEnumerator ReturnBase()
     {
         transform.position = Vector2.MoveTowards(transform.position, initialPositionOnStart, speed * Time.deltaTime); // move the drone for given distance
-        
+        transform.right = initialPositionOnStart - transform.position;
 
         yield return new WaitForSeconds(0);
 
@@ -246,6 +248,7 @@ public class DroneMovementAI : MonoBehaviour {
         else
         {
             GetComponent<CircleCollider2D>().enabled = true;
+            transform.rotation = initialRotationOnStart;
             StartPatrolling(); // this will change to an event for a dynamic call or a plain if statement
         }
     }
