@@ -1,0 +1,135 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class ParallaxHandlerScript : MonoBehaviour {
+
+    //1 is closest layer, 3 is furthest layer (background panel)
+    public GameObject layer1, layer2, layer3;
+
+    //unit to measure size of map by (5 is value used by editor grid for 1 cell)
+    public float unit = 5.0f;
+
+    //dimensions of level in units (same units as above)
+    public float levelSizeX = 200.0f;
+    public float levelSizeY = 200.0f;
+
+    Vector3 centerPos;
+
+    Camera mainCamera;
+    float cameraHalfWidth;
+    float cameraHalfHeight;
+
+    //variables for layer math
+    //can add position and half width or height to get edge pos of layer
+    private float width1, width2, width3;
+    private float height1, height2, height3;
+
+    private float halfWidth1, halfWidth2, halfWidth3;
+    private float halfHeight1, halfHeight2, halfHeight3;
+
+    Vector3 bottomLeft;
+    Vector3 bottomRight;
+    Vector3 topLeft;
+    Vector3 topRight;
+   
+    // Use this for initialization
+    void Start ()
+    {
+       
+
+
+        //assign camera and player variable
+        mainCamera = Camera.main;
+        centerPos = mainCamera.transform.position;
+        cameraHalfHeight = Camera.main.orthographicSize;
+        cameraHalfWidth = Camera.main.orthographicSize * Screen.width / Screen.height ;
+        
+
+        //set sorting layers of all children to each layer
+        foreach (Transform child in layer1.transform)
+        {child.GetComponent<SpriteRenderer>().sortingLayerName = "Parallax1";}
+
+        foreach (Transform child in layer2.transform)
+        { child.GetComponent<SpriteRenderer>().sortingLayerName = "Parallax2"; }
+
+        foreach (Transform child in layer3.transform)
+        { child.GetComponent<SpriteRenderer>().sortingLayerName = "Background"; }
+
+        //set layer math variables
+        width1 = layer1.GetComponent<RectTransform>().rect.width;
+        width2 = layer2.GetComponent<RectTransform>().rect.width;
+        width3 = layer3.GetComponent<RectTransform>().rect.width;
+        height1 = layer1.GetComponent<RectTransform>().rect.height;
+        height2 = layer2.GetComponent<RectTransform>().rect.height;
+        height3 = layer3.GetComponent<RectTransform>().rect.height;
+
+        halfWidth1 = width1 / 2;
+        halfWidth2 = width2 / 2;
+        halfWidth3 = width3 / 2;
+        halfHeight1 = height1 / 2;
+        halfHeight2 = height2 / 2;
+        halfHeight3 = height3 / 2;
+
+        
+    }
+	
+	// Update is called once per frame
+	void Update ()
+    {
+        //draw box for level border
+        DrawDebugBox(Color.green, levelSizeX * unit, levelSizeY*unit, true, Vector3.zero);
+       
+
+        //handle shifting of all 3 layers
+        HandleLayerMovement(layer1.transform, halfWidth1, halfHeight1);
+        HandleLayerMovement(layer2.transform, halfWidth2, halfHeight2);
+        HandleLayerMovement(layer3.transform, halfWidth3, halfHeight3);
+       
+    }
+
+    void HandleLayerMovement(Transform currentLayer, float halfWidth, float halfHeight)
+    {
+
+        float shiftRatioX = 1  - (((levelSizeX * unit / 2) - mainCamera.transform.position.x) / (levelSizeX * unit / 2) - centerPos.x);
+        float shiftRatioY = 1 - (((levelSizeY * unit / 2) - mainCamera.transform.position.y) / (levelSizeY * unit / 2) - centerPos.y);
+        //needs to shift by a certain degree so that it starts centered
+        //and shifts just enough to reach its edge at the edge of the map
+
+        //move the layer to the position of camera with offset
+        float layerXPos = mainCamera.transform.position.x - ((halfWidth- cameraHalfWidth)* shiftRatioX);
+        float layerYPos = mainCamera.transform.position.y - ((halfHeight -cameraHalfHeight)* shiftRatioY);
+
+        currentLayer.position = new Vector2(layerXPos,layerYPos);
+
+        //draw box for layer 1
+        DrawDebugBox(Color.yellow, width1, height1, false, currentLayer.position);
+        //draw box for layer 2
+        DrawDebugBox(Color.blue, width2, height2, false, currentLayer.position);
+        //draw box for layer 3
+        DrawDebugBox(Color.red, width3, height3, false, currentLayer.position);
+
+    }
+
+    void DrawDebugBox(Color color, float xSize, float ySize, bool levelMap, Vector3 shift)
+    {
+        //Get corner positions
+        bottomLeft = new Vector3(-xSize / 2, -ySize / 2, 0);
+        bottomRight = new Vector3(xSize / 2, -ySize / 2, 0);
+        topLeft = new Vector3(-xSize / 2, ySize / 2, 0);
+        topRight = new Vector3(xSize / 2, ySize / 2 , 0);
+
+        if(!levelMap)
+        {
+            bottomLeft += shift;
+            bottomRight += shift;
+            topLeft += shift;
+            topRight += shift;
+        }
+
+        //draw lines for map borders
+        Debug.DrawLine(bottomLeft, bottomRight, color);//< bottom line
+        Debug.DrawLine(topLeft, topRight, color);//< top line
+        Debug.DrawLine(bottomLeft, topLeft, color);//< left line
+        Debug.DrawLine(bottomRight, topRight, color);//< right line
+    }
+}
