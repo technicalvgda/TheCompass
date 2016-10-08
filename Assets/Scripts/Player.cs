@@ -117,7 +117,7 @@ public class Player : MonoBehaviour {
 
 			    //Use the two store floats to create a new Vector2 variable movement.
 			    Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
-			    Debug.Log(rb2d.velocity.magnitude);
+			    //Debug.Log(rb2d.velocity.magnitude);
 
 
 			    //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.

@@ -9,6 +9,7 @@ using System.Collections;
  */
 public class EnemyTractorBeam : MonoBehaviour {
     public float pullDelay = 5.0f, pullForce = 15.0f;
+	public bool junker = false;
 
 	private Vision _vision;
 	private float _tractorlength;
@@ -16,18 +17,30 @@ public class EnemyTractorBeam : MonoBehaviour {
     private bool _hitPlayer, _canPull = true;
 	private const float MAX_TRACTOR_LENGTH = 20.0f;
 	private const float PULL_SPEED = 1.0f;
-	private LineRenderer _tractorLine;
-	private Vector3 _playerPos;
-    private GameObject _player;
-    private Rigidbody2D _playerRgdbdy;
+	private LineRenderer _tractorPlayer, _tractorJunk;
+	private Vector3 _playerPos, _junkPos;
+	private GameObject _player;
+    private Rigidbody2D _playerRgdbdy, _junkRdgdbdy;
+	private CircleCollider2D _collider;
+	private Vector3[] directions = {new Vector3(1, 0 ,0), new Vector3(-1,0,0), new Vector3(0,1,0), new Vector3(0,-1,0)};
 
 	// Use this for initialization
 	void Start () 
 	{
+		_collider = GetComponent<CircleCollider2D>();
+		if(junker)
+		{
+			_collider.enabled = true;
+		}
+		else
+		{
+			_collider.enabled = false;
+		}
         _player = GameObject.FindGameObjectWithTag("Player");
         _playerRgdbdy = _player.GetComponent<Rigidbody2D>();
         _vision = GetComponent<Vision>();
-		_tractorLine = GetComponent<LineRenderer>();
+		_tractorPlayer = GetComponent<LineRenderer>();
+		_tractorJunk = GetComponent<LineRenderer>();
 	}
 	
 	// Update is called once per frame
@@ -58,7 +71,7 @@ public class EnemyTractorBeam : MonoBehaviour {
                 //Pull in the player here for a short time with increased force
                 if (_canPull)
                 {
-                    Enemy_TractorBeamRender();
+					Enemy_TractorBeamRender(_tractorPlayer, _playerPos, _tractorlength);
                     _playerRgdbdy.AddForce(transform.right * -pullForce, ForceMode2D.Impulse);
                     StartCoroutine("impulsePullWait");
                 }
@@ -67,20 +80,20 @@ public class EnemyTractorBeam : MonoBehaviour {
         else
         {
             _tractorlength = 0;
-            _tractorLine.SetPosition(1, transform.position);
+			_tractorPlayer.SetPosition(1, transform.position);
             _hitPlayer = false;
         }
     }
 
 	//Renders a line along the tractor beam
-	private void Enemy_TractorBeamRender()
+	private void Enemy_TractorBeamRender(LineRenderer line, Vector3 target, float length)
 	{
-		_tractorLine.enabled = true;
-		_tractorLine.SetPosition(0, transform.position);
-		_tractorLine.SetColors(Color.red, Color.red);
-		Vector2 rayDir = (Vector2)_playerPos - (Vector2)transform.position;
-		Vector2 endPoint = (Vector2)transform.position + (rayDir.normalized * _tractorlength);
-		_tractorLine.SetPosition(1, endPoint);
+		line.enabled = true;
+		line.SetPosition(0, transform.position);
+		line.SetColors(Color.red, Color.red);
+		Vector2 rayDir = (Vector2)target - (Vector2)transform.position;
+		Vector2 endPoint = (Vector2)transform.position + (rayDir.normalized * length);
+		line.SetPosition(1, endPoint);
 	}
 
     //handles the delay between pulls
@@ -91,4 +104,17 @@ public class EnemyTractorBeam : MonoBehaviour {
         _canPull = true;
     }
 
+	//for the junker, will fling objects not tagged the player into a random direction 
+	void OnTriggerEnter2D(Collider2D col){
+		int rand = Random.Range(0, directions.Length);
+		if(col.gameObject.tag != "Player")
+		{
+			RaycastHit2D hit = Physics2D.Raycast(transform.position, col.transform.position - transform.position, _collider.radius);
+			if(hit){
+				Enemy_TractorBeamRender(_tractorJunk, col.transform.position, Vector2.Distance(transform.position, col.transform.position));
+				col.attachedRigidbody.AddForce(directions[rand] * pullForce, ForceMode2D.Impulse);
+				StartCoroutine("impulsePullWait");
+			}
+		}
+	}
 }
