@@ -35,6 +35,8 @@ public class VirtualJoystickMovement : MonoBehaviour
 	//The varible to hold the name of the parent. This is to check for correct touch position for movement and tether joysticks
 	private string _parentName;
 
+    private int trackTouch;
+
 	//Initialization
 	void Start()
 	{
@@ -55,42 +57,40 @@ public class VirtualJoystickMovement : MonoBehaviour
 			{
 				_touch = Input.GetTouch (i);
 				//If the touch happened on the left side of the screen
-				if (_touch.position.x < Screen.width / 3f) 
+				if (_touch.position.x < Screen.width / 2f) 
 				{
 					//Get the touch position and calculate where in the world the touch is
 					_touchPos = _touch.position;
-					_worldPos = Camera.main.ScreenToWorldPoint (new Vector3 (_touchPos.x, _touchPos.y, this.transform.position.z));
-					_padPos = new Vector3 (_worldPos.x, _worldPos.y, this.transform.position.z);
+					//_worldPos = Camera.main.ScreenToWorldPoint (new Vector3 (_touchPos.x, _touchPos.y, this.transform.position.z));
+					//_padPos = new Vector3 (_touch.x, _worldPos.y, this.transform.position.z);
 					//If the touch began
 					if (_touch.phase == TouchPhase.Began) 
 					{
-						//move the joystick to the position of the touch
-						_joystickVisible = true;
+                        trackTouch = _touch.fingerId;
+                        //move the joystick to the position of the touch
+                        _joystickVisible = true;
 						_changeJoystickColor = true;
-						transform.position = _padPos;
+						transform.position = _touchPos;
+                        _padPos = _touchPos;
 					}
 					//If the touch is moving
-					if (_touch.phase == TouchPhase.Moved) 
+					if (_touch.phase == TouchPhase.Moved && trackTouch == _touch.fingerId) 
 					{
 						//Most of the action is here - calculates the value of inputVector and moves the joystick
-						if (RectTransformUtility.ScreenPointToLocalPointInRectangle (_bgImg.rectTransform, _touch.position, Camera.main, out _pos)) 
-						{
-							_pos.x = (_pos.x / _bgImg.rectTransform.sizeDelta.x);
-							_pos.y = (_pos.y / _bgImg.rectTransform.sizeDelta.y);
+						_inputVector = new Vector3 ((_touchPos.x - _padPos.x), (_touchPos.y - _padPos.y), this.transform.position.z);
+                        Vector3 moveJoy = new Vector3(_inputVector.x * _bgImg.rectTransform.sizeDelta.x / 2, _inputVector.y * _bgImg.rectTransform.sizeDelta.y / 2);
+                        moveJoy = (moveJoy.magnitude > 50.0f) ? moveJoy.normalized * 25 : moveJoy;
+                        //_inputVector = (_inputVector.magnitude > 1.0f) ? _inputVector.normalized : _inputVector;
 
-							_inputVector = new Vector3 (_pos.x, _pos.y, 0);
-							_inputVector = (_inputVector.magnitude > 1.0f) ? _inputVector.normalized : _inputVector;
+                        //Move the joystick image
+                        _joystickImg.rectTransform.anchoredPosition = moveJoy;
+							
 
-							//Move the joystick image
-							_joystickImg.rectTransform.anchoredPosition = 
-								new Vector3 (_inputVector.x * (_bgImg.rectTransform.sizeDelta.x / 2)
-									, _inputVector.y * (_bgImg.rectTransform.sizeDelta.y / 2));
-
-							Debug.Log (_inputVector);
-						}
+						Debug.Log (_inputVector);
+						
 					} 
 					//if the touch has ended
-					else if (_touch.phase == TouchPhase.Ended) 
+					else if (_touch.phase == TouchPhase.Ended && trackTouch == _touch.fingerId) 
 					{
 						//reset the inputVector and the joystick position. Changes bools so that the joystick disappears
 						_inputVector = Vector3.zero;
@@ -120,6 +120,16 @@ public class VirtualJoystickMovement : MonoBehaviour
 				_changeJoystickColor = false;
 			}
 		}
-	}	
+	}
+    
+    public TouchPhase touchPhase()
+    {
+        return _touch.phase;
+    }	
+
+    public Vector3 inputValue()
+    {
+        return _inputVector.normalized; 
+    }
 
 }

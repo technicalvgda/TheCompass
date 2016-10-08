@@ -2,7 +2,7 @@
 using System.Collections;
 /* LaserEmitter.cs
  * 
- * This script should draw an indefinite line. The line with will have damage falloff for enemies and the environment, but not the player (instant death).
+ * This script should draw an indefinite line. The line with will have damage falloff for enemies and the environment, but not the player.
  * When the laser hits an asteroid it will split the asteroid into multiple pieces.
  * 
  */
@@ -17,6 +17,7 @@ public class LaserEmitter : MonoBehaviour
     private RaycastHit2D _hit;
     private Vector3 _startVec, _startVecFwd;
     private Player _playerscript;
+    private float _calcDamage;
     // Use this for initialization
     void Start()
     {
@@ -45,25 +46,30 @@ public class LaserEmitter : MonoBehaviour
             //laser hits something, so the endpoint is the collision point
             line.SetPosition(1, _hit.point);
             //TODO: Make the damage have a cooldown using the coroutine fire methods.
-
+            if (_hit.distance < maxFalloffDist)
+            {
+                /**Linear Fall off scaling
+                * 1 Unit = 10% damage reduction
+                **/
+                _calcDamage = rayDamage * (100 - (100 * (0.1f * _hit.distance)));
+            }
+            else
+            {
+                _calcDamage = 0;
+            }
+            
             //Hitting the player
             Debug.Log(_hit.point);
             if (_hit.collider.gameObject == _player)
             {
-                _playerscript.takeDamage(10000.0f); //the laser hit is lethal
+                _playerscript.takeDamage(_calcDamage);
             }
             //hitting an enemy or the asteroid, change the tags when necessary
             if (_hit.collider.gameObject.tag == "Enemy" || _hit.collider.gameObject.tag == "SplitAsteroid")
             {
                 //The enemy should be taking damage scaled to distance. It should also be hitting the asteroid.
                 //I will update this when the asteroids and enemies get written.
-                if (_hit.distance < maxFalloffDist)
-                {
-                    /**Linear Fall off scaling
-                    * 1 Unit = 10% damage reduction
-                    **/
-                    rayDamage = rayDamage * (100 - (100 * (0.1f * _hit.distance)));
-                }
+                
             }
         }
         else
