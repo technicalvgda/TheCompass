@@ -15,6 +15,7 @@ public class DroneVision : MonoBehaviour
     private static GameObject player; // player game object reference
     private CircleCollider2D droneCollider; // drone collider
     private DroneMovementAI droneMovement;
+    private bool isLookingForPlayer = false;
     
 	// Use this for initialization
 	void Start ()
@@ -32,7 +33,14 @@ public class DroneVision : MonoBehaviour
         if(_player.CompareTag("Player"))
         {
             player = _player.gameObject;
-            StartCoroutine(LookForPlayer());
+            if(!isLookingForPlayer)
+            {
+                isLookingForPlayer = true;
+                StartCoroutine(LookForPlayer());
+                Debug.Log("start Looking");
+
+            }
+            
         }
         
     }
@@ -42,20 +50,20 @@ public class DroneVision : MonoBehaviour
     {
         if (_player.CompareTag("Player"))
         {
-            player = null;
+            //player = null;
             StopCoroutine(LookForPlayer());
+            isLookingForPlayer = false;
         }
     }
 
     // When enemy detected in range, drone keeps looking for the player if it is in sight, then starts rotating to the player until player is out of range
     IEnumerator LookForPlayer()
     {
-        //Debug.Log(Vector2.Angle(transform.right, player.transform.position - transform.position));
 
         if (Vector2.Angle(transform.right, player.transform.position - transform.position) < visionConeAngle / 2)
         {
             transform.right = player.transform.position - transform.position;
-            if (Vector2.Distance(transform.position, player.transform.position) > 5) // constant will be replaced with attack range
+            if (Vector2.Distance(transform.position, player.transform.position) > 10) // constant will be replaced with attack range
             {
                 droneMovement.StartFollowing();
             }
@@ -64,7 +72,7 @@ public class DroneVision : MonoBehaviour
 
         yield return new WaitForSeconds(0);
 
-        if (player != null)
+        if (isLookingForPlayer)
         {
             StartCoroutine(LookForPlayer());
         }

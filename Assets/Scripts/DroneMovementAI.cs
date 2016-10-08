@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class DroneMovementAI : MonoBehaviour {
 
@@ -25,6 +26,13 @@ public class DroneMovementAI : MonoBehaviour {
     public enum PatrolDirection { Left, Right}; // direction for square patrol
     public PatrolDirection direction;
 
+    [Header("Fleet")]
+    public bool isFleet;
+    public List<DroneMovementAI> Fleet = new List<DroneMovementAI>();
+    public bool isNotified = false;
+    
+
+    ///////////////////////////////////////////
     private bool isPatrolling = false; // state of drone
     private bool isTriggerEntered = false;
     private int tempPatrolDistance;
@@ -55,6 +63,19 @@ public class DroneMovementAI : MonoBehaviour {
 
         if(!isFollowing) // call the movement coroutine if not already following the player
         {
+            if(isFleet)
+            {
+                isNotified = true;
+                foreach(var drone in Fleet)
+                {
+                    if(!drone.isNotified)
+                    {
+                        drone.isNotified = true;
+                        drone.StartFollowing();
+                    }
+                    
+                }
+            }
             droneState = DroneMovementState.Following;
             isFollowing = true;
             StartCoroutine(FollowPlayer());
@@ -72,7 +93,7 @@ public class DroneMovementAI : MonoBehaviour {
 
     void StartReturningBase()
     {
-        GetComponent<CircleCollider2D>().enabled = false;
+        //GetComponent<CircleCollider2D>().enabled = false;
         droneState = DroneMovementState.ReturnBase;
         StartCoroutine(ReturnBase());
     }
@@ -247,7 +268,8 @@ public class DroneMovementAI : MonoBehaviour {
         }
         else
         {
-            GetComponent<CircleCollider2D>().enabled = true;
+            //GetComponent<CircleCollider2D>().enabled = true;
+            isNotified = false;
             transform.rotation = initialRotationOnStart;
             StartPatrolling(); // this will change to an event for a dynamic call or a plain if statement
         }

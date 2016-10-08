@@ -90,17 +90,17 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &122309734 stripped
+--- !u!1 &177476513 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000011112591400, guid: a946a39ba7729a9488f335fc6dc4b10c,
     type: 2}
-  m_PrefabInternal: {fileID: 678941866}
---- !u!114 &122309735
+  m_PrefabInternal: {fileID: 1234625216}
+--- !u!114 &177476514
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 122309734}
+  m_GameObject: {fileID: 177476513}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abe33ec0924095c4da098c68b3804899, type: 3}
@@ -108,13 +108,108 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   droneState: 1
   speed: 4
-  followDistance: 0
-  patrolDistance: 10
-  pattern: 0
-  circularRotationAngle: 0
-  idleScanAngle: 0
-  idleScanSpeed: 0
+  followDistance: 40
+  patrolDistance: 5
+  pattern: 2
+  circularRotationAngle: 8
+  idleScanAngle: 100
+  idleScanSpeed: 5
   direction: 0
+  isFleet: 1
+  Fleet:
+  - {fileID: 293225198}
+  - {fileID: 1058564056}
+  isNotified: 0
+--- !u!1001 &209254443
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 22.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 58000012898795460, guid: a946a39ba7729a9488f335fc6dc4b10c,
+        type: 2}
+      propertyPath: m_Radius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012349782556, guid: a946a39ba7729a9488f335fc6dc4b10c,
+        type: 2}
+      propertyPath: visionRange
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011112591400, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+      propertyPath: m_Name
+      value: Drone (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &293225197 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000011112591400, guid: a946a39ba7729a9488f335fc6dc4b10c,
+    type: 2}
+  m_PrefabInternal: {fileID: 827761274}
+--- !u!114 &293225198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 293225197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abe33ec0924095c4da098c68b3804899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droneState: 1
+  speed: 4
+  followDistance: 40
+  patrolDistance: 5
+  pattern: 2
+  circularRotationAngle: 8
+  idleScanAngle: 100
+  idleScanSpeed: 5
+  direction: 0
+  isFleet: 1
+  Fleet:
+  - {fileID: 1058564056}
+  - {fileID: 177476514}
+  isNotified: 0
 --- !u!1 &347432027 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000011112591400, guid: a946a39ba7729a9488f335fc6dc4b10c,
@@ -132,15 +227,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   droneState: 1
-  speed: 3
-  followDistance: 0
+  speed: 4
+  followDistance: 40
   patrolDistance: 5
   pattern: 4
   circularRotationAngle: 8
   idleScanAngle: 100
   idleScanSpeed: 5
   direction: 0
---- !u!1001 &678941866
+  isFleet: 0
+  Fleet: []
+  isNotified: 0
+--- !u!1001 &827761274
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -149,11 +247,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 19.28
+      value: 19.89
       objectReference: {fileID: 0}
     - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 7.56
+      value: 3.58
       objectReference: {fileID: 0}
     - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -183,17 +281,19 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 58000012898795460, guid: a946a39ba7729a9488f335fc6dc4b10c,
+        type: 2}
+      propertyPath: m_Radius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012349782556, guid: a946a39ba7729a9488f335fc6dc4b10c,
+        type: 2}
+      propertyPath: visionRange
+      value: 35
+      objectReference: {fileID: 0}
     - target: {fileID: 1000011112591400, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
       propertyPath: m_Name
-      value: Drone (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: Drone (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
@@ -240,47 +340,95 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2a22ae9536cd3447b04f7ed90817852, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &1204951522
+--- !u!1 &1058564055 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000011112591400, guid: a946a39ba7729a9488f335fc6dc4b10c,
+    type: 2}
+  m_PrefabInternal: {fileID: 209254443}
+--- !u!114 &1058564056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1058564055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abe33ec0924095c4da098c68b3804899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droneState: 1
+  speed: 4
+  followDistance: 40
+  patrolDistance: 5
+  pattern: 2
+  circularRotationAngle: 8
+  idleScanAngle: 100
+  idleScanSpeed: 5
+  direction: 0
+  isFleet: 1
+  Fleet:
+  - {fileID: 293225198}
+  - {fileID: 177476514}
+  isNotified: 0
+--- !u!1001 &1234625216
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1649688439}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4000013713210246, guid: fc232010818669c449e3b76e1ffc46a0, type: 2}
+    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 19.97
       objectReference: {fileID: 0}
-    - target: {fileID: 4000013713210246, guid: fc232010818669c449e3b76e1ffc46a0, type: 2}
+    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -3.3
       objectReference: {fileID: 0}
-    - target: {fileID: 4000013713210246, guid: fc232010818669c449e3b76e1ffc46a0, type: 2}
+    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4000013713210246, guid: fc232010818669c449e3b76e1ffc46a0, type: 2}
+    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4000013713210246, guid: fc232010818669c449e3b76e1ffc46a0, type: 2}
+    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4000013713210246, guid: fc232010818669c449e3b76e1ffc46a0, type: 2}
+    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4000013713210246, guid: fc232010818669c449e3b76e1ffc46a0, type: 2}
+    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013713210246, guid: fc232010818669c449e3b76e1ffc46a0, type: 2}
-      propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 58000012898795460, guid: a946a39ba7729a9488f335fc6dc4b10c,
+        type: 2}
+      propertyPath: m_Radius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012349782556, guid: a946a39ba7729a9488f335fc6dc4b10c,
+        type: 2}
+      propertyPath: visionRange
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011112591400, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+      propertyPath: m_Name
+      value: Drone (3)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: fc232010818669c449e3b76e1ffc46a0, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1237272322
 Prefab:
@@ -325,39 +473,19 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 58000012898795460, guid: a946a39ba7729a9488f335fc6dc4b10c,
+        type: 2}
+      propertyPath: m_Radius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012349782556, guid: a946a39ba7729a9488f335fc6dc4b10c,
+        type: 2}
+      propertyPath: visionRange
+      value: 35
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1649688433 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000011112591400, guid: a946a39ba7729a9488f335fc6dc4b10c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1867127407}
---- !u!114 &1649688434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1649688433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abe33ec0924095c4da098c68b3804899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  droneState: 1
-  speed: 3
-  followDistance: 20
-  patrolDistance: 8
-  pattern: 3
-  circularRotationAngle: 0
-  idleScanAngle: 0
-  idleScanSpeed: 0
-  direction: 0
---- !u!4 &1649688439 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1867127407}
 --- !u!1 &1681884863
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,9 +620,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1681884863}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 4cf2170c36ff70d40999af3b2104e9e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovementControlScheme: 2
+  playerStartingHealth: 0
+  playerHealth: 0
+  playerMaxHealth: 0
+  healthRegen: 0
+  RegenDuration: 0
+  joystick: {fileID: 0}
 --- !u!212 &1681884870
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -537,7 +672,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1681884863}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.1011453, y: -2.098248, z: 0}
+  m_LocalPosition: {x: 5.1011453, y: -15.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -550,48 +685,60 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+    - target: {fileID: 4000012652857506, guid: ccca8fb5c1989a749932c458c074c327, type: 2}
       propertyPath: m_LocalPosition.x
       value: -23.23
       objectReference: {fileID: 0}
-    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+    - target: {fileID: 4000012652857506, guid: ccca8fb5c1989a749932c458c074c327, type: 2}
       propertyPath: m_LocalPosition.y
       value: 3.8
       objectReference: {fileID: 0}
-    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+    - target: {fileID: 4000012652857506, guid: ccca8fb5c1989a749932c458c074c327, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+    - target: {fileID: 4000012652857506, guid: ccca8fb5c1989a749932c458c074c327, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+    - target: {fileID: 4000012652857506, guid: ccca8fb5c1989a749932c458c074c327, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+    - target: {fileID: 4000012652857506, guid: ccca8fb5c1989a749932c458c074c327, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+    - target: {fileID: 4000012652857506, guid: ccca8fb5c1989a749932c458c074c327, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+    - target: {fileID: 4000012652857506, guid: ccca8fb5c1989a749932c458c074c327, type: 2}
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 4000011653343474, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+    - target: {fileID: 114000013751307484, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: followDistance
+      value: 40
       objectReference: {fileID: 0}
-    - target: {fileID: 1000011112591400, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
-      propertyPath: m_Name
-      value: Drone (1)
+    - target: {fileID: 58000010394531082, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: m_Radius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011097851206, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: visionRange
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013751307484, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: speed
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: ccca8fb5c1989a749932c458c074c327, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &2135427219
 GameObject:
