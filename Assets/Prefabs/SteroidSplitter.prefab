@@ -22,9 +22,9 @@ GameObject:
   - 212: {fileID: 212000013646028318}
   - 58: {fileID: 58000012767126960}
   - 50: {fileID: 50000011309238570}
-  - 114: {fileID: 114000012349744762}
+  - 114: {fileID: 114000010719567288}
   m_Layer: 0
-  m_Name: New Prefab
+  m_Name: SteroidSplitter
   m_TagString: small
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012917061754}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.397581, y: -15.660103, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -74,7 +74,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
---- !u!114 &114000012349744762
+--- !u!114 &114000010719567288
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -82,13 +82,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012917061754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d8a77b36775e3f4f960efb79de04e2a, type: 3}
+  m_Script: {fileID: 11500000, guid: c9b755fa41468024b8bf89141297e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   drift: 0
   objectSize: 5
   splitter: {fileID: 1000012917061754}
-  splitterShard: {fileID: 1000012885146664, guid: a639f13b11404a04ca136cdcd1021fd6,
+  splitterShard2: {fileID: 1000010028777008, guid: a850a036eda6bdb408e1b9407426b60b,
     type: 2}
   splitterX: 0
   splitterY: 0
