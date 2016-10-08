@@ -28,7 +28,7 @@ public class EnemyTractorBeam : MonoBehaviour {
 	void Start () 
 	{
 		_collider = GetComponent<CircleCollider2D>();
-		if(junker)
+		if(deflection)
 		{
 			_collider.enabled = true;
 		}
