@@ -26,6 +26,8 @@ GameObject:
   - 50: {fileID: 50000011878748382}
   - 120: {fileID: 120000013746585818}
   - 58: {fileID: 58000011547094326}
+  - 114: {fileID: 114000013438100352}
+  - 114: {fileID: 114000010814046292}
   m_Layer: 0
   m_Name: PlayerPlaceholder
   m_TagString: Player
@@ -77,6 +79,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.2
+--- !u!114 &114000010814046292
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013920337096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cf2170c36ff70d40999af3b2104e9e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovementControlScheme: 2
+  playerStartingHealth: 0
+  playerHealth: 100
+  playerMaxHealth: 100
+  healthRegen: 0
+  RegenDuration: 0
+  joystick: {fileID: 0}
 --- !u!114 &114000012489635114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,6 +122,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovementControlScheme: 2
   playerStartingHealth: 100
+--- !u!114 &114000013438100352
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013920337096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cf2170c36ff70d40999af3b2104e9e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovementControlScheme: 2
+  playerStartingHealth: 100
+  playerHealth: 0
+  playerMaxHealth: 0
+  healthRegen: 0
+  RegenDuration: 0
+  joystick: {fileID: 0}
 --- !u!114 &114000013738887394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa3ded7a9e0671a43bcbacc9b724f647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  asteroidDirection: {x: 0, y: 0}
 --- !u!120 &120000013746585818
 LineRenderer:
   m_ObjectHideFlags: 1
