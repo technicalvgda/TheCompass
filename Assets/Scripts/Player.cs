@@ -80,13 +80,13 @@ public class Player : MonoBehaviour {
         {
             if (playerMovementControlScheme == 1)
 	        {
-#if UNITY_STANDALONE || UNITY_WEBPLAYER
-	            /*
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+                /*
 			    Controls player movement
 				    A and D rotates player
 				    W and S accelerates and decelerates player
 			    */
-	            float rotation = Input.GetAxis("Horizontal");
+                float rotation = Input.GetAxis("Horizontal");
 	            float acceleration = Input.GetAxis("Vertical");
 
 	            transform.Rotate(new Vector3(0, 0, -ROTATION_SPEED * rotation));
@@ -108,9 +108,9 @@ public class Player : MonoBehaviour {
             }
             else if (playerMovementControlScheme == 2)
 		    {
-#if UNITY_STANDALONE || UNITY_WEBPLAYER
-			    //Store the current horizontal input in the float moveHorizontal.
-			    float moveHorizontal = Input.GetAxis ("Horizontal");
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+                //Store the current horizontal input in the float moveHorizontal.
+                float moveHorizontal = Input.GetAxis ("Horizontal");
 
 			    //Store the current vertical input in the float moveVertical.
 			    float moveVertical = Input.GetAxis ("Vertical");
