@@ -5,7 +5,9 @@ public class BowlingManager : MonoBehaviour {
 
     //ten pin objects
     Transform[] pinSpawners;
+    Transform ballSpawner;
     public GameObject pinObject;
+    public GameObject ballObject;
 
     //final score of the player so far
     int finalScore = 0;
@@ -21,6 +23,8 @@ public class BowlingManager : MonoBehaviour {
     void Start()
     {
         pinSpawners = GetComponentsInChildren<Transform>();
+        //the second index is the ball spawner
+        ballSpawner = pinSpawners[1];
 
         //start first frame
         StartFrame();
@@ -53,9 +57,17 @@ public class BowlingManager : MonoBehaviour {
         {
             //reset frame score
             frameScore = 0;
+            //spawn the ball
+            SpawnBall();
             //spawn the pins
             SpawnPins();
         }
+    }
+
+    void SpawnBall()
+    {
+        //instantiate pin
+        GameObject ball = Instantiate(ballObject, ballSpawner.position, ballSpawner.rotation) as GameObject;
     }
 
     void SpawnPins()
@@ -63,8 +75,8 @@ public class BowlingManager : MonoBehaviour {
         //spawn a pin at each spawner
         foreach(Transform spawner in pinSpawners)
         {
-            //skip first one, thats the parent
-            if (spawner != pinSpawners[0])
+            //skip first one and 2nd one, thats the parent
+            if (spawner != pinSpawners[0] && spawner != pinSpawners[1])
             {
                 //Debug.Log(spawner.name);
 

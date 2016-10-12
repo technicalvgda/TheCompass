@@ -22,7 +22,6 @@ GameObject:
   - 212: {fileID: 212000010714080884}
   - 58: {fileID: 58000011038789406}
   - 50: {fileID: 50000012309295142}
-  - 114: {fileID: 114000011610633568}
   - 114: {fileID: 114000013723846938}
   m_Layer: 0
   m_Name: Pin
@@ -75,24 +74,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
---- !u!114 &114000011610633568
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013709436170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d8a77b36775e3f4f960efb79de04e2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drift: 0
-  objectSize: 5
-  splitter: {fileID: 1000013709436170}
-  splitterShard: {fileID: 1000012885146664, guid: a639f13b11404a04ca136cdcd1021fd6,
-    type: 2}
-  splitterX: 0
-  splitterY: 0
 --- !u!114 &114000013723846938
 MonoBehaviour:
   m_ObjectHideFlags: 1
