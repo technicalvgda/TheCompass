@@ -32,6 +32,11 @@ public class TractorBeamControls : MonoBehaviour
     {
         _tractorLine = GetComponent<LineRenderer>();
 
+        if (joystick == null)
+        {
+            joystick = GameObject.Find("VirtualJoystickTether").GetComponentInChildren<VirtualJoystickTether>();
+        }
+
     }
 
     // Update is called once per frame

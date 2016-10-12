@@ -59,6 +59,11 @@ public class Player : MonoBehaviour {
 		rb2d = GetComponent<Rigidbody2D> ();
 		//set player health to starting health
 		playerHealth = playerStartingHealth;
+
+        if(joystick == null)
+        {
+            joystick = GameObject.Find("VirtualJoystickMovement").GetComponentInChildren<VirtualJoystickMovement>();
+        }
 	}
 
 	void Update ()
