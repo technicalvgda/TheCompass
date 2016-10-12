@@ -207,7 +207,7 @@ public class TractorBeamControls : MonoBehaviour
         }
         else if (joystick.touchPhase() == TouchPhase.Ended)
         {
-
+            objectScript = null;
             _hitDebris = false;
             _tractorlength = 0;
         }
@@ -216,7 +216,7 @@ public class TractorBeamControls : MonoBehaviour
 
 
 #endif
-
+        
     }
 
     private void TractorBeamRender()
@@ -320,8 +320,16 @@ public class TractorBeamControls : MonoBehaviour
 
     }
 
-    public MoveableObject getObject()
+    public float getObjectSize()
     {
-        return objectScript;
+        if(objectScript == null)
+        {
+            return 0;
+        }
+        else
+        {
+            return objectScript.objectSize;
+        }
+            
     }
 }

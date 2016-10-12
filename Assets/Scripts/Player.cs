@@ -21,6 +21,8 @@ public class Player : MonoBehaviour {
     const float BRAKE_SPEED = 20.0f;
     const float ROTATION_SPEED = 5.0f;
 
+    private float tractorSlow = 0;
+
     public float playerStartingHealth;//< the amount of health the player begins with
     public float playerHealth;//< the player's current health
     public float playerMaxHealth;//< the maximum health the player can have
@@ -75,6 +77,8 @@ public class Player : MonoBehaviour {
 
     private void ControlPlayer()
     {
+        tractorSlow = GetComponent<TractorBeamControls>().getObjectSize() * 10;
+        
         //Removes player control if doing U-Turn for a set time
         if (currentuTurnTime <= 0)
         {
@@ -91,7 +95,7 @@ public class Player : MonoBehaviour {
 
 	            transform.Rotate(new Vector3(0, 0, -ROTATION_SPEED * rotation));
 
-	            rb2d.AddForce(transform.up * PLAYER_SPEED * acceleration);
+	            rb2d.AddForce(transform.up * (PLAYER_SPEED - tractorSlow) * acceleration);
 #elif UNITY_IOS || UNITY_ANDROID
                 /*for mobile build the movement is determined by the joystick 
                  * left or right rotates the player
@@ -102,7 +106,7 @@ public class Player : MonoBehaviour {
 
                 transform.Rotate(new Vector3(0, 0, -ROTATION_SPEED * rotation));
 
-                rb2d.AddForce(transform.up * PLAYER_SPEED * acceleration);
+                rb2d.AddForce(transform.up * (PLAYER_SPEED - tractorSlow) * acceleration);
 #endif
 
             }
@@ -121,7 +125,7 @@ public class Player : MonoBehaviour {
 
 
 			    //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
-			    rb2d.AddForce (movement * PLAYER_SPEED);
+			    rb2d.AddForce (movement * (PLAYER_SPEED- tractorSlow));
 
 			    //Rotates front of ship to direction of movement
 			    if (movement != Vector2.zero)
@@ -154,7 +158,7 @@ public class Player : MonoBehaviour {
 
 
                 //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
-                rb2d.AddForce(movement * PLAYER_SPEED);
+                rb2d.AddForce(movement * (PLAYER_SPEED - tractorSlow));
 
                 //Rotates front of ship to direction of movement
                 if (movement != Vector2.zero)
