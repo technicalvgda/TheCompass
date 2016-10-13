@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012033981452}
   - 212: {fileID: 212000013504617440}
-  - 114: {fileID: 114000013033125168}
+  - 114: {fileID: 114000013312837990}
   - 114: {fileID: 114000012489635114}
   - 114: {fileID: 114000013738887394}
   - 50: {fileID: 50000011878748382}
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystick: {fileID: 0}
---- !u!114 &114000013033125168
+--- !u!114 &114000013312837990
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -97,11 +97,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000013920337096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ed84a5301ccd35428a7506176c18006, type: 3}
+  m_Script: {fileID: 11500000, guid: 4cf2170c36ff70d40999af3b2104e9e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovementControlScheme: 2
   playerStartingHealth: 100
+  playerHealth: 0
+  playerMaxHealth: 100
+  healthRegen: 0
+  RegenDuration: 0
+  maxXBoundary: 200
+  maxYBoundary: 200
+  minXBoundary: -200
+  minYBoundary: -200
+  joystick: {fileID: 0}
 --- !u!114 &114000013738887394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa3ded7a9e0671a43bcbacc9b724f647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  asteroidDirection: {x: 0, y: 0}
 --- !u!120 &120000013746585818
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -184,7 +194,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0a5f33bc1bfe1b94d8401d2c8163eca3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ed22c6f684a8f544393c8820d94157e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
