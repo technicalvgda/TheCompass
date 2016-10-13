@@ -7,16 +7,19 @@ public class Bullet : MonoBehaviour
 	public GameObject parent;
 	public float speed;
 
+    Vector3 parentDir;
+
 	// Use this for initialization
 	void Start ()
 	{
 		player = GameObject.FindGameObjectWithTag ("Player");
-	}
+        parentDir = parent.transform.right;
+    }
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		transform.position += (parent.transform.right * Time.deltaTime * speed);
+		transform.position += ( parentDir* Time.deltaTime * speed);
 		StartCoroutine (destroy ());
 	}
 
