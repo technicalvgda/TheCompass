@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour {
 
     public GameObject GameOverUI;
@@ -33,7 +33,8 @@ public class GameOver : MonoBehaviour {
 
     //loads up title menu level
     public void Quit()
-	{		
-        Application.LoadLevel("TitleMenu");
+	{	
+		SceneManager.LoadScene ("TitleScene");	
+        //Application.LoadLevel("TitleMenu");
     }
 }

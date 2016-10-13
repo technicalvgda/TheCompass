@@ -95,23 +95,44 @@ public class ButtonManagerScript : MonoBehaviour {
 	/* Universal Back button that uses the activeOnScreen gameObject */ 
 	public void onBack()
 	{
-		if (saveMenu.activeSelf == true) 
+		if (Application.loadedLevelName == "MVPScene") 
 		{
-			activeOnScreen.SetActive (false);
-			activeOnScreen = optionMenu;
+			if (saveMenu.activeSelf == true) 
+			{
+				activeOnScreen.SetActive (false);
+				activeOnScreen = optionMenu;
+			} 
+			else if (cursorSelectionMenu != null) 
+			{
+				if (cursorSelectionMenu.activeSelf == true) 
+				{
+					activeOnScreen.SetActive (false);
+					activeOnScreen = extrasMenu;
+				}
+			}
+			else 
+			{
+				activeOnScreen.SetActive (false);
+				activeOnScreen = null;
+			}
 		} 
-		else if (cursorSelectionMenu != null) 
+		else 
 		{
-			if (cursorSelectionMenu.activeSelf == true) 
+			if (saveMenu.activeSelf == true)
+			{
+				activeOnScreen.SetActive (false);
+				activeOnScreen = optionMenu;
+			} 
+			else if (cursorSelectionMenu.activeSelf == true) 
 			{
 				activeOnScreen.SetActive (false);
 				activeOnScreen = extrasMenu;
 			}
-		}
-		else 
-		{
-			activeOnScreen.SetActive (false);
-			activeOnScreen = null;
+			else 
+			{
+				activeOnScreen.SetActive (false);
+				activeOnScreen = null;
+			}
 		}
 	}
 
