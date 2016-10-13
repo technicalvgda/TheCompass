@@ -15,7 +15,8 @@ public class CursorButtonManager : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-	
+		//Set cursor1B as default
+		Cursor.SetCursor(CursorTextures[0], Vector2.zero, CursorMode.Auto);
 	}
 	
 	// Update is called once per frame
