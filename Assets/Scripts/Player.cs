@@ -20,6 +20,7 @@ public class Player : MonoBehaviour {
 	const float PLAYER_SPEED = 40.0f;
 	const float BRAKE_SPEED = 20.0f;
 	private float rotationSpeed = 1.0f;
+    const float MAX_FUEL = 100.0f;  //the maximum amount of fuel the player can have
 
     private float tractorSlow = 0;
 
@@ -30,7 +31,10 @@ public class Player : MonoBehaviour {
 	public float healthRegen = 0;//Health to be healed over time
 	public float RegenDuration = 0;//The duration of each tick of heal
 
-	bool alive = true; //<bool for whether player is alive
+    //variable for keeping track of the player's current fuel
+    private float currentFuel;
+
+    bool alive = true; //<bool for whether player is alive
 
 	//Used for making U-Turns
 	private float currentuTurnTime = 0;
@@ -62,7 +66,9 @@ public class Player : MonoBehaviour {
 		//set player health to starting health
 		playerHealth = playerStartingHealth;
 
-        if(joystick == null)
+        currentFuel = MAX_FUEL;
+
+        if (joystick == null)
         {
             joystick = GameObject.Find("VirtualJoystickMovement").GetComponentInChildren<VirtualJoystickMovement>();
         }
@@ -279,4 +285,18 @@ public class Player : MonoBehaviour {
 	{
 		playerHealth = h;
 	}
+
+    //function for adding onto the player's current fuel
+    public void gainFuel(int num)
+    {
+        if (currentFuel < MAX_FUEL)
+        {
+            currentFuel += num;
+        }
+        else if (currentFuel > MAX_FUEL)
+        {
+            //this subtraction makes current fuel equal to max fuel, if the player's current fuel ever exceeds the max fuel amount
+            currentFuel -= (currentFuel - MAX_FUEL);
+        }
+    }
 }
