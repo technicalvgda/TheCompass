@@ -78,6 +78,7 @@ public class Player : MonoBehaviour {
 	{
 		//Function to handle player movement
 		ControlPlayer();
+        LoseFuel();
 		checkIfPlayerOutOfBounds(maxXBoundary, maxYBoundary, minXBoundary, minYBoundary);
 
 		// The health regen will only occur when we are below max health
@@ -289,14 +290,26 @@ public class Player : MonoBehaviour {
     //function for adding onto the player's current fuel
     public void gainFuel(int num)
     {
-        if (currentFuel < MAX_FUEL)
+        currentFuel += num;
+
+        if (currentFuel > MAX_FUEL)
         {
-            currentFuel += num;
+            currentFuel = MAX_FUEL;
         }
-        else if (currentFuel > MAX_FUEL)
-        {
-            //this subtraction makes current fuel equal to max fuel, if the player's current fuel ever exceeds the max fuel amount
-            currentFuel -= (currentFuel - MAX_FUEL);
-        }
+
     }
+
+    //function that decreases the Player's fuel
+    //decreases faster when moving
+     void LoseFuel()
+     {
+        if(rb2d.velocity.magnitude < 2)
+        {
+            currentFuel -= Time.deltaTime;
+        }
+        else
+        {
+            currentFuel -= Time.deltaTime*1.5f;
+        }
+     }
 }
