@@ -4,10 +4,14 @@ using System.Collections;
 public class MoveableObject : MonoBehaviour
 {
 	//PUBLIC VARIABLES
-	public bool drift;
+	public bool drift, rotateActivated, splitactivated;
+
 	public float objectSize = 5;
 
-	private float driftSpeed = 100;
+    public GameObject splitter, splitterShard;
+    public float splitterX, splitterY;
+
+    private float driftSpeed = 100;
 	private Rigidbody2D rb2d;
 
 	private bool iAmAsteroid = false;
@@ -27,7 +31,10 @@ public class MoveableObject : MonoBehaviour
 			rb2d.AddForce(direction * driftSpeed);
 		}
 
-		if ( this.gameObject.tag == "small" || this.gameObject.name == "AsteroidPlaceHolder" ) 
+        splitterX = splitter.transform.position.x;
+        splitterY = splitter.transform.position.y;
+
+        if ( this.gameObject.tag == "small" || this.gameObject.name == "AsteroidPlaceHolder" ) 
 		{	
 			iAmAsteroid = true;
 		}
@@ -37,13 +44,32 @@ public class MoveableObject : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+        if (rotateActivated)
+        {
+            RotateLeft();
+        }
 
 
-	}
+    }
 
-	void OnCollisionEnter2D(Collision2D col)
+    void RotateLeft()
+    {
+        transform.Rotate(Vector3.forward);
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
 	{
-		float _directionStatus;
+
+        if (splitactivated)
+        {
+            Destroy(splitter);
+            for (int i = 0; i < 3; i++)
+            {
+                Instantiate(splitterShard, new Vector3(splitterX, splitterY, 0), Quaternion.identity);
+            }
+        }
+
+        float _directionStatus;
 		bool _playerDamaged = false;
 
 		float _asteroidVelocity = 0f;
@@ -131,4 +157,5 @@ public class MoveableObject : MonoBehaviour
 			}
 		}
 	}
+
 }
