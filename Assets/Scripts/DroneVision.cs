@@ -9,6 +9,10 @@ public class DroneVision : MonoBehaviour
     //public delegate void FollowPlayerAction();
     //public static event FollowPlayerAction FollowPlayer;
 
+    GameObject bullet;
+ 	public GameObject bulletPrefab;
+ 	public int bulletSpeed;
+
     public float visionRange; // range that a drone can find the player
     public float visionConeAngle; // cone angle that drone can detect enemies within the range
 
@@ -37,6 +41,7 @@ public class DroneVision : MonoBehaviour
             {
                 isLookingForPlayer = true;
                 StartCoroutine(LookForPlayer());
+               
                 Debug.Log("start Looking");
 
             }
@@ -52,6 +57,7 @@ public class DroneVision : MonoBehaviour
         {
             //player = null;
             StopCoroutine(LookForPlayer());
+            StopCoroutine(Attack());
             isLookingForPlayer = false;
         }
     }
@@ -66,6 +72,7 @@ public class DroneVision : MonoBehaviour
             if (Vector2.Distance(transform.position, player.transform.position) > 10) // constant will be replaced with attack range
             {
                 droneMovement.StartFollowing();
+                StartCoroutine(Attack());
             }
                 
         }
@@ -78,6 +85,19 @@ public class DroneVision : MonoBehaviour
         }
         
     }
+
+    IEnumerator Attack()
+ 	{
+ 		bullet = (GameObject)Instantiate(bulletPrefab, transform.position, transform.rotation);
+        //put this back
+ 		//bullet.GetComponent<Bullet> ().parent = gameObject;
+ 		yield return new WaitForSeconds(1);
+ 
+ 		if (player != null)
+ 		{
+ 			StartCoroutine(Attack());
+ 		}
+ 	}
 
     public static GameObject GetPlayer()
     {
