@@ -31,8 +31,12 @@ public class MoveableObject : MonoBehaviour
 			rb2d.AddForce(direction * driftSpeed);
 		}
 
-        splitterX = splitter.transform.position.x;
-        splitterY = splitter.transform.position.y;
+        if(splitactivated)
+        {
+            splitterX = splitter.transform.position.x;
+            splitterY = splitter.transform.position.y;
+        }
+        
 
         if ( this.gameObject.tag == "small" || this.gameObject.name == "AsteroidPlaceHolder" ) 
 		{	

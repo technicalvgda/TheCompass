@@ -1378,7 +1378,11 @@ MonoBehaviour:
   optionMenu: {fileID: 0}
   loadMenu: {fileID: 0}
   pauseMenu: {fileID: 0}
+  extrasMenu: {fileID: 0}
+  cursorSelectionMenu: {fileID: 0}
   activeOnScreen: {fileID: 0}
+  resolutionDropdown: {fileID: 0}
+  fullscreenToggle: {fileID: 0}
 --- !u!114 &516112169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3955,11 +3959,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000012033981452, guid: b0b7fba286815dc44b0ba11b680392c4, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.3270358
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000012033981452, guid: b0b7fba286815dc44b0ba11b680392c4, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.09157023
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000012033981452, guid: b0b7fba286815dc44b0ba11b680392c4, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3990,27 +3994,6 @@ Prefab:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 947634428}
-    - target: {fileID: 212000013504617440, guid: b0b7fba286815dc44b0ba11b680392c4,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: ed22c6f684a8f544393c8820d94157e6,
-        type: 3}
-    - target: {fileID: 114000013033125168, guid: b0b7fba286815dc44b0ba11b680392c4,
-        type: 2}
-      propertyPath: playerMovementControlScheme
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000013033125168, guid: b0b7fba286815dc44b0ba11b680392c4,
-        type: 2}
-      propertyPath: joystick
-      value: 
-      objectReference: {fileID: 355264600}
-    - target: {fileID: 114000013033125168, guid: b0b7fba286815dc44b0ba11b680392c4,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b0b7fba286815dc44b0ba11b680392c4, type: 2}
   m_IsPrefabParent: 0
@@ -4880,29 +4863,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1941345817}
---- !u!1 &1945581636 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000013920337096, guid: b0b7fba286815dc44b0ba11b680392c4,
-    type: 2}
-  m_PrefabInternal: {fileID: 1454923120}
---- !u!114 &1945581637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1945581636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cf2170c36ff70d40999af3b2104e9e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerMovementControlScheme: 2
-  playerStartingHealth: 100
-  playerHealth: 0
-  playerMaxHealth: 100
-  healthRegen: 0
-  RegenDuration: 0
-  joystick: {fileID: 0}
 --- !u!1 &1972530804
 GameObject:
   m_ObjectHideFlags: 0
