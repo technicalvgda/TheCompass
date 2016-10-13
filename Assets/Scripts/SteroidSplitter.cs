@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Splitter : MonoBehaviour
+public class SteroidSplitter : MonoBehaviour
 {
 	//PUBLIC VARIABLES
 	public bool drift;
 	public float objectSize = 5;
-	public GameObject splitter, splitterShard;
+	public GameObject splitter, splitterShard2;
 	public float splitterX, splitterY;
 
 	private float driftSpeed = 100;
@@ -41,9 +41,9 @@ public class Splitter : MonoBehaviour
 	void OnCollisionEnter2D(Collision2D col)
 	{
 		Destroy (splitter);
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 8; i++)
 		{
-			Instantiate (splitterShard, new Vector3(splitterX, splitterY, 0), Quaternion.identity);
+			Instantiate (splitterShard2, new Vector3(splitterX, splitterY, 0), Quaternion.identity);
 		}
 	}
 
