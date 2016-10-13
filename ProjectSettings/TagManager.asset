@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - asteroid
+  - small
+  - MainMenu
+  - OptionMenu
+  - LoadMenu
+  - PauseMenu
+  - SaveMenu
   layers:
   - Default
   - TransparentFX
@@ -39,6 +45,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2050614061
+    locked: 0
+  - name: Parallax2
+    uniqueID: 356715701
+    locked: 0
+  - name: Parallax1
+    uniqueID: 930490535
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 3049309471
     locked: 0
