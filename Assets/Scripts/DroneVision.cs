@@ -6,6 +6,8 @@ using System.Collections;
 public class DroneVision : MonoBehaviour
 {
 
+    public bool shooting;
+
     //public delegate void FollowPlayerAction();
     //public static event FollowPlayerAction FollowPlayer;
 
@@ -41,7 +43,12 @@ public class DroneVision : MonoBehaviour
             {
                 isLookingForPlayer = true;
                 StartCoroutine(LookForPlayer());
-                StartCoroutine(Attack());
+
+                if(shooting)
+                {
+                    StartCoroutine(Attack());
+                }
+                
                 Debug.Log("start Looking");
 
             }
