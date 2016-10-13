@@ -110,23 +110,10 @@ public class TractorBeamControls : MonoBehaviour
 
             }
         }
-        //when the mouse button is released resets all of the necessary variables
-        if (Input.GetMouseButtonUp(0))
+        //if a controller is present 
+        else if (Input.GetAxis("RightJoystickVertical") != 0 || Input.GetAxis("RightJoystickHorizontal") != 0)//Input.GetButton("RightBumper"))
         {
 
-            //Debug.Log("Click up");
-            objectScript = null;
-            _hitDebris = false;
-            _tractorlength = 0;
-        }
-        //if a controller is present
-        if (Input.GetJoystickNames().Length > 0)
-        {
-            if (Input.GetAxis("RightJoystickVertical") != 0 || Input.GetAxis("RightJoystickHorizontal") != 0)//Input.GetButton("RightBumper"))
-            {
-
-                //get mouse click in world coordinates
-                _MouseClickedPoint = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
                 Debug.DrawRay(transform.position, new Vector2(Input.GetAxis("RightJoystickHorizontal"), Input.GetAxis("RightJoystickVertical")) * 10, Color.blue);
                 Debug.Log(new Vector2(Input.GetAxis("RightJoystickHorizontal"), Input.GetAxis("RightJoystickVertical")));
                 //sends ray out to check if it hits an object when it does it records which object it hit
@@ -165,14 +152,10 @@ public class TractorBeamControls : MonoBehaviour
                     _tractorStick.rigidbody.velocity = (stick * PULL_SPEED / objectScript.objectSize) + GetComponent<Rigidbody2D>().velocity;
 
                     //if the distance between the _mouse clicked point and the object is <1 the object will stop moving
-
-
                 }
-            }
-
-
-            //when the mouse button is released resets all of the necessary variables
-            if (Input.GetAxis("RightJoystickVertical") == 0 && Input.GetAxis("RightJoystickHorizontal") == 0)
+           }
+            //when the mouse button is released or joystick returns to center resets all of the necessary variables
+            else 
             {
 
                 //Debug.Log("Click up");
@@ -180,7 +163,7 @@ public class TractorBeamControls : MonoBehaviour
                 _hitDebris = false;
                 _tractorlength = 0;
             }
-        }
+        
         
 
 
@@ -310,8 +293,6 @@ public class TractorBeamControls : MonoBehaviour
             }
             else
             {
-                //find direction vector from ship to mouse
-                Vector2 mouseDir = mousePos - (Vector2)transform.position;
                 //make a variable for the end position
                 Vector2 endPoint;
 
@@ -327,7 +308,6 @@ public class TractorBeamControls : MonoBehaviour
         }
         else
         {
-            Debug.Log("Hide Beam");
             _tractorLine.SetPosition(1, transform.position);
             _tractorLine.enabled = false;
         }
