@@ -44,6 +44,7 @@ public class TractorBeamControls : MonoBehaviour
     {
         //update tractor beam line renderer
         TractorBeamRender();
+        
 
 
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
@@ -60,6 +61,7 @@ public class TractorBeamControls : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
+           
             //get mouse click in world coordinates
             _MouseClickedPoint = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
 
@@ -108,9 +110,10 @@ public class TractorBeamControls : MonoBehaviour
 
             }
         }
-
-        if (Input.GetButton("RightBumper"))
+       
+        if (Input.GetAxis("RightJoystickVertical") != 0 || Input.GetAxis("RightJoystickHorizontal") != 0)//Input.GetButton("RightBumper"))
         {
+           
             //get mouse click in world coordinates
             _MouseClickedPoint = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
             Debug.DrawRay(transform.position, new Vector2(Input.GetAxis("RightJoystickHorizontal"), Input.GetAxis("RightJoystickVertical")) * 10, Color.blue);
@@ -147,7 +150,7 @@ public class TractorBeamControls : MonoBehaviour
 
                 //move debris in direction of mouse with force (pullspeed/objectsize)
                 //_tractorStick.rigidbody.AddForce(((_MouseClickedPoint - _tractorStick.rigidbody.transform.position).normalized) * PULL_SPEED / objectScript.objectSize );
-                Vector2 stick = new Vector2(Input.GetAxis("RightJoystickVertical"), Input.GetAxis("RightJoystickHorizontal")) * 10;
+                Vector2 stick = new Vector2( Input.GetAxis("RightJoystickHorizontal"), Input.GetAxis("RightJoystickVertical")) * 10;
                 _tractorStick.rigidbody.velocity = (stick * PULL_SPEED / objectScript.objectSize) + GetComponent<Rigidbody2D>().velocity;
 
                 //if the distance between the _mouse clicked point and the object is <1 the object will stop moving
@@ -156,10 +159,11 @@ public class TractorBeamControls : MonoBehaviour
             }
         }
 
+       
         //when the mouse button is released resets all of the necessary variables
-        if (Input.GetButtonUp("RightBumper"))
+        if (Input.GetAxis("RightJoystickVertical") == 0 && Input.GetAxis("RightJoystickHorizontal") == 0)
         {
-
+           
             //Debug.Log("Click up");
             objectScript = null;
             _hitDebris = false;
@@ -276,8 +280,46 @@ public class TractorBeamControls : MonoBehaviour
             }
 
         }
+        else if (Input.GetAxis("RightJoystickVertical") != 0 || Input.GetAxis("RightJoystickHorizontal") != 0)
+        {
+            //enable the beam
+            _tractorLine.enabled = true;
+
+            //get mouse click in world coordinates
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+
+            //make sure starting position of tractor beam is at the ship
+            _tractorLine.SetPosition(0, transform.position);
+
+            //if the tractor beam is connected
+            if (_hitDebris == true)
+            {
+                //set the color of the beam to white
+                _tractorLine.SetColors(Color.white, Color.white);
+                //draw a line to show tractor beam connection
+                _tractorLine.SetPosition(1, _tractorStick.transform.position);
+
+            }
+            else
+            {
+                //find direction vector from ship to mouse
+                Vector2 mouseDir = mousePos - (Vector2)transform.position;
+                //make a variable for the end position
+                Vector2 endPoint;
+
+                //get a position in the direction of the stick
+                endPoint = (Vector2)transform.position + (new Vector2(Input.GetAxis("RightJoystickHorizontal"), Input.GetAxis("RightJoystickVertical")).normalized * _tractorlength);
+                
+
+                //set the end of the beam to be where the endpoint variable is
+                _tractorLine.SetPosition(1, endPoint);
+                //set the color of the beam to blue
+                _tractorLine.SetColors(Color.blue, Color.blue);
+            }
+        }
         else
         {
+            
             _tractorLine.SetPosition(1, transform.position);
             _tractorLine.enabled = false;
         }
