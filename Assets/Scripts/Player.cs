@@ -21,7 +21,9 @@ public class Player : MonoBehaviour {
 	const float BRAKE_SPEED = 20.0f;
 	private float rotationSpeed = 1.0f;
 
-	public float playerStartingHealth;//< the amount of health the player begins with
+    private float tractorSlow = 0;
+
+    public float playerStartingHealth;//< the amount of health the player begins with
 	public float playerHealth;//< the player's current health
 	public float playerMaxHealth;//< the maximum health the player can have
 
@@ -95,19 +97,19 @@ public class Player : MonoBehaviour {
 		{
 			if (playerMovementControlScheme == 1)
 			{
-				#if UNITY_STANDALONE || UNITY_WEBPLAYER
-				/*
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+                /*
 			    Controls player movement
 				    A and D rotates player
 				    W and S accelerates and decelerates player
 			    */
-				float rotation = Input.GetAxis("Horizontal");
+                float rotation = Input.GetAxis("Horizontal");
 				float acceleration = Input.GetAxis("Vertical");
 
 				transform.Rotate(new Vector3(0, 0, -rotationSpeed * rotation));
 
-				rb2d.AddForce(transform.up * PLAYER_SPEED * acceleration);
-				#elif UNITY_IOS || UNITY_ANDROID
+                rb2d.AddForce(transform.up * (PLAYER_SPEED - tractorSlow) * acceleration);
+#elif UNITY_IOS || UNITY_ANDROID
 				/*for mobile build the movement is determined by the joystick 
 				* left or right rotates the player
 				* up accelerates the player and down decelerates the player
@@ -117,15 +119,15 @@ public class Player : MonoBehaviour {
 
 				transform.Rotate(new Vector3(0, 0, -rotationSpeed * rotation));
 
-				rb2d.AddForce(transform.up * PLAYER_SPEED * acceleration);
-				#endif
+				rb2d.AddForce(transform.up * (PLAYER_SPEED - tractorSlow) * acceleration);
+#endif
 
-			}
-			else if (playerMovementControlScheme == 2)
+            }
+            else if (playerMovementControlScheme == 2)
 			{
-				#if UNITY_STANDALONE || UNITY_WEBPLAYER
-				//Store the current horizontal input in the float moveHorizontal.
-				float moveHorizontal = Input.GetAxis ("Horizontal");
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+                //Store the current horizontal input in the float moveHorizontal.
+                float moveHorizontal = Input.GetAxis ("Horizontal");
 
 				//Store the current vertical input in the float moveVertical.
 				float moveVertical = Input.GetAxis ("Vertical");
@@ -135,11 +137,11 @@ public class Player : MonoBehaviour {
 				Debug.Log(rb2d.velocity.magnitude);
 
 
-				//Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
-				rb2d.AddForce (movement * PLAYER_SPEED);
+                //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
+                rb2d.AddForce(movement * (PLAYER_SPEED - tractorSlow));
 
-				//Rotates front of ship to direction of movement
-				if (movement != Vector2.zero)
+                //Rotates front of ship to direction of movement
+                if (movement != Vector2.zero)
 				{
 					float angle = Mathf.Atan2(-movement.x, movement.y) * Mathf.Rad2Deg;
 					transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(angle,Vector3.forward), Time.deltaTime * rotationSpeed);
