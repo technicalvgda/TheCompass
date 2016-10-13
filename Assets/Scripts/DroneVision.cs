@@ -41,7 +41,7 @@ public class DroneVision : MonoBehaviour
             {
                 isLookingForPlayer = true;
                 StartCoroutine(LookForPlayer());
-               
+                StartCoroutine(Attack());
                 Debug.Log("start Looking");
 
             }
@@ -72,7 +72,7 @@ public class DroneVision : MonoBehaviour
             if (Vector2.Distance(transform.position, player.transform.position) > 10) // constant will be replaced with attack range
             {
                 droneMovement.StartFollowing();
-                StartCoroutine(Attack());
+                
             }
                 
         }
@@ -89,8 +89,7 @@ public class DroneVision : MonoBehaviour
     IEnumerator Attack()
  	{
  		bullet = (GameObject)Instantiate(bulletPrefab, transform.position, transform.rotation);
-        //put this back
- 		//bullet.GetComponent<Bullet> ().parent = gameObject;
+ 		bullet.GetComponent<Bullet> ().parent = gameObject;
  		yield return new WaitForSeconds(1);
  
  		if (player != null)
