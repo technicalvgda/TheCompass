@@ -9,6 +9,10 @@ public class TractorBeamControls : MonoBehaviour
     private Vector2 originalTouch;
     public VirtualJoystickTether joystick;
 
+    private Player player;   //an instance of the Player class
+    public float timeElapsed = 50.0f;  //value for the amount of time needed to pick up the fuel
+    public int fuelValue = 20;  //value for the Player's fuel
+
     //tractor beam variables
     MoveableObject objectScript;
     private RaycastHit2D _tractorStick; //< the object that is stuck to tractor beam
@@ -18,7 +22,7 @@ public class TractorBeamControls : MonoBehaviour
     private const float MAX_TRACTOR_LENGTH = 20;
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
     private const float PULL_SPEED = 1;
-    
+
 #elif UNITY_IOS || UNITY_ANDROID
     private const float PULL_SPEED = 3;
 #endif
@@ -32,6 +36,18 @@ public class TractorBeamControls : MonoBehaviour
     {
         _tractorLine = GetComponent<LineRenderer>();
 
+        //get the player component of the tractor beam and set it equal to the instance of the player
+        player = gameObject.GetComponent<Player>();
+
+        //Call the decrease fuel function at the start of the game to have fuel decrease in value autonomously
+        InvokeRepeating("DecreaseFuel", 1.0f, 3.0f);
+
+    }
+
+    //function that decreases the Player's fuel
+    void DecreaseFuel()
+    {
+        fuelValue--;
     }
 
     // Update is called once per frame
@@ -39,7 +55,6 @@ public class TractorBeamControls : MonoBehaviour
     {
         //update tractor beam line renderer
         TractorBeamRender();
-
 
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         /* Tractor Beam Controls Below 
@@ -73,7 +88,7 @@ public class TractorBeamControls : MonoBehaviour
                 _tractorStick = hit;
                 if (objectScript = _tractorStick.collider.GetComponent<MoveableObject>())
                 {
-                    
+
                     _hitDebris = true;
                 }
             }
@@ -82,25 +97,42 @@ public class TractorBeamControls : MonoBehaviour
             if (_hitDebris)
             {
                 //create a script for the held object
-                
-                
-                //if the object has a MoveableObject script, store it and handle physics
-               
-                    //draw a line to show tractor beam connection
-                    Debug.DrawLine(transform.position, _tractorStick.transform.position);
 
-                    //move debris in direction of mouse with force (pullspeed/objectsize)
-                    //_tractorStick.rigidbody.AddForce(((_MouseClickedPoint - _tractorStick.rigidbody.transform.position).normalized) * PULL_SPEED / objectScript.objectSize );
+                //checks if tractor beam collides with the fuel
+                if (_tractorStick.collider.gameObject.tag == "Fuel")
+                {
+                    timeElapsed--;
+                    CancelInvoke("DecreaseFuel");
 
-                    _tractorStick.rigidbody.velocity = Vector2.Lerp(_MouseClickedPoint - _tractorStick.transform.position, _tractorStick.transform.position, Time.deltaTime) * PULL_SPEED / objectScript.objectSize;
-
-                    //if the distance between the _mouse clicked point and the object is <1 the object will stop moving
-                    if (Vector2.Distance(_MouseClickedPoint, _tractorStick.transform.position) < 1)
+                    //if the tractor beam touches the fuel for the specified time
+                    if (timeElapsed <= 0)
                     {
-                        _tractorStick.rigidbody.velocity = Vector2.zero;
+                        player.gainFuel(fuelValue);
+                        Destroy(_tractorStick.collider.gameObject);  //destroy the fuel once it's been picked up to prevent continuous fuel upgrades
                     }
-                
+                }
 
+                //if the object has a MoveableObject script, store it and handle physics
+
+                //draw a line to show tractor beam connection
+                Debug.DrawLine(transform.position, _tractorStick.transform.position);
+
+                //move debris in direction of mouse with force (pullspeed/objectsize)
+                //_tractorStick.rigidbody.AddForce(((_MouseClickedPoint - _tractorStick.rigidbody.transform.position).normalized) * PULL_SPEED / objectScript.objectSize );
+
+                _tractorStick.rigidbody.velocity = Vector2.Lerp(_MouseClickedPoint - _tractorStick.transform.position, _tractorStick.transform.position, Time.deltaTime) * PULL_SPEED / objectScript.objectSize;
+
+                //if the distance between the _mouse clicked point and the object is <1 the object will stop moving
+                if (Vector2.Distance(_MouseClickedPoint, _tractorStick.transform.position) < 1)
+                {
+                    _tractorStick.rigidbody.velocity = Vector2.zero;
+                }
+
+
+            }
+            else
+            {
+                timeElapsed = 50.0f;
             }
         }
 
@@ -110,6 +142,8 @@ public class TractorBeamControls : MonoBehaviour
         {
 
             //Debug.Log("Click up");
+
+            InvokeRepeating("DecreaseFuel", 1.0f, 3.0f);  //decrease fuel amount as long as the tractor beam is not touching it
             _hitDebris = false;
             _tractorlength = 0;
         }
