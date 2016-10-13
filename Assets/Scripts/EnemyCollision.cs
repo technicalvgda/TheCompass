@@ -7,6 +7,7 @@ public class EnemyCollision : MonoBehaviour
 	private Rigidbody2D _asteroidRigidBody;
 	private float _asteroidVelocity = 0f;
 	private float _asteroidMinimum = 0f;
+	public GameObject Items;
 	// Use this for initialization
 	void Start () 
 	{
@@ -29,6 +30,7 @@ public class EnemyCollision : MonoBehaviour
 			if (_asteroidVelocity > _asteroidMinimum) 
 			{
 				Destroy (gameObject);
+				Instantiate (Items, transform.position, Quaternion.identity);
 			}
 		}
 	}
