@@ -3,38 +3,54 @@ using System.Collections;
 
 public class PlayerShield : MonoBehaviour
 {
+    /*
     public GameObject shield, shieldPrefab;
     private bool collision;
+    */
+    private float initialWaitTime = 2.0f;
     private float waitTime;
+    
+    Animator anim;
 
     // Use this for initialization
     void Start()
     {
-        collision = true;
-        waitTime = 5.0f;
+        
+        //collision = true;
+        waitTime = initialWaitTime;
+        
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (waitTime <= 0 && shield != null)
+        
+        if (waitTime <= 0 )
         {
-            Destroy(shield);
-            collision = true;
+            anim.SetBool("Colliding", false);
         }
 
         waitTime -= Time.deltaTime;
+        
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    public void ActivateShield()
     {
-        waitTime = 5.0f;
+        waitTime = initialWaitTime;
+        if (anim.GetBool("Colliding") == false)
+        {
+            anim.SetBool("Colliding", true);
+        }
+        /*
+        
         if (col.gameObject.tag != ("Shield") && collision)
         {
             shield = (GameObject)Instantiate(shieldPrefab, transform.position, Quaternion.identity);
             Debug.Log("Penis");
             collision = false;
         }
+        */
 
     }
 }
