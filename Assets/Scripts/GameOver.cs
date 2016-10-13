@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEditor.SceneManagement;
 public class GameOver : MonoBehaviour {
 
     public GameObject GameOverUI;
@@ -10,7 +10,8 @@ public class GameOver : MonoBehaviour {
     void Start()
     {
         GameOverUI.SetActive(false);
-        player = GetComponent<Player>();
+		player = GameObject.FindGameObjectWithTag ("Player").GetComponent<Player>();
+       // player = GetComponent<Player>();
     }
 	
 	// Update is called once per frame
@@ -32,7 +33,7 @@ public class GameOver : MonoBehaviour {
 
     //loads up title menu level
     public void Quit()
-    {
-        Application.LoadLevel(1);
+	{		
+        Application.LoadLevel("TitleMenu");
     }
 }

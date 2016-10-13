@@ -36,8 +36,10 @@ public class ButtonManagerScript : MonoBehaviour {
 		slotText.text = PlayerPrefs.GetString ("onLevel");
 		saveMenu.SetActive (false);
 		optionMenu.SetActive(false);
-		cursorSelectionMenu.SetActive (false);
-		extrasMenu.SetActive (false);
+		if(cursorSelectionMenu != null)
+			cursorSelectionMenu.SetActive (false);
+		if(extrasMenu != null)
+			extrasMenu.SetActive (false);
 		if(loadMenu != null)
 			loadMenu.SetActive(false);
 		if(pauseMenu != null)
@@ -97,11 +99,14 @@ public class ButtonManagerScript : MonoBehaviour {
 		{
 			activeOnScreen.SetActive (false);
 			activeOnScreen = optionMenu;
-		}
-		else if (cursorSelectionMenu.activeSelf == true) 
+		} 
+		else if (cursorSelectionMenu != null) 
 		{
-			activeOnScreen.SetActive (false);
-			activeOnScreen = extrasMenu;
+			if (cursorSelectionMenu.activeSelf == true) 
+			{
+				activeOnScreen.SetActive (false);
+				activeOnScreen = extrasMenu;
+			}
 		}
 		else 
 		{
