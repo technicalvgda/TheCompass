@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class ParallaxHandlerScript : MonoBehaviour {
 
@@ -70,15 +71,26 @@ public class ParallaxHandlerScript : MonoBehaviour {
         halfHeight2 = height2 / 2;
         halfHeight3 = height3 / 2;
 
-        
+        /*
+        //draw box for level border
+        StartCoroutine(DrawDebugBox(Color.green, levelSizeX * unit, levelSizeY * unit, null));//Vector3.zero);
+
+        //draw box for layer 1
+        StartCoroutine(DrawDebugBox(Color.yellow, width1, height1, layer1));//currentLayer.position);
+        //draw box for layer 2
+        StartCoroutine(DrawDebugBox(Color.blue, width2, height2, layer2));//currentLayer.position);
+        //draw box for layer 3
+        StartCoroutine(DrawDebugBox(Color.red, width3, height3, layer3)); //currentLayer.position);
+        */
+
+
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        //draw box for level border
-        DrawDebugBox(Color.green, levelSizeX * unit, levelSizeY*unit, true, Vector3.zero);
-       
+        
+
 
         //handle shifting of all 3 layers
         HandleLayerMovement(layer1.transform, halfWidth1, halfHeight1);
@@ -95,41 +107,124 @@ public class ParallaxHandlerScript : MonoBehaviour {
         //needs to shift by a certain degree so that it starts centered
         //and shifts just enough to reach its edge at the edge of the map
 
+      
+        //prevent layer from shifting off screen
+        if(shiftRatioX > 1)
+        {shiftRatioX = 1;}
+        if (shiftRatioX < -1)
+        { shiftRatioX = -1; }
+        if (shiftRatioY > 1)
+        { shiftRatioY = 1; }
+        if (shiftRatioY < -1)
+        { shiftRatioY = -1; }
+        
         //move the layer to the position of camera with offset
         float layerXPos = mainCamera.transform.position.x - ((halfWidth- cameraHalfWidth)* shiftRatioX);
         float layerYPos = mainCamera.transform.position.y - ((halfHeight -cameraHalfHeight)* shiftRatioY);
 
         currentLayer.position = new Vector2(layerXPos,layerYPos);
 
-        //draw box for layer 1
-        DrawDebugBox(Color.yellow, width1, height1, false, currentLayer.position);
-        //draw box for layer 2
-        DrawDebugBox(Color.blue, width2, height2, false, currentLayer.position);
-        //draw box for layer 3
-        DrawDebugBox(Color.red, width3, height3, false, currentLayer.position);
 
     }
 
-    void DrawDebugBox(Color color, float xSize, float ySize, bool levelMap, Vector3 shift)
+    /*
+    IEnumerator DrawDebugBox(Color color, float xSize, float ySize, GameObject layer)//Vector3 shift)
     {
-        //Get corner positions
-        bottomLeft = new Vector3(-xSize / 2, -ySize / 2, 0);
-        bottomRight = new Vector3(xSize / 2, -ySize / 2, 0);
-        topLeft = new Vector3(-xSize / 2, ySize / 2, 0);
-        topRight = new Vector3(xSize / 2, ySize / 2 , 0);
-
-        if(!levelMap)
+        Vector3 shift = Vector3.zero;
+        if (layer != null)
         {
-            bottomLeft += shift;
-            bottomRight += shift;
-            topLeft += shift;
-            topRight += shift;
+            shift = layer.transform.position;
         }
+        
 
+        //Get corner positions
+        bottomLeft = new Vector3(-xSize / 2, -ySize / 2, 0) + shift;
+        bottomRight = new Vector3(xSize / 2, -ySize / 2, 0) + shift;
+        topLeft = new Vector3(-xSize / 2, ySize / 2, 0) + shift;
+        topRight = new Vector3(xSize / 2, ySize / 2 , 0) + shift;
+        
         //draw lines for map borders
         Debug.DrawLine(bottomLeft, bottomRight, color);//< bottom line
         Debug.DrawLine(topLeft, topRight, color);//< top line
         Debug.DrawLine(bottomLeft, topLeft, color);//< left line
         Debug.DrawLine(bottomRight, topRight, color);//< right line
+
+        yield return new WaitForSeconds(0.01f);
+        StartCoroutine(DrawDebugBox(color, xSize, ySize, layer));
+        yield return null;
+
     }
+    */
+    void OnDrawGizmos()
+    {
+        Vector3 shift = Vector3.zero;
+        //DRAW MAP BORDER
+        Gizmos.color = Color.green;
+        //Get corner positions of map
+        float xSize = levelSizeX * unit;
+        float ySize = levelSizeY * unit;
+        bottomLeft = new Vector3(-xSize / 2, -ySize / 2, 0);
+        bottomRight = new Vector3(xSize / 2, -ySize / 2, 0);
+        topLeft = new Vector3(-xSize / 2, ySize / 2, 0);
+        topRight = new Vector3(xSize / 2, ySize / 2, 0);
+        //draw lines for map borders
+        Gizmos.DrawLine(bottomLeft, bottomRight);
+        Gizmos.DrawLine(topLeft, topRight);
+        Gizmos.DrawLine(bottomLeft, topLeft);
+        Gizmos.DrawLine(bottomRight, topRight);
+
+        //DRAW LAYER 1
+        Gizmos.color = Color.yellow;
+        shift = layer1.transform.position;
+        //Get corner positions of map
+        xSize = layer1.GetComponent<RectTransform>().rect.width;
+        ySize = layer1.GetComponent<RectTransform>().rect.height;
+        bottomLeft = new Vector3(-xSize / 2, -ySize / 2, 0)+shift;
+        bottomRight = new Vector3(xSize / 2, -ySize / 2, 0) + shift;
+        topLeft = new Vector3(-xSize / 2, ySize / 2, 0) + shift;
+        topRight = new Vector3(xSize / 2, ySize / 2, 0) + shift;
+        //draw lines for map borders
+        Gizmos.DrawLine(bottomLeft, bottomRight);
+        Gizmos.DrawLine(topLeft, topRight);
+        Gizmos.DrawLine(bottomLeft, topLeft);
+        Gizmos.DrawLine(bottomRight, topRight);
+
+        //DRAW LAYER 2
+        Gizmos.color = Color.blue;
+        shift = layer2.transform.position;
+        //Get corner positions of map
+        xSize = layer2.GetComponent<RectTransform>().rect.width;
+        ySize = layer2.GetComponent<RectTransform>().rect.height;
+        bottomLeft = new Vector3(-xSize / 2, -ySize / 2, 0) + shift;
+        bottomRight = new Vector3(xSize / 2, -ySize / 2, 0) + shift;
+        topLeft = new Vector3(-xSize / 2, ySize / 2, 0) + shift;
+        topRight = new Vector3(xSize / 2, ySize / 2, 0) + shift;
+        //draw lines for map borders
+        Gizmos.DrawLine(bottomLeft, bottomRight);
+        Gizmos.DrawLine(topLeft, topRight);
+        Gizmos.DrawLine(bottomLeft, topLeft);
+        Gizmos.DrawLine(bottomRight, topRight);
+
+        //DRAW LAYER 3
+        Gizmos.color = Color.red;
+        shift = layer3.transform.position;
+        //Get corner positions of map
+        xSize = layer3.GetComponent<RectTransform>().rect.width;
+        ySize = layer3.GetComponent<RectTransform>().rect.height;
+        bottomLeft = new Vector3(-xSize / 2, -ySize / 2, 0) + shift;
+        bottomRight = new Vector3(xSize / 2, -ySize / 2, 0) + shift;
+        topLeft = new Vector3(-xSize / 2, ySize / 2, 0) + shift;
+        topRight = new Vector3(xSize / 2, ySize / 2, 0) + shift;
+        //draw lines for map borders
+        Gizmos.DrawLine(bottomLeft, bottomRight);
+        Gizmos.DrawLine(topLeft, topRight);
+        Gizmos.DrawLine(bottomLeft, topLeft);
+        Gizmos.DrawLine(bottomRight, topRight);
+
+
+
+
+
+    }
+
 }
