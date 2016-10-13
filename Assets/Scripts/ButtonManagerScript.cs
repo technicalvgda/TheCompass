@@ -151,6 +151,11 @@ public class ButtonManagerScript : MonoBehaviour {
 		_isPaused = false;
 	}
 
+	// Pause button method, brings up the pause menu 
+	public void Pause()
+	{
+		_isPaused = true;
+	}
 
 
 }
