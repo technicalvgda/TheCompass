@@ -4,7 +4,7 @@ using System.Collections;
 public class MoveableObject : MonoBehaviour
 {
     //PUBLIC VARIABLES
-    public bool drift, rotateActivated = false, splitactivated;
+    public bool drift, rotateActivated, splitactivated;
     public float objectSize = 5;
 
     public GameObject splitter, splitterShard;
@@ -21,10 +21,7 @@ public class MoveableObject : MonoBehaviour
         //get rigidbody component 
         rb2d = GetComponent<Rigidbody2D>();
         if (drift)
-        {
-            rotateActivated = true;
-            RotateLeft();
-            
+        {   
             float x = Random.Range(-1f, 1f);
             float y = Random.Range(-1f, 1f);
             Vector2 direction = new Vector2(x, y).normalized;
@@ -53,10 +50,13 @@ public class MoveableObject : MonoBehaviour
    
     void OnCollisionEnter2D(Collision2D col)
     {
-        Destroy(splitter);
-        for (int i = 0; i < 3; i++)
+        if (splitactivated)
         {
-            Instantiate(splitterShard, new Vector3(splitterX, splitterY, 0), Quaternion.identity);
+            Destroy(splitter);
+            for (int i = 0; i < 3; i++)
+            {
+                Instantiate(splitterShard, new Vector3(splitterX, splitterY, 0), Quaternion.identity);
+            }
         }
     }
 }
