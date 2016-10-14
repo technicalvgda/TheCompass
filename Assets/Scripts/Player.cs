@@ -46,8 +46,10 @@ public class Player : MonoBehaviour {
 	//Values for boundary dimensions
 	public int maxXBoundary = 0;
 	public int maxYBoundary = 0;
-	public int minXBoundary = 12;
-	public int minYBoundary = 13;
+	public int minXBoundary = 0;
+	public int minYBoundary = 0;
+
+    private int unit = 5;
 
 
 
@@ -61,8 +63,14 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		//get rigidbody component of player object
-		rb2d = GetComponent<Rigidbody2D> ();
+
+        maxXBoundary *= unit;
+        maxYBoundary *= unit;
+        minXBoundary *= unit;
+        minYBoundary *= unit;
+
+        //get rigidbody component of player object
+        rb2d = GetComponent<Rigidbody2D> ();
 		//set player health to starting health
 		playerHealth = playerStartingHealth;
 
