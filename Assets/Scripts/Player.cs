@@ -19,7 +19,7 @@ public class Player : MonoBehaviour {
 	// STAT VARIABLES
 	const float PLAYER_SPEED = 40.0f;
 	const float BRAKE_SPEED = 20.0f;
-	private float rotationSpeed = 1.0f;
+	public float rotationSpeed = 2.0f;
     const float MAX_FUEL = 100.0f;  //the maximum amount of fuel the player can have
 
     private float tractorSlow = 0;
@@ -208,7 +208,6 @@ public class Player : MonoBehaviour {
 		if (transform.position.x >= maxX || transform.position.y >= maxY|| transform.position.x <= minX || transform.position.y <= minY) 
 		{
 			resetUTurnTime();
-			rotationSpeed = 3.0f;
 			numberOfChecks++;
 			if (numberOfChecks == 1) {
 				setPlayerExitPos (transform.position);
@@ -217,7 +216,6 @@ public class Player : MonoBehaviour {
 		else 
 		{
 			numberOfChecks = 0;
-			rotationSpeed = 1.0f;
 		}
 	}
 
