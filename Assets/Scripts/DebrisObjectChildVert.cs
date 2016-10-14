@@ -43,7 +43,7 @@ public class DebrisObjectChildVert : MonoBehaviour
 		if (transform.gameObject.name == "DebObUpper")
 		{
 			hit = Physics2D.Raycast (rayBound.origin, rayBound.direction);
-			if (hit != null && hit.collider != null && hit.collider.GetComponent<MoveableObject>() != null)
+			if (hit != false && hit.collider != null && hit.collider.GetComponent<MoveableObject>() != null)
 			{
 				Debug.Log ("Detected collision with Ray2D");
 				transform.parent.GetComponent<DebrisBorderVert>().collWithObUpper(hit.collider);
@@ -52,7 +52,7 @@ public class DebrisObjectChildVert : MonoBehaviour
 		if (transform.gameObject.name == "DebObLower")
 		{	
 			hit = Physics2D.Raycast (rayBound.origin, rayBound.direction);
-			if (hit != null && hit.collider != null && hit.collider.GetComponent<MoveableObject>() != null)
+			if (hit != false && hit.collider != null && hit.collider.GetComponent<MoveableObject>() != null)
 			{
 				Debug.Log ("Detected collision with Ray2D");
 				transform.parent.GetComponent<DebrisBorderVert>().collWithObLower(hit.collider);

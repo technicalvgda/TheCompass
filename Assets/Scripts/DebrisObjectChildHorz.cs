@@ -44,7 +44,7 @@ public class DebrisObjectChildHorz : MonoBehaviour
 		if (transform.gameObject.name == "DebObLeft")
 		{
 			hit = Physics2D.Raycast (rayBound.origin, rayBound.direction);
-			if (hit != null && hit.collider != null && hit.collider.GetComponent<MoveableObject>() != null)
+			if (hit != false && hit.collider != null && hit.collider.GetComponent<MoveableObject>() != null)
 			{
 				Debug.Log ("Detected collision with Ray2D");
 				transform.parent.GetComponent<DebrisBorderHorz>().collWithObLeft(hit.collider);
@@ -53,7 +53,7 @@ public class DebrisObjectChildHorz : MonoBehaviour
 		if (transform.gameObject.name == "DebObRight")
 		{	
 			hit = Physics2D.Raycast (rayBound.origin, rayBound.direction);
-			if (hit != null && hit.collider != null && hit.collider.GetComponent<MoveableObject>() != null)
+			if (hit != false && hit.collider != null && hit.collider.GetComponent<MoveableObject>() != null)
 			{
 				Debug.Log ("Detected collision with Ray2D");
 				transform.parent.GetComponent<DebrisBorderHorz>().collWithObRight(hit.collider);

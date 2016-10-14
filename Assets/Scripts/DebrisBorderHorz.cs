@@ -23,7 +23,7 @@ public class DebrisBorderHorz : MonoBehaviour
 		float xLoc = DebObRight.transform.position.x;
 		float yLoc = DebObRight.transform.position.y;
 		float zLoc = DebObRight.transform.position.z;
-		coll.transform.position = new Vector3 (xLoc-DebObRight.GetComponent<BoxCollider2D>().size.x+.95f, yLoc, zLoc);
+        coll.transform.position = new Vector3(xLoc - DebObRight.GetComponent<BoxCollider2D>().size.x + .95f, coll.transform.position.y, zLoc);
 	}
 
 	public void collWithObRight(Collider2D coll)
@@ -31,6 +31,6 @@ public class DebrisBorderHorz : MonoBehaviour
 		float xLoc = DebObLeft.transform.position.x;
 		float yLoc = DebObLeft.transform.position.y;
 		float zLoc = DebObLeft.transform.position.z;
-		coll.transform.position = new Vector3(xLoc+DebObLeft.GetComponent<BoxCollider2D>().size.x-.95f, yLoc, zLoc);
+		coll.transform.position = new Vector3(xLoc+DebObLeft.GetComponent<BoxCollider2D>().size.x-.95f, coll.transform.position.y, zLoc);
 	}
 }
