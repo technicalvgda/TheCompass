@@ -68,7 +68,7 @@ public class Player : MonoBehaviour {
 
         currentFuel = MAX_FUEL;
 
-        if (joystick == null)
+        if (joystick == null && GameObject.Find("VirtualJoystickMovement")!= null)
         {
             joystick = GameObject.Find("VirtualJoystickMovement").GetComponentInChildren<VirtualJoystickMovement>();
         }
