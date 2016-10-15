@@ -2,7 +2,11 @@
 using System.Collections;
 using UnityEditor;
 
-public class ParallaxHandlerScript : MonoBehaviour {
+public class ParallaxHandlerScript : MonoBehaviour
+{
+
+
+    public bool isTractored = false;
 
     //1 is closest layer, 3 is furthest layer (background panel)
     public GameObject layer1, layer2, layer3;

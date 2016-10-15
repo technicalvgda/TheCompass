@@ -59,7 +59,7 @@ public class LaserEmitter : MonoBehaviour
             }
             
             //Hitting the player
-            Debug.Log(_hit.point);
+            //Debug.Log(_hit.point);
             if (_hit.collider.gameObject == _player)
             {
                 _playerscript.takeDamage(_calcDamage);

@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011897695682}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.397581, y: -15.660103, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -90,6 +90,8 @@ MonoBehaviour:
   splitter: {fileID: 1000011897695682}
   splitterShard: {fileID: 1000012885146664, guid: a639f13b11404a04ca136cdcd1021fd6,
     type: 2}
+  splitterX: 0
+  splitterY: 0
 --- !u!212 &212000014119418062
 SpriteRenderer:
   m_ObjectHideFlags: 1

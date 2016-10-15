@@ -116,6 +116,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0272f0cff0421194e808bab12d471912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shooting: 1
+  bulletPrefab: {fileID: 1000013371463570, guid: 263d8d17f3d9b6d4086b984107c40ccb,
+    type: 2}
+  bulletSpeed: 0
   visionRange: 15
   visionConeAngle: 45
 --- !u!114 &114000013394257170
@@ -131,10 +135,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   droneState: 1
   speed: 3
+  followDistance: 0
   patrolDistance: 5
   pattern: 1
   circularRotationAngle: 8
+  idleScanAngle: 0
+  idleScanSpeed: 0
   direction: 0
+  isFleet: 0
+  Fleet: []
+  isNotified: 0
 --- !u!212 &212000011529923536
 SpriteRenderer:
   m_ObjectHideFlags: 1

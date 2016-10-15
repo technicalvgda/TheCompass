@@ -11,10 +11,14 @@ public class ButtonManagerScript : MonoBehaviour {
 	public Text slotText;
 
 	/* Stores the gameobjects of the UI elements */ 
-	public GameObject saveMenu, optionMenu, loadMenu,pauseMenu;
+	public GameObject saveMenu, optionMenu, loadMenu,pauseMenu,extrasMenu,cursorSelectionMenu;
 
 	/* Stores the active screen (To be used in the onBack()) */ 
 	public GameObject activeOnScreen;
+
+	public Dropdown resolutionDropdown;
+
+	public Toggle fullscreenToggle;
 
 	private bool _isPaused;
 
@@ -24,10 +28,18 @@ public class ButtonManagerScript : MonoBehaviour {
 		saveMenu = GameObject.FindGameObjectWithTag ("SaveMenu");
 		optionMenu = GameObject.FindGameObjectWithTag ("OptionMenu");
 		loadMenu = GameObject.FindGameObjectWithTag ("LoadMenu");
+		cursorSelectionMenu = GameObject.FindGameObjectWithTag ("CursorSelectionMenu");
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
+		extrasMenu = GameObject.FindGameObjectWithTag ("ExtrasMenu");
+		resolutionDropdown = optionMenu.GetComponentInChildren<Dropdown> ();
+		fullscreenToggle = optionMenu.GetComponentInChildren<Toggle> ();
 		slotText.text = PlayerPrefs.GetString ("onLevel");
 		saveMenu.SetActive (false);
 		optionMenu.SetActive(false);
+		if(cursorSelectionMenu != null)
+			cursorSelectionMenu.SetActive (false);
+		if(extrasMenu != null)
+			extrasMenu.SetActive (false);
 		if(loadMenu != null)
 			loadMenu.SetActive(false);
 		if(pauseMenu != null)
@@ -35,6 +47,7 @@ public class ButtonManagerScript : MonoBehaviour {
 	}
 	void Update()
 	{
+		//resolutionDropdownValueChangedHandler(resolutionDropdown);
 		//if ESC button is pressed, change the pause state
 		if (Application.loadedLevelName == "MVPScene") {
 			if (Input.GetButtonDown ("Pause")) {
@@ -82,15 +95,44 @@ public class ButtonManagerScript : MonoBehaviour {
 	/* Universal Back button that uses the activeOnScreen gameObject */ 
 	public void onBack()
 	{
-		if (saveMenu.activeSelf == true) 
+		if (Application.loadedLevelName == "MVPScene") 
 		{
-			activeOnScreen.SetActive (false);
-			activeOnScreen = optionMenu;
+			if (saveMenu.activeSelf == true) 
+			{
+				activeOnScreen.SetActive (false);
+				activeOnScreen = optionMenu;
+			} 
+			else if (cursorSelectionMenu != null) 
+			{
+				if (cursorSelectionMenu.activeSelf == true) 
+				{
+					activeOnScreen.SetActive (false);
+					activeOnScreen = extrasMenu;
+				}
+			}
+			else 
+			{
+				activeOnScreen.SetActive (false);
+				activeOnScreen = null;
+			}
 		} 
 		else 
 		{
-			activeOnScreen.SetActive (false);
-			activeOnScreen = null;
+			if (saveMenu.activeSelf == true)
+			{
+				activeOnScreen.SetActive (false);
+				activeOnScreen = optionMenu;
+			} 
+			else if (cursorSelectionMenu.activeSelf == true) 
+			{
+				activeOnScreen.SetActive (false);
+				activeOnScreen = extrasMenu;
+			}
+			else 
+			{
+				activeOnScreen.SetActive (false);
+				activeOnScreen = null;
+			}
 		}
 	}
 
@@ -151,6 +193,97 @@ public class ButtonManagerScript : MonoBehaviour {
 		_isPaused = false;
 	}
 
+	// Pause button method, brings up the pause menu 
+	public void Pause()
+	{
+		_isPaused = true;
+	}
+	public void extrasMenuEnable()
+	{
+		extrasMenu.SetActive (true);
+		activeOnScreen = extrasMenu;
+	}
+	public void cursorSelectionMenuEnable()
+	{
+		cursorSelectionMenu.SetActive (true);
+		activeOnScreen = cursorSelectionMenu;
+	}
+	public void cursorSelectionMenuDisable()
+	{
+	}
+	public void resolutionDropdownValueChangedHandler(Dropdown target)
+	{
+		switch (target.value)
+		{
+		case 0:
+			Screen.SetResolution(1920, 1080, fullscreenToggle.isOn);
+			break;
+		case 1:
+			Screen.SetResolution(1680, 1050, fullscreenToggle.isOn);
+			break;
+		case 2:
+			Screen.SetResolution(1600, 900, fullscreenToggle.isOn);
+			break;
+		case 3:
+			Screen.SetResolution(1440, 900, fullscreenToggle.isOn);
+			break;
+		case 4:
+			Screen.SetResolution(1400, 1050, fullscreenToggle.isOn);
+			break;
+		case 5:
+			Screen.SetResolution(1366, 768, fullscreenToggle.isOn);
+			break;
+		case 6:
+			Screen.SetResolution(1360, 768, fullscreenToggle.isOn);
+			break;
+		case 7:
+			Screen.SetResolution(1280, 1024, fullscreenToggle.isOn);
+			break;
+		case 8:
+			Screen.SetResolution(1280, 960, fullscreenToggle.isOn);
+			break;
+		case 9:
+			Screen.SetResolution(1280, 800, fullscreenToggle.isOn);
+			break;
+		case 10:
+			Screen.SetResolution(1280, 768, fullscreenToggle.isOn);
+			break;
+		case 11:
+			Screen.SetResolution(1280, 720, fullscreenToggle.isOn);
+			break;
+		case 12:
+			Screen.SetResolution(1280, 600, fullscreenToggle.isOn);
+			break;
+		case 13:
+			Screen.SetResolution(1152, 864, fullscreenToggle.isOn);
+			break;
+		case 14:
+			Screen.SetResolution(1024, 768, fullscreenToggle.isOn);
+			break;
+		case 15:
+			Screen.SetResolution(800, 600, fullscreenToggle.isOn);
+			break;
+		case 16:
+			Screen.SetResolution(640, 480, fullscreenToggle.isOn);
+			break;
+		case 17:
+			Screen.SetResolution(640, 400, fullscreenToggle.isOn);
+			break;
+		case 18:
+			Screen.SetResolution(512, 384, fullscreenToggle.isOn);
+			break;
+		case 19:
+			Screen.SetResolution(400, 300, fullscreenToggle.isOn);
+			break;
+		case 20:
+			Screen.SetResolution(320, 240, fullscreenToggle.isOn);
+			break;
+		case 21:
+			Screen.SetResolution(320, 200, fullscreenToggle.isOn);
+			break;
+
+		}
+	}
 
 
 }
