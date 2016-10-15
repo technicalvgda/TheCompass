@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour {
     	*/
 
 		screenRatio = (float)Screen.height / (float)Screen.width;
-		Debug.Log (screenRatio);
+
 		if (target)
         {
             //NOTE: can modify the ratio of inputted x and y velocity to adjust how far the camera goes ahead of player
