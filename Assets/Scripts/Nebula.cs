@@ -1,27 +1,123 @@
-﻿//============================
-//Task Description: Damaging Nebula: An area which when the player crosses into kills them, and then they respawn outside of it.
-//Last edited : 9/18/16
-//============================
-
+﻿/* Script manages the properties for three different types of Nebulas
+*  Nebulas are classified into type 1, type 2, and type 3 Nebulas
+*/
 using UnityEngine;
 using System.Collections;
 
 public class Nebula : MonoBehaviour
-{   
-    /* Nebula is a trigger collider, both the player object and nebula have 2D box colliders and 
-     * kinematic rigid bodies. For now, the player's position is just reset to origin upon collision
-     */
-    void OnTriggerEnter2D(Collider2D col)
+{
+	public int type;
+	// type 1 - POSITIVE stat boost
+	// type 2 - NEGATIVE stat hit
+	public bool active;
+	// true means active, false means inactive
+	private float speedMultiplier;
+    // alter speed change of object going through NebulaGel, depends on type
+
+    private float _dmgPerLoop = 25; //Deals 25 damage when in contact with pain-nebula over time
+    private float _dmgRate = .1f; //Rate of damage
+    private bool _coroutineActivated = false;
+
+    private GameObject _player;
+    private Player _playerCont; //References the player script
+    private Vector3 _playerPos;
+
+	void Start ()
+	{
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _playerCont = _player.GetComponent<Player>();
+	}
+
+	// Update is called once per frame
+	void Update ()
+	{
+
+	}
+
+	void OnTriggerEnter2D(Collider2D coll)
+	{
+		if (coll.gameObject.name == "PlayerPlaceholder" && isActive ())
+		{
+			if (type == 1) // POSITIVE SPD BUFF NEBULA
+			{
+				Debug.Log ("GelType 1 Detected, positive stat boost");
+				speedMultiplier = 2f;
+				coll.gameObject.GetComponent<Rigidbody2D>().velocity *= speedMultiplier;
+			} 
+			else if (type == 2) // NEGATIVE SPD DEBUFF NEBULA
+			{
+				Debug.Log ("GelType 2 Detected, negative stat boost");
+				speedMultiplier = 0.5f;
+				coll.gameObject.GetComponent<Rigidbody2D>().velocity *= speedMultiplier;
+			}
+			else if (type == 3) // DAMAGING NEBULA, block executes when the Nebula is active & the player collides with it
+            { 
+                if (coll.gameObject.tag == "Player" && coll.gameObject.activeSelf) 
+                {
+					GameObject player = coll.gameObject;
+                  //  _playerPos = player.transform.position; //Saves the point of collision
+                    StartCoroutine(dmgOverTime(player)); //Begin damaging method
+				}
+			}
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D coll) // revert boost/antiboost effects
+	{
+		if (coll.gameObject.name == "PlayerPlaceholder" && isActive ())
+		{
+			if (type == 1)
+			{
+				Debug.Log ("Reset");
+				speedMultiplier = 2f;
+			} 
+			else if (type == 2) 
+			{
+				Debug.Log ("Reset");
+				speedMultiplier = 0.5f;
+			}
+            else if (type == 3)
+            {
+                _coroutineActivated = false;  //Ends damage over time effect
+            }
+			coll.gameObject.GetComponent<Rigidbody2D>().velocity /= speedMultiplier;
+			//remove speed buff/debuff
+		}
+	}
+
+    IEnumerator dmgOverTime(GameObject player)    //Damage over time function
     {
-        if (col.gameObject.name == "PlayerPlaceholder" && col.gameObject.activeSelf)    //If nebula collides with player object
+        _coroutineActivated = true;
+
+        while(_coroutineActivated)
         {
-            GameObject player = col.gameObject;
+            _playerCont.takeDamage(_dmgPerLoop);   //Player receives this much damage per iteration
+            Debug.Log("CURRENT HP: " + _playerCont.playerHealth);
 
-            //When the below is uncommented, the player object will be immediately "destroyed"
-            //Should be replaced with code to decrease health
-            //player.SetActive(false);
+            if (_playerCont.playerHealth <= 0)
+            {
+               _coroutineActivated = false;
+               Debug.Log("PLAYER RAN OUT OF HP");
 
-            player.transform.position = new Vector3(0, 0, 0);   //Temporary code for respawning, resets the player obj to origin
+               player.SetActive(false);
+               player.transform.position = new Vector3(0, 0, 0); //Temporary code for respawning, resets the player obj to origin
+               player.SetActive(true);
+
+               _playerCont.playerHealth = 100; //Reset Hp, Placeholder code for testing
+}
+
+            yield return new WaitForSeconds(_dmgRate); //Wait .25 seconds and then loop
         }
+
     }
+    /*
+    void resetPosition()//Will spawn the player outside of the pain Nebula
+    {
+
+    }
+    */
+    bool isActive()
+	{
+		return active;
+	}
 }
