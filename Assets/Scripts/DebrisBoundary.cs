@@ -6,8 +6,9 @@ public class DebrisBoundary : MonoBehaviour
 	private float maxRayDistX, maxRayDistY;
 	private float ctrXLoc, ctrYLoc;
 	private Vector2 rectNWCorner,rectNECorner,rectSWCorner;
-	Ray2D northSide,eastSide,southSide,westSide;
-	RaycastHit2D hitNorth,hitEast,hitSouth,hitWest;
+	private Ray2D northSide,eastSide,southSide,westSide;
+	private RaycastHit2D[] hitNorth,hitEast,hitSouth,hitWest;
+	private RaycastHit2D hitN,hitE,hitS,hitW;
 
 	void FixedUpdate()
 	{
@@ -34,64 +35,49 @@ public class DebrisBoundary : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		hitNorth = Physics2D.Raycast (northSide.origin, northSide.direction);
-		hitEast = Physics2D.Raycast (eastSide.origin, eastSide.direction);
-		hitSouth = Physics2D.Raycast (southSide.origin, southSide.direction);
-		hitWest = Physics2D.Raycast (westSide.origin, westSide.direction);
-		if (hitNorth != false && hitNorth.collider != null && hitNorth.collider.GetComponent<MoveableObject> () != null &&
-		    hitWest != false && hitWest.collider != null && hitWest.collider.GetComponent<MoveableObject> () != null) {
-			//Debug.Log ("Detected collision with NW boundary");
-			float offset = hitNorth.collider.GetComponent<CircleCollider2D> ().radius;
-			hitNorth.collider.transform.position = new Vector3 (maxRayDistX / 2 - offset - 0.1f, -maxRayDistY / 2 + offset + 0.1f, 0);
-		} 
-		else if (hitNorth != false && hitNorth.collider != null && hitNorth.collider.GetComponent<MoveableObject> () != null &&
-		         hitEast != false && hitEast.collider != null && hitEast.collider.GetComponent<MoveableObject> () != null)
+		hitNorth = Physics2D.RaycastAll (northSide.origin, northSide.direction,maxRayDistX);
+		hitEast = Physics2D.RaycastAll (eastSide.origin, eastSide.direction,maxRayDistY);
+		hitSouth = Physics2D.RaycastAll (southSide.origin, southSide.direction,maxRayDistX);
+		hitWest = Physics2D.RaycastAll (westSide.origin, westSide.direction,maxRayDistY);
+		for (int ii = 0; ii < hitNorth.Length; ii++)
 		{
-			//Debug.Log ("Detected collision with NE boundary");
-			float offset = hitNorth.collider.GetComponent<CircleCollider2D> ().radius;
-			hitNorth.collider.transform.position = new Vector3 (-maxRayDistX / 2 + offset + 0.1f, -maxRayDistY / 2 + offset + 0.1f, 0);
+			RaycastHit2D hitSingleNorth = hitNorth [ii];
+			if (hitSingleNorth != false && hitSingleNorth.collider != null && hitSingleNorth.collider.GetComponent<MoveableObject>() != null)
+			{
+				Debug.Log ("Detected collision with North side boundary");
+				float offset = hitSingleNorth.collider.GetComponent<CircleCollider2D> ().radius;
+				hitSingleNorth.collider.transform.position = new Vector3 (hitSingleNorth.collider.transform.position.x,- maxRayDistY / 2 + offset + 0.1f,0);
+			}
 		}
-		else if(hitSouth != false && hitSouth.collider != null && hitSouth.collider.GetComponent<MoveableObject> () != null &&
-				hitEast != false && hitEast.collider != null && hitEast.collider.GetComponent<MoveableObject> () != null)
+		for (int ii = 0; ii < hitEast.Length; ii++)
 		{
-			//Debug.Log ("Detected collision with SE boundary");
-			float offset = hitSouth.collider.GetComponent<CircleCollider2D> ().radius;
-			hitSouth.collider.transform.position = new Vector3 (-maxRayDistX / 2 + offset + 0.1f, maxRayDistY / 2 - offset - 0.1f, 0);
+			RaycastHit2D hitSingleEast = hitEast [ii];
+			if (hitSingleEast != false && hitSingleEast.collider != null && hitSingleEast.collider.GetComponent<MoveableObject>() != null)
+			{
+				Debug.Log ("Detected collision with East side boundary");
+				float offset = hitSingleEast.collider.GetComponent<CircleCollider2D> ().radius;
+				hitSingleEast.collider.transform.position = new Vector3 (- maxRayDistX / 2 + offset + 0.1f,hitSingleEast.collider.transform.position.y,0);
+			}
 		}
-		else if(hitSouth != false && hitSouth.collider != null && hitSouth.collider.GetComponent<MoveableObject> () != null &&
-			hitWest != false && hitWest.collider != null && hitWest.collider.GetComponent<MoveableObject> () != null)
+		for (int ii = 0; ii < hitSouth.Length; ii++)
 		{
-			//Debug.Log ("Detected collision with SW boundary");
-			float offset = hitSouth.collider.GetComponent<CircleCollider2D> ().radius;
-			hitSouth.collider.transform.position = new Vector3 (maxRayDistX / 2 - offset - 0.1f, maxRayDistY / 2 - offset - 0.1f, 0);
+			RaycastHit2D hitSingleSouth = hitSouth [ii];
+			if (hitSingleSouth != false && hitSingleSouth.collider != null && hitSingleSouth.collider.GetComponent<MoveableObject>() != null)
+			{
+				//Debug.Log ("Detected collision with South side boundary");
+				float offset = hitSingleSouth.collider.GetComponent<CircleCollider2D> ().radius;
+				hitSingleSouth.collider.transform.position = new Vector3 (hitSingleSouth.collider.transform.position.x,maxRayDistY / 2 - offset - 0.1f,0);
+			}
 		}
-		else if (hitNorth != false && hitNorth.collider != null && hitNorth.collider.GetComponent<MoveableObject>() != null)
+		for (int ii = 0; ii < hitWest.Length; ii++)
 		{
-			//Debug.Log ("Detected collision with North side boundary");
-			float offset = hitNorth.collider.GetComponent<CircleCollider2D> ().radius;
-			hitNorth.collider.transform.position = new Vector3 (hitNorth.collider.transform.position.x,- maxRayDistY / 2 + offset + 0.1f,0);
-		}
-		else if (hitEast != false && hitEast.collider != null && hitEast.collider.GetComponent<MoveableObject>() != null)
-		{
-			//Debug.Log ("Detected collision with East side boundary");
-			float offset = hitEast.collider.GetComponent<CircleCollider2D> ().radius;
-			hitEast.collider.transform.position = new Vector3 (- maxRayDistX / 2 + offset + 0.1f,0,0);
-		}
-		else if (hitSouth != false && hitSouth.collider != null && hitSouth.collider.GetComponent<MoveableObject>() != null)
-		{
-			//Debug.Log ("Detected collision with South side boundary");
-			float offset = hitSouth.collider.GetComponent<CircleCollider2D> ().radius;
-			hitSouth.collider.transform.position = new Vector3 (0,maxRayDistY / 2 - offset - 0.1f,0);
-		}
-		else if (hitWest != false && hitWest.collider != null && hitWest.collider.GetComponent<MoveableObject>() != null)
-		{
-			//Debug.Log ("Detected collision with West side boundary");
-			float offset = hitWest.collider.GetComponent<CircleCollider2D> ().radius;
-			hitWest.collider.transform.position = new Vector3 (maxRayDistX / 2 - offset - 0.1f,0,0);
-		}
-		else
-		{
-			//do nothing
+			RaycastHit2D hitSingleWest = hitWest [ii];
+			if (hitSingleWest != false && hitSingleWest.collider != null && hitSingleWest.collider.GetComponent<MoveableObject>() != null)
+			{
+				//Debug.Log ("Detected collision with West side boundary");
+				float offset = hitSingleWest.collider.GetComponent<CircleCollider2D> ().radius;
+				hitSingleWest.collider.transform.position = new Vector3 (maxRayDistX / 2 - offset - 0.1f,hitSingleWest.collider.transform.position.y,0);
+			}
 		}
 	}
 }
