@@ -5,13 +5,19 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 public class ButtonManagerScript : MonoBehaviour {
+	/* Stores the Event System GameObject of the scene */ 
+	public GameObject eventSystem;
+
+	/* Gets the EventSystem component from eventSystem */ 
+	public EventSystem es;
 
 	/* Stores the slotText aka the middle button */ 
 	public Text slotText;
 
 	/* Stores the gameobjects of the UI elements */ 
-	public GameObject saveMenu, optionMenu, loadMenu,pauseMenu,extrasMenu,cursorSelectionMenu;
+	public GameObject mainMenu, saveMenu, optionMenu, loadMenu,pauseMenu,extrasMenu,cursorSelectionMenu;
 
 	/* Stores the active screen (To be used in the onBack()) */ 
 	public GameObject activeOnScreen;
@@ -25,12 +31,14 @@ public class ButtonManagerScript : MonoBehaviour {
 	/* Finds the UI elements and sets them to inactive. Also sets the slot text to the level that the user is on. */ 
 	void Start()
 	{
+		mainMenu = GameObject.FindGameObjectWithTag ("MainMenu");
 		saveMenu = GameObject.FindGameObjectWithTag ("SaveMenu");
 		optionMenu = GameObject.FindGameObjectWithTag ("OptionMenu");
 		loadMenu = GameObject.FindGameObjectWithTag ("LoadMenu");
 		cursorSelectionMenu = GameObject.FindGameObjectWithTag ("CursorSelectionMenu");
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
 		extrasMenu = GameObject.FindGameObjectWithTag ("ExtrasMenu");
+		es = eventSystem.GetComponent<EventSystem> ();
 		resolutionDropdown = optionMenu.GetComponentInChildren<Dropdown> ();
 		fullscreenToggle = optionMenu.GetComponentInChildren<Toggle> ();
 		slotText.text = PlayerPrefs.GetString ("onLevel");
@@ -77,6 +85,18 @@ public class ButtonManagerScript : MonoBehaviour {
 			Time.timeScale = 1;*/
 			}
 		}
+
+		//Switches to joystick/keyboard mode when a vertical/horizontal axis is moved. See Edit>Project Settings>Input
+		if((Mathf.Abs(Input.GetAxis("Vertical")) > 0 || Mathf.Abs(Input.GetAxis("Horizontal")) > 0) && es.currentSelectedGameObject == null) 
+		{
+			selectFirstButton (); 
+		}
+
+		//Sets up the "Cancel" input which the B button is conncected to to call onBack(). See Edit>Project Settings>Input
+		if(Input.GetButtonUp("Cancel") && activeOnScreen != null) 
+		{
+			onBack ();
+		}
 	}
 	/* Loads the level */ 
 	public void onLoad() 
@@ -88,7 +108,6 @@ public class ButtonManagerScript : MonoBehaviour {
 	public void onSave() 
 	{
 		saveMenu.SetActive (true);
-
 		activeOnScreen = saveMenu;
 	}
 		
@@ -126,6 +145,7 @@ public class ButtonManagerScript : MonoBehaviour {
 			else if (cursorSelectionMenu.activeSelf == true) 
 			{
 				activeOnScreen.SetActive (false);
+				extrasMenu.SetActive (true);
 				activeOnScreen = extrasMenu;
 			}
 			else 
@@ -133,6 +153,24 @@ public class ButtonManagerScript : MonoBehaviour {
 				activeOnScreen.SetActive (false);
 				activeOnScreen = null;
 			}
+		}
+		if(activeOnScreen == null)
+		{
+			mainMenu.SetActive (true);
+			selectFirstButton (); 
+
+		}
+	}
+
+	/* If onClick event is not triggered on button click then set the selected button to the FirstButtonOfMenu */ 
+	void selectFirstButton ()
+	{
+		if (!Input.GetMouseButtonUp (0)) {
+			es.SetSelectedGameObject (GameObject.FindGameObjectWithTag ("FirstButtonOfMenu"));
+		}
+		else 
+		{
+			es.SetSelectedGameObject (null);
 		}
 	}
 
@@ -163,6 +201,8 @@ public class ButtonManagerScript : MonoBehaviour {
 	public void OptionBtnEnable()
 	{
 		optionMenu.SetActive (true);
+		mainMenu.SetActive (false);
+		selectFirstButton (); 
 		activeOnScreen = optionMenu;
 
 	}
@@ -171,6 +211,8 @@ public class ButtonManagerScript : MonoBehaviour {
 	public void LoadBtnEnable()
 	{
 		loadMenu.SetActive(true);
+		mainMenu.SetActive (false);
+		selectFirstButton (); 
 		activeOnScreen = loadMenu;
 	}
 
@@ -201,11 +243,14 @@ public class ButtonManagerScript : MonoBehaviour {
 	public void extrasMenuEnable()
 	{
 		extrasMenu.SetActive (true);
+		mainMenu.SetActive (false);
+		selectFirstButton (); 
 		activeOnScreen = extrasMenu;
 	}
 	public void cursorSelectionMenuEnable()
 	{
 		cursorSelectionMenu.SetActive (true);
+		extrasMenu.SetActive (false);
 		activeOnScreen = cursorSelectionMenu;
 	}
 	public void cursorSelectionMenuDisable()
