@@ -77,14 +77,14 @@ public class BowlingManager : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Frame "+ currentFrame+" begin!");
+            Debug.Log("Frame "+ (currentFrame + 1)+" begin!");
             //reset frame score
             frameScore[currentFrame] = 0;
 
             //spawn the ball
-            RespawnBall();
+            StartCoroutine(RespawnBall());
             //spawn the pins
-            RespawnPins();
+            StartCoroutine(RespawnPins());
             //output current scores
             OutputScore();
         }
@@ -98,7 +98,7 @@ public class BowlingManager : MonoBehaviour {
         Debug.Log("Frame " + currentFrame + " round 2!");
        
         //spawn the ball
-        RespawnBall();
+        StartCoroutine(RespawnBall());
        
         //output current scores
         OutputScore();
@@ -109,8 +109,13 @@ public class BowlingManager : MonoBehaviour {
         //calculate final score so far
         ScoreHandler();
 
-        //clean up remaining pins by calling DestroyPin Event
-        DestroyPin();
+        //if anything is subscribed to DestroyPin
+        if (DestroyPin != null)
+        {
+            //clean up remaining pins by calling DestroyPin Event
+            DestroyPin();
+        }
+
 
         //increase frame count
         currentFrame++;
@@ -119,11 +124,17 @@ public class BowlingManager : MonoBehaviour {
         StartFrame();
     }
 
+    
     //handles proper behavior when a ball is destroyed
     //Gutterball or ball lands in back pit
     void BallDrop()
     {
-       
+        StartCoroutine(EndRound());
+    }
+
+    IEnumerator EndRound()
+    {
+        yield return new WaitForSeconds(3f);
         //if this was the first round
         if (!round2)
         {
@@ -143,7 +154,7 @@ public class BowlingManager : MonoBehaviour {
             }
             else
             {
-                Debug.Log("You hit " + frameScore + " pins!");
+                Debug.Log("You hit " + frameScore[currentFrame] + " pins!");
                 //start round 2
                 Round2();
             }
@@ -156,20 +167,20 @@ public class BowlingManager : MonoBehaviour {
             {
                 Debug.Log("SPARE!");
                 //if this is the 10th frame
-                if(currentFrame == 9)
+                if (currentFrame == 9)
                 {
                     bonusThrows += 1;
                 }
             }
             else
             {
-                Debug.Log("You hit " + frameScore + " pins!");
+                Debug.Log("You hit " + frameScore[currentFrame] + " pins!");
             }
             //End this frame
             EndFrame();
         }
     }
-   
+
     void ScoreHandler()
     {
         //CALCULATE FINAL SCORING
@@ -244,28 +255,35 @@ public class BowlingManager : MonoBehaviour {
         frameScore[currentFrame]++;
     }
 
-   
-    void RespawnBall()
+
+    IEnumerator RespawnBall()
     {
+        yield return new WaitForSeconds(2f);
         //if the ball object has been assigned
-        if(ballObject != null)
+        if (ballObject != null)
         {
             //instantiate pin
             GameObject ball = Instantiate(ballObject, ballSpawner.position, ballSpawner.rotation) as GameObject;
         }
-       
+        yield return null;
     }
 
-    void RespawnPins()
+    IEnumerator RespawnPins()
     {
+        //wait 2 seconds
+        yield return new WaitForSeconds(2f);
+        //if anything is subscribed to SpawnPins
         if (SpawnPin != null)
         {
+            //spawn pins using the pin object
             SpawnPin(pinObject);
-        }  
+        }
+        yield return null;
     }
+
     void OutputScore()
     {
-        Debug.Log("Frame Score: "+ frameScore);
+        Debug.Log("Frame Score: "+ frameScore[currentFrame]);
     }
     void EndGame()
     {

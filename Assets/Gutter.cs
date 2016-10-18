@@ -11,7 +11,7 @@ public class Gutter : MonoBehaviour {
     public delegate void IncreaseScoreDelegate();
     public static event IncreaseScoreDelegate HitPin;
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerStay2D(Collider2D col)
     {
        
         if (col.name == "BowlingBall(Clone)")
