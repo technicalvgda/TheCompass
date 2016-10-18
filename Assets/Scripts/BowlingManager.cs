@@ -3,6 +3,9 @@ using System.Collections;
 
 public class BowlingManager : MonoBehaviour {
 
+    public delegate void SpawnAction(GameObject obj, BowlingManager man);
+    public static event SpawnAction SpawnPin;
+
     //ten pin objects
     Transform[] pinSpawners;
     Transform ballSpawner;
@@ -58,22 +61,29 @@ public class BowlingManager : MonoBehaviour {
             //reset frame score
             frameScore = 0;
             //spawn the ball
-            SpawnBall();
+            RespawnBall();
             //spawn the pins
-            SpawnPins();
+            RespawnPins();
         }
     }
 
-    void SpawnBall()
+    void RespawnBall()
     {
         //instantiate pin
         GameObject ball = Instantiate(ballObject, ballSpawner.position, ballSpawner.rotation) as GameObject;
     }
 
-    void SpawnPins()
+    void RespawnPins()
     {
+        if (SpawnPin != null)
+        {
+            SpawnPin(pinObject, this);
+        }
+            
+
+        /*
         //spawn a pin at each spawner
-        foreach(Transform spawner in pinSpawners)
+        foreach (Transform spawner in pinSpawners)
         {
             //skip first one and 2nd one, thats the parent
             if (spawner != pinSpawners[0] && spawner != pinSpawners[1])
@@ -86,6 +96,7 @@ public class BowlingManager : MonoBehaviour {
                 pin.GetComponent<Pin>().SetManager(this);
             }
         }
+        */
     }
     void EndGame()
     {
