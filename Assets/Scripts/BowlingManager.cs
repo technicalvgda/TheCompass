@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/*
+* Script to handle bowling minigame
+* Game consists of 10 frames, 2 rounds per frame
+* Hitting all pins on first throw is a strike (10pts + next 2 throws)
+* Hitting all pins on second throw is a spare (10pts + next throw)
+* If a strike is bowled on 10th round, player gets 2 additional throws
+* If a spare is bowled on 10th round, player gets 1 additional throw
+*/
 
 public class BowlingManager : MonoBehaviour {
 
@@ -36,6 +43,8 @@ public class BowlingManager : MonoBehaviour {
     //current frame (round)
     int currentFrame = 0;
     const int MAX_FRAMES = 10;
+    //number of bonus throws for the player (increased if a strike on 10th round)
+    int bonusThrows = 0;
 
     //subscribe BallDrop function to LostBall Event
     //When a ball hits a gutter, calls BallDrop() to bring it back
@@ -61,7 +70,7 @@ public class BowlingManager : MonoBehaviour {
 
 
         //if all 10 frames have been finished
-        if(currentFrame > MAX_FRAMES)
+        if(currentFrame > MAX_FRAMES && bonusThrows == 0)
         {
             //end the game
             EndGame();
@@ -114,6 +123,7 @@ public class BowlingManager : MonoBehaviour {
     //Gutterball or ball lands in back pit
     void BallDrop()
     {
+       
         //if this was the first round
         if (!round2)
         {
@@ -123,6 +133,11 @@ public class BowlingManager : MonoBehaviour {
                 Debug.Log("STRIKE!!!!!!!!!!!!!!!");
                 //indicate that a strike occured on this frame
                 frameStrike[currentFrame] = true;
+                //if this is the 10th frame
+                if (currentFrame == 9)
+                {
+                    bonusThrows += 2;
+                }
                 //End this frame
                 EndFrame();
             }
@@ -140,19 +155,26 @@ public class BowlingManager : MonoBehaviour {
             if (frameScore[currentFrame] == 10)
             {
                 Debug.Log("SPARE!");
+                //if this is the 10th frame
+                if(currentFrame == 9)
+                {
+                    bonusThrows += 1;
+                }
             }
             else
             {
                 Debug.Log("You hit " + frameScore + " pins!");
             }
+            //End this frame
+            EndFrame();
         }
     }
-
+   
     void ScoreHandler()
     {
         //CALCULATE FINAL SCORING
-        //check for strike last frame (if this isnt the first frame)
-        if (currentFrame > 0 && frameStrike[currentFrame-1] == true)
+        //check for strike or spare last frame (if this isnt the first frame)
+        if (currentFrame > 0 && frameScore[currentFrame-1] == 10)
         {
             frameScore[currentFrame - 1] += frameScore[currentFrame];     
         }
@@ -184,6 +206,9 @@ public class BowlingManager : MonoBehaviour {
 
             switch(strikeCounter)
             {
+                case 2:
+                    Debug.Log("Double!!!");
+                    break;
                 case 3:
                     Debug.Log("Turkey!!!");
                     break;
