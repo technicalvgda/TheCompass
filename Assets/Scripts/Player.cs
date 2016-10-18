@@ -22,7 +22,7 @@ public class Player : MonoBehaviour {
 	private float rotationSpeed = 1.0f;
     const float MAX_FUEL = 100.0f;  //the maximum amount of fuel the player can have
 
-    private float tractorSlow = 0;
+    public float tractorSlow = 0;
 
     public float playerStartingHealth;//< the amount of health the player begins with
 	public float playerHealth;//< the player's current health
@@ -312,4 +312,5 @@ public class Player : MonoBehaviour {
             currentFuel -= Time.deltaTime*1.5f;
         }
      }
+
 }
