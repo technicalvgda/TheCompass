@@ -15,11 +15,9 @@ public class PinSpawn : MonoBehaviour
         BowlingManager.SpawnPin -= SpawnPin;
     }
 
-    void SpawnPin(GameObject pinObj, BowlingManager man)
+    void SpawnPin(GameObject pinObj)
     {
         //instantiate pin
         GameObject pin = Instantiate(pinObj, transform.position, transform.rotation) as GameObject;
-        //set the pins reference to bowling manager
-        pin.GetComponent<Pin>().SetManager(man);
     }
 }
