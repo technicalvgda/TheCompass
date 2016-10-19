@@ -4,20 +4,29 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class TwineTest : MonoBehaviour {
+    #region Variable Declaration
     public TextAsset DialogueFile;
-    public TwineDialogue TDialogue;
-    public PassageNode CurrentPassage;
 
     /* UI Stuff */
     public Button ChoiceButtonPrefab;
+    public Button ChoiceButtonDisabledPrefab;
     public RectTransform ChoicePanel;
     public float VerticalSpacing = -45f;
     public Text PassageTextDisplay;
+
+    [HideInInspector]
     public string PassageText;
+    [HideInInspector]
     public List<Button> Choices;
+    [HideInInspector]
+    public TwineDialogue TDialogue;
+    [HideInInspector]
+    public PassageNode CurrentPassage;
+
     bool _currentlyTyping;
-    
-	void Start () {
+    #endregion
+
+    void Start () {
         TDialogue = TwineReader.Parse(DialogueFile);
         CurrentPassage = TDialogue.StartPassage;
         PassageText = CurrentPassage.GetContent();
@@ -25,7 +34,7 @@ public class TwineTest : MonoBehaviour {
 	}
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _currentlyTyping)
         {
             _currentlyTyping = false;
             PassageTextDisplay.text = PassageText;
@@ -47,13 +56,23 @@ public class TwineTest : MonoBehaviour {
     }
     public void AddChoiceButtons()
     {
-        List<string> choiceString = CurrentPassage.GetChoices();
-        for (int i = 0; i < choiceString.Count; i++)
+        List<string> choiceList = CurrentPassage.GetChoices();
+        List<string> disabledChoices = CurrentPassage.GetChoicesVisited(CurrentPassage.GetChoicesTagged(choiceList, TDialogue.ShowOnceTag));
+        for (int i = 0; i < choiceList.Count; i++)
         {
-            Button newChoice = (Button)Instantiate(ChoiceButtonPrefab, ChoicePanel, false);
-            newChoice.GetComponent<ChoiceButton>().tt = this;
-            newChoice.GetComponentInChildren<Text>().text = choiceString[i];
-            Choices.Add(newChoice);
+            if (!disabledChoices.Contains(choiceList[i]))
+            {
+                Button newChoice = (Button)Instantiate(ChoiceButtonPrefab, ChoicePanel, false);
+                newChoice.GetComponent<ChoiceButton>().tt = this;
+                newChoice.GetComponentInChildren<Text>().text = choiceList[i];
+                Choices.Add(newChoice);
+            }
+            else
+            {
+                Button newChoice = (Button)Instantiate(ChoiceButtonDisabledPrefab, ChoicePanel, false);
+                newChoice.GetComponentInChildren<Text>().text = choiceList[i];
+                Choices.Add(newChoice);
+            }
         }
     }
     public void ChoiceSelect(string choiceContent)

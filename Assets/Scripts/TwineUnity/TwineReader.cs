@@ -47,6 +47,7 @@ public static class TwineReader
     public const string CHOICE_PATTERN = "\\[\\[(.*?)\\|(.*?)\\]\\]";
 
     #endregion
+
     #region Variable Declaration
     /*
     Holds all the Regex objects for each pattern to avoid redundant object
@@ -54,6 +55,7 @@ public static class TwineReader
     */
     public static Dictionary<string, Regex> RGX;
     #endregion
+
     #region Main Code
     /*
     Parses a text according to a pattern (will create a Regex object to parse
@@ -82,7 +84,7 @@ public static class TwineReader
     */
     public static TwineDialogue Parse(TextAsset ta)
     {
-        string s = ta.text.Replace("&#39;", "\'"); ;
+        string s = ta.text.Replace("&#39;", "\'").Replace("&quot","\"");
         TwineDialogue result = new TwineDialogue();
 
         //Getting the Story Data
