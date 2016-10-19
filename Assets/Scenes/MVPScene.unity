@@ -3464,6 +3464,16 @@ Prefab:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 947634428}
+    - target: {fileID: 114000013312837990, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: joystick
+      value: 
+      objectReference: {fileID: 355264600}
+    - target: {fileID: 50000011878748382, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b0b7fba286815dc44b0ba11b680392c4, type: 2}
   m_IsPrefabParent: 0
@@ -3772,6 +3782,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: SizeBySpeedModule.y.maxCurve.m_Curve.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: SizeBySpeedModule.z.maxCurve.m_Curve.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012652857506, guid: ccca8fb5c1989a749932c458c074c327, type: 2}
       propertyPath: m_LocalPosition.x
       value: 27.790428
@@ -3810,6 +3830,106 @@ Prefab:
       value: 
       objectReference: {fileID: 1000013371463570, guid: 263d8d17f3d9b6d4086b984107c40ccb,
         type: 2}
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: CollisionModule.collidesWithDynamic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: randomSeed
+      value: 2095384129
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: SizeBySpeedModule.y.maxCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: SizeBySpeedModule.y.minMaxState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: SizeBySpeedModule.z.maxCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: SizeBySpeedModule.z.minMaxState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: SizeBySpeedModule.y.maxCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: SizeBySpeedModule.y.maxCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: SizeBySpeedModule.z.maxCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: SizeBySpeedModule.z.maxCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: RotationBySpeedModule.curve.scalar
+      value: 0.7853981
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: TriggerModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199000011658904146, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011097851206, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: TriggerModule.collisionShape0
+      value: 
+      objectReference: {fileID: 10219110}
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: TriggerModule.enter
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: TriggerModule.inside
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: CollisionModule.m_Dampen.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010153070524, guid: ccca8fb5c1989a749932c458c074c327,
+        type: 2}
+      propertyPath: CollisionModule.radiusScale
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ccca8fb5c1989a749932c458c074c327, type: 2}
   m_IsPrefabParent: 0
