@@ -29,7 +29,7 @@ public class ExplodingDebris : MonoBehaviour
 
 	IEnumerator explode()
 	{
-		yield return new WaitForSeconds (3);
+		yield return new WaitForSeconds (1);
 		distance = Vector3.Distance (player.transform.position, transform.position);
 
 		if (distance < 5)

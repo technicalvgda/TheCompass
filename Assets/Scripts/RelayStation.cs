@@ -20,8 +20,12 @@ public class RelayStation : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		if (col.gameObject.tag == "Relay Part")
+		if (col.gameObject.tag == "RelayPart")
+		{
+			Debug.Log ("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 			relayComplete = true;
+			Destroy (col.gameObject);
+		}
 			
 	}
 
