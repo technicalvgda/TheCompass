@@ -8,7 +8,9 @@ public class EnemyCollision : MonoBehaviour
 	private float _asteroidVelocity = 0f;
 	private float _asteroidMinimum = 0f;
 	public GameObject Items;
-	// Use this for initialization
+	public float Health = 3;
+	public float Damage = 1;
+
 	void Start () 
 	{
 
@@ -28,6 +30,10 @@ public class EnemyCollision : MonoBehaviour
 			_asteroidRigidBody = _asteroidInput.GetComponent<Rigidbody2D> ();
 			_asteroidVelocity = _asteroidRigidBody.velocity.magnitude;
 			if (_asteroidVelocity > _asteroidMinimum) 
+			{
+				Health = Health - Damage;
+			}
+			if (Health <= 0) 
 			{
 				Destroy (gameObject);
 				Instantiate (Items, transform.position, Quaternion.identity);
