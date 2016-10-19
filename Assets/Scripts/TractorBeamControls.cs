@@ -40,7 +40,7 @@ public class TractorBeamControls : MonoBehaviour
         _tractorLine = GetComponent<LineRenderer>();
         
         
-        if (joystick == null)
+        if (joystick == null && GameObject.Find("VirtualJoystickTether") != null)
         {
             joystick = GameObject.Find("VirtualJoystickTether").GetComponentInChildren<VirtualJoystickTether>();
         }
