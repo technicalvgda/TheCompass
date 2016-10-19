@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TractorBeamControls : MonoBehaviour
 {
-
+    // stuff for virtual joystick input 
     private Touch _touch;
     private Vector2 _touchPos, _worldPos;
     private Vector2 originalTouch;
@@ -14,25 +14,33 @@ public class TractorBeamControls : MonoBehaviour
     private RaycastHit2D _tractorStick; //< the object that is stuck to tractor beam
     private Vector3 _MouseClickedPoint;
     private bool _hitDebris = false;
+    private bool hitMyself = false;
+
+
     private int _tractorlength = 0;//<the current length of the tractor beam
-    private const float MAX_TRACTOR_LENGTH = 20;
-#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
-    private const float PULL_SPEED = 1;
-    
-#elif UNITY_IOS || UNITY_ANDROID
-    private const float PULL_SPEED = 3;
-#endif
+    private const float MAX_TRACTOR_LENGTH = 15;
+    private const float MAX_TRACTOR_PUSH = 20;
 
     //PLAYER COMPONENTS
     private LineRenderer _tractorLine;
 
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+
+    private const float PULL_SPEED = 1;
+    
+#elif UNITY_IOS || UNITY_ANDROID
+
+    private const float PULL_SPEED = 3;
+
+#endif
 
     // Use this for initialization
     void Start()
     {
         _tractorLine = GetComponent<LineRenderer>();
-
-        if (joystick == null && GameObject.Find("VirtualJoystickTether")!= null)
+        
+        
+        if (joystick == null)
         {
             joystick = GameObject.Find("VirtualJoystickTether").GetComponentInChildren<VirtualJoystickTether>();
         }
@@ -48,6 +56,7 @@ public class TractorBeamControls : MonoBehaviour
 
 
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+
         /* Tractor Beam Controls Below 
          *    click to send out a tractor beam in that direction 
          *    when it connects with debris it will stick to it and 
@@ -67,9 +76,9 @@ public class TractorBeamControls : MonoBehaviour
             
             //sends ray out to check if it hits an object when it does it records which object it hit
             RaycastHit2D hit = Physics2D.Raycast(transform.position, _MouseClickedPoint - transform.position, _tractorlength);
+
             if (_tractorlength < MAX_TRACTOR_LENGTH && !_hitDebris)
             {
-
                 //Debug.DrawLine(transform.position, _MouseClickedPoint, Color.red);
                 _tractorlength++;
             }
@@ -80,26 +89,38 @@ public class TractorBeamControls : MonoBehaviour
                 _tractorStick = hit;
                 if (objectScript = _tractorStick.collider.GetComponent<MoveableObject>())
                 {
-                    
+                    objectScript.isTractored = true;
                     _hitDebris = true;
+                    
+                   
                 }
             }
 
             //uses the initial object that was hit by the beam
             if (_hitDebris)
             {
-                //create a script for the held object
-                
-                
                 //if the object has a MoveableObject script, store it and handle physics
-               
-                    //draw a line to show tractor beam connection
-                    Debug.DrawLine(transform.position, _tractorStick.transform.position);
+                //draw a line to show tractor beam connection
+                //Debug.DrawLine(transform.position, _tractorStick.transform.position);
 
                 //move debris in direction of mouse with force (pullspeed/objectsize)
-                //_tractorStick.rigidbody.AddForce(((_MouseClickedPoint - _tractorStick.rigidbody.transform.position).normalized) * PULL_SPEED / objectScript.objectSize );
+                //if the object you have in your tractor beam hit you it will not gain the velocity of the ship
+                if (hitMyself)
+                {
+                    //Debug.Log(Vector2.Distance(_tractorStick.transform.position, this.transform.position));
+                    _tractorStick.rigidbody.velocity = (Vector2.Lerp(_MouseClickedPoint - _tractorStick.transform.position, _tractorStick.transform.position, Time.deltaTime) * PULL_SPEED / objectScript.objectSize);
+                }
+                else 
+                {
+                    _tractorStick.rigidbody.velocity = (Vector2.Lerp(_MouseClickedPoint - _tractorStick.transform.position, _tractorStick.transform.position, Time.deltaTime) * PULL_SPEED / objectScript.objectSize) + GetComponent<Rigidbody2D>().velocity;
+                }
 
-                _tractorStick.rigidbody.velocity = (Vector2.Lerp(_MouseClickedPoint - _tractorStick.transform.position, _tractorStick.transform.position, Time.deltaTime) * PULL_SPEED / objectScript.objectSize) + GetComponent<Rigidbody2D>().velocity;
+                //if the tractor beamed object is further than the max tractor push length will only be that far away
+                if (Vector2.Distance(_tractorStick.transform.position, transform.position) > MAX_TRACTOR_PUSH)
+                {
+                    _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * MAX_TRACTOR_PUSH;   
+                }
+
 
                 //if the distance between the _mouse clicked point and the object is <1 the object will stop moving
                 if (Vector2.Distance(_MouseClickedPoint, _tractorStick.transform.position) < 1)
@@ -111,11 +132,11 @@ public class TractorBeamControls : MonoBehaviour
             }
         }
         //if a controller is present 
-        else if (Input.GetAxis("RightJoystickVertical") != 0 || Input.GetAxis("RightJoystickHorizontal") != 0)//Input.GetButton("RightBumper"))
+        else if (Input.GetButton("RightBumper") || Input.GetAxis("RightTrigger")>0)//Input.GetAxis("RightJoystickVertical") != 0 || Input.GetAxis("RightJoystickHorizontal") != 0
         {
 
                 Debug.DrawRay(transform.position, new Vector2(Input.GetAxis("RightJoystickHorizontal"), Input.GetAxis("RightJoystickVertical")) * 10, Color.blue);
-                Debug.Log(new Vector2(Input.GetAxis("RightJoystickHorizontal"), Input.GetAxis("RightJoystickVertical")));
+                //Debug.Log(new Vector2(Input.GetAxis("RightJoystickHorizontal"), Input.GetAxis("RightJoystickVertical")));
                 //sends ray out to check if it hits an object when it does it records which object it hit
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(Input.GetAxis("RightJoystickHorizontal"), Input.GetAxis("RightJoystickVertical")), _tractorlength);
                 if (_tractorlength < MAX_TRACTOR_LENGTH && !_hitDebris)
@@ -130,7 +151,7 @@ public class TractorBeamControls : MonoBehaviour
                     _tractorStick = hit;
                     if (objectScript = _tractorStick.collider.GetComponent<MoveableObject>())
                     {
-
+                        objectScript.isTractored = true;
                         _hitDebris = true;
                     }
                 }
@@ -145,29 +166,45 @@ public class TractorBeamControls : MonoBehaviour
 
                     //draw a line to show tractor beam connection
                     Debug.DrawLine(transform.position, _tractorStick.transform.position);
-
+                    
                     //move debris in direction of mouse with force (pullspeed/objectsize)
                     //_tractorStick.rigidbody.AddForce(((_MouseClickedPoint - _tractorStick.rigidbody.transform.position).normalized) * PULL_SPEED / objectScript.objectSize );
-                    Vector2 stick = new Vector2(Input.GetAxis("RightJoystickHorizontal"), Input.GetAxis("RightJoystickVertical")) * 10;
-                    _tractorStick.rigidbody.velocity = (stick * PULL_SPEED / objectScript.objectSize) + GetComponent<Rigidbody2D>().velocity;
+                    Vector2 stick = new Vector2(Input.GetAxis("RightJoystickHorizontal"), Input.GetAxis("RightJoystickVertical")) * 20;
+                    if (!hitMyself)
+                    {
+                        _tractorStick.rigidbody.velocity = (stick * PULL_SPEED / objectScript.objectSize) + GetComponent<Rigidbody2D>().velocity;
+                    }
+                    else
+                    {
+                        _tractorStick.rigidbody.velocity = (stick * PULL_SPEED / objectScript.objectSize);
+                    }
 
-                    //if the distance between the _mouse clicked point and the object is <1 the object will stop moving
+                    if (Vector2.Distance(_tractorStick.transform.position, transform.position) > MAX_TRACTOR_PUSH)
+                    {
+                        _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * MAX_TRACTOR_PUSH;
+
+                    }
                 }
-           }
+            }
             //when the mouse button is released or joystick returns to center resets all of the necessary variables
             else 
             {
-
                 //Debug.Log("Click up");
+                if(objectScript != null)
+                {
+                    objectScript.isTractored = false;
+                    objectScript.transform.SetParent(null);
+                }
+                
                 objectScript = null;
                 _hitDebris = false;
                 _tractorlength = 0;
             }
-        
-        
 
 
-        
+
+
+
 #elif UNITY_IOS || UNITY_ANDROID
 
 
@@ -188,7 +225,7 @@ public class TractorBeamControls : MonoBehaviour
                 _tractorStick = hit;
                 if (objectScript = _tractorStick.collider.GetComponent<MoveableObject>())
                 {
-                
+                objectScript.isTractored = true;
                 _hitDebris = true;
                 }
             }
@@ -199,13 +236,27 @@ public class TractorBeamControls : MonoBehaviour
                  //Debug.DrawLine(transform.position, _tractorStick.transform.position);
 
                  //move debris in the direction that the joystick is going
-                 _tractorStick.rigidbody.velocity = (joystick.inputValue() * PULL_SPEED / objectScript.objectSize)+ GetComponent<Rigidbody2D>().velocity;
+                 if (!hitMyself)
+                 {
+                    _tractorStick.rigidbody.velocity = (joystick.inputValue() * PULL_SPEED / objectScript.objectSize)+ GetComponent<Rigidbody2D>().velocity;
+                 }
+                else
+                {
+                    _tractorStick.rigidbody.velocity = (joystick.inputValue() * PULL_SPEED / objectScript.objectSize);
+                }
+                
+                if (Vector2.Distance(_tractorStick.transform.position, transform.position) > MAX_TRACTOR_PUSH)
+                {
+                    _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * MAX_TRACTOR_PUSH;
+                    
+                    
+                }    
 
             }
         }
         else if (joystick.touchPhase() == TouchPhase.Ended)
         {
-
+            objectScript.isTractored = false;
             objectScript = null;
             _hitDebris = false;
             _tractorlength = 0;
@@ -271,7 +322,7 @@ public class TractorBeamControls : MonoBehaviour
             }
 
         }
-        else if (Input.GetAxis("RightJoystickVertical") != 0 || Input.GetAxis("RightJoystickHorizontal") != 0)
+        else if (Input.GetButton("RightBumper") || Input.GetAxis("RightTrigger") > 0)
         {
             //enable the beam
             _tractorLine.enabled = true;
@@ -369,4 +420,24 @@ public class TractorBeamControls : MonoBehaviour
         }
 
     }
+
+    void OnCollisionEnter2D (Collision2D collision)
+    {
+        //Debug.Log("Hit");
+        if (collision.collider == _tractorStick.collider)
+        {
+            Debug.Log("hit myself");
+            hitMyself = true;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider == _tractorStick.collider)
+        {
+            //Debug.Log("hit myself");
+            hitMyself = false;
+        }
+    }
+
 }
