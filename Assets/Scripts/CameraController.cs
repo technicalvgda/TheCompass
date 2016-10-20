@@ -13,6 +13,10 @@ public class CameraController : MonoBehaviour {
 
 	public float screenRatio = 0f;
  
+    void Awake()
+    {
+        transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
+    }
 	void FixedUpdate()
 	{
     	/*
