@@ -1466,6 +1466,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 58000011547094326, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b0b7fba286815dc44b0ba11b680392c4, type: 2}
   m_IsPrefabParent: 0
@@ -1613,6 +1618,7 @@ MonoBehaviour:
   - {fileID: 1000011945169482, guid: 5bfe96865e79f7141b31d483ad2a44f9, type: 2}
   timeToMoveDown: 10
   moveSpeedModifier: 10
+  asteroidsToShoot: []
 --- !u!4 &1254390128
 Transform:
   m_ObjectHideFlags: 0
