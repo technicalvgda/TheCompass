@@ -1569,15 +1569,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridLength: 10
-  gridHeight: 10
+  gridHeight: 30
   asteroids:
   - {fileID: 1000010456271786, guid: 90f97ae43696bfa42afd7caa0a7a90d6, type: 2}
   - {fileID: 1000011057354286, guid: 2b002bf4509c9b749827d44416f3cf45, type: 2}
   - {fileID: 1000013572893338, guid: 8b671ce2c4ad26f4bba9a5a002f65960, type: 2}
   - {fileID: 1000013497475450, guid: b2951d9ca3aa35b49b4ec80f2fe9a3d7, type: 2}
   - {fileID: 1000011945169482, guid: 5bfe96865e79f7141b31d483ad2a44f9, type: 2}
-  timeToMoveDown: 2
-  moveSpeedModifier: 3
+  timeToMoveDown: 10
+  moveSpeedModifier: 10
 --- !u!4 &1254390128
 Transform:
   m_ObjectHideFlags: 0
@@ -2697,7 +2697,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9d0c2264a3e492459faefbddcaeaf6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventSystem: {fileID: 0}
+  es: {fileID: 0}
   slotText: {fileID: 1709784719}
+  mainMenu: {fileID: 0}
   saveMenu: {fileID: 0}
   optionMenu: {fileID: 0}
   loadMenu: {fileID: 0}

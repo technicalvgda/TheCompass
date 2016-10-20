@@ -22,6 +22,7 @@ GameObject:
   - 212: {fileID: 212000010730747282}
   - 58: {fileID: 58000011773948948}
   - 114: {fileID: 114000010761733612}
+  - 114: {fileID: 114000011852174912}
   m_Layer: 0
   m_Name: YellowAsteroid
   m_TagString: small
@@ -75,6 +76,19 @@ MonoBehaviour:
   splitterShard: {fileID: 0}
   splitterX: 0
   splitterY: 0
+--- !u!114 &114000011852174912
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011945169482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b74b8a5c356f9d46bdf4495d16b221a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: Yellow
+  adjacentAsteroids: []
 --- !u!212 &212000010730747282
 SpriteRenderer:
   m_ObjectHideFlags: 1
