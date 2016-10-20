@@ -5,7 +5,6 @@ using System.Collections;
 // Drone Vision script is used for drones that tracks players who are in range
 public class DroneVision : MonoBehaviour
 {
-
     public bool shooting;
 
     //public delegate void FollowPlayerAction();
