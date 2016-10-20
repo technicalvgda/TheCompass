@@ -5,8 +5,6 @@ public class ConfirmCanvasScript : MonoBehaviour {
 
     public Canvas confirmCanvas;
 
-    //private bool isActive = false;
-
     void Start()
     {
         confirmCanvas.enabled = false;
@@ -24,6 +22,8 @@ public class ConfirmCanvasScript : MonoBehaviour {
 
     public void No()
     {
+
+        Screen.SetResolution(resolutionWidthCurrent, resolutionHeightCurrent, fullscreenToggle.isOn);
         confirmCanvas.enabled = false;
 
     }

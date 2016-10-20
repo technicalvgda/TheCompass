@@ -16,22 +16,18 @@ public class ResolutionsDropdownScript : MonoBehaviour
     private int resolutionWidthCurrent;
 
     private int resolutionHeightCurrent;
-    
-    void Start()
-    {
-        resolutionWidthCurrent = Screen.currentResolution.width;
-        resolutionHeightCurrent = Screen.currentResolution.height;
-        //Debug.Log(resolutionWidthCurrent + ", " + resolutionHeightCurrent);
-    }
+
+    public Canvas confirmChangesCanvas;
 
     void Update()
     {
         resolutionDropdownValueChangedHandler(resolutionDropdown);
-        //Screen.SetResolution(resolutionWidthCurrent, resolutionHeightCurrent, fullscreenToggle.isOn);
     }
 
     public void resolutionDropdownValueChangedHandler(Dropdown target)
-    {        
+    {
+        resolutionWidthCurrent = Screen.currentResolution.width;
+        resolutionHeightCurrent = Screen.currentResolution.height;
         switch (target.value)
         {
             case 0:
@@ -101,6 +97,8 @@ public class ResolutionsDropdownScript : MonoBehaviour
                 Screen.SetResolution(320, 200, fullscreenToggle.isOn);
                 break;
         }
+
+        confirmChangesCanvas.enabled = true;
         
     }
 }
