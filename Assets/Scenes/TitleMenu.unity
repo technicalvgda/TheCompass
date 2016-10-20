@@ -1481,6 +1481,10 @@ MonoBehaviour:
   pauseMenu: {fileID: 0}
   extrasMenu: {fileID: 0}
   cursorSelectionMenu: {fileID: 0}
+  mobileRes: {fileID: 1712333599}
+  mobileTog: {fileID: 1350804988}
+  mainMenuLabels: []
+  mainMenuButtons: 
   activeOnScreen: {fileID: 0}
   resolutionDropdown: {fileID: 0}
   fullscreenToggle: {fileID: 0}
@@ -5374,7 +5378,7 @@ GameObject:
   - 114: {fileID: 1350804990}
   m_Layer: 5
   m_Name: FullscreenToggle
-  m_TagString: Untagged
+  m_TagString: FullScreenToggle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6865,7 +6869,7 @@ GameObject:
   - 114: {fileID: 1712333601}
   m_Layer: 5
   m_Name: Dropdown
-  m_TagString: Untagged
+  m_TagString: FullScreenDrop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

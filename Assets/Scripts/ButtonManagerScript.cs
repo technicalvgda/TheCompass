@@ -11,7 +11,13 @@ public class ButtonManagerScript : MonoBehaviour {
 	public Text slotText;
 
 	/* Stores the gameobjects of the UI elements */ 
-	public GameObject saveMenu, optionMenu, loadMenu,pauseMenu,extrasMenu,cursorSelectionMenu;
+	public GameObject saveMenu, optionMenu, loadMenu,pauseMenu,extrasMenu,cursorSelectionMenu, mobileRes, mobileTog;
+
+    public GameObject[] mainMenuLabels;
+
+    public bool[] mainMenuButtons;
+
+    private int mainMenuSelected;
 
 	/* Stores the active screen (To be used in the onBack()) */ 
 	public GameObject activeOnScreen;
@@ -31,12 +37,23 @@ public class ButtonManagerScript : MonoBehaviour {
 		cursorSelectionMenu = GameObject.FindGameObjectWithTag ("CursorSelectionMenu");
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
 		extrasMenu = GameObject.FindGameObjectWithTag ("ExtrasMenu");
+        mobileRes = GameObject.FindGameObjectWithTag("FullScreenDrop");
+        mobileTog = GameObject.FindGameObjectWithTag("FullScreenToggle");
 		resolutionDropdown = optionMenu.GetComponentInChildren<Dropdown> ();
 		fullscreenToggle = optionMenu.GetComponentInChildren<Toggle> ();
 		slotText.text = PlayerPrefs.GetString ("onLevel");
-		saveMenu.SetActive (false);
+        if (Application.isMobilePlatform)
+        {
+            mobileRes.SetActive(false);
+            mobileTog.SetActive(false);
+            Debug.Log("mobile");
+        }
+
+        saveMenu.SetActive (false);
 		optionMenu.SetActive(false);
-		if(cursorSelectionMenu != null)
+
+
+        if (cursorSelectionMenu != null)
 			cursorSelectionMenu.SetActive (false);
 		if(extrasMenu != null)
 			extrasMenu.SetActive (false);
@@ -44,12 +61,17 @@ public class ButtonManagerScript : MonoBehaviour {
 			loadMenu.SetActive(false);
 		if(pauseMenu != null)
 			pauseMenu.SetActive(false);
+
+        mainMenuButtons = new bool[mainMenuLabels.Length];
+
+        mainMenuSelected = 0;
 	}
 	void Update()
 	{
-		//resolutionDropdownValueChangedHandler(resolutionDropdown);
-		//if ESC button is pressed, change the pause state
-		if (Application.loadedLevelName == "MVPScene") {
+
+        //resolutionDropdownValueChangedHandler(resolutionDropdown);
+        //if ESC button is pressed, change the pause state
+        if (Application.loadedLevelName == "MVPScene") {
 			if (Input.GetButtonDown ("Pause")) {
 				_isPaused = !_isPaused;
 			}
@@ -285,5 +307,23 @@ public class ButtonManagerScript : MonoBehaviour {
 		}
 	}
 
+    public void keyboardControl()
+    {
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            if (mainMenuSelected < mainMenuLabels.Length - 1)
+                mainMenuSelected += 1;
+            else
+                mainMenuSelected = 0;
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            if (mainMenuSelected > 0)
+                mainMenuSelected -= 1;
+            else
+                mainMenuSelected = mainMenuLabels.Length -1;
+        }
+    }
 
 }
