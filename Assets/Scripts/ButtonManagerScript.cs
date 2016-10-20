@@ -42,12 +42,15 @@ public class ButtonManagerScript : MonoBehaviour {
 		resolutionDropdown = optionMenu.GetComponentInChildren<Dropdown> ();
 		fullscreenToggle = optionMenu.GetComponentInChildren<Toggle> ();
 		slotText.text = PlayerPrefs.GetString ("onLevel");
-        if (Application.isMobilePlatform)
+
+        #if (UNITY_ANDROID)
         {
             mobileRes.SetActive(false);
             mobileTog.SetActive(false);
             Debug.Log("mobile");
         }
+        #endif
+
 
         saveMenu.SetActive (false);
 		optionMenu.SetActive(false);
