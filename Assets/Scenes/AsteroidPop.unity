@@ -558,6 +558,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!1 &631270326 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000013920337096, guid: b0b7fba286815dc44b0ba11b680392c4,
+    type: 2}
+  m_PrefabInternal: {fileID: 1152052812}
+--- !u!114 &631270334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 631270326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8826ea51ec97060439eacfec7f0f4d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &662938673
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,7 +780,7 @@ Prefab:
       objectReference: {fileID: 1756905939}
     - target: {fileID: 1000010472579736, guid: d45e760d6fc323f4db4ebc90bc7c3d5a, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d45e760d6fc323f4db4ebc90bc7c3d5a, type: 2}
@@ -1431,6 +1447,30 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013312837990, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012489635114, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013738887394, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012033981452, guid: b0b7fba286815dc44b0ba11b680392c4, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 58000011547094326, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b0b7fba286815dc44b0ba11b680392c4, type: 2}
   m_IsPrefabParent: 0
@@ -1578,6 +1618,7 @@ MonoBehaviour:
   - {fileID: 1000011945169482, guid: 5bfe96865e79f7141b31d483ad2a44f9, type: 2}
   timeToMoveDown: 10
   moveSpeedModifier: 10
+  asteroidsToShoot: []
 --- !u!4 &1254390128
 Transform:
   m_ObjectHideFlags: 0
@@ -1682,7 +1723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1259251033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2697,10 +2738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9d0c2264a3e492459faefbddcaeaf6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventSystem: {fileID: 0}
-  es: {fileID: 0}
   slotText: {fileID: 1709784719}
-  mainMenu: {fileID: 0}
   saveMenu: {fileID: 0}
   optionMenu: {fileID: 0}
   loadMenu: {fileID: 0}
@@ -2716,7 +2754,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1756905936}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56d817f895e44604e920c47e24c57903, type: 3}
   m_Name: 

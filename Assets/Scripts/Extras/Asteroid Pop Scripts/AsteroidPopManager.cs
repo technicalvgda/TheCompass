@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class AsteroidPopManager : MonoBehaviour {
 	
 	public int gridLength, gridHeight;
@@ -8,14 +8,24 @@ public class AsteroidPopManager : MonoBehaviour {
 	public GameObject[,] _grid;
 	public float timeToMoveDown;
 	public float moveSpeedModifier;
+	public List<GameObject> asteroidsToShoot;
 	private GameObject _tempObj;
 	private float _timer;
 	private Vector3 _beginningPos;
-
+	private GameObject _player;
+	private GameObject _shootableAsteroidTemp;
 
 	// Use this for initialization
 	void Start () {
+		_player = GameObject.FindGameObjectWithTag ("Player");
 		createGrid ();
+		_shootableAsteroidTemp = (GameObject)Instantiate(asteroids[Random.Range(0,asteroids.Length)], _player.transform.position,Quaternion.identity);
+		_shootableAsteroidTemp.GetComponent<AsteroidPopAsteroid> ().isShootable = true;
+		_shootableAsteroidTemp.GetComponent<AsteroidPopAsteroid> ().nextInLine = true;
+		asteroidsToShoot.Add(_shootableAsteroidTemp);
+		_shootableAsteroidTemp = (GameObject)Instantiate (asteroids [Random.Range (0, asteroids.Length)], new Vector3 (_player.transform.position.x, _player.transform.position.y - 6, 0), Quaternion.identity);
+		_shootableAsteroidTemp.GetComponent<AsteroidPopAsteroid> ().isShootable = true;
+		asteroidsToShoot.Add(_shootableAsteroidTemp);
 	}
 	
 	// Update is called once per frame
@@ -75,5 +85,16 @@ public class AsteroidPopManager : MonoBehaviour {
 			transform.position = new Vector3 (transform.position.x, transform.position.y - (Time.deltaTime*moveSpeedModifier), transform.position.z);
 			yield return new WaitForSeconds (0.1f);
 		}
+	}
+	public void AsteroidFired(GameObject asteroid)
+	{
+		//delete from list, move next asteroid up,set next asteroid bool nextToShoot to true, spawn new random colored asteroid
+		asteroidsToShoot.Remove(asteroid);
+		//moving up and settings bools handled in the object
+		asteroidsToShoot[0].GetComponent<AsteroidPopAsteroid> ().prepareAsteroid (_player.transform.position);
+		_shootableAsteroidTemp = (GameObject)Instantiate (asteroids [Random.Range (0, asteroids.Length)], new Vector3 (_player.transform.position.x, _player.transform.position.y - 4, 0), Quaternion.identity);
+		_shootableAsteroidTemp.GetComponent<AsteroidPopAsteroid> ().isShootable = true;
+		asteroidsToShoot.Add(_shootableAsteroidTemp);
+
 	}
 }
