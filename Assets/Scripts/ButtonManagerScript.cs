@@ -38,6 +38,7 @@ public class ButtonManagerScript : MonoBehaviour {
 		cursorSelectionMenu = GameObject.FindGameObjectWithTag ("CursorSelectionMenu");
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
 		extrasMenu = GameObject.FindGameObjectWithTag ("ExtrasMenu");
+		eventSystem = GameObject.Find ("EventSystem");
 		es = eventSystem.GetComponent<EventSystem> ();
 		resolutionDropdown = optionMenu.GetComponentInChildren<Dropdown> ();
 		fullscreenToggle = optionMenu.GetComponentInChildren<Toggle> ();
