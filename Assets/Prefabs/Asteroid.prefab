@@ -85,7 +85,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 405aef21f13ff1e48ab9aa6ea25fc192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectSize: 5
+  drift: 0
+  rotateActivated: 0
+  splitactivated: 0
+  objectSize: 3
+  splitter: {fileID: 0}
+  splitterShard: {fileID: 0}
+  splitterX: 0
+  splitterY: 0
+  isTractored: 0
 --- !u!212 &212000010874891754
 SpriteRenderer:
   m_ObjectHideFlags: 1

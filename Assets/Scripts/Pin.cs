@@ -4,16 +4,14 @@ using System.Collections;
 public class Pin : MonoBehaviour
 {
 
-    BowlingManager manager;
+    void OnEnable()
+    { BowlingManager.DestroyPin += CleanUp; }
+    void OnDisable()
+    { BowlingManager.DestroyPin -= CleanUp; }
 
-    public void SetManager(BowlingManager mngr)
+    void CleanUp()
     {
-        manager = mngr;
-    }
-
-    void OnDestroy()
-    {
-        manager.KnockDownPin();
+        Destroy(this.gameObject);
     }
 
 }

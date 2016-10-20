@@ -16,6 +16,10 @@ public class MoveableObject : MonoBehaviour
 
 	private bool iAmAsteroid = false;
 
+    public bool isTractored = false;
+
+
+
 
 	// Use this for initialization
 	void Start ()
