@@ -101,4 +101,15 @@ public class ResolutionsDropdownScript : MonoBehaviour
         confirmChangesCanvas.enabled = true;
         
     }
+
+    public void YesButton()
+    {
+        confirmChangesCanvas.enabled = false;
+    }
+
+    public void NoButton()
+    {
+        Screen.SetResolution(resolutionWidthCurrent, resolutionHeightCurrent, fullscreenToggle.isOn);
+        confirmChangesCanvas.enabled = false;
+    }
 }
