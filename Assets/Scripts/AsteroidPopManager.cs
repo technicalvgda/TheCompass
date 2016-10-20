@@ -7,6 +7,7 @@ public class AsteroidPopManager : MonoBehaviour {
 	public GameObject[] asteroids;
 	public GameObject[,] _grid;
 	public float timeToMoveDown;
+	public float moveSpeedModifier;
 	private GameObject _tempObj;
 	private float _timer;
 
@@ -24,7 +25,8 @@ public class AsteroidPopManager : MonoBehaviour {
 		if (_timer >= timeToMoveDown) 
 		{
 			_timer = 0;
-			transform.position = new Vector3 (transform.position.x, transform.position.y - 4, 0);
+			StartCoroutine ("SmoothMoveDown");
+			//transform.position = new Vector3 (transform.position.x, transform.position.y - 4, 0);
 		}
 	}
 
@@ -67,6 +69,10 @@ public class AsteroidPopManager : MonoBehaviour {
 
 	IEnumerator SmoothMoveDown()
 	{
-		
+		while (transform.position.y > transform.position.y - 2) 
+		{			
+			transform.position = new Vector3 (transform.position.x, transform.position.y - (Time.deltaTime*moveSpeedModifier), transform.position.z);
+			yield return new WaitForSeconds (0.1f);
+		}
 	}
 }

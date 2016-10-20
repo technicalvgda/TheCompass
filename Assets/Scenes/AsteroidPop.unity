@@ -1568,7 +1568,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35183491263ae4444badc289c301961e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentObject: {fileID: 1996992198}
   gridLength: 10
   gridHeight: 10
   asteroids:
@@ -1578,6 +1577,7 @@ MonoBehaviour:
   - {fileID: 1000013497475450, guid: b2951d9ca3aa35b49b4ec80f2fe9a3d7, type: 2}
   - {fileID: 1000011945169482, guid: 5bfe96865e79f7141b31d483ad2a44f9, type: 2}
   timeToMoveDown: 2
+  moveSpeedModifier: 3
 --- !u!4 &1254390128
 Transform:
   m_ObjectHideFlags: 0
@@ -3450,34 +3450,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1879541629}
---- !u!1 &1996992198
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1996992199}
-  m_Layer: 0
-  m_Name: TheAsteroids
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1996992199
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1996992198}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.583181, y: 16.190075, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
 --- !u!1 &2018191478
 GameObject:
   m_ObjectHideFlags: 0
