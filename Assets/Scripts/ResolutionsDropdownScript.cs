@@ -9,13 +9,29 @@ public class ResolutionsDropdownScript : MonoBehaviour
 
     public Toggle fullscreenToggle;
 
+    private int resolutionWidthNew;
+
+    private int resolutionHeightNew;
+
+    private int resolutionWidthCurrent;
+
+    private int resolutionHeightCurrent;
+    
+    void Start()
+    {
+        resolutionWidthCurrent = Screen.currentResolution.width;
+        resolutionHeightCurrent = Screen.currentResolution.height;
+        //Debug.Log(resolutionWidthCurrent + ", " + resolutionHeightCurrent);
+    }
+
     void Update()
     {
         resolutionDropdownValueChangedHandler(resolutionDropdown);
+        //Screen.SetResolution(resolutionWidthCurrent, resolutionHeightCurrent, fullscreenToggle.isOn);
     }
 
     public void resolutionDropdownValueChangedHandler(Dropdown target)
-    {
+    {        
         switch (target.value)
         {
             case 0:
@@ -84,7 +100,7 @@ public class ResolutionsDropdownScript : MonoBehaviour
             case 21:
                 Screen.SetResolution(320, 200, fullscreenToggle.isOn);
                 break;
-
         }
+        
     }
 }
