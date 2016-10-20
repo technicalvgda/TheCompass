@@ -21,6 +21,7 @@ GameObject:
   - 4: {fileID: 4000010867034840}
   - 212: {fileID: 212000012917500772}
   - 58: {fileID: 58000011482098660}
+  - 114: {fileID: 114000012902510916}
   - 114: {fileID: 114000013712463984}
   m_Layer: 0
   m_Name: BlueAsteroid
@@ -56,6 +57,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
+--- !u!114 &114000012902510916
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010456271786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b74b8a5c356f9d46bdf4495d16b221a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: Blue
+  adjacentAsteroids: []
 --- !u!114 &114000013712463984
 MonoBehaviour:
   m_ObjectHideFlags: 1

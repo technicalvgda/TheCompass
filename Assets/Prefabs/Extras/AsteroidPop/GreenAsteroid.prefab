@@ -22,6 +22,7 @@ GameObject:
   - 212: {fileID: 212000013213448510}
   - 58: {fileID: 58000011908170040}
   - 114: {fileID: 114000011407076272}
+  - 114: {fileID: 114000010577107528}
   m_Layer: 0
   m_Name: GreenAsteroid
   m_TagString: small
@@ -56,6 +57,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
+--- !u!114 &114000010577107528
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011057354286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b74b8a5c356f9d46bdf4495d16b221a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: Green
+  adjacentAsteroids: []
 --- !u!114 &114000011407076272
 MonoBehaviour:
   m_ObjectHideFlags: 1

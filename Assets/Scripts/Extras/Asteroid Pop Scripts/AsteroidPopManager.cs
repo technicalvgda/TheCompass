@@ -10,6 +10,7 @@ public class AsteroidPopManager : MonoBehaviour {
 	public float moveSpeedModifier;
 	private GameObject _tempObj;
 	private float _timer;
+	private Vector3 _beginningPos;
 
 
 	// Use this for initialization
@@ -21,7 +22,6 @@ public class AsteroidPopManager : MonoBehaviour {
 	void Update () {
 	
 		_timer += Time.deltaTime;
-		Debug.Log (_timer);
 		if (_timer >= timeToMoveDown) 
 		{
 			_timer = 0;
@@ -40,9 +40,9 @@ public class AsteroidPopManager : MonoBehaviour {
 			{
 				_grid [i, j] = asteroids [Random.Range (0, asteroids.Length)];
 				if(j%2==0)//if even
-					_tempObj = (GameObject)Instantiate (_grid [i, j], new Vector3(i*4+2,j*4,0),Quaternion.identity);
+					_tempObj = (GameObject)Instantiate (_grid [i, j], new Vector3(i*4+2,j*4-1,0),Quaternion.identity);
 				else
-					_tempObj = (GameObject)Instantiate (_grid [i, j], new Vector3(i*4,j*4,0),Quaternion.identity);
+					_tempObj = (GameObject)Instantiate (_grid [i, j], new Vector3(i*4,j*4-1,0),Quaternion.identity);
 				_tempObj.transform.parent = this.transform;
 
 
@@ -69,7 +69,8 @@ public class AsteroidPopManager : MonoBehaviour {
 
 	IEnumerator SmoothMoveDown()
 	{
-		while (transform.position.y > transform.position.y - 2) 
+		_beginningPos = transform.position;
+		while (transform.position.y > _beginningPos.y - 4) 
 		{			
 			transform.position = new Vector3 (transform.position.x, transform.position.y - (Time.deltaTime*moveSpeedModifier), transform.position.z);
 			yield return new WaitForSeconds (0.1f);
