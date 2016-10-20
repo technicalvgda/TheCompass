@@ -17,7 +17,7 @@ public class ButtonManagerScript : MonoBehaviour {
 	public Text slotText;
 
 	/* Stores the gameobjects of the UI elements */ 
-	public GameObject mainMenu, saveMenu, optionMenu, loadMenu,pauseMenu,extrasMenu,cursorSelectionMenu;
+	public GameObject mainMenu, saveMenu, optionMenu, loadMenu,pauseMenu,extrasMenu,cursorSelectionMenu,gameOverMenu;
 
 	/* Stores the active screen (To be used in the onBack()) */ 
 	public GameObject activeOnScreen;
@@ -27,6 +27,8 @@ public class ButtonManagerScript : MonoBehaviour {
 	public Toggle fullscreenToggle;
 
 	private bool _isPaused;
+	public GameObject _pauseCanvasMenuObject;
+	private GameOver _gameOverScript;
 
 	/* Finds the UI elements and sets them to inactive. Also sets the slot text to the level that the user is on. */ 
 	void Start()
@@ -38,7 +40,9 @@ public class ButtonManagerScript : MonoBehaviour {
 		cursorSelectionMenu = GameObject.FindGameObjectWithTag ("CursorSelectionMenu");
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
 		extrasMenu = GameObject.FindGameObjectWithTag ("ExtrasMenu");
+		_pauseCanvasMenuObject = GameObject.Find ("Pause Menu");
 		eventSystem = GameObject.Find ("EventSystem");
+		gameOverMenu = GameObject.FindGameObjectWithTag ("GameOverMenu");
 		es = eventSystem.GetComponent<EventSystem> ();
 		resolutionDropdown = optionMenu.GetComponentInChildren<Dropdown> ();
 		fullscreenToggle = optionMenu.GetComponentInChildren<Toggle> ();
@@ -63,37 +67,52 @@ public class ButtonManagerScript : MonoBehaviour {
 			loadMenu.SetActive(false);
 		if(pauseMenu != null)
 			pauseMenu.SetActive(false);
+		if (gameOverMenu != null) 
+		{
+			_gameOverScript = gameObject.GetComponent<GameOver> ();
+			//gameOverMenu.SetActive (false);
+		}
 	}
 	void Update()
 	{
 		//resolutionDropdownValueChangedHandler(resolutionDropdown);
 		//if ESC button is pressed, change the pause state
-		if (Application.loadedLevelName == "MVPScene") {
-			if (Input.GetButtonDown ("Pause")) {
-				_isPaused = !_isPaused;
-			}
+		if (Application.loadedLevelName == "MVPScene" || Application.loadedLevelName == "Level1Rough") 
+		{
+			if (_gameOverScript.isGameOver == false) 
+			{
+				if (Input.GetButtonDown ("Pause")) 
+				{
+					_isPaused = !_isPaused;
+				}
 
-			//if paused, bring up pause menu && stop game time
-			if (_isPaused) {
-				pauseMenu.SetActive (true);
-				//PauseUI.enabled = true;
-				Time.timeScale = 0;
-			}
+				//if paused, bring up pause menu && stop game time
+				if (_isPaused) {
+					pauseMenu.SetActive (true);
+					_pauseCanvasMenuObject.SetActive (true);
+					//PauseUI.enabled = true;
+					Time.timeScale = 0;
+				}
 
-			//if not paused, deactivate pause menu && continue game time
-			if (!_isPaused) {
-				pauseMenu.SetActive (false);
-				//PauseUI.enabled = false;
-				if (optionMenu.activeSelf == true)
-					optionMenu.SetActive (false);
-				if (saveMenu.activeSelf == true)
-					saveMenu.SetActive (false);
-				Time.timeScale = 1;
+				//if not paused, deactivate pause menu && continue game time
+				if (!_isPaused) {
+					pauseMenu.SetActive (false);
+					//PauseUI.enabled = false;
+					if (optionMenu.activeSelf == true)
+						optionMenu.SetActive (false);
+					if (saveMenu.activeSelf == true)
+						saveMenu.SetActive (false);
+					Time.timeScale = 1;
 
-				/*
+					/*
 			if (optionsCanvas.enabled == true)
 				optionsCanvas.enabled = false;
 			Time.timeScale = 1;*/
+				}
+			} 
+			else if (_gameOverScript.isGameOver == true) 
+			{
+				Time.timeScale = 0;
 			}
 		}
 
@@ -125,7 +144,7 @@ public class ButtonManagerScript : MonoBehaviour {
 	/* Universal Back button that uses the activeOnScreen gameObject */ 
 	public void onBack()
 	{
-		if (Application.loadedLevelName == "MVPScene") 
+		if (Application.loadedLevelName == "MVPScene" || Application.loadedLevelName == "Level1Rough") 
 		{
 			if (saveMenu.activeSelf == true) 
 			{
@@ -139,6 +158,13 @@ public class ButtonManagerScript : MonoBehaviour {
 					activeOnScreen.SetActive (false);
 					activeOnScreen = extrasMenu;
 				}
+			} 
+			else if (_pauseCanvasMenuObject.activeSelf == false) 
+			{
+				_pauseCanvasMenuObject.SetActive (true);
+				optionMenu.SetActive (false);
+				activeOnScreen = pauseMenu;
+				selectFirstButton ();
 			}
 			else 
 			{
@@ -167,7 +193,8 @@ public class ButtonManagerScript : MonoBehaviour {
 		}
 		if(activeOnScreen == null)
 		{
-			mainMenu.SetActive (true);
+			if(mainMenu != null)
+				mainMenu.SetActive (true);
 			selectFirstButton (); 
 
 		}
@@ -212,7 +239,10 @@ public class ButtonManagerScript : MonoBehaviour {
 	public void OptionBtnEnable()
 	{
 		optionMenu.SetActive (true);
-		mainMenu.SetActive (false);
+		if(mainMenu != null)
+			mainMenu.SetActive (false);
+		if (_pauseCanvasMenuObject != null)
+			_pauseCanvasMenuObject.SetActive (false);
 		selectFirstButton (); 
 		activeOnScreen = optionMenu;
 
