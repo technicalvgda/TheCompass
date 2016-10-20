@@ -47,6 +47,7 @@ public class ButtonManagerScript : MonoBehaviour {
 		{
 			resolutionDropdown.gameObject.SetActive(false);
 			fullscreenToggle.gameObject.SetActive(false);
+			cursorSelectionMenu.gameObject.SetActive(false);
 			//resolutionDropdown.enabled = false;
 			//fullscreenToggle.enabled = false;
 			Debug.Log("mobile");
