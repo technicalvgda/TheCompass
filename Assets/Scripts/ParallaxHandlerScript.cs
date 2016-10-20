@@ -45,7 +45,7 @@ public class ParallaxHandlerScript : MonoBehaviour
 
         //assign camera and player variable
         mainCamera = Camera.main;
-        centerPos = mainCamera.transform.position;
+        centerPos = new Vector3(0, 0, transform.position.z);//mainCamera.transform.position;
         cameraHalfHeight = Camera.main.orthographicSize;
         cameraHalfWidth = Camera.main.orthographicSize * Screen.width / Screen.height ;
         

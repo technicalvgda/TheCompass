@@ -11,6 +11,11 @@ public class CameraController : MonoBehaviour {
     private float _yVelRatio = 2.0f;
     private Vector3 _velocity = Vector3.zero;
  
+
+    void Awake()
+    {
+        transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
+    }
     void FixedUpdate()
     {
     	/*
