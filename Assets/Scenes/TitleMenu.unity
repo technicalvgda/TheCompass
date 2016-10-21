@@ -109,7 +109,7 @@ GameObject:
   - 114: {fileID: 17633891}
   m_Layer: 5
   m_Name: Load Button
-  m_TagString: Untagged
+  m_TagString: FirstButtonOfMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -313,7 +313,7 @@ GameObject:
   - 114: {fileID: 54930106}
   m_Layer: 5
   m_Name: NewGame
-  m_TagString: Untagged
+  m_TagString: FirstButtonOfMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -570,6 +570,7 @@ GameObject:
   - 124: {fileID: 157676246}
   - 81: {fileID: 157676245}
   - 114: {fileID: 157676249}
+  - 82: {fileID: 157676250}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -658,6 +659,80 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CursorTextures:
   - {fileID: 2800000, guid: 5045119c56054194aabd48ece3c04347, type: 3}
+--- !u!82 &157676250
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 157676243}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: a245b8ca340ff354a9b9c3e9f62dff8e, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &163769393
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,7 +747,7 @@ GameObject:
   - 114: {fileID: 163769398}
   m_Layer: 5
   m_Name: Credits
-  m_TagString: Untagged
+  m_TagString: FirstButtonOfMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1474,16 +1549,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9d0c2264a3e492459faefbddcaeaf6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventSystem: {fileID: 0}
+  es: {fileID: 0}
   slotText: {fileID: 1591850709}
+  mainMenu: {fileID: 0}
   saveMenu: {fileID: 0}
   optionMenu: {fileID: 0}
   loadMenu: {fileID: 0}
   pauseMenu: {fileID: 0}
   extrasMenu: {fileID: 0}
   cursorSelectionMenu: {fileID: 0}
+  gameOverMenu: {fileID: 0}
   activeOnScreen: {fileID: 0}
   resolutionDropdown: {fileID: 0}
   fullscreenToggle: {fileID: 0}
+  _pauseCanvasMenuObject: {fileID: 0}
 --- !u!4 &330001492
 Transform:
   m_ObjectHideFlags: 0
@@ -4367,6 +4447,114 @@ Prefab:
       propertyPath: m_Colors.m_HighlightedColor.b
       value: 0.4745098
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013078896788, guid: a32d4e6b8ff9b524b9d1e304f17a67ba, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013729549070, guid: a32d4e6b8ff9b524b9d1e304f17a67ba, type: 2}
+      propertyPath: m_TagString
+      value: FirstButtonOfMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010126860474, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011681106856, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011867629324, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010783002596, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011141452416, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000014270164110, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000011538477622, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000011538477622, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012416238064, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000011143125196, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000011143125196, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000010575048588, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000010833225884, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000010833225884, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000011891103694, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000010442925258, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000010442925258, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000013180986148, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000010424715092, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000010424715092, guid: a32d4e6b8ff9b524b9d1e304f17a67ba,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a32d4e6b8ff9b524b9d1e304f17a67ba, type: 2}
   m_IsPrefabParent: 0
@@ -5374,7 +5562,7 @@ GameObject:
   - 114: {fileID: 1350804990}
   m_Layer: 5
   m_Name: FullscreenToggle
-  m_TagString: Untagged
+  m_TagString: FullScreenToggle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6865,7 +7053,7 @@ GameObject:
   - 114: {fileID: 1712333601}
   m_Layer: 5
   m_Name: Dropdown
-  m_TagString: Untagged
+  m_TagString: FullScreenDrop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
