@@ -1647,7 +1647,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 20
+  orthographic size: 30
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5084,6 +5084,16 @@ Prefab:
         type: 2}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013312837990, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: RegenDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013312837990, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: healthRegen
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b0b7fba286815dc44b0ba11b680392c4, type: 2}
