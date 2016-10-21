@@ -68,12 +68,19 @@ public class BowlingManager : MonoBehaviour {
         //indicate that this frame is on its first round
         round2 = false;
 
-
         //if all 10 frames have been finished
-        if(currentFrame > MAX_FRAMES && bonusThrows == 0)
+        if(currentFrame > MAX_FRAMES)
         {
-            //end the game
-            EndGame();
+            //if bonus rounds are available
+            if (bonusThrows > 0)
+            {
+                //handle bonus rounds
+            }
+            else //if there are no bonus rounds
+            {
+                //end the game
+                EndGame();
+            }         
         }
         else
         {
@@ -99,44 +106,65 @@ public class BowlingManager : MonoBehaviour {
        
         //spawn the ball
         StartCoroutine(RespawnBall());
-       
         //output current scores
         OutputScore();
     }
 
+
+    //Handles all functions for ending a frame
     void EndFrame()
     {
         //calculate final score so far
         ScoreHandler();
 
         //if anything is subscribed to DestroyPin
+        //clean up remaining pins by calling DestroyPin Event
         if (DestroyPin != null)
-        {
-            //clean up remaining pins by calling DestroyPin Event
-            DestroyPin();
-        }
-
-
-        //increase frame count
+        { DestroyPin();}
+            
+        //Advance counter to next frame
         currentFrame++;
-
         //start next frame
         StartFrame();
     }
 
     
-    //handles proper behavior when a ball is destroyed
+    //handles proper behavior when a ball is destroyed:
     //Gutterball or ball lands in back pit
     void BallDrop()
     {
+        //End the round
         StartCoroutine(EndRound());
     }
 
+    //Handles the end of a round
+    //checks whether to continue to round 2 or end frame
     IEnumerator EndRound()
     {
+        //wait for remaining pins to fall
         yield return new WaitForSeconds(3f);
+        //if this was a bonus throw
+        if(bonusThrows > 0)
+        {
+            //if the throw was a strike
+            if (frameScore[currentFrame] == 10)
+            {
+                Debug.Log("STRIKE!!!!!!!!!!!!!!!");
+                //indicate that a strike occured on this frame
+                frameStrike[currentFrame] = true;
+            }
+            else
+            {
+                Debug.Log("You hit " + frameScore[currentFrame] + " pins!");
+            }
+            
+            //decrement bonus throws
+            bonusThrows--;
+            //End this frame
+            EndFrame();
+        }
         //if this was the first round
-        if (!round2)
+        else if (!round2)
         {
             //check if a strike was made
             if (frameScore[currentFrame] == 10)
@@ -184,8 +212,8 @@ public class BowlingManager : MonoBehaviour {
     void ScoreHandler()
     {
         //CALCULATE FINAL SCORING
-        //check for strike or spare last frame (if this isnt the first frame)
-        if (currentFrame > 0 && frameScore[currentFrame-1] == 10)
+        //check for strike or spare last frame (if this isnt the first frame or the 2nd bonus round)
+        if (currentFrame > 0 && currentFrame < 11 && frameScore[currentFrame-1] == 10)
         {
             frameScore[currentFrame - 1] += frameScore[currentFrame];     
         }
@@ -207,14 +235,14 @@ public class BowlingManager : MonoBehaviour {
                 //if the frame being checked was a strike
                 if(frameStrike[i] == true)
                 {
+                    //increase the strike counter
                     strikeCounter++;
                 }
                 else
-                {
-                    break;
-                }
+                {break;}
             }
 
+            //output the proper strike term based on streak
             switch(strikeCounter)
             {
                 case 2:
@@ -240,9 +268,10 @@ public class BowlingManager : MonoBehaviour {
            
         }
 
+        //DEBUG CODE!!!
         //calculate current final score
         //add all scores together
-        for (int i = 0; i <= currentFrame; i++)
+        for (int i = 0; i <= MAX_FRAMES; i++)
         {
             finalScore += frameScore[i];
         }
@@ -287,10 +316,17 @@ public class BowlingManager : MonoBehaviour {
     }
     void EndGame()
     {
-        //calculate score
+        Debug.Log("GAME COMPLETE");
+        //calculate final score
+        //add all scores together
+        for (int i = 0; i <= MAX_FRAMES; i++)
+        {
+            Debug.Log("Frame 1: "+ frameScore[i]);
+            finalScore += frameScore[i];
+        }
 
         //display score
-
+        Debug.Log("Final Score: " + finalScore);
         //save score?
 
         //retry or exit
