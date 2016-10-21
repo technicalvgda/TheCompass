@@ -170,7 +170,7 @@ public class Player : MonoBehaviour {
 
 
                 //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
-                rb2d.AddForce(movement * (PLAYER_SPEED - tractorSlow) );
+                rb2d.AddForce(movement * (PLAYER_SPEED - tractorSlow));
 
                 //Rotates front of ship to direction of movement
                 if (movement != Vector2.zero)

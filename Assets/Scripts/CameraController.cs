@@ -7,31 +7,18 @@ public class CameraController : MonoBehaviour {
     public Transform target;
     
     private float _dampTime = 0.15f;
-    private float _xVelRatio = 2.0f;
-    private float _yVelRatio = 2.00f;
+    private float _xVelRatio = 2.25f;
+    private float _yVelRatio = 2.25f;
     private Vector3 _velocity = Vector3.zero;
 
-	public float screenRatio;
-
-	private Vector2 _previousVelocity;
-	private float _jerkCompensationTime = 0f;
-
-
-	private Vector2 _cameraVelocity;
-
+	public float screenRatio = 0f;
  
-	void Start(){
-		_previousVelocity = Vector2.zero;
-
-	}
-
     void Awake()
     {
         transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
     }
 	void FixedUpdate()
 	{
-
     	/*
     	Uses the player's position and velocity to determine where to move the camera
     	*/
@@ -54,32 +41,8 @@ public class CameraController : MonoBehaviour {
 			//destination is the point from the player to the difference between where the player will be in a second and the center of the screen
             Vector3 destination = transform.position + delta;
 
-			//If the player experiences sudden movement, makes camera movement smoother
-			if (playerIsJerked(target.GetComponent<Rigidbody2D>()) || _jerkCompensationTime > 0)
-			{
-				_jerkCompensationTime -= Time.fixedDeltaTime;
-				transform.position = Vector3.SmoothDamp(transform.position, destination, ref _velocity, _dampTime * (_jerkCompensationTime * 2 + 1));
-			}
-			else
-			{
-				
-				//The camera position transition to the calculated destination
-				transform.position = Vector3.SmoothDamp(transform.position, destination, ref _velocity, _dampTime);
-			}
-
+			//The camera position transition to the calculated destination
+            transform.position = Vector3.SmoothDamp(transform.position, destination, ref _velocity, _dampTime);
         }
     }
-
-	public bool playerIsJerked (Rigidbody2D ship) {
-		Vector2 deltaVel = ship.velocity - _previousVelocity;
-		bool shipIsSpedUp = (ship.velocity.magnitude > _previousVelocity.magnitude);
-		if (deltaVel.magnitude > 3) {
-			_jerkCompensationTime = deltaVel.magnitude/30;
-			Debug.Log (deltaVel.magnitude);
-		}
-		_previousVelocity = ship.velocity;
-
-		return deltaVel.magnitude > 3;
-	}
-
 }
