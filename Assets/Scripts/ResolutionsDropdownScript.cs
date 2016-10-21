@@ -102,7 +102,6 @@ public class ResolutionsDropdownScript : MonoBehaviour
                 Screen.SetResolution(320, 200, fullscreenToggle.isOn);
                 break;
         }
-
         confirmChangesCanvas.SetActive(true);
         
     }
