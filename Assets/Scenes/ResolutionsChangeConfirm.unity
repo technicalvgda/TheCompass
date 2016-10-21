@@ -8309,7 +8309,6 @@ GameObject:
   - 223: {fileID: 1967812324}
   - 114: {fileID: 1967812323}
   - 114: {fileID: 1967812322}
-  - 114: {fileID: 1967812325}
   - 222: {fileID: 1967812326}
   m_Layer: 0
   m_Name: ConfirmCanvas
@@ -8396,17 +8395,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 2
   m_TargetDisplay: 0
---- !u!114 &1967812325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1967812320}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0e4497e7b5b95f4abdde4ae1a18f33d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &1967812326
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8504,7 +8492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resolutionDropdown: {fileID: 1890267552}
   fullscreenToggle: {fileID: 820728509}
-  confirmChangesCanvas: {fileID: 1967812320}
+  confirmChangesCanvas: {fileID: 2034908207}
 --- !u!1 &1993823929
 GameObject:
   m_ObjectHideFlags: 0
