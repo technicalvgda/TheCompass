@@ -19,7 +19,7 @@ public class Player : MonoBehaviour {
 	// STAT VARIABLES
 	const float PLAYER_SPEED = 40.0f;
 	const float BRAKE_SPEED = 20.0f;
-	private float rotationSpeed = 1.0f;
+	public float rotationSpeed = 2.5f;
     const float MAX_FUEL = 100.0f;  //the maximum amount of fuel the player can have
 
     public float tractorSlow = 0;
@@ -46,8 +46,10 @@ public class Player : MonoBehaviour {
 	//Values for boundary dimensions
 	public int maxXBoundary = 0;
 	public int maxYBoundary = 0;
-	public int minXBoundary = 12;
-	public int minYBoundary = 13;
+	public int minXBoundary = 0;
+	public int minYBoundary = 0;
+
+    private int unit = 5;
 
 
 
@@ -61,14 +63,20 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		//get rigidbody component of player object
-		rb2d = GetComponent<Rigidbody2D> ();
+
+        maxXBoundary *= unit;
+        maxYBoundary *= unit;
+        minXBoundary *= unit;
+        minYBoundary *= unit;
+
+        //get rigidbody component of player object
+        rb2d = GetComponent<Rigidbody2D> ();
 		//set player health to starting health
 		playerHealth = playerStartingHealth;
 
         currentFuel = MAX_FUEL;
 
-        if (joystick == null)
+        if (joystick == null && GameObject.Find("VirtualJoystickMovement")!= null)
         {
             joystick = GameObject.Find("VirtualJoystickMovement").GetComponentInChildren<VirtualJoystickMovement>();
         }
@@ -139,21 +147,6 @@ public class Player : MonoBehaviour {
 				//Store the current vertical input in the float moveVertical.
 				float moveVertical = Input.GetAxis ("Vertical");
 
-				//Use the two store floats to create a new Vector2 variable movement.
-				Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
-				//Debug.Log(rb2d.velocity.magnitude);
-
-
-                //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
-                rb2d.AddForce(movement * (PLAYER_SPEED - tractorSlow));
-
-                //Rotates front of ship to direction of movement
-                if (movement != Vector2.zero)
-				{
-					float angle = Mathf.Atan2(-movement.x, movement.y) * Mathf.Rad2Deg;
-					transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(angle,Vector3.forward), Time.deltaTime * rotationSpeed);
-				}
-
 				/*
                  * Disables player control until player is either not inputting movement or away from where they were initially heading
                  * NOTE: the reason why the comparison is  <= 0 is because the opposite direction is inversed when passing the point of entry
@@ -170,6 +163,23 @@ public class Player : MonoBehaviour {
 						moveHorizontal = 0;
 					}
 				}
+
+				//Use the two store floats to create a new Vector2 variable movement.
+				Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
+				//Debug.Log(rb2d.velocity.magnitude);
+
+
+                //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
+                rb2d.AddForce(movement * (PLAYER_SPEED - tractorSlow));
+
+                //Rotates front of ship to direction of movement
+                if (movement != Vector2.zero)
+				{
+					float angle = Mathf.Atan2(-movement.x, movement.y) * Mathf.Rad2Deg;
+					transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(angle,Vector3.forward), Time.deltaTime * rotationSpeed);
+				}
+
+
 				#elif UNITY_IOS || UNITY_ANDROID
 
 				//use the joystick input to create movement vector
@@ -208,7 +218,6 @@ public class Player : MonoBehaviour {
 		if (transform.position.x >= maxX || transform.position.y >= maxY|| transform.position.x <= minX || transform.position.y <= minY) 
 		{
 			resetUTurnTime();
-			rotationSpeed = 3.0f;
 			numberOfChecks++;
 			if (numberOfChecks == 1) {
 				setPlayerExitPos (transform.position);
@@ -217,7 +226,6 @@ public class Player : MonoBehaviour {
 		else 
 		{
 			numberOfChecks = 0;
-			rotationSpeed = 1.0f;
 		}
 	}
 
