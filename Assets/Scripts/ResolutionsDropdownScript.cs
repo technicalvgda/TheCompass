@@ -17,7 +17,12 @@ public class ResolutionsDropdownScript : MonoBehaviour
 
     private int resolutionHeightCurrent;
 
-    public Canvas confirmChangesCanvas;
+    public GameObject confirmChangesCanvas;
+
+    void Start()
+    {
+        confirmChangesCanvas.SetActive(false);
+    }
 
     void Update()
     {
@@ -98,18 +103,18 @@ public class ResolutionsDropdownScript : MonoBehaviour
                 break;
         }
 
-        confirmChangesCanvas.enabled = true;
+        confirmChangesCanvas.SetActive(true);
         
     }
 
     public void YesButton()
     {
-        confirmChangesCanvas.enabled = false;
+        confirmChangesCanvas.SetActive(false);
     }
 
     public void NoButton()
     {
         Screen.SetResolution(resolutionWidthCurrent, resolutionHeightCurrent, fullscreenToggle.isOn);
-        confirmChangesCanvas.enabled = false;
+        confirmChangesCanvas.SetActive(false);
     }
 }
