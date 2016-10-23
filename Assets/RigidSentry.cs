@@ -5,10 +5,11 @@ public class RigidSentry : MonoBehaviour {
 	private LinearPatrol _patrolpattern;
 	private Vision _vision;
 	private bool _canFire;
-	private float _bulletVelocity;
+	private float _bulletVelocity, _spray;
 
 	public Rigidbody2D bullet;
-	public float sprayAngle, fireRate;
+    //The higher the accuracy value, the more deviation there is from center point
+	public float accuracy, fireRate;
 	// Use this for initialization
 	void Start () {
 		_canFire = true;
@@ -31,8 +32,8 @@ public class RigidSentry : MonoBehaviour {
 		if(_canFire){
 			_canFire = false;
 			Rigidbody2D instantProjectile = Instantiate(bullet,transform.position,transform.rotation) as Rigidbody2D;
-			instantProjectile.velocity = transform.TransformDirection(new Vector3(0, _bulletVelocity , 0 ));
-
+            _spray = Random.Range(-accuracy, accuracy);
+            instantProjectile.velocity = transform.TransformDirection(new Vector3(_bulletVelocity, _spray, 0 ));
 			//taking the inverse of the firerate to get projectiles per second
 			yield return new WaitForSeconds(1/fireRate);
 			_canFire = true;
