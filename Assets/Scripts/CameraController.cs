@@ -15,7 +15,15 @@ public class CameraController : MonoBehaviour {
 
 	private Vector2 _previousVelocity;
 	private float _jerkCompensationTime = 0f;
+	private float _minXPos;
+	private float _minYPos;
+	private float _maxXPos;
+	private float _maxYPos;
+	private float _clampedXPos;
+	private float _clampedYPos;
 
+	private float _vertExtent;
+	private float _horzExtent;
 
 	void Start(){
 		_previousVelocity = Vector2.zero;
@@ -27,6 +35,9 @@ public class CameraController : MonoBehaviour {
     }
 	void FixedUpdate()
 	{
+		_vertExtent = Camera.main.orthographicSize;
+		_horzExtent = _vertExtent * Screen.width / Screen.height;
+
     	/*
     	Uses the player's position and velocity to determine where to move the camera
     	*/
@@ -35,6 +46,8 @@ public class CameraController : MonoBehaviour {
 
 		if (target)
         {
+			
+
             //NOTE: can modify the ratio of inputted x and y velocity to adjust how far the camera goes ahead of player
             //aheadpoint = player position + vector of player velocity => position of player after one second
 			Vector3 aheadPoint = target.position + new Vector3(target.GetComponent<Rigidbody2D>().velocity.x / (_xVelRatio * screenRatio) , target.GetComponent<Rigidbody2D>().velocity.y / _yVelRatio, 0);
@@ -49,20 +62,33 @@ public class CameraController : MonoBehaviour {
 			//destination is the point from the player to the difference between where the player will be in a second and the center of the screen
             Vector3 destination = transform.position + delta;
 
+
 			//If the player experiences sudden movement, makes camera movement smoother
 			if (playerIsJerked(target.GetComponent<Rigidbody2D>()) || _jerkCompensationTime > 0)
 			{
 				_jerkCompensationTime -= Time.fixedDeltaTime;
 				transform.position = Vector3.SmoothDamp(transform.position, destination, ref _velocity, _dampTime * (_jerkCompensationTime * 2 + 1));
+				clampCamera (1.5f);
 			}
 			else
 			{
-
+				
 				//The camera position transition to the calculated destination
 				transform.position = Vector3.SmoothDamp(transform.position, destination, ref _velocity, _dampTime);
+				clampCamera (1.5f);
 			}
 
 		}
+	}
+
+	public void clampCamera(float ratio){
+		_minXPos = target.position.x - _horzExtent / ratio;
+		_minYPos = target.position.y - _vertExtent / ratio;
+		_maxXPos = target.position.x + _horzExtent / ratio;
+		_maxYPos = target.position.y + _vertExtent / ratio;
+		_clampedXPos = Mathf.Clamp(transform.position.x, _minXPos, _maxXPos);
+		_clampedYPos = Mathf.Clamp (transform.position.y, _minYPos, _maxYPos);
+		transform.position = new Vector3 (_clampedXPos, _clampedYPos, transform.position.z);
 	}
 
 	public bool playerIsJerked (Rigidbody2D ship) {
