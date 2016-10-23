@@ -1586,6 +1586,7 @@ GameObject:
   - 114: {fileID: 516112169}
   - 114: {fileID: 516112170}
   - 114: {fileID: 516112171}
+  - 114: {fileID: 516112172}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1752,6 +1753,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameOverUI: {fileID: 1399804850}
   isGameOver: 0
+--- !u!114 &516112172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 516112160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f7f821a5e0f4c7d99a66fd8a7a568a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitude: 0.1
+  length: 0.15
 --- !u!1001 &531537077
 Prefab:
   m_ObjectHideFlags: 0
@@ -5085,6 +5099,11 @@ Prefab:
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013312837990, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 516112172}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b0b7fba286815dc44b0ba11b680392c4, type: 2}
   m_IsPrefabParent: 0
