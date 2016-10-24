@@ -58,6 +58,7 @@ GameObject:
   - 58: {fileID: 58000010394531082}
   - 50: {fileID: 50000010471320282}
   - 114: {fileID: 114000013751307484}
+  - 114: {fileID: 114000013066523384}
   m_Layer: 0
   m_Name: DusterDrone
   m_TagString: Untagged
@@ -161,8 +162,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0272f0cff0421194e808bab12d471912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shooting: 0
+  bulletPrefab: {fileID: 0}
+  bulletSpeed: 0
   visionRange: 15
   visionConeAngle: 45
+--- !u!114 &114000013066523384
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012888972344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c39d475d7b5da4ebe23688a6e6edfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeedThreshhold: 0
+  DetectionRange: 100
+  arrowPrefab: {fileID: 1000013997023758, guid: b4b1f5b29243b9b468e012bffe8b927c,
+    type: 2}
 --- !u!114 &114000013751307484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -183,6 +202,9 @@ MonoBehaviour:
   idleScanAngle: 0
   idleScanSpeed: 0
   direction: 0
+  isFleet: 0
+  Fleet: []
+  isNotified: 0
 --- !u!198 &198000010153070524
 ParticleSystem:
   m_ObjectHideFlags: 1

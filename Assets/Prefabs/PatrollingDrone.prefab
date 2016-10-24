@@ -40,6 +40,7 @@ GameObject:
   - 58: {fileID: 58000010814746862}
   - 50: {fileID: 50000011856684122}
   - 114: {fileID: 114000013394257170}
+  - 114: {fileID: 114000011877551544}
   m_Layer: 0
   m_Name: PatrollingDrone
   m_TagString: Untagged
@@ -122,6 +123,21 @@ MonoBehaviour:
   bulletSpeed: 0
   visionRange: 15
   visionConeAngle: 45
+--- !u!114 &114000011877551544
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012621182136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c39d475d7b5da4ebe23688a6e6edfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeedThreshhold: 0
+  DetectionRange: 100
+  arrowPrefab: {fileID: 1000013529883644, guid: 44f6e27ddd2c0ea4c889a70fca637e23,
+    type: 2}
 --- !u!114 &114000013394257170
 MonoBehaviour:
   m_ObjectHideFlags: 1

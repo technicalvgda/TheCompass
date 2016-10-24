@@ -24,6 +24,7 @@ GameObject:
   - 50: {fileID: 50000011494621134}
   - 114: {fileID: 114000012998576432}
   - 114: {fileID: 114000010533202574}
+  - 114: {fileID: 114000013614632656}
   m_Layer: 0
   m_Name: SplitterShard2
   m_TagString: small
@@ -101,6 +102,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drift: 1
   objectSize: 5
+--- !u!114 &114000013614632656
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010028777008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c39d475d7b5da4ebe23688a6e6edfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeedThreshhold: 3
+  DetectionRange: 100
+  arrowPrefab: {fileID: 1000013692013292, guid: 329a7898fc1955b42919de3af79b9ddd,
+    type: 2}
 --- !u!212 &212000010679041126
 SpriteRenderer:
   m_ObjectHideFlags: 1
