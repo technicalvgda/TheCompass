@@ -12,6 +12,9 @@ public class PlayerShield : MonoBehaviour
     
     Animator anim;
 
+    //Shield Audio Source
+    AudioSource audioSrc;
+
     // Use this for initialization
     void Start()
     {
@@ -20,6 +23,8 @@ public class PlayerShield : MonoBehaviour
         waitTime = initialWaitTime;
         
         anim = GetComponent<Animator>();
+
+        audioSrc = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -41,6 +46,12 @@ public class PlayerShield : MonoBehaviour
         if (anim.GetBool("Colliding") == false)
         {
             anim.SetBool("Colliding", true);
+
+            // Activate Sound on collision
+            if (audioSrc != null)
+            {
+                audioSrc.Play();
+            }
         }
         /*
         
