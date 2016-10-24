@@ -75,9 +75,92 @@ public class ButtonManagerScript : MonoBehaviour {
 	}
 	void Update()
 	{
-		//resolutionDropdownValueChangedHandler(resolutionDropdown);
-		//if ESC button is pressed, change the pause state
-		if (Application.loadedLevelName == "MVPScene" || Application.loadedLevelName == "Level1Rough") 
+        //START- check if any buttons from gamepad is pressed. If true, make cursor invisible
+        if (Input.GetKeyDown(KeyCode.JoystickButton0))
+        {
+            Cursor.visible = false;
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton1))
+        {
+            Cursor.visible = false;
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton2))
+        {
+            Cursor.visible = false;
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton3))
+        {
+            Cursor.visible = false;
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton4))
+        {
+            Cursor.visible = false;
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton5))
+        {
+            Cursor.visible = false;
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton6))
+        {
+            Cursor.visible = false;
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton7))
+        {
+            Cursor.visible = false;
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton8))
+        {
+            Cursor.visible = false;
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton9))
+        {
+            Cursor.visible = false;
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton10))
+        {
+            Cursor.visible = false;
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton11))
+        {
+            Cursor.visible = false;
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton12))
+        {
+            Cursor.visible = false;
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton13))
+        {
+            Cursor.visible = false;
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton14))
+        {
+            Cursor.visible = false;
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton15))
+        {
+            Cursor.visible = false;
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton16))
+        {
+            Cursor.visible = false;
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton17))
+        {
+            Cursor.visible = false;
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton18))
+        {
+            Cursor.visible = false;
+        }
+        if (Input.GetKeyDown(KeyCode.JoystickButton19))
+        {
+            Cursor.visible = false;
+        }
+        //END- check if any buttons from gamepad is pressed. If true, make cursor invisible
+
+        //resolutionDropdownValueChangedHandler(resolutionDropdown);
+        //if ESC button is pressed, change the pause state
+        if (Application.loadedLevelName == "MVPScene" || Application.loadedLevelName == "Level1Rough") 
 		{
 			if (_gameOverScript.isGameOver == false) 
 			{
