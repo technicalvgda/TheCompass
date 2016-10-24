@@ -9,29 +9,28 @@ public class ResolutionsDropdownScript : MonoBehaviour
 
     public Toggle fullscreenToggle;
 
-    private int resolutionWidthNew;
-
-    private int resolutionHeightNew;
-
-    private int resolutionWidthCurrent;
-
-    private int resolutionHeightCurrent;
+    public Text countdownText;
 
     public GameObject confirmChangesCanvas;
 
-    public float myTimer; //
+    private int resolutionWidthCurrent; //saved screen width
 
-    public Text countdownText;
+    private int resolutionHeightCurrent; //saved screen height
+    
+    public float revertTimer; //Number countdown will start from until reverting back to old resolution  
 
+    //Deactivates confirm canvas.
     void Start()
     {
         confirmChangesCanvas.SetActive(false);
     }
     
+    //First, "saves" current width and height and of game screen. Second, sets resolution to whichever user chooses.
+    //Next, activates the confirm canvas. Last, starts countdown coroutine.
     public void resolutionDropdownValueChangedHandler(Dropdown target)
     {
-        resolutionWidthCurrent = Screen.currentResolution.width;
-        resolutionHeightCurrent = Screen.currentResolution.height;
+        resolutionWidthCurrent = Screen.width;
+        resolutionHeightCurrent = Screen.height;
         switch (target.value)
         {
             case 0:
@@ -106,14 +105,17 @@ public class ResolutionsDropdownScript : MonoBehaviour
         
     }
 
+    //First, stops the countdown. Next, saves current screen resolutions. Finally, deactivates confirm canvas.
     public void YesButton()
     {
         StopCoroutine("Countdown");
-        resolutionWidthCurrent = Screen.currentResolution.width;
-        resolutionHeightCurrent = Screen.currentResolution.height;
+        resolutionWidthCurrent = Screen.width;
+        resolutionHeightCurrent = Screen.height;
         confirmChangesCanvas.SetActive(false);
     }
 
+
+    //First stops the countdown. Next sets screen to old resolution. Finally, deactivates confirm canvas.
     public void NoButton()
     {
         StopCoroutine("Countdown");
@@ -121,9 +123,10 @@ public class ResolutionsDropdownScript : MonoBehaviour
         confirmChangesCanvas.SetActive(false);
     }
 
+    //Coroutine that starts counting down from revertTimer to 0 and displays countdown. Once done, activates the no button.
     IEnumerator Countdown()
     {
-        for(float i = myTimer; i >= 0; i--)
+        for(float i = revertTimer; i >= 0; i--)
         {
             countdownText.text = "Keep changes? Reverting back in " + i + " seconds.";
             yield return new WaitForSeconds(1);
