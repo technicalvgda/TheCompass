@@ -19,16 +19,15 @@ public class ResolutionsDropdownScript : MonoBehaviour
 
     public GameObject confirmChangesCanvas;
 
+    public float myTimer; //
+
+    public Text countdownText;
+
     void Start()
     {
         confirmChangesCanvas.SetActive(false);
     }
-
-    void Update()
-    {
-        resolutionDropdownValueChangedHandler(resolutionDropdown);
-    }
-
+    
     public void resolutionDropdownValueChangedHandler(Dropdown target)
     {
         resolutionWidthCurrent = Screen.currentResolution.width;
@@ -103,17 +102,32 @@ public class ResolutionsDropdownScript : MonoBehaviour
                 break;
         }
         confirmChangesCanvas.SetActive(true);
+        StartCoroutine("Countdown");
         
     }
 
     public void YesButton()
     {
+        StopCoroutine("Countdown");
+        resolutionWidthCurrent = Screen.currentResolution.width;
+        resolutionHeightCurrent = Screen.currentResolution.height;
         confirmChangesCanvas.SetActive(false);
     }
 
     public void NoButton()
     {
+        StopCoroutine("Countdown");
         Screen.SetResolution(resolutionWidthCurrent, resolutionHeightCurrent, fullscreenToggle.isOn);
         confirmChangesCanvas.SetActive(false);
+    }
+
+    IEnumerator Countdown()
+    {
+        for(float i = myTimer; i >= 0; i--)
+        {
+            countdownText.text = "Keep changes? Reverting back in " + i + " seconds.";
+            yield return new WaitForSeconds(1);
+        }        
+        NoButton();
     }
 }
