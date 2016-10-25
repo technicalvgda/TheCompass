@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour {
     private float _yVelRatio = 2.0f;
     private Vector3 _velocity = Vector3.zero;
 
-	public float screenRatio = 0f;
+	private float _screenRatio = 0f;
 
 	private Vector2 _previousVelocity;
 	private float _jerkCompensationTime = 0f;
@@ -21,6 +21,7 @@ public class CameraController : MonoBehaviour {
 	private float _maxYPos;
 	private float _clampedXPos;
 	private float _clampedYPos;
+	private float _clampScreenRatio = 1.5f;
 
 	private float _vertExtent;
 	private float _horzExtent;
@@ -42,7 +43,7 @@ public class CameraController : MonoBehaviour {
     	Uses the player's position and velocity to determine where to move the camera
     	*/
 
-		screenRatio = (float)Screen.height / (float)Screen.width;
+		_screenRatio = (float)Screen.height / (float)Screen.width;
 
 		if (target)
         {
@@ -50,7 +51,7 @@ public class CameraController : MonoBehaviour {
 
             //NOTE: can modify the ratio of inputted x and y velocity to adjust how far the camera goes ahead of player
             //aheadpoint = player position + vector of player velocity => position of player after one second
-			Vector3 aheadPoint = target.position + new Vector3(target.GetComponent<Rigidbody2D>().velocity.x / (_xVelRatio * screenRatio) , target.GetComponent<Rigidbody2D>().velocity.y / _yVelRatio, 0);
+			Vector3 aheadPoint = target.position + new Vector3(target.GetComponent<Rigidbody2D>().velocity.x / (_xVelRatio * _screenRatio) , target.GetComponent<Rigidbody2D>().velocity.y / _yVelRatio, 0);
 
 
 			//converts aheadPoint to camera viewport reference (Shown screen goes from bottom left [0,0] to top right [1,1]
@@ -68,19 +69,23 @@ public class CameraController : MonoBehaviour {
 			{
 				_jerkCompensationTime -= Time.fixedDeltaTime;
 				transform.position = Vector3.SmoothDamp(transform.position, destination, ref _velocity, _dampTime * (_jerkCompensationTime * 2 + 1));
-				clampCamera (1.5f);
+				clampCamera (_clampScreenRatio);
 			}
 			else
 			{
 				
 				//The camera position transition to the calculated destination
 				transform.position = Vector3.SmoothDamp(transform.position, destination, ref _velocity, _dampTime);
-				clampCamera (1.5f);
+				clampCamera (_clampScreenRatio);
 			}
 
 		}
 	}
 
+	/*
+	 * Clamps the camera a scaled distance away from the player based on the ratio given.
+	 * @param	ratio	Affects the ratio of how far the camera can offset from the player based on screen size.
+	 */
 	public void clampCamera(float ratio){
 		_minXPos = target.position.x - _horzExtent / ratio;
 		_minYPos = target.position.y - _vertExtent / ratio;
@@ -91,6 +96,12 @@ public class CameraController : MonoBehaviour {
 		transform.position = new Vector3 (_clampedXPos, _clampedYPos, transform.position.z);
 	}
 
+	/*
+	 * Checks if the player experiences rapid changes in velocity. Used to help reduce jerking of camera
+	 * when that happens.
+	 * @param	ship	The ship that we want to detect if it is jerked
+	 * @return	true 	if player velocity changed dramatically enough from last update
+	 */ 
 	public bool playerIsJerked (Rigidbody2D ship) {
 		Vector2 deltaVel = ship.velocity - _previousVelocity;
 		bool shipIsSpedUp = (ship.velocity.magnitude > _previousVelocity.magnitude);
