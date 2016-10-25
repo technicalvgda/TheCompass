@@ -9,7 +9,8 @@ public class ParallaxHandlerScript : MonoBehaviour
     public bool isTractored = false;
 
     //1 is closest layer, 3 is furthest layer (background panel)
-    public GameObject layer1, layer2, layer3;
+    //front layer is the foreground
+    public GameObject frontLayer,layer1, layer2, layer3;
 
     //unit to measure size of map by (5 is value used by editor grid for 1 cell)
     public float unit = 5.0f;
@@ -26,11 +27,11 @@ public class ParallaxHandlerScript : MonoBehaviour
 
     //variables for layer math
     //can add position and half width or height to get edge pos of layer
-    private float width1, width2, width3;
-    private float height1, height2, height3;
+    private float width1, width2, width3, widthF;
+    private float height1, height2, height3, heightF;
 
-    private float halfWidth1, halfWidth2, halfWidth3;
-    private float halfHeight1, halfHeight2, halfHeight3;
+    private float halfWidth1, halfWidth2, halfWidth3, halfWidthF;
+    private float halfHeight1, halfHeight2, halfHeight3, halfHeightF;
 
     Vector3 bottomLeft;
     Vector3 bottomRight;
@@ -45,7 +46,7 @@ public class ParallaxHandlerScript : MonoBehaviour
 
         //assign camera and player variable
         mainCamera = Camera.main;
-        centerPos = mainCamera.transform.position;
+        centerPos = new Vector3(0, 0, transform.position.z);//mainCamera.transform.position;
         cameraHalfHeight = Camera.main.orthographicSize;
         cameraHalfWidth = Camera.main.orthographicSize * Screen.width / Screen.height ;
         
@@ -60,6 +61,9 @@ public class ParallaxHandlerScript : MonoBehaviour
         foreach (Transform child in layer3.transform)
         { child.GetComponent<SpriteRenderer>().sortingLayerName = "Background"; }
 
+        foreach (Transform child in frontLayer.transform)
+        { child.GetComponent<SpriteRenderer>().sortingLayerName = "Foreground"; }
+
         //set layer math variables
         width1 = layer1.GetComponent<RectTransform>().rect.width;
         width2 = layer2.GetComponent<RectTransform>().rect.width;
@@ -67,6 +71,8 @@ public class ParallaxHandlerScript : MonoBehaviour
         height1 = layer1.GetComponent<RectTransform>().rect.height;
         height2 = layer2.GetComponent<RectTransform>().rect.height;
         height3 = layer3.GetComponent<RectTransform>().rect.height;
+        widthF =  frontLayer.GetComponent<RectTransform>().rect.width;
+        heightF = frontLayer.GetComponent<RectTransform>().rect.height;
 
         halfWidth1 = width1 / 2;
         halfWidth2 = width2 / 2;
@@ -74,18 +80,8 @@ public class ParallaxHandlerScript : MonoBehaviour
         halfHeight1 = height1 / 2;
         halfHeight2 = height2 / 2;
         halfHeight3 = height3 / 2;
-
-        /*
-        //draw box for level border
-        StartCoroutine(DrawDebugBox(Color.green, levelSizeX * unit, levelSizeY * unit, null));//Vector3.zero);
-
-        //draw box for layer 1
-        StartCoroutine(DrawDebugBox(Color.yellow, width1, height1, layer1));//currentLayer.position);
-        //draw box for layer 2
-        StartCoroutine(DrawDebugBox(Color.blue, width2, height2, layer2));//currentLayer.position);
-        //draw box for layer 3
-        StartCoroutine(DrawDebugBox(Color.red, width3, height3, layer3)); //currentLayer.position);
-        */
+        halfWidthF = widthF / 2;
+        halfHeightF = heightF / 2;
 
 
     }
@@ -100,7 +96,8 @@ public class ParallaxHandlerScript : MonoBehaviour
         HandleLayerMovement(layer1.transform, halfWidth1, halfHeight1);
         HandleLayerMovement(layer2.transform, halfWidth2, halfHeight2);
         HandleLayerMovement(layer3.transform, halfWidth3, halfHeight3);
-       
+        HandleLayerMovement(frontLayer.transform, halfWidthF, halfHeightF);
+
     }
 
     void HandleLayerMovement(Transform currentLayer, float halfWidth, float halfHeight)
@@ -131,34 +128,7 @@ public class ParallaxHandlerScript : MonoBehaviour
 
     }
 
-    /*
-    IEnumerator DrawDebugBox(Color color, float xSize, float ySize, GameObject layer)//Vector3 shift)
-    {
-        Vector3 shift = Vector3.zero;
-        if (layer != null)
-        {
-            shift = layer.transform.position;
-        }
-        
-
-        //Get corner positions
-        bottomLeft = new Vector3(-xSize / 2, -ySize / 2, 0) + shift;
-        bottomRight = new Vector3(xSize / 2, -ySize / 2, 0) + shift;
-        topLeft = new Vector3(-xSize / 2, ySize / 2, 0) + shift;
-        topRight = new Vector3(xSize / 2, ySize / 2 , 0) + shift;
-        
-        //draw lines for map borders
-        Debug.DrawLine(bottomLeft, bottomRight, color);//< bottom line
-        Debug.DrawLine(topLeft, topRight, color);//< top line
-        Debug.DrawLine(bottomLeft, topLeft, color);//< left line
-        Debug.DrawLine(bottomRight, topRight, color);//< right line
-
-        yield return new WaitForSeconds(0.01f);
-        StartCoroutine(DrawDebugBox(color, xSize, ySize, layer));
-        yield return null;
-
-    }
-    */
+   
     void OnDrawGizmos()
     {
         Vector3 shift = Vector3.zero;
@@ -215,6 +185,22 @@ public class ParallaxHandlerScript : MonoBehaviour
         //Get corner positions of map
         xSize = layer3.GetComponent<RectTransform>().rect.width;
         ySize = layer3.GetComponent<RectTransform>().rect.height;
+        bottomLeft = new Vector3(-xSize / 2, -ySize / 2, 0) + shift;
+        bottomRight = new Vector3(xSize / 2, -ySize / 2, 0) + shift;
+        topLeft = new Vector3(-xSize / 2, ySize / 2, 0) + shift;
+        topRight = new Vector3(xSize / 2, ySize / 2, 0) + shift;
+        //draw lines for map borders
+        Gizmos.DrawLine(bottomLeft, bottomRight);
+        Gizmos.DrawLine(topLeft, topRight);
+        Gizmos.DrawLine(bottomLeft, topLeft);
+        Gizmos.DrawLine(bottomRight, topRight);
+
+        //DRAW FRONT LAYER
+        Gizmos.color = Color.cyan;
+        shift = frontLayer.transform.position;
+        //Get corner positions of map
+        xSize = frontLayer.GetComponent<RectTransform>().rect.width;
+        ySize = frontLayer.GetComponent<RectTransform>().rect.height;
         bottomLeft = new Vector3(-xSize / 2, -ySize / 2, 0) + shift;
         bottomRight = new Vector3(xSize / 2, -ySize / 2, 0) + shift;
         topLeft = new Vector3(-xSize / 2, ySize / 2, 0) + shift;

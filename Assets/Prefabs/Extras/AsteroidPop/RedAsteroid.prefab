@@ -22,6 +22,8 @@ GameObject:
   - 212: {fileID: 212000011645984658}
   - 58: {fileID: 58000011547097672}
   - 114: {fileID: 114000014185887928}
+  - 114: {fileID: 114000010846046614}
+  - 50: {fileID: 50000010758061080}
   m_Layer: 0
   m_Name: RedAsteroid
   m_TagString: small
@@ -42,6 +44,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!50 &50000010758061080
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013497475450}
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &58000011547097672
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -56,6 +75,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
+--- !u!114 &114000010846046614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013497475450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b74b8a5c356f9d46bdf4495d16b221a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShootable: 0
+  nextInLine: 0
+  isShot: 0
+  color: Red
+  adjacentAsteroids: []
+  hitColliders: []
+  moveSpeed: 0
 --- !u!114 &114000014185887928
 MonoBehaviour:
   m_ObjectHideFlags: 1

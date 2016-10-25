@@ -66,6 +66,13 @@ public class DroneMovementAI : MonoBehaviour {
             if(isFleet)
             {
                 isNotified = true;
+
+                for (int i = 0; i < Fleet.Count; i++)
+                {
+                    Fleet[i].isNotified = true;
+                    Fleet[i].StartFollowing();
+                }
+                /*
                 foreach(var drone in Fleet)
                 {
                     if(!drone.isNotified)
@@ -74,7 +81,7 @@ public class DroneMovementAI : MonoBehaviour {
                         drone.StartFollowing();
                     }
                     
-                }
+                }*/
             }
             droneState = DroneMovementState.Following;
             isFollowing = true;
