@@ -75,7 +75,11 @@ public class ButtonManagerScript : MonoBehaviour {
 	}
 	void Update()
 	{
-        //START- check if any buttons from gamepad is pressed. If true, make cursor invisible
+        //START- check if any buttons/ d-pad/ analog stick from gamepad is used. If true, make cursor invisible
+        if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+        {
+            Cursor.visible = false;
+        }
         if (Input.GetKeyDown(KeyCode.JoystickButton0))
         {
             Cursor.visible = false;
@@ -157,6 +161,13 @@ public class ButtonManagerScript : MonoBehaviour {
             Cursor.visible = false;
         }
         //END- check if any buttons from gamepad is pressed. If true, make cursor invisible
+
+        //if any keyboard key is pressed or the mouse is clicked, make cursor visible again
+        if (Input.anyKeyDown)
+        {
+            Cursor.visible = true;
+        }
+
 
         //resolutionDropdownValueChangedHandler(resolutionDropdown);
         //if ESC button is pressed, change the pause state
