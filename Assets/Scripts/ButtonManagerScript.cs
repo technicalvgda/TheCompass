@@ -28,7 +28,7 @@ public class ButtonManagerScript : MonoBehaviour {
 
 	private bool _isPaused;
 	public GameObject _pauseCanvasMenuObject;
-	private GameOver _gameOverScript;
+	public GameOver _gameOverScript;
 
 	/* Finds the UI elements and sets them to inactive. Also sets the slot text to the level that the user is on. */ 
 	void Start()
@@ -51,7 +51,8 @@ public class ButtonManagerScript : MonoBehaviour {
 		{
 			resolutionDropdown.gameObject.SetActive(false);
 			fullscreenToggle.gameObject.SetActive(false);
-			cursorSelectionMenu.gameObject.SetActive(false);
+			if(cursorSelectionMenu != null)
+				cursorSelectionMenu.gameObject.SetActive(false);
 			//resolutionDropdown.enabled = false;
 			//fullscreenToggle.enabled = false;
 			Debug.Log("mobile");
