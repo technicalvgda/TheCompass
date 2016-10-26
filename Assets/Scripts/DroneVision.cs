@@ -11,6 +11,7 @@ public class DroneVision : MonoBehaviour
     //public static event FollowPlayerAction FollowPlayer;
 
     GameObject bullet;
+	Teleporter tScript;
  	public GameObject bulletPrefab;
  	public int bulletSpeed;
 
@@ -28,6 +29,7 @@ public class DroneVision : MonoBehaviour
         droneCollider = GetComponent<CircleCollider2D>();
         droneCollider.radius = visionRange; // set the radius of the collider to vision range
         droneMovement = GetComponent<DroneMovementAI>();
+		tScript = gameObject.GetComponentInChildren<Teleporter> ();
 	}
 	
 
@@ -43,6 +45,11 @@ public class DroneVision : MonoBehaviour
                 isLookingForPlayer = true;
                 StartCoroutine(LookForPlayer());
 
+				if (tScript != null) 
+				{
+					tScript.canTeleport = false;
+					Debug.Log ("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+				}
                 if(shooting)
                 {
                     StartCoroutine(Attack());
@@ -61,10 +68,16 @@ public class DroneVision : MonoBehaviour
     {
         if (_player.CompareTag("Player"))
         {
-            //player = null;
+            player = null;
             StopCoroutine(LookForPlayer());
             StopCoroutine(Attack());
             isLookingForPlayer = false;
+
+			if (tScript != null) 
+			{
+				Debug.Log ("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+				tScript.canTeleport = true;
+			}
         }
     }
 
@@ -102,6 +115,7 @@ public class DroneVision : MonoBehaviour
  		{
  			StartCoroutine(Attack());
  		}
+
  	}
 
     public static GameObject GetPlayer()
