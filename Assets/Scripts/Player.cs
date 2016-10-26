@@ -59,6 +59,8 @@ public class Player : MonoBehaviour {
 	// only applies if being built to a mobile platform creates 
 	public VirtualJoystickMovement joystick;
 
+	// Camera Shake variable
+	public CameraShake mainCam;
 
 	// Use this for initialization
 	void Start () 
@@ -99,8 +101,10 @@ public class Player : MonoBehaviour {
 		//temp code for damage testing
 		if (Input.GetKeyDown (KeyCode.U))
 			playerHealth += 5f;
-		if (Input.GetKeyDown (KeyCode.J))
+		if (Input.GetKeyDown (KeyCode.J)) {
 			playerHealth -= 5f;
+			mainCam.shakeCam ();
+		}
 		//END TEMP
 
 	}
@@ -282,9 +286,12 @@ public class Player : MonoBehaviour {
 		playerHealth += health;
 	}
 
+	// function for when the player takes damage. It will shake the main camera
+	// when the player takes damage.
 	public void takeDamage(float damage)
 	{
 		playerHealth -= damage;
+		mainCam.shakeCam ();
 	}
 	public float getHealth()
 	{
