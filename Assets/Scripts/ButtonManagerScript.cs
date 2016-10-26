@@ -76,7 +76,7 @@ public class ButtonManagerScript : MonoBehaviour {
 	void Update()
 	{
         //START- check if any buttons/ d-pad/ analog stick from gamepad is used. If true, make cursor invisible
-        if (Input.GetAxis("GamepadVertical") != 0 || Input.GetAxis("GamepadHorizontal") != 0)
+		if (Input.GetAxis("GamepadVertical") != 0 || Input.GetAxis("GamepadHorizontal") != 0 || Input.GetAxis("GamepadHorizontalDPad") != 0 || Input.GetAxis("GamepadVerticalDPad") != 0)
         {
 			Cursor.visible = false;
         }
