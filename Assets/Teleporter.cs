@@ -27,7 +27,7 @@ public class Teleporter : MonoBehaviour {
             // so that new coordinates are generated
             StartCoroutine(TeleportEnemy(3.0f));
         }
-        else
+		else if(transform.position == new Vector3(xPos, yPos, 0) && !canTeleport)
         {
             // If the teleporter ended up in another object, generate new Coordinates quicker
             StartCoroutine(GenerateNewCoordinates(2.0f));
