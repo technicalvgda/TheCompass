@@ -42,29 +42,27 @@ public class PlayerShield : MonoBehaviour
 
     public void ActivateShield(bool playerDamaged)
     {
+        StopCoroutine(ResetAnim());
         waitTime = initialWaitTime;
-
+       
         if (anim.GetBool("Colliding") == false)
         {
             anim.SetBool("Damage", playerDamaged);
             anim.SetBool("Colliding", true);
-            
-
-            // Activate Sound on collision
-            if (audioSrc != null)
-            {
-                audioSrc.Play();
-            }
+           
         }
-        /*
-        
-        if (col.gameObject.tag != ("Shield") && collision)
+        // Activate Sound on collision
+        if (audioSrc != null)
         {
-            shield = (GameObject)Instantiate(shieldPrefab, transform.position, Quaternion.identity);
-            Debug.Log("Penis");
-            collision = false;
+            audioSrc.Play();
         }
-        */
+        StartCoroutine(ResetAnim());
+    }
 
+    IEnumerator ResetAnim()
+    {
+        yield return new WaitForSeconds(1f);
+        anim.SetBool("Damage", false);
+        yield return null;
     }
 }

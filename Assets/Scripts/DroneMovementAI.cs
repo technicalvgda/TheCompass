@@ -330,7 +330,7 @@ public class DroneMovementAI : MonoBehaviour {
 
     void OnTriggerStay2D(Collider2D _object)
     {
-        if (_object.transform.CompareTag("small"))
+        if (_object.transform.CompareTag("Debris"))
         {
             if (Vector2.Distance(_object.transform.position, transform.position) < _object.GetComponent<CircleCollider2D>().radius + 1)
             {
