@@ -40,12 +40,15 @@ public class PlayerShield : MonoBehaviour
         
     }
 
-    public void ActivateShield()
+    public void ActivateShield(bool playerDamaged)
     {
         waitTime = initialWaitTime;
+
         if (anim.GetBool("Colliding") == false)
         {
+            anim.SetBool("Damage", playerDamaged);
             anim.SetBool("Colliding", true);
+            
 
             // Activate Sound on collision
             if (audioSrc != null)
