@@ -61,7 +61,7 @@ public class Player : MonoBehaviour {
 	public VirtualJoystickMovement joystick;
 
 	// Camera Shake variable
-	public CameraShake mainCam;
+	CameraShake mainCam;
 
 	// Use this for initialization
 	void Start () 
@@ -77,12 +77,16 @@ public class Player : MonoBehaviour {
 		//set player health to starting health
 		playerHealth = playerStartingHealth;
 
+        mainCam = Camera.main.GetComponent<CameraShake>();
+
         currentFuel = MAX_FUEL;
 
         if (joystick == null && GameObject.Find("VirtualJoystickMovement")!= null)
         {
             joystick = GameObject.Find("VirtualJoystickMovement").GetComponentInChildren<VirtualJoystickMovement>();
         }
+
+        
 	}
 
 	void Update ()
@@ -292,7 +296,11 @@ public class Player : MonoBehaviour {
 	public void takeDamage(float damage)
 	{
 		playerHealth -= damage;
-		mainCam.shakeCam ();
+        if(mainCam != null)
+        {
+            mainCam.shakeCam();
+        }
+		
 	}
 	public float getHealth()
 	{
