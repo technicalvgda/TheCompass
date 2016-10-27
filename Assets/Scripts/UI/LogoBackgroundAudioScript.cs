@@ -18,5 +18,11 @@ public class LogoBackgroundAudioScript : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(sec);
 		audioSource.Play ();
+		while (audioSource.volume <= 1) 
+		{
+			audioSource.volume += Time.deltaTime;
+			yield return new WaitForSeconds (0.1f);
+		}
+
 	}
 }
