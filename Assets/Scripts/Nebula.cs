@@ -15,7 +15,7 @@ public class Nebula : MonoBehaviour
     // alter speed change of object going through NebulaGel, depends on type
 
     private float _dmgPerLoop = 25; //Deals 25 damage when in contact with pain-nebula over time
-    private float _dmgRate = .1f; //Rate of damage
+    private float _dmgRate = 1f; //Rate of damage
     private bool _coroutineActivated = false;
 
     private GameObject _player;
@@ -42,14 +42,14 @@ public class Nebula : MonoBehaviour
 			{
 				Debug.Log ("GelType 1 Detected, positive stat boost");
 				speedMultiplier = 2f;
-				coll.gameObject.GetComponent<Rigidbody2D>().velocity *= speedMultiplier;
+				coll.GetComponent<Player>().nebulaMultiplier = speedMultiplier;
 			} 
 			else if (type == 2) // NEGATIVE SPD DEBUFF NEBULA
 			{
 				Debug.Log ("GelType 2 Detected, negative stat boost");
 				speedMultiplier = 0.5f;
-				coll.gameObject.GetComponent<Rigidbody2D>().velocity *= speedMultiplier;
-			}
+                coll.GetComponent<Player>().nebulaMultiplier = speedMultiplier;
+            }
 			else if (type == 3) // DAMAGING NEBULA, block executes when the Nebula is active & the player collides with it
             { 
                 if (coll.gameObject.tag == "Player" && coll.gameObject.activeSelf) 
@@ -60,27 +60,39 @@ public class Nebula : MonoBehaviour
 				}
 			}
 		}
+        else
+        {
+            if (type == 1) // POSITIVE SPD BUFF NEBULA
+			{
+				Debug.Log ("GelType 1 Detected, positive stat boost");
+				speedMultiplier = 2f;
+				coll.GetComponent<Rigidbody2D>().velocity *= speedMultiplier;
+			} 
+			else if (type == 2) // NEGATIVE SPD DEBUFF NEBULA
+			{
+				Debug.Log ("GelType 2 Detected, negative stat boost");
+				speedMultiplier = 0.5f;
+                coll.GetComponent<Rigidbody2D>().velocity *= speedMultiplier;
+            }
+        }
 	}
 
 	void OnTriggerExit2D(Collider2D coll) // revert boost/antiboost effects
 	{
 		if (coll.gameObject.name == "PlayerPlaceholder" && isActive ())
 		{
-			if (type == 1)
+			if (type == 1 || type == 2)
 			{
 				Debug.Log ("Reset");
-				speedMultiplier = 2f;
-			} 
-			else if (type == 2) 
-			{
-				Debug.Log ("Reset");
-				speedMultiplier = 0.5f;
-			}
+				
+                coll.GetComponent<Player>().nebulaMultiplier = 1;
+            } 
+			
             else if (type == 3)
             {
                 _coroutineActivated = false;  //Ends damage over time effect
             }
-			coll.gameObject.GetComponent<Rigidbody2D>().velocity /= speedMultiplier;
+			
 			//remove speed buff/debuff
 		}
 	}
@@ -99,11 +111,11 @@ public class Nebula : MonoBehaviour
                _coroutineActivated = false;
                Debug.Log("PLAYER RAN OUT OF HP");
 
-               player.SetActive(false);
+               /*player.SetActive(false);
                player.transform.position = new Vector3(0, 0, 0); //Temporary code for respawning, resets the player obj to origin
                player.SetActive(true);
 
-               _playerCont.playerHealth = 100; //Reset Hp, Placeholder code for testing
+               _playerCont.playerHealth = 100; //Reset Hp, Placeholder code for testing*/
 }
 
             yield return new WaitForSeconds(_dmgRate); //Wait .25 seconds and then loop
