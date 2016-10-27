@@ -4,7 +4,8 @@ using System.Collections;
 
 public class ParallaxHandlerScript : MonoBehaviour
 {
-
+    public GameObject boundTile;
+    public GameObject edgeBoundTile;
 
     public bool isTractored = false;
 
@@ -37,23 +38,23 @@ public class ParallaxHandlerScript : MonoBehaviour
     Vector3 bottomRight;
     Vector3 topLeft;
     Vector3 topRight;
-   
+
     // Use this for initialization
-    void Start ()
+    void Start()
     {
-       
+
 
 
         //assign camera and player variable
         mainCamera = Camera.main;
         centerPos = new Vector3(0, 0, transform.position.z);//mainCamera.transform.position;
         cameraHalfHeight = Camera.main.orthographicSize;
-        cameraHalfWidth = Camera.main.orthographicSize * Screen.width / Screen.height ;
-        
+        cameraHalfWidth = Camera.main.orthographicSize * Screen.width / Screen.height;
+
 
         //set sorting layers of all children to each layer
         foreach (Transform child in layer1.transform)
-        {child.GetComponent<SpriteRenderer>().sortingLayerName = "Parallax1";}
+        { child.GetComponent<SpriteRenderer>().sortingLayerName = "Parallax1"; }
 
         foreach (Transform child in layer2.transform)
         { child.GetComponent<SpriteRenderer>().sortingLayerName = "Parallax2"; }
@@ -71,7 +72,7 @@ public class ParallaxHandlerScript : MonoBehaviour
         height1 = layer1.GetComponent<RectTransform>().rect.height;
         height2 = layer2.GetComponent<RectTransform>().rect.height;
         height3 = layer3.GetComponent<RectTransform>().rect.height;
-        widthF =  frontLayer.GetComponent<RectTransform>().rect.width;
+        widthF = frontLayer.GetComponent<RectTransform>().rect.width;
         heightF = frontLayer.GetComponent<RectTransform>().rect.height;
 
         halfWidth1 = width1 / 2;
@@ -83,7 +84,8 @@ public class ParallaxHandlerScript : MonoBehaviour
         halfWidthF = widthF / 2;
         halfHeightF = heightF / 2;
 
-
+        //spawn boundary tiles
+        SpawnBoundaries();
     }
 	
 	// Update is called once per frame
@@ -128,7 +130,15 @@ public class ParallaxHandlerScript : MonoBehaviour
 
     }
 
-   
+    void SpawnBoundaries()
+    {
+        for(int i = -100; i < 100; i++)
+        {
+            //spawn left side
+            Instantiate(edgeBoundTile, transform.position + new Vector3(transform.position.x - levelSizeX * unit, transform.position.y + i * unit, transform.position.z), transform.rotation);
+        }
+        
+    }
     void OnDrawGizmos()
     {
         Vector3 shift = Vector3.zero;
