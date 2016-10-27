@@ -22,6 +22,7 @@ public class Player : MonoBehaviour {
 	public float rotationSpeed = 2.5f;
     const float MAX_FUEL = 100.0f;  //the maximum amount of fuel the player can have
 
+    public float nebulaMultiplier = 1.0f;
     public float tractorSlow = 0;
 
     public float playerStartingHealth;//< the amount of health the player begins with
@@ -127,7 +128,7 @@ public class Player : MonoBehaviour {
 
 				transform.Rotate(new Vector3(0, 0, -rotationSpeed * rotation));
 
-                rb2d.AddForce(transform.up * (PLAYER_SPEED - tractorSlow) * acceleration);
+                rb2d.AddForce(transform.up * ((PLAYER_SPEED * nebulaMultiplier) - tractorSlow) * acceleration);
 #elif UNITY_IOS || UNITY_ANDROID
 				/*for mobile build the movement is determined by the joystick 
 				* left or right rotates the player
@@ -138,7 +139,7 @@ public class Player : MonoBehaviour {
 
 				transform.Rotate(new Vector3(0, 0, -rotationSpeed * rotation));
 
-				rb2d.AddForce(transform.up * (PLAYER_SPEED - tractorSlow) * acceleration);
+				rb2d.AddForce(transform.up * ((PLAYER_SPEED * nebulaMultiplier) - tractorSlow) * acceleration);
 #endif
 
             }
@@ -174,7 +175,7 @@ public class Player : MonoBehaviour {
 
 
                 //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
-                rb2d.AddForce(movement * (PLAYER_SPEED - tractorSlow));
+                rb2d.AddForce(movement * ((PLAYER_SPEED * nebulaMultiplier) - tractorSlow));
 
                 //Rotates front of ship to direction of movement
                 if (movement != Vector2.zero)
@@ -184,7 +185,7 @@ public class Player : MonoBehaviour {
 				}
 
 
-				#elif UNITY_IOS || UNITY_ANDROID
+#elif UNITY_IOS || UNITY_ANDROID
 
 				//use the joystick input to create movement vector
 				Vector2 movement = joystick.inputValue().normalized;
@@ -192,7 +193,7 @@ public class Player : MonoBehaviour {
 
 
 				//Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
-				rb2d.AddForce(movement * PLAYER_SPEED);
+				rb2d.AddForce(movement * ((PLAYER_SPEED * nebulaMultiplier) - tractorSlow));
 
 				//Rotates front of ship to direction of movement
 				if (movement != Vector2.zero)
@@ -200,13 +201,13 @@ public class Player : MonoBehaviour {
 				float angle = Mathf.Atan2(-movement.x, movement.y) * Mathf.Rad2Deg;
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * rotationSpeed);
 				}
-				#endif
+#endif
 
 
 
-			}
+            }
 
-		}
+        }
 		currentuTurnTime = uTurnPlayer(currentuTurnTime); 
 	}
 
@@ -242,7 +243,7 @@ public class Player : MonoBehaviour {
 
 			//The unit vector of the opposite the direction the player was initialling heading
 			oppositeDirection = (playerExitPos - (Vector2)transform.position).normalized;
-			rb2d.AddForce(oppositeDirection * (PLAYER_SPEED));
+			rb2d.AddForce(oppositeDirection * ((PLAYER_SPEED * nebulaMultiplier) - tractorSlow));
 			disablePlayerControl = true;
 			if (rb2d.velocity != Vector2.zero)
 			{
