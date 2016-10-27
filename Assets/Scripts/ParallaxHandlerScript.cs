@@ -132,10 +132,42 @@ public class ParallaxHandlerScript : MonoBehaviour
 
     void SpawnBoundaries()
     {
-        for(int i = -100; i < 100; i++)
+        for(int i = -100; i <= 100; i++)
         {
-            //spawn left side
-            Instantiate(edgeBoundTile, transform.position + new Vector3(transform.position.x - levelSizeX * unit, transform.position.y + i * unit, transform.position.z), transform.rotation);
+           
+            //spawn left side, row2 row 3
+            Instantiate(edgeBoundTile, new Vector3(transform.position.x - (levelSizeX/2 * unit), transform.position.y + i * unit, 0), transform.rotation );
+            Instantiate(boundTile,  new Vector3(transform.position.x - (levelSizeX / 2 * unit) - unit, transform.position.y + i * unit, 0), transform.rotation);
+            Instantiate(boundTile, new Vector3(transform.position.x - (levelSizeX / 2 * unit) - (unit*2), transform.position.y + i * unit, 0), transform.rotation);
+            Instantiate(boundTile, new Vector3(transform.position.x - (levelSizeX / 2 * unit) - (unit * 3), transform.position.y + i * unit, 0), transform.rotation);
+            Instantiate(boundTile, new Vector3(transform.position.x - (levelSizeX / 2 * unit) - (unit * 4), transform.position.y + i * unit, 0), transform.rotation);
+            Instantiate(boundTile, new Vector3(transform.position.x - (levelSizeX / 2 * unit) - (unit * 5), transform.position.y + i * unit, 0), transform.rotation);
+            Instantiate(boundTile, new Vector3(transform.position.x - (levelSizeX / 2 * unit) - (unit * 6), transform.position.y + i * unit, 0), transform.rotation);
+            //spawn right side
+            Instantiate(edgeBoundTile, new Vector3(transform.position.x + (levelSizeX / 2 * unit), transform.position.y + i * unit, 0), transform.rotation);
+            Instantiate(boundTile, new Vector3(transform.position.x + (levelSizeX / 2 * unit) + unit, transform.position.y + i * unit, 0), transform.rotation);
+            Instantiate(boundTile, new Vector3(transform.position.x + (levelSizeX / 2 * unit) + (unit * 2), transform.position.y + i * unit, 0), transform.rotation);
+            Instantiate(boundTile, new Vector3(transform.position.x + (levelSizeX / 2 * unit) + (unit * 3), transform.position.y + i * unit, 0), transform.rotation);
+            Instantiate(boundTile, new Vector3(transform.position.x + (levelSizeX / 2 * unit) + (unit * 4), transform.position.y + i * unit, 0), transform.rotation);
+            Instantiate(boundTile, new Vector3(transform.position.x + (levelSizeX / 2 * unit) + (unit * 5), transform.position.y + i * unit, 0), transform.rotation);
+            Instantiate(boundTile, new Vector3(transform.position.x + (levelSizeX / 2 * unit) + (unit * 6), transform.position.y + i * unit, 0), transform.rotation);
+
+            //spawn top side
+            Instantiate(edgeBoundTile, new Vector3( transform.position.x + i * unit, transform.position.y + (levelSizeY / 2 * unit), 0), Quaternion.Euler(new Vector3( 0, 0, -90)));
+            Instantiate(boundTile, new Vector3(transform.position.x + i * unit, transform.position.y + (levelSizeY / 2 * unit) + unit, 0), Quaternion.Euler(new Vector3(0, 0, -90)));
+            Instantiate(boundTile, new Vector3(transform.position.x + i * unit, transform.position.y + (levelSizeY / 2 * unit) + (unit*2), 0), Quaternion.Euler(new Vector3(0, 0, -90)));
+            Instantiate(boundTile, new Vector3(transform.position.x + i * unit, transform.position.y + (levelSizeY / 2 * unit) + (unit * 3), 0), Quaternion.Euler(new Vector3(0, 0, -90)));
+            Instantiate(boundTile, new Vector3(transform.position.x + i * unit, transform.position.y + (levelSizeY / 2 * unit) + (unit * 4), 0), Quaternion.Euler(new Vector3(0, 0, -90)));
+            Instantiate(boundTile, new Vector3(transform.position.x + i * unit, transform.position.y + (levelSizeY / 2 * unit) + (unit * 5), 0), Quaternion.Euler(new Vector3(0, 0, -90)));
+            Instantiate(boundTile, new Vector3(transform.position.x + i * unit, transform.position.y + (levelSizeY / 2 * unit) + (unit * 6), 0), Quaternion.Euler(new Vector3(0, 0, -90)));
+            //spawn bottom side
+            Instantiate(edgeBoundTile, transform.position + new Vector3(transform.position.x + i * unit, transform.position.y - (levelSizeY / 2 * unit), 0), Quaternion.Euler( new Vector3(0, 0,90)));
+            Instantiate(boundTile, transform.position + new Vector3(transform.position.x + i * unit, transform.position.y - (levelSizeY / 2 * unit) + unit, 0), Quaternion.Euler(new Vector3(0, 0, -90)));
+            Instantiate(boundTile, transform.position + new Vector3(transform.position.x + i * unit, transform.position.y - (levelSizeY / 2 * unit) + (unit * 2), 0), Quaternion.Euler(new Vector3(0, 0, -90)));
+            Instantiate(boundTile, transform.position + new Vector3(transform.position.x + i * unit, transform.position.y - (levelSizeY / 2 * unit) + (unit * 3), 0), Quaternion.Euler(new Vector3(0, 0, -90)));
+            Instantiate(boundTile, transform.position + new Vector3(transform.position.x + i * unit, transform.position.y - (levelSizeY / 2 * unit) + (unit * 4), 0), Quaternion.Euler(new Vector3(0, 0, -90)));
+            Instantiate(boundTile, transform.position + new Vector3(transform.position.x + i * unit, transform.position.y - (levelSizeY / 2 * unit) + (unit * 5), 0), Quaternion.Euler(new Vector3(0, 0, -90)));
+            Instantiate(boundTile, transform.position + new Vector3(transform.position.x + i * unit, transform.position.y - (levelSizeY / 2 * unit) + (unit * 6), 0), Quaternion.Euler(new Vector3(0, 0, -90)));
         }
         
     }
