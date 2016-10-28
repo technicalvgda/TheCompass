@@ -5,19 +5,21 @@ public class MoveableObject : MonoBehaviour
 {
 	//PUBLIC VARIABLES
 	public bool drift, rotateActivated, splitactivated;
-
 	public float objectSize = 5;
-
     public GameObject splitter, splitterShard;
     public float splitterX, splitterY;
 
     private float driftSpeed = 100;
 	private Rigidbody2D rb2d;
-
 	private bool iAmAsteroid = false;
 
+	public int knockBackImpact = 500;  // adjust the impact force
     public bool isTractored = false;
+	public float angleCollisionDamage = 0f; //Angle of asteroid object collision
 
+	//Moveable Object
+	private Vector2 curVelocity;
+	private float curSpeed;
 
 
 
@@ -56,8 +58,6 @@ public class MoveableObject : MonoBehaviour
         {
             RotateLeft();
         }
-
-
     }
 
     void RotateLeft()
@@ -65,9 +65,15 @@ public class MoveableObject : MonoBehaviour
         transform.Rotate(Vector3.forward);
     }
 
+
+	void FixedUpdate()
+	{
+		curVelocity = rb2d.velocity.normalized;
+		curSpeed = rb2d.velocity.magnitude;
+	}
+
     void OnCollisionEnter2D(Collision2D col)
 	{
-
         if (splitactivated)
         {
             Destroy(splitter);
@@ -79,46 +85,39 @@ public class MoveableObject : MonoBehaviour
 
         float _directionStatus;
 		bool _playerDamaged = false;
-
-		float _asteroidVelocity = 0f;
-		float _asteroidMinimum = -100f; //Minimum velocity of asteroid to deal damage to player, can be changed later
+		float _asteroidSpeed = 0f;
 		float _asteroidDamageForce = 0f;
 		const float _VELOCITYMINIMUM = 0f; //Change later
-		bool _objectVelocityMet = false;
-
-		const float _ASTEROIDFORCECONSTANT = 1f; //Can change later
+		const float _ASTEROIDFORCE = 1f; //Can change later
 
 		Vector2 asteroidDirection;
 		Player playerObject;
-
+		Rigidbody2D playerRb2d;
 		bool collidedWithPlayer = false;
+		// Opposite direction of player
+		Vector2 oppositeDirection = new Vector2(0, 0);
 
 		if (col.gameObject.tag == "Player") {
 			collidedWithPlayer = true;
 		}
 
-		if ( iAmAsteroid && collidedWithPlayer ) {
-
+		if (iAmAsteroid && collidedWithPlayer) {
 			playerObject = col.gameObject.GetComponent<Player> ();
+			playerRb2d = col.gameObject.GetComponent<Rigidbody2D> ();
 
-			if (playerObject != null) {	
-
+			if (playerObject && playerRb2d && !isTractored) 
+			{	
                 /*
 				Debug.Log ("----------------------------------------------");
-
 				Debug.Log ("Current object tag: " + this.gameObject.tag);
 				Debug.Log ("Collided object tag: " + col.gameObject.tag);
                 */
-
-				_asteroidVelocity = rb2d.velocity.magnitude;
-
+				_asteroidSpeed = rb2d.velocity.magnitude;
                 /*
 				Debug.Log ("Apos: " + col.transform.position);
 				Debug.Log ("PPos: " + transform.position);
                 */
-
 				asteroidDirection = (col.transform.position - transform.position).normalized;
-
                 /*
 				Debug.Log ("Asteroid Direction: " + rb2d.velocity.normalized);
 				Debug.Log ("Asteroid Direction from Player: " + (col.transform.position - transform.position));
@@ -127,30 +126,32 @@ public class MoveableObject : MonoBehaviour
 				Debug.Log ("Asteroid rigidbody velocity Normalized: " + rb2d.velocity.normalized);
                 */
 
-				_directionStatus = Vector2.Dot (asteroidDirection, rb2d.velocity.normalized);
+				_directionStatus = Vector2.Dot (asteroidDirection, curVelocity);
 
                 /*
 				Debug.Log ("Dot Product: " + _directionStatus);
                 */
 
-				if (_asteroidVelocity > _VELOCITYMINIMUM) 
+				if ((_asteroidSpeed > _VELOCITYMINIMUM && _directionStatus > angleCollisionDamage) || curSpeed == 0) 
 				{
-					_objectVelocityMet = true;
-                    /*
-					Debug.Log ("Object Velocity met?" + _objectVelocityMet);
-                    */
-				}
-
-				if (_asteroidVelocity > _asteroidMinimum && _directionStatus > 0f) {
 					_playerDamaged = true;
-					_asteroidDamageForce = Mathf.Round (_asteroidVelocity * _ASTEROIDFORCECONSTANT); 
+					_asteroidDamageForce = Mathf.Round (_asteroidSpeed * _ASTEROIDFORCE); 
 
                     /*
 					print ("Player current health= " + playerObject.getHealth ());
                     */
 
-					if (_playerDamaged) {	
+					if (_playerDamaged) 
+					{	
 						playerObject.takeDamage (_asteroidDamageForce);
+						// Increase the knockback to the player when hit by an asteroid 
+						// (scaled with the speed of the asteroid )
+						oppositeDirection = -playerRb2d.velocity.normalized;
+						playerRb2d.AddForce(oppositeDirection * _asteroidSpeed * knockBackImpact);
+
+						Debug.Log ("oppositeDirection: " + oppositeDirection);
+						Debug.Log ("_asteroidSpeed " + _asteroidSpeed);
+						Debug.Log ("Force applied: " + oppositeDirection * _asteroidSpeed * knockBackImpact);
 
                         /*
 						print ("Player damage= " + _asteroidDamageForce);
@@ -159,7 +160,7 @@ public class MoveableObject : MonoBehaviour
 					}
                     /*
 					print (_playerDamaged);
-					print ("Velocity= " + _asteroidVelocity);
+					print ("Velocity= " + _asteroidSpeed);
                     */
 				}
 			}

@@ -40,9 +40,9 @@ public class LoadingAsync : MonoBehaviour {
 
 #if UNITY_STANDALONE || UNITY_WEBPLAYER
                 //if in the web player will prompt user to press spacebar
-                loadingText.text = "Press 'Space' to Continue"; // prompts the user to press space in order
+                loadingText.text = "Press any button to Continue"; // prompts the user to press space in order
                 loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, Mathf.PingPong(Time.time, 1));
-                if (Input.GetKeyDown(KeyCode.Space))
+				if (Input.anyKeyDown)
                 {
                     aSyncOp.allowSceneActivation = true;
                 }

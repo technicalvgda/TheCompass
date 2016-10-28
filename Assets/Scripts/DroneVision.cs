@@ -95,7 +95,7 @@ public class DroneVision : MonoBehaviour
     IEnumerator Attack()
  	{
  		bullet = (GameObject)Instantiate(bulletPrefab, transform.position, transform.rotation);
- 		bullet.GetComponent<Bullet> ().parent = gameObject;
+ 		//bullet.GetComponent<Bullet> ().parent = gameObject;
  		yield return new WaitForSeconds(1);
  
  		if (player != null)

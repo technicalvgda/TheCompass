@@ -56,7 +56,7 @@ public class HUDManager : MonoBehaviour
 		//Reset the timer and do its thing
 		if (_waveTimer <= 0f) 
 		{
-			Debug.Log ("Enemy wave incoming.");
+			//Debug.Log ("Enemy wave incoming.");
 			_waveTimer = startingWaveTimer;
 		}
 		//If the player is not in critical health
