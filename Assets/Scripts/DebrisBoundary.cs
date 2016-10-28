@@ -44,7 +44,7 @@ public class DebrisBoundary : MonoBehaviour
 			RaycastHit2D hitSingleNorth = hitNorth [ii];
 			if (hitSingleNorth != false && hitSingleNorth.collider != null && hitSingleNorth.collider.GetComponent<MoveableObject>() != null)
 			{
-				Debug.Log ("Detected collision with North side boundary");
+				//Debug.Log ("Detected collision with North side boundary");
 				float offset = hitSingleNorth.collider.GetComponent<CircleCollider2D> ().radius;
 				hitSingleNorth.collider.transform.position = new Vector3 (hitSingleNorth.collider.transform.position.x,- maxRayDistY / 2 + offset + 0.1f,0);
 			}
@@ -54,7 +54,7 @@ public class DebrisBoundary : MonoBehaviour
 			RaycastHit2D hitSingleEast = hitEast [ii];
 			if (hitSingleEast != false && hitSingleEast.collider != null && hitSingleEast.collider.GetComponent<MoveableObject>() != null)
 			{
-				Debug.Log ("Detected collision with East side boundary");
+				//Debug.Log ("Detected collision with East side boundary");
 				float offset = hitSingleEast.collider.GetComponent<CircleCollider2D> ().radius;
 				hitSingleEast.collider.transform.position = new Vector3 (- maxRayDistX / 2 + offset + 0.1f,hitSingleEast.collider.transform.position.y,0);
 			}

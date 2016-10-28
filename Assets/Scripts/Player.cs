@@ -1,9 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 /* 
 *   Script to handle all player controls
 *   and stat changes
 *
+* Moved PlayerCollision code to main player script
+//============================
+//Amy Becerra
+//Task Description (9/27): Create a collision function for the player that deals damage to the player when they collide with an asteroid and the asteroid has a particular velocity
+//Task Description (10/2): Modify the code so that the player tests the velocity value component in the direction of the player, and takes damage only if that particular velocity is over a certain value (this means that a player colliding with an asteroid that is moving away from them will not damage them)
+//Last edited : 10/4/16
+//============================
 */
 public class Player : MonoBehaviour {
 
@@ -31,6 +39,8 @@ public class Player : MonoBehaviour {
 
 	public float healthRegen = 0;//Health to be healed over time
 	public float RegenDuration = 0;//The duration of each tick of heal
+
+    private float _bulletDamage = 5.0f;//<amount of damage a single bullet deals
 
     //variable for keeping track of the player's current fuel
     private float currentFuel;
@@ -60,9 +70,23 @@ public class Player : MonoBehaviour {
 	// only applies if being built to a mobile platform creates 
 	public VirtualJoystickMovement joystick;
 
+	// Camera Shake variable
+	CameraShake mainCam;
 
-	// Use this for initialization
-	void Start () 
+    //COLLISION VARIABLES
+    private GameObject _asteroidInput;
+    private bool _playerDamaged = false;
+    private Rigidbody2D _asteroidRigidbody;
+    private float _asteroidVelocity = 0f;
+    private float _asteroidMinimum = 1f; //Minimum velocity of asteroid to deal damage to player, can be changed later
+    private float _asteroidDamageForce = 0f;
+    const float _ASTEROIDFORCECONSTANT = 2f; //Can change later
+    public Vector2 asteroidDirection;
+    //shield script in child object
+    PlayerShield shield;
+
+    // Use this for initialization
+    void Start () 
 	{
 
         maxXBoundary *= unit;
@@ -72,8 +96,12 @@ public class Player : MonoBehaviour {
 
         //get rigidbody component of player object
         rb2d = GetComponent<Rigidbody2D> ();
-		//set player health to starting health
-		playerHealth = playerStartingHealth;
+        //get shield script
+        shield = GetComponentInChildren<PlayerShield>();
+        //set player health to starting health
+        playerHealth = playerStartingHealth;
+
+        mainCam = Camera.main.GetComponent<CameraShake>();
 
         currentFuel = MAX_FUEL;
 
@@ -81,6 +109,8 @@ public class Player : MonoBehaviour {
         {
             joystick = GameObject.Find("VirtualJoystickMovement").GetComponentInChildren<VirtualJoystickMovement>();
         }
+
+        
 	}
 
 	void Update ()
@@ -100,8 +130,10 @@ public class Player : MonoBehaviour {
 		//temp code for damage testing
 		if (Input.GetKeyDown (KeyCode.U))
 			playerHealth += 5f;
-		if (Input.GetKeyDown (KeyCode.J))
+		if (Input.GetKeyDown (KeyCode.J)) {
 			playerHealth -= 5f;
+			mainCam.shakeCam ();
+		}
 		//END TEMP
 
 	}
@@ -283,9 +315,16 @@ public class Player : MonoBehaviour {
 		playerHealth += health;
 	}
 
+	// function for when the player takes damage. It will shake the main camera
+	// when the player takes damage.
 	public void takeDamage(float damage)
 	{
 		playerHealth -= damage;
+        if(mainCam != null)
+        {
+            mainCam.shakeCam();
+        }
+		
 	}
 	public float getHealth()
 	{
@@ -321,5 +360,54 @@ public class Player : MonoBehaviour {
             currentFuel -= Time.deltaTime*1.5f;
         }
      }
+
+    //Function that grabs velocity from the asteroid object and stores it in a var, applies damage to player if velocity is high enough, calculates a force, and subtracts that force from player health
+    //Function also calculates if asteroid and player are moving away from each other or are facing 
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "SceneLoader")
+        {
+            SceneManager.LoadScene("TitleMenu");
+        }
+        else if (col.gameObject.name == "AsteroidPlaceholder")
+        {
+            float _directionStatus;
+            _asteroidInput = col.gameObject;
+            _asteroidRigidbody = _asteroidInput.GetComponent<Rigidbody2D>();
+            _asteroidVelocity = _asteroidRigidbody.velocity.magnitude;
+
+            //Get direction vector from asteroid to player
+            asteroidDirection = (col.transform.position - transform.position).normalized;
+
+            //Find the Dot to see if they are facing the same way, facing opposite ways, etc..
+            _directionStatus = Vector2.Dot(asteroidDirection, _asteroidRigidbody.velocity.normalized);
+
+            if (_asteroidVelocity > _asteroidMinimum && _directionStatus >= 0f) //temporarily set to if the asteroid is moving, it deals damage automatically
+            {
+                _playerDamaged = true;
+                _asteroidDamageForce = _asteroidVelocity * _ASTEROIDFORCECONSTANT * _directionStatus; //Damage to scale; Need requirements for damage 
+                takeDamage(_asteroidDamageForce);
+                print("Velocity= " + _asteroidVelocity);
+            }
+        }
+        else if (col.gameObject.tag == "Bullet")
+        {
+            Debug.Log("Player hit by bullet");
+            _playerDamaged = true;
+            //deal damage
+            takeDamage(_bulletDamage);
+
+        }
+        //activate player shield
+        if (shield != null)
+        {
+            //activate shield, send info if player was damaged
+            shield.ActivateShield(_playerDamaged);
+
+        }
+
+        _playerDamaged = false;
+
+    }
 
 }

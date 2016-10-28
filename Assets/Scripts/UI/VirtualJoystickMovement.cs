@@ -114,8 +114,8 @@ public class VirtualJoystickMovement : MonoBehaviour
 			} 
 			else 
 			{
-				_tempColor = new Color (1, 1, 1, 1);
-				_bgImg.color = _tempColor;
+				//_tempColor = new Color (1, 1, 1, 1);
+				_bgImg.color = joystickColor;
 				_joystickImg.color = joystickColor;
 				_changeJoystickColor = false;
 			}
