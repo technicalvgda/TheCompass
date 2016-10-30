@@ -5,8 +5,8 @@ public class NebulaParticles : MonoBehaviour
 {
     ParticleSystem particles;
     int emissionMultiplier = 10;
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
         float emissionRate = emissionMultiplier * transform.lossyScale.magnitude;
         particles = GetComponent<ParticleSystem>();
@@ -14,7 +14,6 @@ public class NebulaParticles : MonoBehaviour
         ParticleSystem.MinMaxCurve rate = new ParticleSystem.MinMaxCurve();
         rate.constantMax = emissionRate;
         em.rate = rate;
-        Debug.Log(particles.emission.rate);
-    }
+    } 
 	
 }
