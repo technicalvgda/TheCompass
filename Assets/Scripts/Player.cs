@@ -62,7 +62,8 @@ public class Player : MonoBehaviour {
 
     private int unit = 5;
 
-
+	float clampingSpeedTime = 0.0f;
+	float clampingSpeed = 20.0f;
 
 	private int numberOfChecks = 0;
 
@@ -198,12 +199,33 @@ public class Player : MonoBehaviour {
 				}
 
 				//Use the two store floats to create a new Vector2 variable movement.
-				Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
+				Vector2 movement = new Vector2 (moveHorizontal, moveVertical).normalized;
 				//Debug.Log(rb2d.velocity.magnitude);
 
 
                 //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
-                rb2d.AddForce(movement * ((PLAYER_SPEED * nebulaMultiplier) - tractorSlow));
+				//rb2d.AddForce(movement * ((PLAYER_SPEED * nebulaMultiplier) - tractorSlow));
+
+
+				if(rb2d.velocity.magnitude < clampingSpeed - 1 ) 
+				{
+                	rb2d.AddForce(movement * ((PLAYER_SPEED * nebulaMultiplier) - tractorSlow));
+					rb2d.velocity = Vector2.ClampMagnitude(rb2d.velocity, clampingSpeed);
+					clampingSpeedTime = 1.0f;
+				} 
+				if(rb2d.velocity.magnitude > clampingSpeed - 1 && clampingSpeedTime > 0) 
+				{
+					rb2d.AddForce(movement * ((PLAYER_SPEED * nebulaMultiplier) - tractorSlow));
+					rb2d.velocity = Vector2.ClampMagnitude(rb2d.velocity, clampingSpeed);
+					clampingSpeedTime -= Time.deltaTime;
+				} 
+				if (clampingSpeedTime <= 0) 
+				{
+					rb2d.AddForce(movement * ((PLAYER_SPEED * 1.5f * nebulaMultiplier) - tractorSlow));
+				}
+
+				Debug.Log(rb2d.velocity.magnitude);
+				//Debug.Log(clampingSpeedTime);
 
                 //Rotates front of ship to direction of movement
                 if (movement != Vector2.zero)
