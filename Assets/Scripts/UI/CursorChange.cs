@@ -14,6 +14,9 @@ public class CursorChange : MonoBehaviour
     */
     public Texture2D[] CursorTextures;
 
+	// Uses the CursorButtonManager in the PersistData Gameobject
+	public CursorButtonManager cbm;
+
     /*
     The current Cursor Texture being displayed.
     Used only for testing purposes.
@@ -26,8 +29,19 @@ public class CursorChange : MonoBehaviour
     */
 	void Start ()
     {
-        _index = 0;
-        Cursor.SetCursor(CursorTextures[_index], Vector2.zero, CursorMode.Auto); ;
+		cbm = GameObject.FindGameObjectWithTag ("PersistData").GetComponent<CursorButtonManager> ();
+		_index = 0;
+
+		// if the scene is the LoadingScreenScene use the loading cursor instead 
+		if (Application.loadedLevelName == "LoadingScreenScene")
+		{
+			Cursor.SetCursor (CursorTextures [_index], Vector2.zero, CursorMode.Auto);
+		}
+		else
+		{
+			cbm.loadPlayerCursor ();
+		}
+        
 	}
 	
     /*
@@ -38,7 +52,7 @@ public class CursorChange : MonoBehaviour
     */
 	void Update ()
     {
-        //Check if the Left Mouse Button is clicked during this frame
+/*        //Check if the Left Mouse Button is clicked during this frame
 	    if (Input.GetMouseButtonDown(0))
         {
             //Increment index by one, and modulo it by the size of the array
@@ -47,6 +61,6 @@ public class CursorChange : MonoBehaviour
 
             //Sets the cursor's texture to the next texture.
             Cursor.SetCursor(CursorTextures[_index], Vector2.zero, CursorMode.Auto);
-        }
+        }*/
 	}
 }

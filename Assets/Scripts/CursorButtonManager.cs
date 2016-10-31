@@ -11,77 +11,29 @@ public class CursorButtonManager : MonoBehaviour
     */
 
     public Texture2D[] CursorTextures;
-
+	void Awake () 
+	{
+		DontDestroyOnLoad (this);
+	}
     // Use this for initialization
     void Start ()
     {
-		//Set cursor1B as default
-		Cursor.SetCursor(CursorTextures[0], Vector2.zero, CursorMode.Auto);
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-	
+		//Set cursor to the PlayerPrefs Value
+		loadPlayerCursor ();
 	}
 
-    public void cursor1Blue()
-    {
-        Cursor.SetCursor(CursorTextures[0], Vector2.zero, CursorMode.Auto); 
-    }
-    public void cursor1Yellow()
-    {
-        Cursor.SetCursor(CursorTextures[1], Vector2.zero, CursorMode.Auto);
-    }
-    public void cursor1Green()
-    {
-        Cursor.SetCursor(CursorTextures[2], Vector2.zero, CursorMode.Auto);
-    }
-    public void cursor1Red()
-    {
-        Cursor.SetCursor(CursorTextures[3], Vector2.zero, CursorMode.Auto);
-    }
+	/* Loads the player's cursor from the prefs */ 
+	public void loadPlayerCursor ()
+	{
+		Cursor.SetCursor (CursorTextures [PlayerPrefs.GetInt ("CursorValue")], Vector2.zero, CursorMode.Auto);
+	}
 
-    public void cursor2Blue()
+	/* Saves the player's cursor choice as an int and changes the cursor to that */ 
+	public void savePlayerCursor(int choice)
     {
-        Cursor.SetCursor(CursorTextures[4], Vector2.zero, CursorMode.Auto);
+		Cursor.SetCursor(CursorTextures[choice], Vector2.zero, CursorMode.Auto); 
+		PlayerPrefs.SetInt ("CursorValue", choice);
     }
-    public void cursor2Yellow()
-    {
-        Cursor.SetCursor(CursorTextures[5], Vector2.zero, CursorMode.Auto);
-    }
-    public void cursor2Pink()
-    {
-        Cursor.SetCursor(CursorTextures[6], Vector2.zero, CursorMode.Auto);
-    }
-    public void cursor2Orange()
-    {
-        Cursor.SetCursor(CursorTextures[7], Vector2.zero, CursorMode.Auto);
-    }
-
-    public void cursor3InvertedBlue()
-    {
-        Cursor.SetCursor(CursorTextures[8], Vector2.zero, CursorMode.Auto);
-    }
-    public void cursor3Blue()
-    {
-        Cursor.SetCursor(CursorTextures[9], Vector2.zero, CursorMode.Auto);
-    }
-    public void cursor3Green()
-    {
-        Cursor.SetCursor(CursorTextures[10], Vector2.zero, CursorMode.Auto);
-    }
-    public void cursor3Purple()
-    {
-        Cursor.SetCursor(CursorTextures[11], Vector2.zero, CursorMode.Auto);
-    }
-    public void cursor3Yellow()
-    {
-        Cursor.SetCursor(CursorTextures[12], Vector2.zero, CursorMode.Auto);
-    }
-    public void cursor3Red()
-    {
-        Cursor.SetCursor(CursorTextures[13], Vector2.zero, CursorMode.Auto);
-    }
+		
 
 }
