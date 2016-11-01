@@ -35,12 +35,11 @@ public class Vision : MonoBehaviour {
 		if ((Vector3.Angle(_rayDirection, _startVecFwd)) < viewAngle && Vector3.Distance(_playerLoc, _startVec) < viewDist)
 		{
             Debug.DrawRay(_startVec, _rayDirection, Color.red, 5.0f);
-            //raycast to the player, checking our angle with the first condition and the distance/hit with the second (Raycast returns a boolean)
+            //raycast to the player to check for line of sight
             _hit = Physics2D.Raycast(_startVec, _rayDirection, viewDist);
             
             if (_hit.collider.gameObject == _player && _hit)
 			{
-                Debug.Log(_hit.collider.name);
                 //because our forward is on the unused z axis, we can't use lookAt()
                 //so we have to get a (distance) vector by subtracting the two points and rotate to this vector 
                 transform.right = _rayDirection;
