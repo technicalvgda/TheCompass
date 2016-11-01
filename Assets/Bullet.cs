@@ -3,40 +3,30 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour 
 {
-	GameObject player;
-	public float speed;
+    //Non Rigid-Body version of Bullet
 
-    //Vector3 parentDir;
-
-	// Use this for initialization
+	private Player _player;
+	public float speed, damage, lifetime;
 	void Start ()
 	{
-		player = GameObject.FindGameObjectWithTag ("Player");
+		_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         //parentDir = transform.parent.transform.right;
+        Destroy(this.gameObject, lifetime);
     }
 	
 	// Update is called once per frame
 	void Update () 
 	{
 		transform.position += (transform.right * Time.deltaTime * speed);//( parentDir* Time.deltaTime * speed);
-        StartCoroutine (destroy ());
 	}
     
 	void OnCollisionEnter2D(Collision2D col)
 	{
-        if (col.gameObject.tag == "Player" || col.gameObject.tag == "Debris")
+        if(col.gameObject.tag == "Player")
         {
-            Destroy(gameObject);
-        }		
+            _player.takeDamage(damage);
+        }
+        Destroy(gameObject);	
 	}
   
-    
-    
-
-	IEnumerator destroy()
-	{
-		yield return new WaitForSeconds (1);
-
-		Destroy (gameObject);
-	}
 }
