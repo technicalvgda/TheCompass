@@ -85,6 +85,10 @@ public class Player : MonoBehaviour {
     //shield script in child object
     PlayerShield shield;
 
+    //KingdomCross - For knockback script
+    internal static float x; //KingdomCross - For knockback script
+    internal static float y; //KingdomCross - For knockback script
+
     // Use this for initialization
     void Start () 
 	{
