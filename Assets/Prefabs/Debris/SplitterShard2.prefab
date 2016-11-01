@@ -22,9 +22,8 @@ GameObject:
   - 212: {fileID: 212000010679041126}
   - 58: {fileID: 58000013809126158}
   - 50: {fileID: 50000011494621134}
-  - 114: {fileID: 114000012998576432}
-  - 114: {fileID: 114000010533202574}
   - 114: {fileID: 114000013614632656}
+  - 114: {fileID: 114000010063896292}
   m_Layer: 0
   m_Name: SplitterShard2
   m_TagString: Debris
@@ -76,7 +75,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
---- !u!114 &114000010533202574
+--- !u!114 &114000010063896292
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -84,24 +83,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000010028777008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a4fe7d050b6e8443a8c7890249f7a46, type: 3}
+  m_Script: {fileID: 11500000, guid: 405aef21f13ff1e48ab9aa6ea25fc192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   drift: 1
+  rotateActivated: 0
+  splitactivated: 0
   objectSize: 1
---- !u!114 &114000012998576432
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010028777008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 175c15613f16d36499ff4025fb993092, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drift: 1
-  objectSize: 5
+  splitter: {fileID: 0}
+  splitterShard: {fileID: 0}
+  splitterX: 0
+  splitterY: 0
+  driftSpeed: 1000
+  knockBackImpact: 500
+  isTractored: 0
+  angleCollisionDamage: 0
 --- !u!114 &114000013614632656
 MonoBehaviour:
   m_ObjectHideFlags: 1
