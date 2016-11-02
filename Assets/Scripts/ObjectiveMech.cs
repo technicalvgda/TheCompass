@@ -15,7 +15,7 @@ public class ObjectiveMech : MonoBehaviour {
             Debug.Log("COMPLETE,COMPLETE,COMPLETE");
             if(nextLevelName != null)
             {
-                SceneManager.LoadScene(nextLevelName);
+                SceneManager.LoadSceneAsync(nextLevelName);
             }
             else
             {

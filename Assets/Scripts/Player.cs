@@ -330,7 +330,11 @@ public class Player : MonoBehaviour {
 	{
 		return playerHealth;
 	}
-	public void setHealth(float h)
+    public float getFuel()
+    {
+        return currentFuel;
+    }
+    public void setHealth(float h)
 	{
 		playerHealth = h;
 	}
@@ -359,6 +363,7 @@ public class Player : MonoBehaviour {
         {
             currentFuel -= Time.deltaTime*1.5f;
         }
+        Debug.Log("CurrentFuel is: " +currentFuel);
      }
 
     //Function that grabs velocity from the asteroid object and stores it in a var, applies damage to player if velocity is high enough, calculates a force, and subtracts that force from player health
