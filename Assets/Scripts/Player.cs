@@ -84,11 +84,11 @@ public class Player : MonoBehaviour {
     public Vector2 asteroidDirection;
     //shield script in child object
     PlayerShield shield;
-
+    public bool _fuelControl;
     // Use this for initialization
     void Start () 
 	{
-
+        _fuelControl = true;
         maxXBoundary *= unit;
         maxYBoundary *= unit;
         minXBoundary *= unit;
@@ -117,7 +117,15 @@ public class Player : MonoBehaviour {
 	{
 		//Function to handle player movement
 		ControlPlayer();
-        LoseFuel();
+        if (_fuelControl)
+        {
+            LoseFuel(); //By default, lose fuel
+        }
+        else
+        {
+            gainFuel(); //When _fuelControl is false, gain fuel instead
+        }
+            
 		checkIfPlayerOutOfBounds(maxXBoundary, maxYBoundary, minXBoundary, minYBoundary);
 
 		// The health regen will only occur when we are below max health
@@ -336,11 +344,12 @@ public class Player : MonoBehaviour {
 	}
 
     //function for adding onto the player's current fuel
-    public void gainFuel(int num)
+    public void gainFuel()
     {
-        currentFuel += num;
-
-        if (currentFuel > MAX_FUEL)
+        Debug.Log("Your current fuel amount is increasing = " + currentFuel);
+        currentFuel += Time.deltaTime*5;
+        
+        if (currentFuel > MAX_FUEL) //Keeps the current fuel from passing the cap
         {
             currentFuel = MAX_FUEL;
         }
@@ -348,15 +357,16 @@ public class Player : MonoBehaviour {
     }
 
     //function that decreases the Player's fuel
-    //decreases faster when moving
      void LoseFuel()
      {
-        if(rb2d.velocity.magnitude < 2)
+        if(rb2d.velocity.magnitude < 3)
         {
+            Debug.Log("Your current fuel amount is = " + currentFuel);
             currentFuel -= Time.deltaTime;
         }
         else
         {
+            Debug.Log("Your current fuel amount is depleting rapidly = " + currentFuel); //decreases faster when moving
             currentFuel -= Time.deltaTime*1.5f;
         }
      }

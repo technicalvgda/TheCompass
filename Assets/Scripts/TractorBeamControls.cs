@@ -21,6 +21,10 @@ public class TractorBeamControls : MonoBehaviour
     private const float MAX_TRACTOR_LENGTH = 15;
     private const float MAX_TRACTOR_PUSH = 20;
 
+    private GameObject _player;
+    private Player _playerCont;
+    
+
     //PLAYER COMPONENTS
     private LineRenderer _tractorLine;
 
@@ -37,6 +41,9 @@ public class TractorBeamControls : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        _player = GameObject.FindGameObjectWithTag("Player");   //References the player object
+        _playerCont = _player.GetComponent<Player>(); //References the playerscript
+
         _tractorLine = GetComponent<LineRenderer>();
         
         
@@ -93,6 +100,11 @@ public class TractorBeamControls : MonoBehaviour
                     _hitDebris = true;
                     
                    
+                }
+                if(_tractorStick.collider.CompareTag("Fuel"))
+                {
+                    //Activates Fuel Gain
+                    _playerCont._fuelControl = false;
                 }
             }
 
@@ -199,7 +211,12 @@ public class TractorBeamControls : MonoBehaviour
                 objectScript = null;
                 _hitDebris = false;
                 _tractorlength = 0;
+
+            if(_playerCont._fuelControl == false) //When the player stops gaining fuel, restore fuel loss to default
+            {
+                _playerCont._fuelControl = true;
             }
+        }
 
 
 
@@ -426,7 +443,7 @@ public class TractorBeamControls : MonoBehaviour
         //Debug.Log("Hit");
         if (collision.collider == _tractorStick.collider)
         {
-            Debug.Log("hit myself");
+            //Debug.Log("hit myself");
             hitMyself = true;
         }
     }
