@@ -23,6 +23,7 @@ public class TractorBeamControls : MonoBehaviour
 
     //PLAYER COMPONENTS
     private LineRenderer _tractorLine;
+    private Player _player;
 
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
 
@@ -38,7 +39,7 @@ public class TractorBeamControls : MonoBehaviour
     void Start()
     {
         _tractorLine = GetComponent<LineRenderer>();
-        
+        _player = GetComponent<Player>();
         
         if (joystick == null && GameObject.Find("VirtualJoystickTether") != null)
         {
@@ -86,14 +87,8 @@ public class TractorBeamControls : MonoBehaviour
             //holds first object it hits and keeps it from hitting another object
             if (!_hitDebris && hit)
             {
-                _tractorStick = hit;
-                if (objectScript = _tractorStick.collider.GetComponent<MoveableObject>())
-                {
-                    objectScript.isTractored = true;
-                    _hitDebris = true;
-                    
-                   
-                }
+                //handles initial tractor beam connection
+                TractorConnects(hit);
             }
 
             //uses the initial object that was hit by the beam
@@ -148,12 +143,8 @@ public class TractorBeamControls : MonoBehaviour
                 //holds first object it hits and keeps it from hitting another object
                 if (!_hitDebris && hit)
                 {
-                    _tractorStick = hit;
-                    if (objectScript = _tractorStick.collider.GetComponent<MoveableObject>())
-                    {
-                        objectScript.isTractored = true;
-                        _hitDebris = true;
-                    }
+                     //handles initial tractor beam connection
+                    TractorConnects(hit);
                 }
 
                 //uses the initial object that was hit by the beam
@@ -189,16 +180,8 @@ public class TractorBeamControls : MonoBehaviour
             //when the mouse button is released or joystick returns to center resets all of the necessary variables
             else 
             {
-                //Debug.Log("Click up");
-                if(objectScript != null)
-                {
-                    objectScript.isTractored = false;
-                    objectScript.transform.SetParent(null);
-                }
-                
-                objectScript = null;
-                _hitDebris = false;
-                _tractorlength = 0;
+                //Handles variable reset
+                TractorReleases();
             }
 
 
@@ -222,12 +205,8 @@ public class TractorBeamControls : MonoBehaviour
 
             if (!_hitDebris && hit)
             {
-                _tractorStick = hit;
-                if (objectScript = _tractorStick.collider.GetComponent<MoveableObject>())
-                {
-                objectScript.isTractored = true;
-                _hitDebris = true;
-                }
+                 //handles initial tractor beam connection
+                    TractorConnects(hit);
             }
 
             if (_hitDebris)
@@ -256,10 +235,8 @@ public class TractorBeamControls : MonoBehaviour
         }
         else if (joystick.touchPhase() == TouchPhase.Ended)
         {
-            objectScript.isTractored = false;
-            objectScript = null;
-            _hitDebris = false;
-            _tractorlength = 0;
+            //Handles variable reset
+            TractorReleases();
         }
 
 
@@ -406,6 +383,40 @@ public class TractorBeamControls : MonoBehaviour
 #endif
 
 
+    }
+
+    //Handles the initial variables for connecting the beam to an object
+    void TractorConnects(RaycastHit2D hit)
+    {
+        _tractorStick = hit;
+        //if the connected object is a moveable object
+        if (objectScript = _tractorStick.collider.GetComponent<MoveableObject>())
+        {
+            objectScript.isTractored = true;
+            _hitDebris = true;
+        }
+        //if the connected object is fuel
+        if (_tractorStick.collider.CompareTag("Fuel"))
+        {
+            Fuel fuelScript = _tractorStick.collider.GetComponent<Fuel>();
+            float fuelAmount = fuelScript.CollectFuel();
+            _player.gainFuel(fuelAmount);
+        }
+    }
+
+    //Handles reset when player releases an object
+    void TractorReleases()
+    {
+        //Debug.Log("Click up");
+        if (objectScript != null)
+        {
+            objectScript.isTractored = false;
+            objectScript.transform.SetParent(null);
+        }
+
+        objectScript = null;
+        _hitDebris = false;
+        _tractorlength = 0;
     }
 
     public float getObjectSize()
