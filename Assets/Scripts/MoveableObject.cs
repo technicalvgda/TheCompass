@@ -57,7 +57,11 @@ public class MoveableObject : MonoBehaviour
 			iAmAsteroid = true;
 		}
 
-	}
+        //give the object a random rotation
+        Vector3 euler = transform.eulerAngles;
+        euler.z = Random.Range(0f, 360f);
+        transform.eulerAngles = euler;
+    }
 
 	// Update is called once per frame
 	void Update ()
