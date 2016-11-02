@@ -335,6 +335,12 @@ public class Player : MonoBehaviour {
 		playerHealth = h;
 	}
 
+    public float getFuel01()
+    {
+        currentFuel = Mathf.Clamp(currentFuel, 0, MAX_FUEL);
+        return currentFuel / MAX_FUEL;
+    }
+
     //function for adding onto the player's current fuel
     public void gainFuel(int num)
     {
