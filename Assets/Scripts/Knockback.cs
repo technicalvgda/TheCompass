@@ -24,20 +24,20 @@ public class Knockback : MonoBehaviour
         _Xdif = Player.x - 10;
         _Ydif = Player.y - 10;
     }
-        
+
     //Set desire object tag to "Wall" to make the pilot bounce off if collide
     //It also used the WallKnockback script unknown use to KingdomCross
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Wall")
-            if (other.transform.position.x < transform.position.x)
-                _rb2d.AddForce(new Vector2(-_Xdif,0) * knockback);
-            else
-                _rb2d.AddForce(new Vector2(_Xdif,0) * knockback);
 
-            if (other.transform.position.y < transform.position.y)
-                _rb2d.AddForce(new Vector2(0, -_Ydif) * knockback);
-            else
-                _rb2d.AddForce(new Vector2(0, _Ydif) * knockback);
+        if (other.transform.position.x < transform.position.x)
+            _rb2d.AddForce(new Vector2(-_Xdif, 0) * knockback);
+        else
+            _rb2d.AddForce(new Vector2(_Xdif, 0) * knockback);
+
+        if (other.transform.position.y < transform.position.y)
+            _rb2d.AddForce(new Vector2(0, -_Ydif) * knockback);
+        else
+            _rb2d.AddForce(new Vector2(0, _Ydif) * knockback);
     }
 }
