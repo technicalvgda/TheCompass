@@ -184,7 +184,14 @@ public class ButtonManagerScript : MonoBehaviour {
 
         //resolutionDropdownValueChangedHandler(resolutionDropdown);
         //if ESC button is pressed, change the pause state
-		if (SceneManager.GetActiveScene().name == "MVPScene" || SceneManager.GetActiveScene().name == "Level1Rough" || SceneManager.GetActiveScene().name == "Level 0 Tutorial" || SceneManager.GetActiveScene().name == "Level 1" || SceneManager.GetActiveScene().name == "Level 2") 
+		if (SceneManager.GetActiveScene().name == "MVPScene" || 
+			SceneManager.GetActiveScene().name == "Level1Rough" ||
+			SceneManager.GetActiveScene().name == "Level 0 Tutorial" || 
+			SceneManager.GetActiveScene().name == "Level 1" || 
+			SceneManager.GetActiveScene().name == "Level 2" ||
+			SceneManager.GetActiveScene().name == "Level 3" ||
+			SceneManager.GetActiveScene().name == "Level 4" ||
+			SceneManager.GetActiveScene().name == "Level 5" ) 
 		{
 			if (_gameOverScript.isGameOver == false) 
 			{
