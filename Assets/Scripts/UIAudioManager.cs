@@ -50,32 +50,17 @@ public class UIAudioManager : MonoBehaviour
 			{
 				if( _audioSource != null) 
 				{
+					if (_sliderVolumeLevel > _masterVolumeLevel)
+						_audioSource.volume = _masterVolumeLevel;
+					else
+						_audioSource.volume = _sliderVolumeLevel;
+					/*
 					if (_masterVolumeLevel > _sliderVolumeLevel) 
 					{
 						_audioSource.volume = _sliderVolumeLevel;
 					} 
 					else
-						_audioSource.volume = _masterVolumeLevel;
-				}
-			}
-		}
-	}
-	public void initVolume()
-	{
-		for (int i = 0; i < gameAudio.Length; i++) 
-		{
-			_audioSource = gameAudio [i].GetComponent<AudioSource> ();
-			//Debug.Log (this.name + ": " + _audioSource.name);
-			if (gameAudio [i].activeSelf == false) 
-			{
-				if( _audioSource != null) 
-				{
-					if (_masterVolumeLevel > _sliderVolumeLevel) 
-					{
-						_audioSource.volume = _sliderVolumeLevel;
-					} 
-					else
-						_audioSource.volume = _masterVolumeLevel;
+						_audioSource.volume = _masterVolumeLevel;*/
 				}
 			}
 		}
