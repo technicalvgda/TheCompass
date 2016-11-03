@@ -6,7 +6,7 @@ using System.Collections;
 
 public class BlackholeBehavior : MonoBehaviour {
 
-	private int _blackHoleRadius = 100;
+	//private int _blackHoleRadius = 100;
 	private Rigidbody2D _rb2d;
 	public int _gravityScale = 20;
 	public float _blackHoleBoundary = 7f;
@@ -24,7 +24,7 @@ public class BlackholeBehavior : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		Vector2 blackHolePos = transform.position;
+		//Vector2 blackHolePos = transform.position;
 		GameObject[] spaceObjects = FindObjectsOfType<GameObject>();
 
 		foreach(GameObject _spaceObject in spaceObjects)

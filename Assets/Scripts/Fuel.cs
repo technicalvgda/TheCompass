@@ -5,14 +5,14 @@ public class Fuel : MonoBehaviour
 {
     public float FuelAmount;
     bool collected = false;
-    Animator anim;
+    //Animator anim;
 
     float targetScale = 0.1f;
     float shrinkSpeed = 0.1f;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
     }
 
     public float CollectFuel()

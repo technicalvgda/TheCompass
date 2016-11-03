@@ -107,10 +107,10 @@ public class CameraController : MonoBehaviour {
 		bool shipIsSpedUp = (ship.velocity.magnitude > _previousVelocity.magnitude);
 		if (deltaVel.magnitude >= 30) {
 			_jerkCompensationTime = deltaVel.magnitude/30;
-			Debug.Log (deltaVel.magnitude);
+			//Debug.Log (deltaVel.magnitude);
 		} else if (deltaVel.magnitude > 3){
 			_jerkCompensationTime = 1.0f;
-			Debug.Log (deltaVel.magnitude);
+			//Debug.Log (deltaVel.magnitude);
 		}
 		_previousVelocity = ship.velocity;
 

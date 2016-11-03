@@ -184,7 +184,7 @@ public class ButtonManagerScript : MonoBehaviour {
 
         //resolutionDropdownValueChangedHandler(resolutionDropdown);
         //if ESC button is pressed, change the pause state
-		if (Application.loadedLevelName == "MVPScene" || Application.loadedLevelName == "Level1Rough" || Application.loadedLevelName == "Level 0 Tutorial" || Application.loadedLevelName == "Level 1" || Application.loadedLevelName == "Level 2") 
+		if (SceneManager.GetActiveScene().name == "MVPScene" || SceneManager.GetActiveScene().name == "Level1Rough" || SceneManager.GetActiveScene().name == "Level 0 Tutorial" || SceneManager.GetActiveScene().name == "Level 1" || SceneManager.GetActiveScene().name == "Level 2") 
 		{
 			if (_gameOverScript.isGameOver == false) 
 			{
@@ -253,7 +253,7 @@ public class ButtonManagerScript : MonoBehaviour {
 	/* Universal Back button that uses the activeOnScreen gameObject */ 
 	public void onBack()
 	{
-		if (Application.loadedLevelName == "MVPScene" || Application.loadedLevelName == "Level1Rough" || Application.loadedLevelName == "Level 0 Tutorial" || Application.loadedLevelName == "Level 1" || Application.loadedLevelName == "Level 2") 
+		if (SceneManager.GetActiveScene().name == "MVPScene" || SceneManager.GetActiveScene().name == "Level1Rough" || SceneManager.GetActiveScene().name == "Level 0 Tutorial" || SceneManager.GetActiveScene().name == "Level 1" || SceneManager.GetActiveScene().name == "Level 2") 
 		{
 			if (saveMenu.activeSelf == true) 
 			{

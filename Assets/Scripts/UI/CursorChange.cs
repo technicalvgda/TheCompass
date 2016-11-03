@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class CursorChange : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class CursorChange : MonoBehaviour
 		_index = 0;
 
 		// if the scene is the LoadingScreenScene use the loading cursor instead 
-		if (Application.loadedLevelName == "LoadingScreenScene")
+		if (SceneManager.GetActiveScene().name == "LoadingScreenScene")
 		{
 			Cursor.SetCursor (CursorTextures [_index], Vector2.zero, CursorMode.Auto);
 		}

@@ -11,6 +11,7 @@ public class CursorButtonManager : MonoBehaviour
     */
 
     public Texture2D[] CursorTextures;
+
 	void Awake () 
 	{
 		DontDestroyOnLoad (this);

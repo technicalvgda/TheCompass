@@ -33,7 +33,7 @@ public class GameOver : MonoBehaviour {
     //reloads the level that is currently executing
     public void Retry()
     {
-        Application.LoadLevel(Application.loadedLevel);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     //loads up title menu level

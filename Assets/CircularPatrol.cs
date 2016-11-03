@@ -2,14 +2,14 @@
 using System.Collections;
 
 public class CircularPatrol : MonoBehaviour {
-    private int controller;
+    //private int controller;
     private int currentPath;
     private int patrolDistance;
     public int totalDistance; // Can be changed in unity
     private int patrol;
 	// Use this for initialization
 	void Start () {
-        controller = 5;
+        //controller = 5;
         currentPath = 0;
         patrolDistance = 0;
         patrol = 1;

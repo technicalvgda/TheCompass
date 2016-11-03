@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour 
 {
-	GameObject player;
+	//GameObject player;
 	public float speed;
 
     //Vector3 parentDir;
@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		player = GameObject.FindGameObjectWithTag ("Player");
+		//player = GameObject.FindGameObjectWithTag ("Player");
         //parentDir = transform.parent.transform.right;
     }
 	
