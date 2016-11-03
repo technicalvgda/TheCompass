@@ -38,12 +38,12 @@ public class LaserEmitter : MonoBehaviour
     void Update()
     {
         _startVec = transform.position; //ray origins
-        _startVecFwd = transform.up; //ray direction
+        _startVecFwd = laserEndPt.position;//transform.up; //ray direction
 
         line.SetPosition(0, _startVec);
 
-        Debug.DrawRay(_startVec, _startVecFwd, Color.black, 1.0f);
-        _hit = Physics2D.Raycast(_startVec, _startVecFwd);
+        Debug.DrawLine(_startVec, _startVecFwd, Color.black, 1.0f);
+        _hit = Physics2D.Linecast(_startVec, _startVecFwd);
         if (_hit)
         {
             //laser hits something, so the endpoint is the collision point
