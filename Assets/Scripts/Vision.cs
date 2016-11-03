@@ -38,14 +38,15 @@ public class Vision : MonoBehaviour {
             //raycast to the player to check for line of sight
             _hit = Physics2D.Raycast(_startVec, _rayDirection, viewDist);
             
-            if (_hit.collider.gameObject == _player && _hit)
-			{
-                //because our forward is on the unused z axis, we can't use lookAt()
-                //so we have to get a (distance) vector by subtracting the two points and rotate to this vector 
-                transform.right = _rayDirection;
-				Debug.DrawRay(_startVec, _rayDirection, Color.blue, 5.0f);
-				sightPos = _hit.transform.position;
-				sight = true;
+			if (_hit){
+				if (_hit.collider.gameObject == _player) {
+					//because our forward is on the unused z axis, we can't use lookAt()
+					//so we have to get a (distance) vector by subtracting the two points and rotate to this vector 
+					transform.right = _rayDirection;
+					Debug.DrawRay (_startVec, _rayDirection, Color.blue, 5.0f);
+					sightPos = _hit.transform.position;
+					sight = true;
+				}
 				//Debug.Log("I see the player.");
 			}
 			else
