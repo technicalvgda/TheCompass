@@ -22,7 +22,7 @@ public class GameOver : MonoBehaviour {
 	void Update ()
     {
         //if player's health is 0 or less, stop game time & set game over canvas to active
-        if (player.getHealth() <= 0)
+        if (player.getHealth() <= 0 || player.getFuel01() <= 0)
         {
            	GameOverUI.SetActive(true);
 			isGameOver = true;
