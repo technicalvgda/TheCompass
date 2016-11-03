@@ -29,6 +29,7 @@ public class NebulaParticles : MonoBehaviour
 
     void OnDrawGizmos()
     {
+
         float xOffset = GetComponent<Collider2D>().bounds.size.x/2;
         float yOffset = GetComponent<Collider2D>().bounds.size.y /2;
         lowerLeft = new Vector3(transform.position.x - xOffset,transform.position.y-yOffset,0);
