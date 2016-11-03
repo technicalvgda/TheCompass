@@ -101,6 +101,14 @@ public class LaserEmitter : MonoBehaviour
             timeLimit = 0.5f;
         }
     }
+    void OnDrawGizmos()
+    {
+        if (laserEndPt != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, laserEndPt.position);
+        }
+    }
 }
 
  
