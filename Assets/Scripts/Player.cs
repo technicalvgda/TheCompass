@@ -330,7 +330,8 @@ public class Player : MonoBehaviour {
 	{
 		return playerHealth;
 	}
-	public void setHealth(float h)
+   
+    public void setHealth(float h)
 	{
 		playerHealth = h;
 	}
@@ -342,14 +343,17 @@ public class Player : MonoBehaviour {
     }
 
     //function for adding onto the player's current fuel
-    public void gainFuel(int num)
+    public void gainFuel(float fuelAmount)
     {
-        currentFuel += num;
-
+        //increase fuel by fuel amount
+        currentFuel += fuelAmount;
+        //set to max if above max amount
         if (currentFuel > MAX_FUEL)
         {
             currentFuel = MAX_FUEL;
         }
+
+        Debug.Log("Your current fuel amount is increasing = " + currentFuel);
 
     }
 
@@ -365,6 +369,7 @@ public class Player : MonoBehaviour {
         {
             currentFuel -= Time.deltaTime*1.5f;
         }
+        //Debug.Log("CurrentFuel is: " +currentFuel);
      }
 
     //Function that grabs velocity from the asteroid object and stores it in a var, applies damage to player if velocity is high enough, calculates a force, and subtracts that force from player health
