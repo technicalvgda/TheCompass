@@ -17,7 +17,7 @@ public class ButtonManagerScript : MonoBehaviour {
 	public Text slotText;
 
 	/* Stores the gameobjects of the UI elements */ 
-	public GameObject mainMenu, saveMenu, optionMenu, loadMenu,pauseMenu,extrasMenu,cursorSelectionMenu,gameOverMenu;
+	public GameObject mainMenu, saveMenu, optionMenu, loadMenu,pauseMenu,extrasMenu,cursorSelectionMenu,gameOverMenu,confirmPrompt;
 
 	/* Stores the active screen (To be used in the onBack()) */ 
 	public GameObject activeOnScreen;
@@ -29,6 +29,7 @@ public class ButtonManagerScript : MonoBehaviour {
 	private bool _isPaused;
 	public GameObject _pauseCanvasMenuObject;
 	public GameOver _gameOverScript;
+	private string _nameOfButton;
 
 	/* Finds the UI elements and sets them to inactive. Also sets the slot text to the level that the user is on. */ 
 	void Start()
@@ -47,6 +48,8 @@ public class ButtonManagerScript : MonoBehaviour {
 		resolutionDropdown = optionMenu.GetComponentInChildren<Dropdown> ();
 		fullscreenToggle = optionMenu.GetComponentInChildren<Toggle> ();
 		slotText.text = PlayerPrefs.GetString ("onLevel");
+		confirmPrompt = GameObject.Find ("ConfirmMenu");
+
 		#if(UNITY_ANDROID)
 		{
 			resolutionDropdown.gameObject.SetActive(false);
@@ -58,6 +61,8 @@ public class ButtonManagerScript : MonoBehaviour {
 			Debug.Log("mobile");
 		}
 		#endif
+		if (confirmPrompt != null)
+			confirmPrompt.SetActive (false);
 		if(saveMenu != null)
 			saveMenu.SetActive (false);
 		optionMenu.SetActive(false);
@@ -204,6 +209,8 @@ public class ButtonManagerScript : MonoBehaviour {
 						optionMenu.SetActive (false);
 					if (saveMenu.activeSelf == true)
 						saveMenu.SetActive (false);
+					if (confirmPrompt.activeSelf == true)
+						confirmPrompt.SetActive (false);
 					Time.timeScale = 1;
 
 					/*
@@ -316,7 +323,7 @@ public class ButtonManagerScript : MonoBehaviour {
 	}
 
 	/* Saves the level */ 
-	public void promptYes()
+	public void savePromptYes()
 	{
 		//Random number generator to test the saving feature
 		PlayerPrefs.SetString("onLevel", "Level " + Random.Range(1,100));
@@ -326,7 +333,7 @@ public class ButtonManagerScript : MonoBehaviour {
 	}
 
 	/* Closes the prompt */ 
-	public void promptNo() 
+	public void savePromptNo() 
 	{
 		saveMenu.SetActive (false);
 	}
@@ -368,9 +375,23 @@ public class ButtonManagerScript : MonoBehaviour {
 	}
 
 	// Application closes
-	public void QuitBtn()
+	public void LeaveGameBtn(string command)
 	{
-		Application.Quit();
+		confirmPrompt.SetActive (true);
+		_nameOfButton = command;
+
+		//Application.Quit();
+	}
+	public void confirmYesButton()
+	{
+		if (_nameOfButton == "Quit")
+			Application.Quit ();
+		else if (_nameOfButton == "MainMenu")
+			SceneManager.LoadScene ("TitleMenu");
+	}
+	public void confirmNoButton()
+	{
+		confirmPrompt.SetActive (false);
 	}
 
 	//Resume button method, changes pause state to original

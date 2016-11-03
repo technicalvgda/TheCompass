@@ -19,6 +19,10 @@ public class ButtonSoundTrigger : EventTrigger
     object. It plays an instance of the hover sound (can be run simultaneously
     with other sounds)
     */
+	void Start()
+	{
+		Source.volume = PlayerPrefs.GetFloat ("FXSlider");
+	}
     public override void OnPointerEnter(PointerEventData eventData)
     {
         Source.PlayOneShot(ButtonHoverSound, 1f);
