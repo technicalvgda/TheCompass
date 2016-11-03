@@ -31,19 +31,18 @@ public class Vision : MonoBehaviour {
 		_rayDirection = _playerLoc - _startVec;
 
 		Debug.DrawRay(_startVec, _startVecFwd, Color.black, 1.0f); //Black line to show our ""forward"" (which is actually the right since we are in 2d)
-		Debug.DrawRay(_startVec, _rayDirection, Color.red, 5.0f);
-
-		//raycast to the player, checking our angle with the first condition and the distance/hit with the second (Raycast returns a boolean)
-		_hit = Physics2D.Raycast(_startVec, _rayDirection, viewDist);
-		if ((Vector3.Angle(_rayDirection, _startVecFwd)) < viewAngle && _hit)
+        //player is within range and within the viewing angle
+		if ((Vector3.Angle(_rayDirection, _startVecFwd)) < viewAngle && Vector3.Distance(_playerLoc, _startVec) < viewDist)
 		{
-			//Debug.Log(hit.collider.name);
-			Debug.DrawRay(_startVec, _rayDirection, Color.green, 5.0f);
-			if (_hit.collider.gameObject == _player)
+            Debug.DrawRay(_startVec, _rayDirection, Color.red, 5.0f);
+            //raycast to the player to check for line of sight
+            _hit = Physics2D.Raycast(_startVec, _rayDirection, viewDist);
+            
+            if (_hit.collider.gameObject == _player && _hit)
 			{
-				//because our forward is on the unused z axis, we can't use lookAt()
-				//so we have to get a (distance) vector by subtracting the two points and rotate to this vector 
-				transform.right = _player.transform.position - transform.position;
+                //because our forward is on the unused z axis, we can't use lookAt()
+                //so we have to get a (distance) vector by subtracting the two points and rotate to this vector 
+                transform.right = _rayDirection;
 				Debug.DrawRay(_startVec, _rayDirection, Color.blue, 5.0f);
 				sightPos = _hit.transform.position;
 				sight = true;
