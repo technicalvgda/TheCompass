@@ -19,10 +19,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012955116674}
-  - 61: {fileID: 61000013024133390}
+  - 58: {fileID: 58000010977985932}
   - 50: {fileID: 50000013877535444}
-  - 114: {fileID: 114000011693982504}
   - 199: {fileID: 199000012214384336}
+  - 114: {fileID: 114000011693982504}
   - 198: {fileID: 198000011486922754}
   - 114: {fileID: 114000010486805686}
   m_Layer: 0
@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011078323298}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 197.2, y: -6.7, z: 0}
+  m_LocalPosition: {x: 207.2467, y: -281.77853, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -62,8 +62,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61000013024133390
-BoxCollider2D:
+--- !u!58 &58000010977985932
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -75,7 +75,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Radius: 0.5
 --- !u!114 &114000010486805686
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,12 +150,12 @@ ParticleSystem:
   moveWithTransform: 1
   autoRandomSeed: 1
   scalingMode: 2
-  randomSeed: -1350811987
+  randomSeed: -1044068141
   InitialModule:
     serializedVersion: 2
     enabled: 1
     startLifetime:
-      scalar: 2
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -190,7 +190,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 1
+      scalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -313,10 +313,10 @@ ParticleSystem:
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.1764706, g: 0.23137255, b: 0.78039217, a: 1}
+      maxColor: {r: 0.20392157, g: 0.8901961, b: 0.078431375, a: 1}
       minMaxState: 0
     startSize:
-      scalar: 3
+      scalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -534,7 +534,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     type: 10
-    radius: 0.8
+    radius: 0.3
     angle: 1
     length: 5
     boxX: 1

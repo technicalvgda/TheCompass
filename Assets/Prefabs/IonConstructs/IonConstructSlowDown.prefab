@@ -19,10 +19,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000014188369134}
-  - 61: {fileID: 61000010025077600}
+  - 58: {fileID: 58000013345614156}
   - 50: {fileID: 50000010692724158}
-  - 114: {fileID: 114000011368406636}
   - 199: {fileID: 199000011653793496}
+  - 114: {fileID: 114000011368406636}
   - 198: {fileID: 198000013763529334}
   - 114: {fileID: 114000013962847762}
   m_Layer: 0
@@ -62,8 +62,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61000010025077600
-BoxCollider2D:
+--- !u!58 &58000013345614156
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -75,7 +75,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Radius: 0.5
 --- !u!114 &114000011368406636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -155,7 +155,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     startLifetime:
-      scalar: 2
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -190,7 +190,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 1
+      scalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -313,10 +313,10 @@ ParticleSystem:
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.08235294, g: 0.7058824, b: 0.08627451, a: 1}
+      maxColor: {r: 0.18431373, g: 0.38039216, b: 0.57254905, a: 1}
       minMaxState: 0
     startSize:
-      scalar: 3
+      scalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -534,7 +534,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     type: 10
-    radius: 0.8
+    radius: 0.3
     angle: 1
     length: 5
     boxX: 1
