@@ -5,11 +5,11 @@ public class Bullet : MonoBehaviour
 {
     //Non Rigid-Body version of Bullet
 
-	private Player _player;
+	//private Player _player;
 	public float speed, damage, lifetime;
 	void Start ()
 	{
-		_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+		//_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         //parentDir = transform.parent.transform.right;
         Destroy(this.gameObject, lifetime);
     }
@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
 	{
         if(col.gameObject.tag == "Player")
         {
-            _player.takeDamage(damage);
+            col.gameObject.GetComponent<Player>().takeDamage(damage);
         }
         Destroy(gameObject);	
 	}
