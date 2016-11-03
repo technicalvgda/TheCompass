@@ -12,6 +12,8 @@ public class LaserEmitter : MonoBehaviour
     public float maxFalloffDist;    //don't set this past 10
     public float rayDamage;
     public Transform laserEndPt;
+    public float bounceIntensity;  //how much the player gets bounced back upon collision with the laser
+    public float timeLimit = 0.5f;  //amount of time the player is paralyzed for
 
     private GameObject _player;
     private RaycastHit2D _hit;
@@ -29,6 +31,7 @@ public class LaserEmitter : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
         _playerscript = _player.GetComponent<Player>();
         line.enabled = true;
+        bounceIntensity = 1.0f;
     }
 
     // Update is called once per frame
@@ -63,7 +66,16 @@ public class LaserEmitter : MonoBehaviour
             if (_hit.collider.gameObject == _player)
             {
                 _playerscript.takeDamage(_calcDamage);
+
+                //applies force to the player in the opposite direction with which it is hit by the laser
+                Vector2 bounceBack = _playerscript.transform.position - transform.position;
+                bounceBack = new Vector2((bounceBack.x > 0) ? 1 : -1, (bounceBack.y > 0) ? 1 : -1);
+                _playerscript.GetComponent<Rigidbody2D>().AddForce(bounceBack * bounceIntensity, ForceMode2D.Impulse);
+
+                //deactivates the playerscript in order to simulate paralysis
+                _playerscript.enabled = false;
             }
+
             //hitting an enemy or the asteroid, change the tags when necessary
             if (_hit.collider.gameObject.tag == "Enemy" || _hit.collider.gameObject.tag == "SplitAsteroid")
             {
@@ -76,6 +88,17 @@ public class LaserEmitter : MonoBehaviour
         {
             //laser hits nothing, so it will continue to its endpoint
             line.SetPosition(1, laserEndPt.position);
+        }
+
+        //conditions to reactivate player script after the paralysis time has elapsed
+        if (timeLimit > 0 && !_playerscript.enabled)
+        {
+            timeLimit -= Time.deltaTime;
+        }
+        else
+        {
+            _playerscript.enabled = true;
+            timeLimit = 0.5f;
         }
     }
 }
