@@ -58,7 +58,8 @@ public class ButtonManagerScript : MonoBehaviour {
 			Debug.Log("mobile");
 		}
 		#endif
-		saveMenu.SetActive (false);
+		if(saveMenu != null)
+			saveMenu.SetActive (false);
 		optionMenu.SetActive(false);
 		if(cursorSelectionMenu != null)
 			cursorSelectionMenu.SetActive (false);
@@ -275,11 +276,12 @@ public class ButtonManagerScript : MonoBehaviour {
 		} 
 		else 
 		{
-			if (saveMenu.activeSelf == true)
-			{
-				activeOnScreen.SetActive (false);
-				activeOnScreen = optionMenu;
-			} 
+			if (saveMenu != null) {
+				if (saveMenu.activeSelf == true) {
+					activeOnScreen.SetActive (false);
+					activeOnScreen = optionMenu;
+				}
+			}
 			else if (cursorSelectionMenu.activeSelf == true) 
 			{
 				activeOnScreen.SetActive (false);
