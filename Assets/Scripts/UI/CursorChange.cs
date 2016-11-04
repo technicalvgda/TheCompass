@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
@@ -30,6 +31,7 @@ public class CursorChange : MonoBehaviour
     */
 	void Start ()
     {
+		#if(!UNITY_ANDROID)
 		cbm = GameObject.FindGameObjectWithTag ("PersistData").GetComponent<CursorButtonManager> ();
 		_index = 0;
 
@@ -42,6 +44,7 @@ public class CursorChange : MonoBehaviour
 		{
 			cbm.loadPlayerCursor ();
 		}
+		#endif
         
 	}
 	
