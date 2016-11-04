@@ -50,7 +50,7 @@ public class LoadingAsync : MonoBehaviour {
                 //when built to mobile will prompt user to touch the screen to continue 
                 loadingText.text = "Touch Screen to Continue"; // prompts the user to press space in order
                 loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, Mathf.PingPong(Time.time, 1));
-                if (Input.touchCount > 0)
+				if (Input.touchCount > 0 || Input.GetMouseButtonDown(0))
                 {
                     aSyncOp.allowSceneActivation = true;
                 }
