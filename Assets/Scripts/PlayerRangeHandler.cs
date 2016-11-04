@@ -9,7 +9,7 @@ public class PlayerRangeHandler : MonoBehaviour
     //The collider of the object
     Collider2D col;
     //The Particle System of the object
-    public ParticleSystem part;
+    ParticleSystem part;
     //the emission module for the particle system
     ParticleSystem.EmissionModule em;
 
