@@ -3,12 +3,12 @@ using System.Collections;
 
 public class RelayStation : MonoBehaviour 
 {
-	bool relayComplete;
+	//bool relayComplete;
 
 	// Use this for initialization
 	void Start () 
 	{
-		relayComplete = false;
+		//relayComplete = false;
 	}
 	
 	// Update is called once per frame
@@ -23,7 +23,7 @@ public class RelayStation : MonoBehaviour
 		if (col.gameObject.tag == "RelayPart")
 		{
 			Debug.Log ("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-			relayComplete = true;
+			//relayComplete = true;
 			Destroy (col.gameObject);
 		}
 			

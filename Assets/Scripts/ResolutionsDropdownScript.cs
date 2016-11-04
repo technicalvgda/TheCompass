@@ -129,7 +129,7 @@ public class ResolutionsDropdownScript : MonoBehaviour
         for(float i = revertTimer; i >= 0; i--)
         {
             countdownText.text = "Keep changes? Reverting back in " + i + " seconds.";
-            yield return new WaitForSeconds(1);
+			yield return new WaitForSecondsRealtime (1);
         }        
         NoButton();
     }

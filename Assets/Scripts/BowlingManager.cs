@@ -331,8 +331,9 @@ public class BowlingManager : MonoBehaviour {
         //if the ball object has been assigned
         if (ballObject != null)
         {
-            //instantiate pin
-            GameObject ball = Instantiate(ballObject, ballSpawner.position, ballSpawner.rotation) as GameObject;
+            //instantiate ball
+            //GameObject ball = Instantiate(ballObject, ballSpawner.position, ballSpawner.rotation) as GameObject;
+            Instantiate(ballObject, ballSpawner.position, ballSpawner.rotation);
         }
         yield return null;
     }
