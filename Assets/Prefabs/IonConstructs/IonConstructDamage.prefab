@@ -25,6 +25,7 @@ GameObject:
   - 114: {fileID: 114000011619289520}
   - 198: {fileID: 198000012862043548}
   - 114: {fileID: 114000010336598802}
+  - 114: {fileID: 114000014120403316}
   m_Layer: 0
   m_Name: IonConstructDamage
   m_TagString: Untagged
@@ -100,6 +101,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   active: 1
+--- !u!114 &114000014120403316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010896331292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b76245ee88a7a459e93944971438b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  part: {fileID: 0}
 --- !u!198 &198000012862043548
 ParticleSystem:
   m_ObjectHideFlags: 1

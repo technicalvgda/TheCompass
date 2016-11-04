@@ -25,6 +25,7 @@ GameObject:
   - 114: {fileID: 114000011693982504}
   - 198: {fileID: 198000011486922754}
   - 114: {fileID: 114000010486805686}
+  - 114: {fileID: 114000014046678818}
   m_Layer: 0
   m_Name: IonConstructSpeedUp
   m_TagString: Untagged
@@ -100,6 +101,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   active: 1
+--- !u!114 &114000014046678818
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011078323298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b76245ee88a7a459e93944971438b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  part: {fileID: 0}
 --- !u!198 &198000011486922754
 ParticleSystem:
   m_ObjectHideFlags: 1
