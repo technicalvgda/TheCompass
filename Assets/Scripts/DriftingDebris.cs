@@ -5,7 +5,7 @@ public class DriftingDebris : MonoBehaviour
 {
     [SerializeField]
     private float speed;
-    private Vector2 pos1;
+    //private Vector2 pos1;
     private Vector2 pos2;
     private Vector2 nextPos;
     [SerializeField]
@@ -15,7 +15,7 @@ public class DriftingDebris : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        pos1 = childtransform.localPosition;
+        //pos1 = childtransform.localPosition;
         pos2 = transformPos2.localPosition;
     }
 

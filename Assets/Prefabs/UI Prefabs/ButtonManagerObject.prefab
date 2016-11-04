@@ -21,6 +21,7 @@ GameObject:
   - 4: {fileID: 4000013391046660}
   - 114: {fileID: 114000013455539988}
   - 114: {fileID: 114000012712379736}
+  - 114: {fileID: 114000010371122926}
   m_Layer: 0
   m_Name: ButtonManagerObject
   m_TagString: Untagged
@@ -41,6 +42,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &114000010371122926
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011742258576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d52bfb5abcafe4a99ceff6eeded4c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolutionDropdown: {fileID: 0}
+  fullscreenToggle: {fileID: 0}
+  countdownText: {fileID: 0}
+  confirmChangesCanvas: {fileID: 0}
+  revertTimer: 5
 --- !u!114 &114000012712379736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,13 +95,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9d0c2264a3e492459faefbddcaeaf6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventSystem: {fileID: 0}
+  es: {fileID: 0}
   slotText: {fileID: 0}
+  mainMenu: {fileID: 0}
   saveMenu: {fileID: 0}
   optionMenu: {fileID: 0}
   loadMenu: {fileID: 0}
   pauseMenu: {fileID: 0}
   extrasMenu: {fileID: 0}
   cursorSelectionMenu: {fileID: 0}
+  gameOverMenu: {fileID: 0}
+  confirmPrompt: {fileID: 0}
   activeOnScreen: {fileID: 0}
   resolutionDropdown: {fileID: 0}
   fullscreenToggle: {fileID: 0}
+  _pauseCanvasMenuObject: {fileID: 0}
+  _gameOverScript: {fileID: 0}
