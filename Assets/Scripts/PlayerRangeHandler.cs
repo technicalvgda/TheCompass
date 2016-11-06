@@ -62,7 +62,7 @@ public class PlayerRangeHandler : MonoBehaviour
                 SR.enabled = true;
             }
         }
-
+        /*
         if(part != null)
         {
             //if the player is outside render range and the spriterenderer is enabled
@@ -77,6 +77,7 @@ public class PlayerRangeHandler : MonoBehaviour
                 em.enabled= true;
             }
         }
+        */
         
 	}
 }

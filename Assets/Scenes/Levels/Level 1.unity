@@ -1177,8 +1177,7 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 30
       objectReference: {fileID: 0}
-    - target: {fileID: 198000011486922754, guid: 9fbfa6dd6cab1a348b461660b6bea27d,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: randomSeed
       value: -970224437
       objectReference: {fileID: 0}
@@ -1847,8 +1846,7 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 198000013763529334, guid: 47b520105c5bc294c90f8732a47db3b8,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: randomSeed
       value: 450843798
       objectReference: {fileID: 0}
@@ -2239,8 +2237,7 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 198000011486922754, guid: 9fbfa6dd6cab1a348b461660b6bea27d,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: randomSeed
       value: 2031660566
       objectReference: {fileID: 0}
@@ -2304,8 +2301,7 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 198000013763529334, guid: 47b520105c5bc294c90f8732a47db3b8,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: randomSeed
       value: -1806188422
       objectReference: {fileID: 0}
@@ -2795,8 +2791,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
-    - target: {fileID: 198000013763529334, guid: 47b520105c5bc294c90f8732a47db3b8,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: randomSeed
       value: 1266171017
       objectReference: {fileID: 0}
@@ -3569,8 +3564,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 198000013763529334, guid: 47b520105c5bc294c90f8732a47db3b8,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: randomSeed
       value: -1391517783
       objectReference: {fileID: 0}
@@ -3956,23 +3950,19 @@ Prefab:
       propertyPath: m_RootOrder
       value: 17
       objectReference: {fileID: 0}
-    - target: {fileID: 198000011486922754, guid: 9fbfa6dd6cab1a348b461660b6bea27d,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: InitialModule.startColor.maxColor.r
       value: 0.20392157
       objectReference: {fileID: 0}
-    - target: {fileID: 198000011486922754, guid: 9fbfa6dd6cab1a348b461660b6bea27d,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 0.078431375
       objectReference: {fileID: 0}
-    - target: {fileID: 198000011486922754, guid: 9fbfa6dd6cab1a348b461660b6bea27d,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: randomSeed
       value: -1044068141
       objectReference: {fileID: 0}
-    - target: {fileID: 198000011486922754, guid: 9fbfa6dd6cab1a348b461660b6bea27d,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: InitialModule.startColor.maxColor.g
       value: 0.8901961
       objectReference: {fileID: 0}
@@ -5902,8 +5892,7 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 198000011486922754, guid: 9fbfa6dd6cab1a348b461660b6bea27d,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: randomSeed
       value: -151293503
       objectReference: {fileID: 0}
@@ -6843,6 +6832,48 @@ Prefab:
     - target: {fileID: 4000012251758694, guid: 628e5365816812e429e650997737054b, type: 2}
       propertyPath: m_LocalScale.y
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: randomSeed
+      value: 1422341290
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RotationModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: lengthInSec
+      value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010158100474, guid: 628e5365816812e429e650997737054b,
+        type: 2}
+      propertyPath: ShapeModule.randomDirection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010158100474, guid: 628e5365816812e429e650997737054b,
+        type: 2}
+      propertyPath: randomSeed
+      value: -1992842637
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 628e5365816812e429e650997737054b, type: 2}
@@ -8278,6 +8309,31 @@ Prefab:
       propertyPath: minYBoundary
       value: -100
       objectReference: {fileID: 0}
+    - target: {fileID: 198000010918450768, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: InitialModule.maxNumParticles
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010918450768, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: randomSeed
+      value: 221350721
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000012936943236, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: InitialModule.maxNumParticles
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000012936943236, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: randomSeed
+      value: -1021086272
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000012936943236, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: autoRandomSeed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b0b7fba286815dc44b0ba11b680392c4, type: 2}
   m_IsPrefabParent: 0
@@ -8734,8 +8790,7 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 30
       objectReference: {fileID: 0}
-    - target: {fileID: 198000013763529334, guid: 47b520105c5bc294c90f8732a47db3b8,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: randomSeed
       value: 96855250
       objectReference: {fileID: 0}
@@ -8992,8 +9047,7 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 100
       objectReference: {fileID: 0}
-    - target: {fileID: 198000013763529334, guid: 47b520105c5bc294c90f8732a47db3b8,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: randomSeed
       value: -1303378074
       objectReference: {fileID: 0}
@@ -9559,6 +9613,10 @@ Prefab:
     - target: {fileID: 4000012652857506, guid: ccca8fb5c1989a749932c458c074c327, type: 2}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012888972344, guid: ccca8fb5c1989a749932c458c074c327, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ccca8fb5c1989a749932c458c074c327, type: 2}
@@ -10311,8 +10369,7 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 198000011486922754, guid: 9fbfa6dd6cab1a348b461660b6bea27d,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: randomSeed
       value: 2106678288
       objectReference: {fileID: 0}
@@ -11087,8 +11144,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 198000011486922754, guid: 9fbfa6dd6cab1a348b461660b6bea27d,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: randomSeed
       value: -1001936790
       objectReference: {fileID: 0}
@@ -11973,8 +12029,7 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 198000011486922754, guid: 9fbfa6dd6cab1a348b461660b6bea27d,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: randomSeed
       value: 625468945
       objectReference: {fileID: 0}
@@ -13755,8 +13810,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 198000013763529334, guid: 47b520105c5bc294c90f8732a47db3b8,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: randomSeed
       value: 1266171017
       objectReference: {fileID: 0}
@@ -14266,6 +14320,10 @@ Prefab:
     - target: {fileID: 1000012888972344, guid: ccca8fb5c1989a749932c458c074c327, type: 2}
       propertyPath: m_Name
       value: DusterDrone (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012888972344, guid: ccca8fb5c1989a749932c458c074c327, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ccca8fb5c1989a749932c458c074c327, type: 2}
@@ -16943,10 +17001,17 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 100
       objectReference: {fileID: 0}
-    - target: {fileID: 198000011486922754, guid: 9fbfa6dd6cab1a348b461660b6bea27d,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: randomSeed
       value: -581991634
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.maxNumParticles
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: EmissionModule.rate.scalar
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9fbfa6dd6cab1a348b461660b6bea27d, type: 2}
@@ -17392,6 +17457,10 @@ Prefab:
       propertyPath: m_Name
       value: DusterDrone (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012888972344, guid: ccca8fb5c1989a749932c458c074c327, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ccca8fb5c1989a749932c458c074c327, type: 2}
   m_IsPrefabParent: 0
@@ -17729,8 +17798,7 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 198000011486922754, guid: 9fbfa6dd6cab1a348b461660b6bea27d,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: randomSeed
       value: -1538229486
       objectReference: {fileID: 0}
