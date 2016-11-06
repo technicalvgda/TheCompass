@@ -33,8 +33,8 @@ public class DroneMovementAI : MonoBehaviour {
     
 
     ///////////////////////////////////////////
-    private bool isPatrolling = false; // state of drone
-    private bool isTriggerEntered = false;
+    //private bool isPatrolling = false; // state of drone
+    //private bool isTriggerEntered = false;
     private int tempPatrolDistance;
     private Vector3 initialPositionBeforeTurn;
     private Vector3 initialPositionOnStart;

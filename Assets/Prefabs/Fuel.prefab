@@ -21,6 +21,8 @@ GameObject:
   - 4: {fileID: 4000012249292780}
   - 212: {fileID: 212000013114560822}
   - 58: {fileID: 58000011209162362}
+  - 50: {fileID: 50000010590427892}
+  - 114: {fileID: 114000010848621036}
   - 95: {fileID: 95000014262060354}
   m_Layer: 0
   m_Name: Fuel
@@ -36,12 +38,29 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014294361950}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 16.2, y: -11.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!50 &50000010590427892
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014294361950}
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &58000011209162362
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -73,6 +92,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114000010848621036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014294361950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4010a4b140a4149af05ac7b41b7cfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FuelAmount: 10
 --- !u!212 &212000013114560822
 SpriteRenderer:
   m_ObjectHideFlags: 1

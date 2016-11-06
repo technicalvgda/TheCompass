@@ -18,6 +18,7 @@ public class PinSpawn : MonoBehaviour
     void SpawnPin(GameObject pinObj)
     {
         //instantiate pin
-        GameObject pin = Instantiate(pinObj, transform.position, transform.rotation) as GameObject;
+        //GameObject pin = Instantiate(pinObj, transform.position, transform.rotation) as GameObject;
+        Instantiate(pinObj, transform.position, transform.rotation);
     }
 }

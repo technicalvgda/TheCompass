@@ -22,8 +22,8 @@ GameObject:
   - 212: {fileID: 212000013646028318}
   - 58: {fileID: 58000012767126960}
   - 50: {fileID: 50000011309238570}
-  - 114: {fileID: 114000010719567288}
   - 114: {fileID: 114000010718425500}
+  - 114: {fileID: 114000012619083472}
   m_Layer: 0
   m_Name: SteroidSplitter
   m_TagString: Debris
@@ -90,7 +90,7 @@ MonoBehaviour:
   DetectionRange: 100
   arrowPrefab: {fileID: 1000013692013292, guid: 329a7898fc1955b42919de3af79b9ddd,
     type: 2}
---- !u!114 &114000010719567288
+--- !u!114 &114000012619083472
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -98,16 +98,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012917061754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9b755fa41468024b8bf89141297e0ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 405aef21f13ff1e48ab9aa6ea25fc192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   drift: 0
-  objectSize: 5
+  rotateActivated: 0
+  splitactivated: 1
+  objectSize: 2
   splitter: {fileID: 1000012917061754}
-  splitterShard2: {fileID: 1000010028777008, guid: a850a036eda6bdb408e1b9407426b60b,
+  splitterShard: {fileID: 1000010028777008, guid: a850a036eda6bdb408e1b9407426b60b,
     type: 2}
   splitterX: 0
   splitterY: 0
+  splitShards: 4
+  driftSpeed: 100
+  knockBackImpact: 500
+  isTractored: 0
+  angleCollisionDamage: 0
 --- !u!212 &212000013646028318
 SpriteRenderer:
   m_ObjectHideFlags: 1
