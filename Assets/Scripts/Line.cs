@@ -9,7 +9,7 @@ public class Line : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		target = GameObject.Find ("target").transform;
+		target = transform.GetChild(0);
 		myLine = GetComponent<LineRenderer>();
 		myLine.SetVertexCount(2);
 	}
@@ -20,7 +20,7 @@ public class Line : MonoBehaviour {
 		myLine.SetPosition (0, transform.position);
 		myLine.SetPosition (1, target.position);
 		float distance = Vector3.Distance (transform.position, target.position);
-		GetComponent<LineRenderer> ().material.mainTextureScale = new Vector2(distance * 2, 1);
+		myLine.material.mainTextureScale = new Vector2(distance * 2, 1);
 
 	}
 }
