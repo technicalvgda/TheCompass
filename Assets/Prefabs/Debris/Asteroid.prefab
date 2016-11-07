@@ -24,6 +24,7 @@ GameObject:
   - 50: {fileID: 50000011788043966}
   - 114: {fileID: 114000010351355696}
   - 114: {fileID: 114000010498103884}
+  - 114: {fileID: 114000013823979300}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Debris
@@ -94,6 +95,8 @@ MonoBehaviour:
   splitterShard: {fileID: 0}
   splitterX: 0
   splitterY: 0
+  splitShards: 4
+  driftSpeed: 100
   knockBackImpact: 500
   isTractored: 0
   angleCollisionDamage: 0
@@ -112,6 +115,17 @@ MonoBehaviour:
   DetectionRange: 100
   arrowPrefab: {fileID: 1000013692013292, guid: 329a7898fc1955b42919de3af79b9ddd,
     type: 2}
+--- !u!114 &114000013823979300
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010663599838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b76245ee88a7a459e93944971438b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212000010874891754
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -15,6 +15,10 @@ using UnityEngine.SceneManagement;
 */
 public class Player : MonoBehaviour {
 
+    //static variable to allow all scripts to access player position directly
+    public static Vector3 playerPos;
+
+
 	//PLAYER COMPONENTS
 	private Rigidbody2D rb2d;
 
@@ -122,6 +126,9 @@ public class Player : MonoBehaviour {
 
 	void Update ()
 	{
+        //update static vector for player position
+        playerPos = transform.position;
+
 		//Function to handle player movement
 		ControlPlayer();
         LoseFuel();
