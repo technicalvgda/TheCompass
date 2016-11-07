@@ -30,12 +30,17 @@ public class TetheredObject : MonoBehaviour
 			zPos = GameObject.Find("PlayerPlaceholder").transform.position.z;
 			playerPosition = new Vector3 (xPos, yPos, zPos);
 			lineRen.SetPosition (0, playerPosition);
-			while ((playerPosition - transform.position).magnitude > 10f)
+			if ((playerPosition - transform.position).magnitude > 10f)
 			{
 				transform.position = Vector3.MoveTowards (transform.position, playerPosition, .5f);
 				GetComponent<Rigidbody2D>().velocity = Vector3.zero;
 				GetComponent<Rigidbody2D>().angularVelocity = 0;
-				//Debug.Log (GetComponent<Rigidbody2D> ().velocity);
+			}
+			if ((playerPosition - transform.position).magnitude < 6f)
+			{
+				transform.position = Vector3.MoveTowards (transform.position, playerPosition * -1, .5f);
+				GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
+				GetComponent<Rigidbody2D> ().angularVelocity = 0;
 			}
 			lineRen.SetPosition (1, transform.position);
 		}
