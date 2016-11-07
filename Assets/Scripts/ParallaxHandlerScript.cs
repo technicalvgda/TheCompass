@@ -4,7 +4,7 @@ using System.Collections;
 
 public class ParallaxHandlerScript : MonoBehaviour
 {
-    public GameObject boundTile;
+    //public GameObject boundTile;
     public GameObject edgeBoundTile;
 
     public bool isTractored = false;
