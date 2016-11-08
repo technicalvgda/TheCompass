@@ -4,7 +4,7 @@ using System.Collections;
 
 public class FuelGauge : MonoBehaviour
 {
-    public Player player;
+    private Player player;
     [Space]
     public Animator fuel;
     public Image mask, glow;
@@ -16,6 +16,8 @@ public class FuelGauge : MonoBehaviour
         // Obtain the animator parameter's hashed ID to use in Set* functions
         // Do NOT pass strings as parameter
         apid = fuel.GetParameter(0).nameHash;
+
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
 	void Update ()

@@ -4,7 +4,7 @@ using System.Collections;
 
 public class ParallaxHandlerScript : MonoBehaviour
 {
-    public GameObject boundTile;
+    //public GameObject boundTile;
     public GameObject edgeBoundTile;
 
     public bool isTractored = false;
@@ -132,9 +132,21 @@ public class ParallaxHandlerScript : MonoBehaviour
 
     void SpawnBoundaries()
     {
-        for(int i = -100; i <= 100; i++)
-        {
-           
+        float borderWidth = edgeBoundTile.GetComponent<SpriteRenderer>().bounds.size.x/2; //half the width of the border  
+        float borderHeight = edgeBoundTile.GetComponent<SpriteRenderer>().bounds.size.y / 2; //half the width of the border //start pos
+        //Instantiate(edgeBoundTile, new Vector3(transform.position.x - (levelSizeX / 2 * unit) - borderWidth, transform.position.y - (levelSizeY / 2 * unit) - borderWidth, 0), transform.rotation);
+        
+        for(int i = 0; i <= 13; i++)
+        {    
+            //Left border                                               
+            Instantiate(edgeBoundTile, new Vector3(transform.position.x - (levelSizeX / 2 * unit) - borderWidth, transform.position.y - (levelSizeY / 2 * unit) - borderHeight + (i * borderHeight*2)-borderHeight, 0), transform.rotation);
+            //top border
+            Instantiate(edgeBoundTile, new Vector3(transform.position.x - (levelSizeX / 2 * unit) +  borderWidth + (i * borderWidth * 2), transform.position.y - (levelSizeY / 2 * unit) - borderHeight, 0), transform.rotation);
+            //right border
+            Instantiate(edgeBoundTile, new Vector3(transform.position.x + (levelSizeX / 2 * unit) + borderWidth, transform.position.y - (levelSizeY / 2 * unit) + borderHeight + (i * borderHeight * 2), 0), transform.rotation);
+            //bottom border
+            Instantiate(edgeBoundTile, new Vector3(transform.position.x - (levelSizeX / 2 * unit) - borderWidth + (i * borderWidth * 2)-borderWidth, transform.position.y + (levelSizeY / 2 * unit) + borderHeight, 0), transform.rotation);
+            /*
             //spawn left side, row2 row 3
             Instantiate(edgeBoundTile, new Vector3(transform.position.x - (levelSizeX/2 * unit), transform.position.y + i * unit, 0), transform.rotation );
             Instantiate(boundTile,  new Vector3(transform.position.x - (levelSizeX / 2 * unit) - unit, transform.position.y + i * unit, 0), transform.rotation);
@@ -168,8 +180,10 @@ public class ParallaxHandlerScript : MonoBehaviour
             Instantiate(boundTile, transform.position + new Vector3(transform.position.x + i * unit, transform.position.y - (levelSizeY / 2 * unit) - (unit * 4), 0), Quaternion.Euler(new Vector3(0, 180, -90)));
             Instantiate(boundTile, transform.position + new Vector3(transform.position.x + i * unit, transform.position.y - (levelSizeY / 2 * unit) - (unit * 5), 0), Quaternion.Euler(new Vector3(0, 180, -90)));
             Instantiate(boundTile, transform.position + new Vector3(transform.position.x + i * unit, transform.position.y - (levelSizeY / 2 * unit) - (unit * 6), 0), Quaternion.Euler(new Vector3(0, 180, -90)));
+        */
         }
         
+
     }
     void OnDrawGizmos()
     {
