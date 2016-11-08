@@ -11,13 +11,6 @@ public class DialogueExchangeMoveStars : MonoBehaviour {
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		//keep the object behind the player
-		_newPos = new Vector3 (player.transform.position.x - 160, player.transform.position.y, player.transform.position.z);
-		transform.position = _newPos;
-	}
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
