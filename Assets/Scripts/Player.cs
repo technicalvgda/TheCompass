@@ -15,6 +15,10 @@ using UnityEngine.SceneManagement;
 */
 public class Player : MonoBehaviour {
 
+    //static variable to allow all scripts to access player position directly
+    public static Vector3 playerPos;
+
+
 	//PLAYER COMPONENTS
 	private Rigidbody2D rb2d;
 
@@ -85,6 +89,9 @@ public class Player : MonoBehaviour {
     //shield script in child object
     PlayerShield shield;
 
+    //variable to keep track of how many enemies the player has killed
+    public static int killCounter;
+
     // Use this for initialization
     void Start () 
 	{
@@ -98,6 +105,7 @@ public class Player : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D> ();
         //get shield script
         shield = GetComponentInChildren<PlayerShield>();
+
         //set player health to starting health
         playerHealth = playerStartingHealth;
 
@@ -115,6 +123,9 @@ public class Player : MonoBehaviour {
 
 	void Update ()
 	{
+        //update static vector for player position
+        playerPos = transform.position;
+
 		//Function to handle player movement
 		ControlPlayer();
         LoseFuel();
@@ -419,6 +430,14 @@ public class Player : MonoBehaviour {
 
         _playerDamaged = false;
 
+    }
+
+    /**
+    * function to increase the counter of how many enemies the player has killed if the enemies' health reaches zero
+    */
+    public static void increaseKillCount()
+    {
+        killCounter++;
     }
 
 }
