@@ -56,12 +56,16 @@ public class EnemyCollision : MonoBehaviour
 			_asteroidInput = col.gameObject;
 			_asteroidRigidBody = _asteroidInput.GetComponent<Rigidbody2D> ();
 			_asteroidVelocity = _asteroidRigidBody.velocity.magnitude;
+            //Health--;
+            //Debug.Log("Enemy health: " + Health);
 			//if (_asteroidVelocity > _enemyMinimum) {
 				//Health = Health - Damage;
 			//}
 			if (Health <= 0) 
 			{
 				Destroy (gameObject);
+                Player.increaseKillCount();
+                //Debug.Log("Player kill count: " + Player.killCounter);
 				Instantiate (Items, transform.position, Quaternion.identity);
 			}
 
