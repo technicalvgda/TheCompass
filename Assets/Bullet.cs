@@ -11,9 +11,10 @@ public class Bullet : MonoBehaviour
 	{
 		//_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         //parentDir = transform.parent.transform.right;
+		lifetime = 2;
         Destroy(this.gameObject, lifetime);
     }
-	
+
 	// Update is called once per frame
 	void Update () 
 	{

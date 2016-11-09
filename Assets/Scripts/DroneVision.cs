@@ -10,8 +10,7 @@ public class DroneVision : MonoBehaviour
     //public delegate void FollowPlayerAction();
     //public static event FollowPlayerAction FollowPlayer;
 
-    GameObject bullet;
- 	public GameObject bulletPrefab;
+
  	public int bulletSpeed;
 
     public float visionRange; // range that a drone can find the player
@@ -20,7 +19,7 @@ public class DroneVision : MonoBehaviour
     private static GameObject player; // player game object reference
     private CircleCollider2D droneCollider; // drone collider
     private DroneMovementAI droneMovement;
-    private bool isLookingForPlayer = false;
+    public bool isLookingForPlayer, playerFound = false;
     
 	// Use this for initialization
 	void Start ()
@@ -43,11 +42,6 @@ public class DroneVision : MonoBehaviour
                 isLookingForPlayer = true;
                 StartCoroutine(LookForPlayer());
 
-                if(shooting)
-                {
-                    StartCoroutine(Attack());
-                }
-                
                 Debug.Log("start Looking");
 
             }
@@ -63,8 +57,8 @@ public class DroneVision : MonoBehaviour
         {
             //player = null;
             StopCoroutine(LookForPlayer());
-            StopCoroutine(Attack());
             isLookingForPlayer = false;
+			playerFound = false;
         }
     }
 
@@ -78,6 +72,7 @@ public class DroneVision : MonoBehaviour
             if (Vector2.Distance(transform.position, player.transform.position) > 10) // constant will be replaced with attack range
             {
                 droneMovement.StartFollowing();
+				playerFound = true;
                 
             }
                 
@@ -91,19 +86,7 @@ public class DroneVision : MonoBehaviour
         }
         
     }
-
-    IEnumerator Attack()
- 	{
- 		bullet = (GameObject)Instantiate(bulletPrefab, transform.position, transform.rotation);
- 		//bullet.GetComponent<Bullet> ().parent = gameObject;
- 		yield return new WaitForSeconds(1);
- 
- 		if (player != null)
- 		{
- 			StartCoroutine(Attack());
- 		}
- 	}
-
+		
     public static GameObject GetPlayer()
     {
         return player;
