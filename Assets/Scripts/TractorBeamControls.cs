@@ -109,6 +109,7 @@ public class TractorBeamControls : MonoBehaviour
                 //move debris in direction of mouse with force (pullspeed/objectsize)
                 //if the object you have in your tractor beam hit you it will not gain the velocity of the ship
 
+                _tractorStick.transform.position = Vector2.Lerp(_tractorStick.transform.position, _MouseClickedPoint, Mathf.Lerp(0.01f,0f, Time.deltaTime));
                 /*if (hitMyself)
                 {
                     //Debug.Log(Vector2.Distance(_tractorStick.transform.position, this.transform.position));
