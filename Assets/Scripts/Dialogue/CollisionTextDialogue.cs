@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ActivateTextAtLine : MonoBehaviour
+public class CollisionTextDialogue : MonoBehaviour
 {
 
 

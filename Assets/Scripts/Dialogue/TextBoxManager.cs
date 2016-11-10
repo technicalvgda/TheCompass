@@ -20,6 +20,7 @@ public class TextBoxManager : MonoBehaviour
     public float typeSpeed = 0.05f;
 	private RectTransform _rectTransform;
 	public float movementSpeed;
+	private bool  _dialogueIsFinished;
     // Use this for initialization
     void Start()
     {
@@ -116,7 +117,7 @@ public class TextBoxManager : MonoBehaviour
         if(theText != null)
         {
             textLines = new string[1];
-            textLines = (theText.text.Split('\n'));
+            textLines = (theText.text.Split('@'));
         }
     }
 	public void setSpeakerNameText(string speakerName)
