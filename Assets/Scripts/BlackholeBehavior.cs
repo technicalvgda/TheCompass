@@ -8,8 +8,11 @@ public class BlackholeBehavior : MonoBehaviour {
 
 	//private int _blackHoleRadius = 100;
 	private Rigidbody2D _rb2d;
-	public int _gravityScale = 20;
-	public float _blackHoleBoundary = 7f;
+	public int _gravityScale = 10;
+
+	private float _blackHoleEdge = 7f;
+	public float _blackHoleBounds = 200f;
+
 	public int _acceleration = 950;
 
 	// Use this for initialization
@@ -36,12 +39,28 @@ public class BlackholeBehavior : MonoBehaviour {
 				Vector2 distance = transform.position - _spaceObject.transform.position;
 				float near = Vector2.Distance(_spaceObject.transform.position, transform.position);
 
-				if (near > _blackHoleBoundary)//boundary set; if outside the inner boundary of black hole, object is still being pulled
+				if ( near <= _blackHoleBounds ) //boundary set; if outside the inner boundary of black hole, object is still being pulled
 				{ 
 					_rb2d.AddForce((_acceleration/near) * distance.normalized * _rb2d.mass * _gravityScale * Time.fixedDeltaTime , ForceMode2D.Force );
 				}
-				else 
-				{
+
+				if ( near <= _blackHoleEdge ) // Suck object into black hole 
+				{						
+
+					float randDistance;
+					float randDirection;
+
+					randDistance = Random.Range(30, 50);
+
+					randDirection = Random.Range(0, 360);
+
+					float posX = transform.position.x + (Mathf.Cos((randDirection) * Mathf.Deg2Rad) * randDistance);
+					float posY = transform.position.y + (Mathf.Sin((randDirection) * Mathf.Deg2Rad) * randDistance);
+
+					if (_spaceObject.tag != "Player")
+					{	
+						Instantiate(_spaceObject.gameObject, new Vector2(posX, posY), _spaceObject.gameObject.transform.rotation);
+					}
 					Destroy (_spaceObject.gameObject); 
 				} 
 			} 
