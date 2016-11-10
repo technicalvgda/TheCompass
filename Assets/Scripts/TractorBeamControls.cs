@@ -15,10 +15,11 @@ public class TractorBeamControls : MonoBehaviour
     private Vector3 _MouseClickedPoint;
     private bool _hitDebris = false;
     private bool hitMyself = false;
+    private Vector2 velocity;
 
 
     private int _tractorlength = 0;//<the current length of the tractor beam
-    private const float MAX_TRACTOR_LENGTH = 15;
+    private const float MAX_TRACTOR_LENGTH = 20;
     private const float MAX_TRACTOR_PUSH = 20;
 
     //PLAYER COMPONENTS
@@ -92,15 +93,24 @@ public class TractorBeamControls : MonoBehaviour
             }
 
             //uses the initial object that was hit by the beam
-            if (_hitDebris)
+            if (_hitDebris && !objectScript.isTractored)
             {
+                Debug.Log("TractorBeamed item destroyed");
+                TractorReleases();
+            }
+            else if (_hitDebris)
+            {
+                velocity = _tractorStick.rigidbody.velocity = (Vector2.Lerp(_MouseClickedPoint - _tractorStick.transform.position, _tractorStick.transform.position, Time.deltaTime) * PULL_SPEED / objectScript.objectSize);
+
                 //if the object has a MoveableObject script, store it and handle physics
                 //draw a line to show tractor beam connection
                 //Debug.DrawLine(transform.position, _tractorStick.transform.position);
 
                 //move debris in direction of mouse with force (pullspeed/objectsize)
                 //if the object you have in your tractor beam hit you it will not gain the velocity of the ship
-                if (hitMyself)
+
+                _tractorStick.transform.position = Vector2.Lerp(_tractorStick.transform.position, _MouseClickedPoint, Mathf.Lerp(0.01f,0f, Time.deltaTime));
+                /*if (hitMyself)
                 {
                     //Debug.Log(Vector2.Distance(_tractorStick.transform.position, this.transform.position));
                     _tractorStick.rigidbody.velocity = (Vector2.Lerp(_MouseClickedPoint - _tractorStick.transform.position, _tractorStick.transform.position, Time.deltaTime) * PULL_SPEED / objectScript.objectSize);
@@ -108,17 +118,17 @@ public class TractorBeamControls : MonoBehaviour
                 else 
                 {
                     _tractorStick.rigidbody.velocity = (Vector2.Lerp(_MouseClickedPoint - _tractorStick.transform.position, _tractorStick.transform.position, Time.deltaTime) * PULL_SPEED / objectScript.objectSize) + GetComponent<Rigidbody2D>().velocity;
-                }
+                }*/
 
                 //if the tractor beamed object is further than the max tractor push length will only be that far away
-                if (Vector2.Distance(_tractorStick.transform.position, transform.position) > MAX_TRACTOR_PUSH)
+                if ((Vector2.Distance(_tractorStick.transform.position, transform.position) - (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x)) > MAX_TRACTOR_PUSH)
                 {
-                    _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * MAX_TRACTOR_PUSH;   
+                    _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * (MAX_TRACTOR_PUSH + (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x));
                 }
 
 
                 //if the distance between the _mouse clicked point and the object is <1 the object will stop moving
-                if (Vector2.Distance(_MouseClickedPoint, _tractorStick.transform.position) < 1)
+                    if ((Vector2.Distance(_tractorStick.transform.position, transform.position)- (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x)) > MAX_TRACTOR_PUSH)
                 {
                         _tractorStick.rigidbody.velocity = Vector2.zero;
                 }
@@ -147,8 +157,12 @@ public class TractorBeamControls : MonoBehaviour
                     TractorConnects(hit);
                 }
 
-                //uses the initial object that was hit by the beam
-                if (_hitDebris)
+            //uses the initial object that was hit by the beam
+                if (_hitDebris && !objectScript.isTractored)
+                {
+                    TractorReleases();
+                }
+                else if (_hitDebris)
                 {
                     //create a script for the held object
 
@@ -170,14 +184,17 @@ public class TractorBeamControls : MonoBehaviour
                         _tractorStick.rigidbody.velocity = (stick * PULL_SPEED / objectScript.objectSize);
                     }
 
-                    if (Vector2.Distance(_tractorStick.transform.position, transform.position) > MAX_TRACTOR_PUSH)
+                    if ((Vector2.Distance(_tractorStick.transform.position, transform.position)- (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x)) > MAX_TRACTOR_PUSH)
                     {
-                        _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * MAX_TRACTOR_PUSH;
-
+                        _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * (MAX_TRACTOR_PUSH + (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x));
                     }
                 }
             }
-            //when the mouse button is released or joystick returns to center resets all of the necessary variables
+        //when the mouse button is released or joystick returns to center resets all of the necessary variables
+            else if (Input.GetMouseButtonUp(0) && _tractorStick.rigidbody != null)
+            {
+                _tractorStick.rigidbody.velocity = velocity;
+            }
             else 
             {
                 //Handles variable reset
@@ -209,7 +226,11 @@ public class TractorBeamControls : MonoBehaviour
                     TractorConnects(hit);
             }
 
-            if (_hitDebris)
+            if(_hitDebris && !objectScript.isTractored)
+            {
+                TractorReleases();
+            }
+            else if (_hitDebris)
             {
                  //draw a line to show tractor beam connection
                  //Debug.DrawLine(transform.position, _tractorStick.transform.position);
@@ -224,12 +245,10 @@ public class TractorBeamControls : MonoBehaviour
                     _tractorStick.rigidbody.velocity = (joystick.inputValue() * PULL_SPEED / objectScript.objectSize);
                 }
                 
-                if (Vector2.Distance(_tractorStick.transform.position, transform.position) > MAX_TRACTOR_PUSH)
+                if ((Vector2.Distance(_tractorStick.transform.position, transform.position) - (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x)) > MAX_TRACTOR_PUSH)
                 {
-                    _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * MAX_TRACTOR_PUSH;
-                    
-                    
-                }    
+                    _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * (MAX_TRACTOR_PUSH + (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x));
+                }  
 
             }
         }
@@ -263,7 +282,7 @@ public class TractorBeamControls : MonoBehaviour
             _tractorLine.SetPosition(0, transform.position);
 
             //if the tractor beam is connected
-            if (_hitDebris == true)
+            if (_hitDebris && objectScript.isTractored)
             {
                 //set the color of the beam to white
                 _tractorLine.SetColors(Color.white, Color.white);
@@ -311,7 +330,7 @@ public class TractorBeamControls : MonoBehaviour
             _tractorLine.SetPosition(0, transform.position);
 
             //if the tractor beam is connected
-            if (_hitDebris == true)
+            if (_hitDebris && objectScript.isTractored)
             {
                 //set the color of the beam to white
                 _tractorLine.SetColors(Color.white, Color.white);
@@ -352,7 +371,7 @@ public class TractorBeamControls : MonoBehaviour
             _tractorLine.SetPosition(0, transform.position);
 
             //if the tractor beam is connected
-            if (_hitDebris == true)
+            if (_hitDebris && objectScript.isTractored)
             {
                 //set the color of the beam to white
                 _tractorLine.SetColors(Color.white, Color.white);
