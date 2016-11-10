@@ -95,7 +95,10 @@ public class Player : MonoBehaviour {
     //shield script in child object
     PlayerShield shield;
 
-   
+    //Audio
+    public AudioSource AccelerateSound;
+    bool engineOn = false;
+    float accelerateVolume;
 
     // Use this for initialization
     void Start () 
@@ -133,6 +136,8 @@ public class Player : MonoBehaviour {
 		//Function to handle player movement
 		ControlPlayer();
         LoseFuel();
+        
+
 		checkIfPlayerOutOfBounds(maxXBoundary, maxYBoundary, minXBoundary, minYBoundary);
 
 		// The health regen will only occur when we are below max health
@@ -153,6 +158,9 @@ public class Player : MonoBehaviour {
 
 	}
 
+    
+      
+    
 	private void ControlPlayer()
 	{
 		//Removes player control if doing U-Turn for a set time
@@ -171,10 +179,26 @@ public class Player : MonoBehaviour {
 
 				if (acceleration == 0f){
 					_enginePower = 0f;
-				} else {
+                    //stop accelerate sound
+                    if(engineOn)
+                    {
+                        engineOn = false;
+                        StartCoroutine(FadeSoundAndEnd(AccelerateSound));   
+                    }
+                   
+                    
+                } else {
 					_enginePower += Time.deltaTime * LINEAR_ENGINE_POWER_COEFFICIENT;
 					_enginePower = Mathf.Clamp(_enginePower, 0, MAX_ENGINE_POWER);
-				}
+                    //play accelerate sound
+                    if(!engineOn)
+                    {
+                        engineOn = true;
+                        StartCoroutine(FadeSoundAndStart(AccelerateSound));
+                    }
+                    
+
+                }
 
 				transform.Rotate(new Vector3(0, 0, -rotationSpeed * rotation));
 
@@ -189,9 +213,21 @@ public class Player : MonoBehaviour {
 
 				if (acceleration == 0f){
 					_enginePower = 0f;
+                    //stop accelerate sound
+                    if(engineOn)
+                    {
+                        engineOn = false;
+                        StartCoroutine(FadeSoundAndEnd(AccelerateSound));   
+                    }
 				} else {
 					_enginePower += Time.deltaTime * LINEAR_ENGINE_POWER_COEFFICIENT;
 					_enginePower = Mathf.Clamp(_enginePower, 0, MAX_ENGINE_POWER);
+                   //play accelerate sound
+                    if(!engineOn)
+                    {
+                        engineOn = true;
+                        StartCoroutine(FadeSoundAndStart(AccelerateSound));
+                    }
 				}
 
 				transform.Rotate(new Vector3(0, 0, -rotationSpeed * rotation));
@@ -234,10 +270,22 @@ public class Player : MonoBehaviour {
 				//Resets when input is in neutral position
 				if (movement.magnitude == 0f){
 					_enginePower = 0f;
-				} else {
+                    //stop accelerate sound
+                    if (engineOn)
+                    {
+                        engineOn = false;
+                        StartCoroutine(FadeSoundAndEnd(AccelerateSound));
+                    }
+                } else {
 					_enginePower += Time.deltaTime * LINEAR_ENGINE_POWER_COEFFICIENT;
 					_enginePower = Mathf.Clamp(_enginePower, 0, MAX_ENGINE_POWER);
-				}
+                    //play accelerate sound
+                    if (!engineOn)
+                    {
+                        engineOn = true;
+                        StartCoroutine(FadeSoundAndStart(AccelerateSound));
+                    }
+                }
 
 
                 //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
@@ -259,9 +307,21 @@ public class Player : MonoBehaviour {
 
 				if (movement.magnitude == 0f){
 					_enginePower = 0f;
+                     //stop accelerate sound
+                    if(engineOn)
+                    {
+                        engineOn = false;
+                        StartCoroutine(FadeSoundAndEnd(AccelerateSound));   
+                    }
 				} else {
 					_enginePower += Time.deltaTime * LINEAR_ENGINE_POWER_COEFFICIENT;
 					_enginePower = Mathf.Clamp(_enginePower, 0, MAX_ENGINE_POWER);
+                    //play accelerate sound
+                    if(!engineOn)
+                    {
+                        engineOn = true;
+                        StartCoroutine(FadeSoundAndStart(AccelerateSound));
+                    }
 				}
 
 				//Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
@@ -326,7 +386,7 @@ public class Player : MonoBehaviour {
 		}
 		return lengthOfTime;
 	}
-
+   
 	public void resetUTurnTime()
 	{
 		currentuTurnTime = U_TURN_TIME;
@@ -472,5 +532,36 @@ public class Player : MonoBehaviour {
      {
          killCounter++;
      }
+
+    private IEnumerator FadeSoundAndEnd(AudioSource source)
+    {
+        StopCoroutine(FadeSoundAndStart(source));
+        if (source.isPlaying)
+        {
+            while(source.volume > 0)
+            {
+                source.volume -= 0.1f;
+                yield return new WaitForSeconds(0.3f);
+            }
+            source.Stop();
+        }
+        yield return null;
+    }
+    private IEnumerator FadeSoundAndStart(AudioSource source)
+    {
+        StopCoroutine(FadeSoundAndEnd(source));
+        if (!source.isPlaying)
+        {
+            source.volume = 0;
+            source.Play();
+            while (source.volume < 1)
+            {
+                source.volume += 0.1f;
+                yield return new WaitForSeconds(0.3f);
+            }
+            
+        }
+        yield return null;
+    }
 
 }

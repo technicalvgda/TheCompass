@@ -27,6 +27,9 @@ public class TractorBeamControls : MonoBehaviour
     public GameObject beamEnd;
     private Player _player;
 
+    //Audio
+    public AudioSource TractorConnectSound, TractorReleaseSound;
+
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
 
     private const float PULL_SPEED = 1;
@@ -443,6 +446,8 @@ public class TractorBeamControls : MonoBehaviour
             float fuelAmount = fuelScript.CollectFuel();
             _player.gainFuel(fuelAmount);
         }
+   
+        TractorConnectSound.Play();
     }
 
     //Handles reset when player releases an object
@@ -453,11 +458,14 @@ public class TractorBeamControls : MonoBehaviour
         {
             objectScript.isTractored = false;
             objectScript.transform.SetParent(null);
+
+            TractorReleaseSound.Play();
         }
 
         objectScript = null;
         _hitDebris = false;
         _tractorlength = 0;
+
     }
 
     public float getObjectSize()
