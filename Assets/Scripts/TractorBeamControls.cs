@@ -24,6 +24,7 @@ public class TractorBeamControls : MonoBehaviour
 
     //PLAYER COMPONENTS
     private LineRenderer _tractorLine;
+    public GameObject beamEnd;
     private Player _player;
 
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
@@ -39,7 +40,8 @@ public class TractorBeamControls : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        _tractorLine = GetComponent<LineRenderer>();
+        _tractorLine = GetComponentInChildren<LineRenderer>();
+
         _player = GetComponent<Player>();
         
         if (joystick == null && GameObject.Find("VirtualJoystickTether") != null)
@@ -274,6 +276,7 @@ public class TractorBeamControls : MonoBehaviour
         {
             //enable the beam
             _tractorLine.enabled = true;
+            beamEnd.SetActive(true);
 
             //get mouse click in world coordinates
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
@@ -285,7 +288,7 @@ public class TractorBeamControls : MonoBehaviour
             if (_hitDebris && objectScript.isTractored)
             {
                 //set the color of the beam to white
-                _tractorLine.SetColors(Color.white, Color.white);
+                //_tractorLine.SetColors(Color.white, Color.white);
                 //draw a line to show tractor beam connection
                 _tractorLine.SetPosition(1, _tractorStick.transform.position);
 
@@ -314,7 +317,11 @@ public class TractorBeamControls : MonoBehaviour
                 //set the end of the beam to be where the endpoint variable is
                 _tractorLine.SetPosition(1, endPoint);
                 //set the color of the beam to blue
-                _tractorLine.SetColors(Color.blue, Color.blue);
+                //_tractorLine.SetColors(Color.blue, Color.blue);
+                Vector3 directionVector = (_tractorLine.transform.position - (Vector3)endPoint).normalized;
+                beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
+                beamEnd.transform.position = endPoint;
+              
             }
 
         }
@@ -322,6 +329,7 @@ public class TractorBeamControls : MonoBehaviour
         {
             //enable the beam
             _tractorLine.enabled = true;
+            beamEnd.SetActive(true);
 
             //get mouse click in world coordinates
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
@@ -333,7 +341,7 @@ public class TractorBeamControls : MonoBehaviour
             if (_hitDebris && objectScript.isTractored)
             {
                 //set the color of the beam to white
-                _tractorLine.SetColors(Color.white, Color.white);
+                //_tractorLine.SetColors(Color.white, Color.white);
                 //draw a line to show tractor beam connection
                 _tractorLine.SetPosition(1, _tractorStick.transform.position);
 
@@ -349,20 +357,28 @@ public class TractorBeamControls : MonoBehaviour
 
                 //set the end of the beam to be where the endpoint variable is
                 _tractorLine.SetPosition(1, endPoint);
+                Vector3 directionVector = (_tractorLine.transform.position - (Vector3)endPoint).normalized;
+                beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
+                beamEnd.transform.position = endPoint;
+               
                 //set the color of the beam to blue
-                _tractorLine.SetColors(Color.blue, Color.blue);
+                // _tractorLine.SetColors(Color.blue, Color.blue);
             }
         }
         else
         {
             _tractorLine.SetPosition(1, transform.position);
             _tractorLine.enabled = false;
+            beamEnd.transform.position = transform.position;
+            beamEnd.SetActive(false);
         }
 #elif UNITY_IOS || UNITY_ANDROID
         if(joystick.touchPhase() == TouchPhase.Began)
         {
             //enable the beam
             _tractorLine.enabled = true;
+            beamEnd.SetActive(true);
+
         }
 
         if (joystick.touchPhase() == TouchPhase.Moved)
@@ -374,7 +390,7 @@ public class TractorBeamControls : MonoBehaviour
             if (_hitDebris && objectScript.isTractored)
             {
                 //set the color of the beam to white
-                _tractorLine.SetColors(Color.white, Color.white);
+                //_tractorLine.SetColors(Color.white, Color.white);
                 //draw a line to show tractor beam connection
                 _tractorLine.SetPosition(1, _tractorStick.transform.position);
             }
@@ -388,14 +404,20 @@ public class TractorBeamControls : MonoBehaviour
 
                 //set the end of the beam to be where the endpoint variable is
                 _tractorLine.SetPosition(1, endPoint);
+                beamEnd.transform.position = endPoint;
                 //set the color of the beam to blue
-                _tractorLine.SetColors(Color.blue, Color.blue);
+                //_tractorLine.SetColors(Color.blue, Color.blue);
+                Vector3 directionVector = (_tractorLine.transform.position - (Vector3)endPoint).normalized;
+                beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
+                beamEnd.transform.position = endPoint;
             }
         }
         if(joystick.touchPhase() == TouchPhase.Ended)
         {
             _tractorLine.SetPosition(1, transform.position);
             _tractorLine.enabled = false;
+            beamEnd.transform.position = transform.position;
+            beamEnd.SetActive(false);
         }
 
         
