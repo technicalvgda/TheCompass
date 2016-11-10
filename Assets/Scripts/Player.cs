@@ -15,6 +15,11 @@ using UnityEngine.SceneManagement;
 */
 public class Player : MonoBehaviour {
 
+
+    //variable to keep track of how many enemies the player has killed
+    public static int killCounter;
+
+
     //static variable to allow all scripts to access player position directly
     public static Vector3 playerPos;
 
@@ -33,6 +38,9 @@ public class Player : MonoBehaviour {
 	const float BRAKE_SPEED = 20.0f;
 	public float rotationSpeed = 2.5f;
     const float MAX_FUEL = 100.0f;  //the maximum amount of fuel the player can have
+	private float _enginePower = 0.0f;
+	const float MAX_ENGINE_POWER = 40.0f;
+	const float LINEAR_ENGINE_POWER_COEFFICIENT = 15.0f;
 
     public float nebulaMultiplier = 1.0f;
     public float tractorSlow = 0;
@@ -66,8 +74,6 @@ public class Player : MonoBehaviour {
 
     private int unit = 5;
 
-
-
 	private int numberOfChecks = 0;
 
 	//Joystick Variable
@@ -88,6 +94,8 @@ public class Player : MonoBehaviour {
     public Vector2 asteroidDirection;
     //shield script in child object
     PlayerShield shield;
+
+   
 
     // Use this for initialization
     void Start () 
@@ -161,9 +169,16 @@ public class Player : MonoBehaviour {
                 float rotation = Input.GetAxis("Horizontal");
 				float acceleration = Input.GetAxis("Vertical");
 
+				if (acceleration == 0f){
+					_enginePower = 0f;
+				} else {
+					_enginePower += Time.deltaTime * LINEAR_ENGINE_POWER_COEFFICIENT;
+					_enginePower = Mathf.Clamp(_enginePower, 0, MAX_ENGINE_POWER);
+				}
+
 				transform.Rotate(new Vector3(0, 0, -rotationSpeed * rotation));
 
-                rb2d.AddForce(transform.up * ((PLAYER_SPEED * nebulaMultiplier) - tractorSlow) * acceleration);
+				rb2d.AddForce(transform.up * ((_enginePower * nebulaMultiplier) - tractorSlow) * acceleration);
 #elif UNITY_IOS || UNITY_ANDROID
 				/*for mobile build the movement is determined by the joystick 
 				* left or right rotates the player
@@ -172,9 +187,16 @@ public class Player : MonoBehaviour {
 				float rotation = joystick.inputValue().x;
 				float acceleration = joystick.inputValue().y;
 
+				if (acceleration == 0f){
+					_enginePower = 0f;
+				} else {
+					_enginePower += Time.deltaTime * LINEAR_ENGINE_POWER_COEFFICIENT;
+					_enginePower = Mathf.Clamp(_enginePower, 0, MAX_ENGINE_POWER);
+				}
+
 				transform.Rotate(new Vector3(0, 0, -rotationSpeed * rotation));
 
-				rb2d.AddForce(transform.up * ((PLAYER_SPEED * nebulaMultiplier) - tractorSlow) * acceleration);
+				rb2d.AddForce(transform.up * ((_enginePower * nebulaMultiplier) - tractorSlow) * acceleration);
 #endif
 
             }
@@ -205,12 +227,21 @@ public class Player : MonoBehaviour {
 				}
 
 				//Use the two store floats to create a new Vector2 variable movement.
-				Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
+				Vector2 movement = new Vector2 (moveHorizontal, moveVertical).normalized;
 				//Debug.Log(rb2d.velocity.magnitude);
+
+				//Increase force the longer movement direction is inputted
+				//Resets when input is in neutral position
+				if (movement.magnitude == 0f){
+					_enginePower = 0f;
+				} else {
+					_enginePower += Time.deltaTime * LINEAR_ENGINE_POWER_COEFFICIENT;
+					_enginePower = Mathf.Clamp(_enginePower, 0, MAX_ENGINE_POWER);
+				}
 
 
                 //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
-                rb2d.AddForce(movement * ((PLAYER_SPEED * nebulaMultiplier) - tractorSlow));
+				rb2d.AddForce(movement * ((_enginePower * nebulaMultiplier) - tractorSlow));
 
                 //Rotates front of ship to direction of movement
                 if (movement != Vector2.zero)
@@ -226,6 +257,12 @@ public class Player : MonoBehaviour {
 				Vector2 movement = joystick.inputValue().normalized;
 				Debug.Log(rb2d.velocity.magnitude);
 
+				if (movement.magnitude == 0f){
+					_enginePower = 0f;
+				} else {
+					_enginePower += Time.deltaTime * LINEAR_ENGINE_POWER_COEFFICIENT;
+					_enginePower = Mathf.Clamp(_enginePower, 0, MAX_ENGINE_POWER);
+				}
 
 				//Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
 				rb2d.AddForce(movement * ((PLAYER_SPEED * nebulaMultiplier) - tractorSlow));
@@ -427,5 +464,13 @@ public class Player : MonoBehaviour {
         _playerDamaged = false;
 
     }
+
+    /**
+     * function to increase the counter of how many enemies the player has killed if the enemies' health reaches zero
+     */
+     public static void increaseKillCount()
+     {
+         killCounter++;
+     }
 
 }

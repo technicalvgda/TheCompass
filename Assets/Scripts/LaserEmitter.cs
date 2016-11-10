@@ -31,7 +31,7 @@ public class LaserEmitter : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
         _playerscript = _player.GetComponent<Player>();
         line.enabled = true;
-        bounceIntensity = 1.0f;
+        bounceIntensity = 15.0f;
     }
 
     // Update is called once per frame

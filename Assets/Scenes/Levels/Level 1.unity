@@ -4760,7 +4760,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   edgeBoundTile: {fileID: 1000013788250456, guid: 19a0b6ce7e6a18944a9efaed307d0d96,
     type: 2}
-  isTractored: 0
+  hasForeground: 1
   frontLayer: {fileID: 1965630665}
   layer1: {fileID: 1299372464}
   layer2: {fileID: 54764324}
@@ -8287,7 +8287,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012033981452, guid: b0b7fba286815dc44b0ba11b680392c4, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 114000013312837990, guid: b0b7fba286815dc44b0ba11b680392c4,
         type: 2}
@@ -8333,6 +8333,16 @@ Prefab:
         type: 2}
       propertyPath: autoRandomSeed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000011250037578, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: CollisionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000011250037578, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: randomSeed
+      value: 315287210
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b0b7fba286815dc44b0ba11b680392c4, type: 2}
@@ -13883,7 +13893,7 @@ Transform:
   - {fileID: 2085035238}
   - {fileID: 695409292}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
 --- !u!4 &1503470755 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000013278662104, guid: a850a036eda6bdb408e1b9407426b60b,
