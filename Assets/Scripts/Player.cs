@@ -15,6 +15,11 @@ using UnityEngine.SceneManagement;
 */
 public class Player : MonoBehaviour {
 
+
+    //variable to keep track of how many enemies the player has killed
+    public static int killCounter;
+
+
     //static variable to allow all scripts to access player position directly
     public static Vector3 playerPos;
 
@@ -89,6 +94,8 @@ public class Player : MonoBehaviour {
     public Vector2 asteroidDirection;
     //shield script in child object
     PlayerShield shield;
+
+   
 
     // Use this for initialization
     void Start () 
@@ -457,5 +464,13 @@ public class Player : MonoBehaviour {
         _playerDamaged = false;
 
     }
+
+    /**
+     * function to increase the counter of how many enemies the player has killed if the enemies' health reaches zero
+     */
+     public static void increaseKillCount()
+     {
+         killCounter++;
+     }
 
 }
