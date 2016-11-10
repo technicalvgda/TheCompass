@@ -8,6 +8,12 @@ public class BlackholeBehavior : MonoBehaviour {
 
 	//private int _blackHoleRadius = 100;
 	private Rigidbody2D _rb2d;
+    //the transform of the debris border
+    public RectTransform debrisBorder;
+    //the width and height of the debris border
+    float borderWidth;
+    float borderHeight;
+
 	public int _gravityScale = 10;
 
 	private float _blackHoleEdge = 7f;
@@ -18,7 +24,10 @@ public class BlackholeBehavior : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-	}
+        borderWidth =  debrisBorder.rect.width/2;
+        borderHeight = debrisBorder.rect.height/2;
+        
+    }
 
 	// Update is called once per frame
 	void Update () 
@@ -45,23 +54,44 @@ public class BlackholeBehavior : MonoBehaviour {
 				}
 
 				if ( near <= _blackHoleEdge ) // Suck object into black hole 
-				{						
+				{					
 
-					float randDistance;
-					float randDirection;
+					if (_spaceObject.tag == "Debris")
+					{
+                        //choose a border for each object
+                        int border = Random.Range(1, 4);
 
-					randDistance = Random.Range(30, 50);
+                        switch(border)
+                        {
+                            case 1:
+                                //set at pos x border and at random position between -height and positive height
+                                _spaceObject.transform.position = new Vector2(debrisBorder.position.x + borderWidth, Random.Range(-borderHeight, borderHeight));
+                               
+                                break;
+                            case 2:
+                                //set at neg x border and at random position between -height and positive height
+                                _spaceObject.transform.position = new Vector2(debrisBorder.position.x - borderWidth, Random.Range(-borderHeight, borderHeight));
+                                break;
+                            case 3:
+                                //set at pos y border and at random position between -width and positive width
+                                _spaceObject.transform.position = new Vector2(Random.Range(-borderWidth, borderWidth), debrisBorder.position.y + borderHeight);
+                                break;
+                            case 4:
+                                //set at ned y border and at random position between -width and positive width
+                                _spaceObject.transform.position = new Vector2(Random.Range(-borderWidth, borderWidth), debrisBorder.position.y - borderHeight);
+                                break;
+                            default:
+                                //do nothing
+                                break;
 
-					randDirection = Random.Range(0, 360);
+                        }    
 
-					float posX = transform.position.x + (Mathf.Cos((randDirection) * Mathf.Deg2Rad) * randDistance);
-					float posY = transform.position.y + (Mathf.Sin((randDirection) * Mathf.Deg2Rad) * randDistance);
-
-					if (_spaceObject.tag != "Player")
-					{	
-						Instantiate(_spaceObject.gameObject, new Vector2(posX, posY), _spaceObject.gameObject.transform.rotation);
-					}
-					Destroy (_spaceObject.gameObject); 
+                    }
+                    else
+                    {
+                        Destroy(_spaceObject.gameObject);
+                    }
+					
 				} 
 			} 
 		}
