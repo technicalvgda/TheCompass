@@ -4,13 +4,7 @@ using UnityEngine.UI;
 
 public class TextBoxManager : MonoBehaviour
 {
-    public GameObject textBox;
-    public GameObject toContinueTextBox;
-
-    public Text theText;
-    public Text toContinueText;
-
-    public Color textColor;
+    public Text speakerText,mainBodyText;
 
     public TextAsset textFile;
     public string[] textLines;
@@ -18,24 +12,16 @@ public class TextBoxManager : MonoBehaviour
     public int currentLine;
     public int endAtLine;
 
-    public Player player;
-
     public bool isActive;
 
     private bool isTyping = false;
     private bool cancelTyping = false;
 
     public float typeSpeed = 0.05f;
-
-
     // Use this for initialization
     void Start()
     {
-        player = FindObjectOfType<Player>();
-
-        
-
-        if (textFile != null)
+		if (textFile != null)
         {
             textLines = (textFile.text.Split('\n'));
         }
@@ -64,7 +50,7 @@ public class TextBoxManager : MonoBehaviour
         }
 
         //theText.text = textLines[currentLine];
-        toContinueText.color = new Color(toContinueText.color.r, toContinueText.color.g, toContinueText.color.b, Mathf.PingPong(Time.time, 1));
+       // toContinueText.color = new Color(toContinueText.color.r, toContinueText.color.g, toContinueText.color.b, Mathf.PingPong(Time.time, 1));
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if(!isTyping)
@@ -92,33 +78,33 @@ public class TextBoxManager : MonoBehaviour
     private IEnumerator TextScroll(string lineOfText)
     {
         int letter = 0;
-        theText.text = "";
+		mainBodyText.text = "";
         isTyping = true;
         cancelTyping = false;
-        toContinueTextBox.SetActive(false);
+        //toContinueTextBox.SetActive(false);
         while(isTyping && !cancelTyping && (letter < lineOfText.Length - 1))
         {
-            theText.text += lineOfText[letter];
+			mainBodyText.text += lineOfText[letter];
             letter++;
             yield return new WaitForSeconds(typeSpeed);
         }
-        toContinueTextBox.SetActive(true);
-        theText.text = lineOfText;
+        //toContinueTextBox.SetActive(true);
+		mainBodyText.text = lineOfText;
         isTyping = false;
         cancelTyping = false;
     }
 
     public void EnableTextBox()
     {
-        textBox.SetActive(true);
-        isActive = true;
+        //textBox.SetActive(true);
+        
         StartCoroutine(TextScroll(textLines[currentLine]));
 
     }
 
     public void DisableTextBox()
     {
-        textBox.SetActive(false);
+        //textBox.SetActive(false);
         isActive = false;
     }
 
@@ -131,4 +117,21 @@ public class TextBoxManager : MonoBehaviour
             textLines = (theText.text.Split('\n'));
         }
     }
+	public void setSpeakerNameText(string speakerName)
+	{
+		speakerText.text = speakerName;
+	}
+	public void startCommentaryDialogue()
+	{
+		
+		StartCoroutine (StartCommentary ());
+	}
+	IEnumerator StartCommentary()
+	{
+		//TODO: IMPLEMENT DIALOGUE BOX SLIDING AND TEXT TYPING
+		//1) Slide box up
+		//2) Start text typing
+		//3) Once dialogue is done scroll text box back down
+		yield return null;
+	}
 }

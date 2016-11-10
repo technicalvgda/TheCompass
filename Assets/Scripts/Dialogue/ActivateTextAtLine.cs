@@ -6,7 +6,7 @@ public class ActivateTextAtLine : MonoBehaviour
 
 
     public TextAsset theText;
-
+	public string speakerName;
     public int startLine;
     public int endLine;
 
@@ -30,10 +30,12 @@ public class ActivateTextAtLine : MonoBehaviour
     {
         if(other.name == "PlayerPlaceholder")
         {
+			theTextBox.startCommentaryDialogue();
             theTextBox.ReloadScript(theText);
             theTextBox.currentLine = startLine;
             theTextBox.endAtLine = endLine;
-            theTextBox.EnableTextBox();
+            //theTextBox.EnableTextBox();
+			theTextBox.setSpeakerNameText (speakerName);
 
             if(destroyWhenActivated)
             {
