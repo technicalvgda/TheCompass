@@ -41,7 +41,7 @@ public class Splitter : MonoBehaviour
 	void OnCollisionEnter2D(Collision2D col)
 	{
 		Destroy (splitter);
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			Instantiate (splitterShard, new Vector3(splitterX, splitterY, 0), Quaternion.identity);
 		}

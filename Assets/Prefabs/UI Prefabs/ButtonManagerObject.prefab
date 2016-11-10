@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1000011742258576}
+  m_IsPrefabParent: 1
+--- !u!1 &1000011742258576
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000013391046660}
+  - 114: {fileID: 114000013455539988}
+  - 114: {fileID: 114000012712379736}
+  - 114: {fileID: 114000010371122926}
+  m_Layer: 0
+  m_Name: ButtonManagerObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000013391046660
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011742258576}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 278.5, y: 267.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &114000010371122926
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011742258576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d52bfb5abcafe4a99ceff6eeded4c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolutionDropdown: {fileID: 0}
+  fullscreenToggle: {fileID: 0}
+  countdownText: {fileID: 0}
+  confirmChangesCanvas: {fileID: 0}
+  revertTimer: 5
+--- !u!114 &114000012712379736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011742258576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa91aafd65801e0408ffa616179d0904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CursorTextures:
+  - {fileID: 2800000, guid: 5045119c56054194aabd48ece3c04347, type: 3}
+  - {fileID: 2800000, guid: 0d63e21a4c5d2d845942495c41417834, type: 3}
+  - {fileID: 2800000, guid: 1ba6769f303897a4aaef2578bae7ad98, type: 3}
+  - {fileID: 2800000, guid: 9c9ed4b83cc37a04b8fa4dd4e3ee7db2, type: 3}
+  - {fileID: 2800000, guid: 7716f2ad8aa84e54c9c68a865e793afb, type: 3}
+  - {fileID: 2800000, guid: 1ada43b2bc44a3e478792e63e229140f, type: 3}
+  - {fileID: 2800000, guid: 491852351cb3f454f937b89e6d69244b, type: 3}
+  - {fileID: 2800000, guid: 6a7a40c3c2c549948b37f9a5cfda1cb5, type: 3}
+  - {fileID: 2800000, guid: 691c65e9e7b297448a68e615d04e1a39, type: 3}
+  - {fileID: 2800000, guid: 421e45cd8a60dc549ba7f29b313a08e3, type: 3}
+  - {fileID: 2800000, guid: dc662f7d441325b4a90e6fc09ac80935, type: 3}
+  - {fileID: 2800000, guid: 3f1f8d163594abb4f96bc5c82897d775, type: 3}
+  - {fileID: 2800000, guid: 2ff6f0f0e7f96034591054ea9fe0c2e8, type: 3}
+  - {fileID: 2800000, guid: ae87c4080494b694eb6696a70dc03c2b, type: 3}
+--- !u!114 &114000013455539988
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011742258576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9d0c2264a3e492459faefbddcaeaf6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 0}
+  es: {fileID: 0}
+  slotText: {fileID: 0}
+  mainMenu: {fileID: 0}
+  saveMenu: {fileID: 0}
+  optionMenu: {fileID: 0}
+  loadMenu: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  extrasMenu: {fileID: 0}
+  cursorSelectionMenu: {fileID: 0}
+  gameOverMenu: {fileID: 0}
+  confirmPrompt: {fileID: 0}
+  activeOnScreen: {fileID: 0}
+  resolutionDropdown: {fileID: 0}
+  fullscreenToggle: {fileID: 0}
+  _pauseCanvasMenuObject: {fileID: 0}
+  _gameOverScript: {fileID: 0}

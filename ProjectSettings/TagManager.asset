@@ -4,13 +4,21 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - asteroid
-  - small
+  - Debris
   - MainMenu
   - OptionMenu
   - LoadMenu
   - PauseMenu
   - SaveMenu
+  - CursorSelectionMenu
+  - ExtrasMenu
+  - Fuel
+  - FirstButtonOfMenu
+  - FullScreenToggle
+  - FullScreenDrop
+  - GameOverMenu
+  - Bullet
+  - PersistData
   layers:
   - Default
   - TransparentFX
@@ -56,6 +64,9 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 2994645849
     locked: 0
   - name: UI
     uniqueID: 3049309471
