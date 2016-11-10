@@ -18,9 +18,12 @@ public class TextBoxManager : MonoBehaviour
     private bool cancelTyping = false;
 
     public float typeSpeed = 0.05f;
+	private RectTransform _rectTransform;
+	public float movementSpeed;
     // Use this for initialization
     void Start()
     {
+		_rectTransform = transform.GetComponent<RectTransform> ();
 		if (textFile != null)
         {
             textLines = (textFile.text.Split('\n'));
@@ -44,10 +47,9 @@ public class TextBoxManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isActive)
-        {
-            return;
-        }
+		if (!isActive) {
+			return;
+		} 
 
         //theText.text = textLines[currentLine];
        // toContinueText.color = new Color(toContinueText.color.r, toContinueText.color.g, toContinueText.color.b, Mathf.PingPong(Time.time, 1));
@@ -128,10 +130,29 @@ public class TextBoxManager : MonoBehaviour
 	}
 	IEnumerator StartCommentary()
 	{
-		//TODO: IMPLEMENT DIALOGUE BOX SLIDING AND TEXT TYPING
-		//1) Slide box up
-		//2) Start text typing
-		//3) Once dialogue is done scroll text box back down
-		yield return null;
+		//get stop position
+		Vector2 _newPos = new Vector2(_rectTransform.anchoredPosition.x, -15f);
+		//move the box up
+		while (_rectTransform.anchoredPosition.y < -16f) 
+		{
+			_rectTransform.anchoredPosition = Vector2.Lerp (_rectTransform.anchoredPosition, _newPos, Time.deltaTime * movementSpeed);
+			yield return new WaitForSeconds (0.01f);
+		}
+		//enable the commentary
+		isActive = true;
+		EnableTextBox ();
+		//wait while text is still active
+		while (isActive == true) 
+		{
+			yield return new WaitForSeconds (0.01f);
+		}
+		//get position off screen
+		_newPos = new Vector2(_rectTransform.anchoredPosition.x, -145f);
+		//move the box back down
+		while (_rectTransform.anchoredPosition.y > -144f) 
+		{
+			_rectTransform.anchoredPosition = Vector2.Lerp (_rectTransform.anchoredPosition, _newPos, Time.deltaTime * movementSpeed);
+			yield return new WaitForSeconds (0.01f);
+		}
 	}
 }
