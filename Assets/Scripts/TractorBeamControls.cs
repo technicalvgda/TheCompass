@@ -73,8 +73,11 @@ public class TractorBeamControls : MonoBehaviour
          *    the mouse it will maintain its velocity
          *        
          * */
-        //when left mouse button is clicked and held
+		//if the game is not paused or in a cutscene
+		if(Time.timeScale != 0f)
+		{
 
+			//when left mouse button is clicked and held
         if (Input.GetMouseButton(0))
         {
            
@@ -204,7 +207,8 @@ public class TractorBeamControls : MonoBehaviour
             {
                 //Handles variable reset
                 TractorReleases();
-            }
+			}
+		}
 
 
 
@@ -272,109 +276,96 @@ public class TractorBeamControls : MonoBehaviour
 
     private void TractorBeamRender()
     {
-
+		//if the game is not paused or in a cutscene
+		if (Time.timeScale != 0) {
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
-        //if the tractor beam is active
-        if (Input.GetMouseButton(0))
-        {
-            //enable the beam
-            _tractorLine.enabled = true;
-            beamEnd.SetActive(true);
+			//if the tractor beam is active
+			if (Input.GetMouseButton (0)) {
+				//enable the beam
+				_tractorLine.enabled = true;
+				beamEnd.SetActive (true);
 
-            //get mouse click in world coordinates
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+				//get mouse click in world coordinates
+				Vector2 mousePos = Camera.main.ScreenToWorldPoint (new Vector2 (Input.mousePosition.x, Input.mousePosition.y));
 
-            //make sure starting position of tractor beam is at the ship
-            _tractorLine.SetPosition(0, transform.position);
+				//make sure starting position of tractor beam is at the ship
+				_tractorLine.SetPosition (0, transform.position);
 
-            //if the tractor beam is connected
-            if (_hitDebris && objectScript.isTractored)
-            {
-                //set the color of the beam to white
-                //_tractorLine.SetColors(Color.white, Color.white);
-                //draw a line to show tractor beam connection
-                _tractorLine.SetPosition(1, _tractorStick.transform.position);
+				//if the tractor beam is connected
+				if (_hitDebris && objectScript.isTractored) {
+					//set the color of the beam to white
+					//_tractorLine.SetColors(Color.white, Color.white);
+					//draw a line to show tractor beam connection
+					_tractorLine.SetPosition (1, _tractorStick.transform.position);
 
-            }
-            else
-            {
-                //find direction vector from ship to mouse
-                Vector2 mouseDir = mousePos - (Vector2)transform.position;
-                //make a variable for the end position
-                Vector2 endPoint;
-                //if the mouse if further away than the max length of the beam
-                if (mouseDir.magnitude > MAX_TRACTOR_LENGTH)
-                {
+				} else {
+					//find direction vector from ship to mouse
+					Vector2 mouseDir = mousePos - (Vector2)transform.position;
+					//make a variable for the end position
+					Vector2 endPoint;
+					//if the mouse if further away than the max length of the beam
+					if (mouseDir.magnitude > MAX_TRACTOR_LENGTH) {
                     
-                    //get a position in the direction of the mouse 
-                    endPoint = (Vector2)transform.position + (mouseDir.normalized * _tractorlength);
+						//get a position in the direction of the mouse 
+						endPoint = (Vector2)transform.position + (mouseDir.normalized * _tractorlength);
                     
-                }
-                else
-                {
+					} else {
                    
-                    //get the mouse position
-                    endPoint = mousePos;
-                }
+						//get the mouse position
+						endPoint = mousePos;
+					}
 
-                //set the end of the beam to be where the endpoint variable is
-                _tractorLine.SetPosition(1, endPoint);
-                //set the color of the beam to blue
-                //_tractorLine.SetColors(Color.blue, Color.blue);
-                Vector3 directionVector = (_tractorLine.transform.position - (Vector3)endPoint).normalized;
-                beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
-                beamEnd.transform.position = endPoint;
+					//set the end of the beam to be where the endpoint variable is
+					_tractorLine.SetPosition (1, endPoint);
+					//set the color of the beam to blue
+					//_tractorLine.SetColors(Color.blue, Color.blue);
+					Vector3 directionVector = (_tractorLine.transform.position - (Vector3)endPoint).normalized;
+					beamEnd.transform.rotation = Quaternion.LookRotation (directionVector);
+					beamEnd.transform.position = endPoint;
               
-            }
+				}
 
-        }
-        else if (Input.GetButton("RightBumper") || Input.GetAxis("RightTrigger") > 0)
-        {
-            //enable the beam
-            _tractorLine.enabled = true;
-            beamEnd.SetActive(true);
+			} else if (Input.GetButton ("RightBumper") || Input.GetAxis ("RightTrigger") > 0) {
+				//enable the beam
+				_tractorLine.enabled = true;
+				beamEnd.SetActive (true);
 
-            //get mouse click in world coordinates
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+				//get mouse click in world coordinates
+				Vector2 mousePos = Camera.main.ScreenToWorldPoint (new Vector2 (Input.mousePosition.x, Input.mousePosition.y));
 
-            //make sure starting position of tractor beam is at the ship
-            _tractorLine.SetPosition(0, transform.position);
+				//make sure starting position of tractor beam is at the ship
+				_tractorLine.SetPosition (0, transform.position);
 
-            //if the tractor beam is connected
-            if (_hitDebris && objectScript.isTractored)
-            {
-                //set the color of the beam to white
-                //_tractorLine.SetColors(Color.white, Color.white);
-                //draw a line to show tractor beam connection
-                _tractorLine.SetPosition(1, _tractorStick.transform.position);
+				//if the tractor beam is connected
+				if (_hitDebris && objectScript.isTractored) {
+					//set the color of the beam to white
+					//_tractorLine.SetColors(Color.white, Color.white);
+					//draw a line to show tractor beam connection
+					_tractorLine.SetPosition (1, _tractorStick.transform.position);
 
-            }
-            else
-            {
-                //make a variable for the end position
-                Vector2 endPoint;
+				} else {
+					//make a variable for the end position
+					Vector2 endPoint;
 
-                //get a position in the direction of the stick
-                endPoint = (Vector2)transform.position + (new Vector2(Input.GetAxis("RightJoystickHorizontal"), Input.GetAxis("RightJoystickVertical")).normalized * _tractorlength);
+					//get a position in the direction of the stick
+					endPoint = (Vector2)transform.position + (new Vector2 (Input.GetAxis ("RightJoystickHorizontal"), Input.GetAxis ("RightJoystickVertical")).normalized * _tractorlength);
                 
 
-                //set the end of the beam to be where the endpoint variable is
-                _tractorLine.SetPosition(1, endPoint);
-                Vector3 directionVector = (_tractorLine.transform.position - (Vector3)endPoint).normalized;
-                beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
-                beamEnd.transform.position = endPoint;
+					//set the end of the beam to be where the endpoint variable is
+					_tractorLine.SetPosition (1, endPoint);
+					Vector3 directionVector = (_tractorLine.transform.position - (Vector3)endPoint).normalized;
+					beamEnd.transform.rotation = Quaternion.LookRotation (directionVector);
+					beamEnd.transform.position = endPoint;
                
-                //set the color of the beam to blue
-                // _tractorLine.SetColors(Color.blue, Color.blue);
-            }
-        }
-        else
-        {
-            _tractorLine.SetPosition(1, transform.position);
-            _tractorLine.enabled = false;
-            beamEnd.transform.position = transform.position;
-            beamEnd.SetActive(false);
-        }
+					//set the color of the beam to blue
+					// _tractorLine.SetColors(Color.blue, Color.blue);
+				}
+			} else {
+				_tractorLine.SetPosition (1, transform.position);
+				_tractorLine.enabled = false;
+				beamEnd.transform.position = transform.position;
+				beamEnd.SetActive (false);
+			}
 #elif UNITY_IOS || UNITY_ANDROID
         if(joystick.touchPhase() == TouchPhase.Began)
         {
@@ -425,7 +416,7 @@ public class TractorBeamControls : MonoBehaviour
 
         
 #endif
-
+		}
 
     }
 

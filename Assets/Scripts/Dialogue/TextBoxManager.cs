@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class TextBoxManager : MonoBehaviour
 {
+	
     public Text speakerText,mainBodyText;
 
     public TextAsset textFile;
@@ -21,6 +22,7 @@ public class TextBoxManager : MonoBehaviour
 	private RectTransform _rectTransform;
 	public float movementSpeed;
 	private bool  _dialogueIsFinished;
+
     // Use this for initialization
     void Start()
     {
@@ -89,7 +91,7 @@ public class TextBoxManager : MonoBehaviour
         {
 			mainBodyText.text += lineOfText[letter];
             letter++;
-            yield return new WaitForSeconds(typeSpeed);
+			yield return new WaitForSecondsRealtime(typeSpeed);
         }
         //toContinueTextBox.SetActive(true);
 		mainBodyText.text = lineOfText;
@@ -100,7 +102,7 @@ public class TextBoxManager : MonoBehaviour
     public void EnableTextBox()
     {
         //textBox.SetActive(true);
-        
+		isActive = true;
         StartCoroutine(TextScroll(textLines[currentLine]));
 
     }
