@@ -38,6 +38,7 @@ GameObject:
   - 212: {fileID: 212000014271336228}
   - 114: {fileID: 114000010670176434}
   - 120: {fileID: 120000011301108982}
+  - 114: {fileID: 114000012347571424}
   m_Layer: 0
   m_Name: LaserEmitter
   m_TagString: Untagged
@@ -52,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010790308344}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 22.93, z: 0}
+  m_LocalPosition: {x: 0, y: 100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_Children: []
@@ -65,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012672807388}
   m_LocalRotation: {x: 0, y: 0, z: 0.5735764, w: 0.8191521}
-  m_LocalPosition: {x: -58, y: -321.9, z: 0}
+  m_LocalPosition: {x: -38, y: -309, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 70}
   m_Children:
@@ -89,6 +90,17 @@ MonoBehaviour:
   laserEndPt: {fileID: 4000011271564606}
   bounceIntensity: 0
   timeLimit: 0.5
+--- !u!114 &114000012347571424
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012672807388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510c22593a387624da51f282fdd8ec94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!120 &120000011301108982
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -102,7 +114,7 @@ LineRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e1ab10d56e6990242a2e1c8b33b6a661, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -115,7 +127,7 @@ LineRenderer:
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 15201, guid: 0000000000000000f000000000000000, type: 0}
+  m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Positions:
@@ -126,10 +138,10 @@ LineRenderer:
     endWidth: 1
     m_StartColor:
       serializedVersion: 2
-      rgba: 4278190335
+      rgba: 4294967295
     m_EndColor:
       serializedVersion: 2
-      rgba: 4278190335
+      rgba: 4294967295
   m_UseWorldSpace: 1
 --- !u!212 &212000010594689392
 SpriteRenderer:
