@@ -22,10 +22,12 @@ public class TextBoxManager : MonoBehaviour
 	private RectTransform _rectTransform;
 	public float movementSpeed;
 	private bool  _dialogueIsFinished;
-
+	private float _timer;
+	private bool _timedCommentaryActive;
     // Use this for initialization
     void Start()
     {
+		_timedCommentaryActive = false;
 		_rectTransform = transform.GetComponent<RectTransform> ();
 		if (textFile != null)
         {
@@ -56,6 +58,17 @@ public class TextBoxManager : MonoBehaviour
 
         //theText.text = textLines[currentLine];
        // toContinueText.color = new Color(toContinueText.color.r, toContinueText.color.g, toContinueText.color.b, Mathf.PingPong(Time.time, 1));
+		if (_timedCommentaryActive) 
+		{
+			_timer -= Time.deltaTime;
+			Debug.Log (_timer);
+			if (_timer <= 0) 
+			{
+				_timedCommentaryActive = false;
+				DisableTextBox ();
+				Debug.Log ("Timed commentary done");
+			}
+		}
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if(!isTyping)
@@ -111,6 +124,7 @@ public class TextBoxManager : MonoBehaviour
     {
         //textBox.SetActive(false);
         isActive = false;
+		mainBodyText.text = " ";
     }
 
     //make it so that we can use different dialogue scripts
@@ -157,5 +171,12 @@ public class TextBoxManager : MonoBehaviour
 			_rectTransform.anchoredPosition = Vector2.Lerp (_rectTransform.anchoredPosition, _newPos, Time.deltaTime * movementSpeed);
 			yield return new WaitForSeconds (0.01f);
 		}
+	}
+	public void activateTimedCommentary(float time)
+	{
+		Debug.Log ("TIMED COMMENTARY");
+		_timer = time;
+		Debug.Log ("TIMER: " + _timer);
+		_timedCommentaryActive = true;
 	}
 }
