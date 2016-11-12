@@ -11,18 +11,17 @@ public class DroneMovementAI : MonoBehaviour {
 
     [Header("Following")]
     public int followDistance;
-    private RaycastHit2D hit; //raycast hit output
-    private GameObject player; // player game object
-    private GameObject nonPlayer; // non player game object stored after raycasting
-    private bool isFollowing = false; // state of drone
+    private RaycastHit2D _hit; //raycast hit output
+    private GameObject _player; // player game object
+    private GameObject _nonPlayer; // non player game object stored after raycasting
+    private bool _isFollowing = false; // state of drone
 
     [Header("Patrolling")]
     public int patrolDistance; // distance the drone will move before making a turn
     public enum PatrolPattern { Circular, Square, SideBySide, Snake, IdleScan} // patrolling patterns
     public PatrolPattern pattern;
     public float circularRotationAngle; // rotation angle for the circular pattern
-    public int idleScanAngle;
-    public int idleScanSpeed;
+    public int idleScanAngle, idleScanSpeed;
     public enum PatrolDirection { Left, Right}; // direction for square patrol
     public PatrolDirection direction;
 
@@ -35,22 +34,21 @@ public class DroneMovementAI : MonoBehaviour {
     ///////////////////////////////////////////
     //private bool isPatrolling = false; // state of drone
     //private bool isTriggerEntered = false;
-    private int tempPatrolDistance;
-    private Vector3 initialPositionBeforeTurn;
-    private Vector3 initialPositionOnStart;
-    private Quaternion initialRotationOnStart;
-    private DroneMovementState initialDroneMovementState;
-    private bool canRaycast = true;
-    private float idleScanAngleCounter;
+    private int _tempPatrolDistance;
+    private Vector3 _initialPositionBeforeTurn, _initialPositionOnStart;
+    private Quaternion _initialRotationOnStart;
+    private DroneMovementState _initialDroneMovementState;
+    private bool _canRaycast = true;
+    private float _idleScanAngleCounter;
 
 
     void Start ()
     {
         //DroneVision.FollowPlayer += StartFollowing;
-        tempPatrolDistance = patrolDistance;
-        initialPositionOnStart = transform.position;
-        initialRotationOnStart = transform.rotation;
-        initialDroneMovementState = droneState;
+        _tempPatrolDistance = patrolDistance;
+        _initialPositionOnStart = transform.position;
+        _initialRotationOnStart = transform.rotation;
+        _initialDroneMovementState = droneState;
         if(droneState == DroneMovementState.Patrolling)
         {
             StartPatrolling();
@@ -59,9 +57,9 @@ public class DroneMovementAI : MonoBehaviour {
 	
     public void StartFollowing()
     {
-        player = DroneVision.GetPlayer();
+        _player = DroneVision.GetPlayer();
 
-        if(!isFollowing) // call the movement coroutine if not already following the player
+        if(!_isFollowing) // call the movement coroutine if not already following the player
         {
             if(isFleet)
             {
@@ -84,7 +82,7 @@ public class DroneMovementAI : MonoBehaviour {
                 }*/
             }
             droneState = DroneMovementState.Following;
-            isFollowing = true;
+            _isFollowing = true;
             StartCoroutine(FollowPlayer());
         }
         
@@ -93,8 +91,8 @@ public class DroneMovementAI : MonoBehaviour {
     void StartPatrolling()
     {
         droneState = DroneMovementState.Patrolling;
-        initialPositionBeforeTurn = transform.position;
-        idleScanAngleCounter = 0;
+        _initialPositionBeforeTurn = transform.position;
+        _idleScanAngleCounter = 0;
         StartCoroutine(Patrol());
     }
 
@@ -110,46 +108,46 @@ public class DroneMovementAI : MonoBehaviour {
     {
 
         //check the distance between the player and the drone to give a stopping distance
-        if(Vector2.Distance(transform.position, player.transform.position) > 5) // constant will be replaced with attack range
+        if(Vector2.Distance(transform.position, _player.transform.position) > 5) // constant will be replaced with attack range
         {
             
-            hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position); // get the raycast
+            _hit = Physics2D.Raycast(transform.position, _player.transform.position - transform.position); // get the raycast
 
             //Debug.DrawRay(transform.position, player.transform.position - transform.position, Color.red);
 
-            transform.right = player.transform.position - transform.position; // keep rotating the face of the ship to the player since there is no range for following for now
+            transform.right = _player.transform.position - transform.position; // keep rotating the face of the ship to the player since there is no range for following for now
 
-            if(!hit.transform.CompareTag("Player"))
+            if(!_hit.transform.CompareTag("Player"))
             {
-                nonPlayer = hit.transform.gameObject; // store the non player object
+                _nonPlayer = _hit.transform.gameObject; // store the non player object
             }
             
             // check the distance between the drone and the non player object to avoid
-            if (nonPlayer != null && Vector2.Distance(transform.position, nonPlayer.transform.position) < nonPlayer.GetComponent<CircleCollider2D>().radius * 2) //constant will be replaced with radius
+            if (_nonPlayer != null && Vector2.Distance(transform.position, _nonPlayer.transform.position) < _nonPlayer.GetComponent<CircleCollider2D>().radius * 2) //constant will be replaced with radius
             {
 
                 transform.position = Vector2.MoveTowards(transform.position, transform.position + (transform.up + transform.right) * 10, speed * Time.deltaTime); // move the drone in the y-axis     
             }
             else
             {
-                nonPlayer = null;
-                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime); // after avoiding, keep following the player
+                _nonPlayer = null;
+                transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, speed * Time.deltaTime); // after avoiding, keep following the player
             }
 
-            if (Vector2.Distance(transform.position, player.transform.position) > followDistance)
+            if (Vector2.Distance(transform.position, _player.transform.position) > followDistance)
             {
                 StartReturningBase();
-                isFollowing = false;
+                _isFollowing = false;
             }
         }
         else
         {
-            isFollowing = false;
+            _isFollowing = false;
             StopCoroutine(FollowPlayer());
         }
         yield return new WaitForSeconds(0);
 
-        if(isFollowing && droneState == DroneMovementState.Following)
+        if(_isFollowing && droneState == DroneMovementState.Following)
         {
             StartCoroutine(FollowPlayer());
         }
@@ -166,7 +164,7 @@ public class DroneMovementAI : MonoBehaviour {
 
         if (pattern == PatrolPattern.Square)
         {
-            if (Vector2.Distance(initialPositionBeforeTurn, transform.position) < patrolDistance)
+            if (Vector2.Distance(_initialPositionBeforeTurn, transform.position) < patrolDistance)
             {
                 transform.position = Vector2.MoveTowards(transform.position, transform.position + (transform.right * patrolDistance), speed * Time.deltaTime); // move the drone for given distance
             }
@@ -182,13 +180,13 @@ public class DroneMovementAI : MonoBehaviour {
                     transform.Rotate(new Vector3(0, 0, -90));
                 }
 
-                initialPositionBeforeTurn = transform.position;
+                _initialPositionBeforeTurn = transform.position;
             }
         }
 
         if (pattern == PatrolPattern.SideBySide)
         {
-            if (Vector2.Distance(initialPositionBeforeTurn, transform.position) < patrolDistance)
+            if (Vector2.Distance(_initialPositionBeforeTurn, transform.position) < patrolDistance)
             {
                 transform.position = Vector2.MoveTowards(transform.position, transform.position + (transform.right * patrolDistance), speed * Time.deltaTime); // move the drone for given distance
             }
@@ -196,15 +194,15 @@ public class DroneMovementAI : MonoBehaviour {
             {
                 transform.Rotate(new Vector3(0, 0, transform.rotation.z + 180 * -1)); // rotate back the drone
 
-                initialPositionBeforeTurn = transform.position;
+                _initialPositionBeforeTurn = transform.position;
             }
         }
 
         if (pattern == PatrolPattern.Snake) // will have an implementation defining the borders of patrol area
         {
-            Debug.DrawRay(transform.right + transform.position, (transform.position + transform.right * tempPatrolDistance) - transform.position);
+            Debug.DrawRay(transform.right + transform.position, (transform.position + transform.right * _tempPatrolDistance) - transform.position);
 
-            if (Vector2.Distance(initialPositionBeforeTurn, transform.position) < patrolDistance)
+            if (Vector2.Distance(_initialPositionBeforeTurn, transform.position) < patrolDistance)
             {
                 transform.position = Vector2.MoveTowards(transform.position, transform.position + (transform.right * patrolDistance), speed * Time.deltaTime); // move the drone for given distance
             }
@@ -213,17 +211,17 @@ public class DroneMovementAI : MonoBehaviour {
 
                 PickRandomDirection();
 
-                initialPositionBeforeTurn = transform.position;
+                _initialPositionBeforeTurn = transform.position;
 
-                patrolDistance = tempPatrolDistance;
-                hit = Physics2D.Raycast(transform.right + transform.position, (transform.position + transform.right * tempPatrolDistance * 2) - transform.position); // get the raycast
+                patrolDistance = _tempPatrolDistance;
+                _hit = Physics2D.Raycast(transform.right + transform.position, (transform.position + transform.right * _tempPatrolDistance * 2) - transform.position); // get the raycast
                 
-                if(hit.transform)
+                if(_hit.transform)
                 {
-                    if (hit.distance < patrolDistance)
+                    if (_hit.distance < patrolDistance)
                     {
-                        tempPatrolDistance = patrolDistance;
-                        patrolDistance = Mathf.CeilToInt(hit.distance / 3);
+                        _tempPatrolDistance = patrolDistance;
+                        patrolDistance = Mathf.CeilToInt(_hit.distance / 3);
                     }
                 }
                 
@@ -234,19 +232,19 @@ public class DroneMovementAI : MonoBehaviour {
         if(pattern == PatrolPattern.IdleScan)
         {
 
-            if(idleScanAngleCounter > 0 && idleScanAngleCounter < idleScanAngle)
+            if(_idleScanAngleCounter > 0 && _idleScanAngleCounter < idleScanAngle)
             {
-                idleScanAngleCounter += idleScanSpeed / 10f;
+                _idleScanAngleCounter += idleScanSpeed / 10f;
                 transform.Rotate(new Vector3(0, 0, idleScanSpeed / 10f));
 
-                if(idleScanAngleCounter >= idleScanAngle)
+                if(_idleScanAngleCounter >= idleScanAngle)
                 {
-                    idleScanAngleCounter = -idleScanAngle;
+                    _idleScanAngleCounter = -idleScanAngle;
                 }
             }
             else
             {
-                idleScanAngleCounter += idleScanSpeed / 10f;
+                _idleScanAngleCounter += idleScanSpeed / 10f;
                 transform.Rotate(new Vector3(0, 0, -idleScanSpeed / 10f));
             }
             
@@ -264,12 +262,12 @@ public class DroneMovementAI : MonoBehaviour {
 
     IEnumerator ReturnBase()
     {
-        transform.position = Vector2.MoveTowards(transform.position, initialPositionOnStart, speed * Time.deltaTime); // move the drone for given distance
-        transform.right = initialPositionOnStart - transform.position;
+        transform.position = Vector2.MoveTowards(transform.position, _initialPositionOnStart, speed * Time.deltaTime); // move the drone for given distance
+        transform.right = _initialPositionOnStart - transform.position;
 
         yield return new WaitForSeconds(0);
 
-        if (Vector2.Distance(initialPositionOnStart, transform.position) > 0)
+        if (Vector2.Distance(_initialPositionOnStart, transform.position) > 0)
         {
             StartCoroutine(ReturnBase());
         }
@@ -277,7 +275,7 @@ public class DroneMovementAI : MonoBehaviour {
         {
             //GetComponent<CircleCollider2D>().enabled = true;
             isNotified = false;
-            transform.rotation = initialRotationOnStart;
+            transform.rotation = _initialRotationOnStart;
             StartPatrolling(); // this will change to an event for a dynamic call or a plain if statement
         }
     }
@@ -296,20 +294,20 @@ public class DroneMovementAI : MonoBehaviour {
                 break;
         }
 
-        canRaycast = true;
+        _canRaycast = true;
     }
 
 
     void RaycastInFront(Transform _object)
     {
-        if (canRaycast)
+        if (_canRaycast)
         {
-            canRaycast = false;
+            _canRaycast = false;
 
-            hit = Physics2D.Raycast(transform.right + transform.position, (transform.position + transform.right * tempPatrolDistance * 2) - transform.position); // get the raycast
-            if (hit.transform)
+            _hit = Physics2D.Raycast(transform.right + transform.position, (transform.position + transform.right * _tempPatrolDistance * 2) - transform.position); // get the raycast
+            if (_hit.transform)
             {
-                if (hit.distance < tempPatrolDistance)
+                if (_hit.distance < _tempPatrolDistance)
                 {
                     PickRandomDirection();
                 }
