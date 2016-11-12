@@ -61,6 +61,11 @@ GameObject:
   - 68: {fileID: 68000012282814756}
   - 68: {fileID: 68000013104432878}
   - 68: {fileID: 68000013461262542}
+  - 68: {fileID: 68000012210127780}
+  - 68: {fileID: 68000011369990990}
+  - 68: {fileID: 68000010288014000}
+  - 68: {fileID: 68000011107232664}
+  - 68: {fileID: 68000013498269106}
   m_Layer: 0
   m_Name: BlockedLaser
   m_TagString: Untagged
@@ -318,6 +323,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 281.7692
+--- !u!68 &68000010288014000
+EdgeCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011372501210}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: -221.65495, y: 382.573}
+  - {x: -268.79852, y: 253.68806}
+  - {x: -268.79224, y: 220.01004}
 --- !u!68 &68000010565422040
 EdgeCollider2D:
   m_ObjectHideFlags: 1
@@ -333,6 +354,21 @@ EdgeCollider2D:
   m_Points:
   - {x: -374.31964, y: -36.425858}
   - {x: -336.88654, y: -50.038013}
+--- !u!68 &68000011107232664
+EdgeCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011372501210}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: -431.82324, y: -391.11673}
+  - {x: -302.41306, y: -316.42783}
 --- !u!68 &68000011183479244
 EdgeCollider2D:
   m_ObjectHideFlags: 1
@@ -348,6 +384,41 @@ EdgeCollider2D:
   m_Points:
   - {x: -374.46637, y: -36.34884}
   - {x: -431.01132, y: -15.739113}
+--- !u!68 &68000011369990990
+EdgeCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011372501210}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: -268.8114, y: 253.63164}
+  - {x: -281.06094, y: 220.00008}
+--- !u!68 &68000012210127780
+EdgeCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011372501210}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: -281.06097, y: 219.99977}
+  - {x: -268.84726, y: 219.97969}
+  - {x: -268.8588, y: 215.97594}
+  - {x: -268.76746, y: 215.96577}
+  - {x: -268.79208, y: 219.96799}
+  - {x: -256.03522, y: 219.92845}
+  - {x: -248.80273, y: 219.92293}
 --- !u!68 &68000012245662246
 EdgeCollider2D:
   m_ObjectHideFlags: 1
@@ -361,8 +432,8 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
-  - {x: -374.27896, y: -36.2632}
-  - {x: -328.70328, y: 88.737076}
+  - {x: -374.27118, y: -36.309887}
+  - {x: -280.95602, y: 219.56464}
 --- !u!68 &68000012282814756
 EdgeCollider2D:
   m_ObjectHideFlags: 1
@@ -415,7 +486,7 @@ EdgeCollider2D:
   - {x: -261.7857, y: 289.0451}
   - {x: -261.78748, y: 288.95853}
   - {x: -268.78937, y: 288.99158}
-  - {x: -268.79468, y: 220.00453}
+  - {x: -268.79428, y: 253.71928}
 --- !u!68 &68000013104432878
 EdgeCollider2D:
   m_ObjectHideFlags: 1
@@ -454,6 +525,21 @@ EdgeCollider2D:
   - {x: 209.38669, y: 202.00253}
   - {x: 261.31802, y: 231.97926}
   - {x: 202.3923, y: 265.99164}
+--- !u!68 &68000013498269106
+EdgeCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011372501210}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: -240.0453, y: -269.05063}
+  - {x: -111.8609, y: -422.28693}
 --- !u!68 &68000014242749918
 EdgeCollider2D:
   m_ObjectHideFlags: 1
@@ -467,13 +553,9 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
-  - {x: -248.80196, y: 219.9944}
-  - {x: -268.795, y: 219.99443}
-  - {x: -268.7757, y: 215.99124}
-  - {x: -268.81708, y: 215.98866}
-  - {x: -268.80637, y: 219.99461}
-  - {x: -342.78845, y: 219.98836}
-  - {x: -342.70734, y: 194.97304}
+  - {x: -281.0615, y: 219.99971}
+  - {x: -342.7956, y: 219.99332}
+  - {x: -342.76993, y: 194.96518}
 --- !u!114 &114000010054611316
 MonoBehaviour:
   m_ObjectHideFlags: 1
