@@ -37,7 +37,7 @@ public class TwineTest : MonoBehaviour {
 	}
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Space) && _currentlyTyping)
+		if (Input.anyKeyDown && _currentlyTyping)
 		{
 			_currentlyTyping = false;
 			PassageTextDisplay.text = PassageText;
@@ -69,12 +69,16 @@ public class TwineTest : MonoBehaviour {
 				newChoice.GetComponent<ChoiceButton>().tt = this;
 				newChoice.GetComponentInChildren<Text>().text = choiceList[i];
 				Choices.Add(newChoice);
+				if (i == 0)
+					newChoice.tag = "FirstButtonOfMenu";
 			}
 			else
 			{
 				Button newChoice = (Button)Instantiate(ChoiceButtonDisabledPrefab, ChoicePanel, false);
 				newChoice.GetComponentInChildren<Text>().text = choiceList[i];
 				Choices.Add(newChoice);
+				if (i == 0)
+					newChoice.tag = "FirstButtonOfMenu";
 			}
 		}
 		if (Choices.Count <= 0)
@@ -82,6 +86,7 @@ public class TwineTest : MonoBehaviour {
 			Button continueButton = (Button)Instantiate(ChoiceButtonPrefab, ChoicePanel, false);
 			continueButton.GetComponentInChildren<Text>().text = ContinueText;
 			continueButton.GetComponent<ChoiceButton>().tt = this;
+			continueButton.tag = "FirstButtonOfMenu";
 		}
 	}
 	public void ChoiceSelect(string choiceContent)

@@ -14,6 +14,7 @@ public class DialogueExchangeShipMovement : MonoBehaviour {
 	void Update()
 	{
 		//apply force
-		_rb2d.AddForce (new Vector2 (speedOfMovement, 0));
+		if(Time.timeScale != 0)
+			_rb2d.AddForce (new Vector2 (speedOfMovement, 0));
 	}
 }
