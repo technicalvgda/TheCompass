@@ -23,6 +23,7 @@ GameObject:
   - 114: {fileID: 114000011661636400}
   - 114: {fileID: 114000014154300136}
   - 114: {fileID: 114000012344263664}
+  - 114: {fileID: 114000011839987634}
   m_Layer: 5
   m_Name: ChoiceButton
   m_TagString: Untagged
@@ -74,6 +75,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000011839987634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011362062854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9301e59b33622b4cbc759212a8ce677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonHover: {fileID: 8300000, guid: adf6af63a829cc140b1320cdbeb5bf07, type: 3}
+  ButtonClick: {fileID: 8300000, guid: 0691f57c7f8eed74dbe885949c47886f, type: 3}
 --- !u!114 &114000012344263664
 MonoBehaviour:
   m_ObjectHideFlags: 1
