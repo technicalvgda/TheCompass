@@ -69,7 +69,7 @@ public class TextBoxManager : MonoBehaviour
 				Debug.Log ("Timed commentary done");
 			}
 		}
-        if (Input.GetKeyDown(KeyCode.Space))
+		if (Input.anyKeyDown)
         {
             if(!isTyping)
             {
