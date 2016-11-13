@@ -4,8 +4,25 @@ using System.Collections;
 
 public class UIHelper : MonoBehaviour
 {
-    public const string HORIZONTAL = "Horizontal";
-    public const string VERTICAL = "Vertical";
+    const string HORIZONTAL = "Horizontal";
+    const string VERTICAL = "Vertical";
+    const string CANCEL = "Cancel";
+    
+    public static GameObject selected
+    {
+        get { return EventSystem.current.currentSelectedGameObject; }
+        set { EventSystem.current.SetSelectedGameObject(value); }
+    }
+
+    public static bool isButtonNavigation
+    {
+        get { return Input.GetAxis(HORIZONTAL) != 0 || Input.GetAxis(VERTICAL) != 0; }
+    }
+
+    public static bool isBackPressed
+    {
+        get { return Input.GetButtonDown(CANCEL); }
+    }
 
     // WaitForSeconds that works under timeScale 0
     // http://blog.projectmw.net/wait-for-real-seconds-class-using-static-function-in-unity
@@ -16,31 +33,6 @@ public class UIHelper : MonoBehaviour
         while (Time.realtimeSinceStartup < start + seconds)
         {
             yield return null;
-        }
-    }
-
-    public static void SetSelected(GameObject selected)
-    {
-        EventSystem.current.SetSelectedGameObject(selected);
-    }
-
-    public static GameObject currentSelected
-    {
-        get
-        {
-            return EventSystem.current.currentSelectedGameObject;
-        }
-    }
-
-    
-    public static bool isButtonNavigation
-    {
-        get
-        {
-            if (Input.GetAxis(HORIZONTAL) != 0 || Input.GetAxis(VERTICAL) != 0)
-                return true;
-
-            return false;
         }
     }
 }
