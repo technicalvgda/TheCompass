@@ -50,7 +50,7 @@ public class EnemyCollision : MonoBehaviour
 
 		Vector2 oppositeDirection = new Vector2(0, 0);
 
-		if (col.gameObject.name == "AsteroidPlaceHolder") 
+		if (col.gameObject.tag == "Debris") 
 		{
 			collidedWithAsteroid = true;
 			_asteroidInput = col.gameObject;
@@ -61,8 +61,11 @@ public class EnemyCollision : MonoBehaviour
 			//}
 			if (Health <= 0) 
 			{
+                // kill enemy
 				Destroy (gameObject);
-				Instantiate (Items, transform.position, Quaternion.identity);
+                // increase kill counter
+                Player.increaseKillCount();
+                Instantiate (Items, transform.position, Quaternion.identity);
 			}
 
 

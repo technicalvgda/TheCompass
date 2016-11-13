@@ -91,7 +91,8 @@ public class MoveableObject : MonoBehaviour
             
             splitterX = splitter.transform.position.x;
             splitterY = splitter.transform.position.y;
-            
+
+            isTractored = false;
             Destroy(splitter);
             for (int i = 0; i < splitShards; i++)
             {

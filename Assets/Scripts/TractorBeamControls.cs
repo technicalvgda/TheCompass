@@ -15,15 +15,20 @@ public class TractorBeamControls : MonoBehaviour
     private Vector3 _MouseClickedPoint;
     private bool _hitDebris = false;
     private bool hitMyself = false;
+    private Vector2 velocity;
 
 
     private int _tractorlength = 0;//<the current length of the tractor beam
-    private const float MAX_TRACTOR_LENGTH = 15;
+    private const float MAX_TRACTOR_LENGTH = 20;
     private const float MAX_TRACTOR_PUSH = 20;
 
     //PLAYER COMPONENTS
     private LineRenderer _tractorLine;
+    public GameObject beamEnd;
     private Player _player;
+
+    //Audio
+    public AudioSource TractorConnectSound, TractorReleaseSound;
 
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
 
@@ -38,7 +43,8 @@ public class TractorBeamControls : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        _tractorLine = GetComponent<LineRenderer>();
+        _tractorLine = GetComponentInChildren<LineRenderer>();
+
         _player = GetComponent<Player>();
         
         if (joystick == null && GameObject.Find("VirtualJoystickTether") != null)
@@ -92,15 +98,24 @@ public class TractorBeamControls : MonoBehaviour
             }
 
             //uses the initial object that was hit by the beam
-            if (_hitDebris)
+            if (_hitDebris && !objectScript.isTractored)
             {
+                Debug.Log("TractorBeamed item destroyed");
+                TractorReleases();
+            }
+            else if (_hitDebris)
+            {
+                velocity = _tractorStick.rigidbody.velocity = (Vector2.Lerp(_MouseClickedPoint - _tractorStick.transform.position, _tractorStick.transform.position, Time.deltaTime) * PULL_SPEED / objectScript.objectSize);
+
                 //if the object has a MoveableObject script, store it and handle physics
                 //draw a line to show tractor beam connection
                 //Debug.DrawLine(transform.position, _tractorStick.transform.position);
 
                 //move debris in direction of mouse with force (pullspeed/objectsize)
                 //if the object you have in your tractor beam hit you it will not gain the velocity of the ship
-                if (hitMyself)
+
+                _tractorStick.transform.position = Vector2.Lerp(_tractorStick.transform.position, _MouseClickedPoint, Mathf.Lerp(0.01f,0f, Time.deltaTime));
+                /*if (hitMyself)
                 {
                     //Debug.Log(Vector2.Distance(_tractorStick.transform.position, this.transform.position));
                     _tractorStick.rigidbody.velocity = (Vector2.Lerp(_MouseClickedPoint - _tractorStick.transform.position, _tractorStick.transform.position, Time.deltaTime) * PULL_SPEED / objectScript.objectSize);
@@ -108,17 +123,17 @@ public class TractorBeamControls : MonoBehaviour
                 else 
                 {
                     _tractorStick.rigidbody.velocity = (Vector2.Lerp(_MouseClickedPoint - _tractorStick.transform.position, _tractorStick.transform.position, Time.deltaTime) * PULL_SPEED / objectScript.objectSize) + GetComponent<Rigidbody2D>().velocity;
-                }
+                }*/
 
                 //if the tractor beamed object is further than the max tractor push length will only be that far away
-                if (Vector2.Distance(_tractorStick.transform.position, transform.position) > MAX_TRACTOR_PUSH)
+                if ((Vector2.Distance(_tractorStick.transform.position, transform.position) - (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x)) > MAX_TRACTOR_PUSH)
                 {
-                    _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * MAX_TRACTOR_PUSH;   
+                    _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * (MAX_TRACTOR_PUSH + (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x));
                 }
 
 
                 //if the distance between the _mouse clicked point and the object is <1 the object will stop moving
-                if (Vector2.Distance(_MouseClickedPoint, _tractorStick.transform.position) < 1)
+                    if ((Vector2.Distance(_tractorStick.transform.position, transform.position)- (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x)) > MAX_TRACTOR_PUSH)
                 {
                         _tractorStick.rigidbody.velocity = Vector2.zero;
                 }
@@ -147,8 +162,12 @@ public class TractorBeamControls : MonoBehaviour
                     TractorConnects(hit);
                 }
 
-                //uses the initial object that was hit by the beam
-                if (_hitDebris)
+            //uses the initial object that was hit by the beam
+                if (_hitDebris && !objectScript.isTractored)
+                {
+                    TractorReleases();
+                }
+                else if (_hitDebris)
                 {
                     //create a script for the held object
 
@@ -170,14 +189,17 @@ public class TractorBeamControls : MonoBehaviour
                         _tractorStick.rigidbody.velocity = (stick * PULL_SPEED / objectScript.objectSize);
                     }
 
-                    if (Vector2.Distance(_tractorStick.transform.position, transform.position) > MAX_TRACTOR_PUSH)
+                    if ((Vector2.Distance(_tractorStick.transform.position, transform.position)- (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x)) > MAX_TRACTOR_PUSH)
                     {
-                        _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * MAX_TRACTOR_PUSH;
-
+                        _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * (MAX_TRACTOR_PUSH + (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x));
                     }
                 }
             }
-            //when the mouse button is released or joystick returns to center resets all of the necessary variables
+        //when the mouse button is released or joystick returns to center resets all of the necessary variables
+            else if (Input.GetMouseButtonUp(0) && _tractorStick.rigidbody != null)
+            {
+                _tractorStick.rigidbody.velocity = velocity;
+            }
             else 
             {
                 //Handles variable reset
@@ -209,7 +231,11 @@ public class TractorBeamControls : MonoBehaviour
                     TractorConnects(hit);
             }
 
-            if (_hitDebris)
+            if(_hitDebris && !objectScript.isTractored)
+            {
+                TractorReleases();
+            }
+            else if (_hitDebris)
             {
                  //draw a line to show tractor beam connection
                  //Debug.DrawLine(transform.position, _tractorStick.transform.position);
@@ -224,12 +250,10 @@ public class TractorBeamControls : MonoBehaviour
                     _tractorStick.rigidbody.velocity = (joystick.inputValue() * PULL_SPEED / objectScript.objectSize);
                 }
                 
-                if (Vector2.Distance(_tractorStick.transform.position, transform.position) > MAX_TRACTOR_PUSH)
+                if ((Vector2.Distance(_tractorStick.transform.position, transform.position) - (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x)) > MAX_TRACTOR_PUSH)
                 {
-                    _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * MAX_TRACTOR_PUSH;
-                    
-                    
-                }    
+                    _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * (MAX_TRACTOR_PUSH + (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x));
+                }  
 
             }
         }
@@ -255,6 +279,7 @@ public class TractorBeamControls : MonoBehaviour
         {
             //enable the beam
             _tractorLine.enabled = true;
+            beamEnd.SetActive(true);
 
             //get mouse click in world coordinates
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
@@ -263,10 +288,10 @@ public class TractorBeamControls : MonoBehaviour
             _tractorLine.SetPosition(0, transform.position);
 
             //if the tractor beam is connected
-            if (_hitDebris == true)
+            if (_hitDebris && objectScript.isTractored)
             {
                 //set the color of the beam to white
-                _tractorLine.SetColors(Color.white, Color.white);
+                //_tractorLine.SetColors(Color.white, Color.white);
                 //draw a line to show tractor beam connection
                 _tractorLine.SetPosition(1, _tractorStick.transform.position);
 
@@ -295,7 +320,11 @@ public class TractorBeamControls : MonoBehaviour
                 //set the end of the beam to be where the endpoint variable is
                 _tractorLine.SetPosition(1, endPoint);
                 //set the color of the beam to blue
-                _tractorLine.SetColors(Color.blue, Color.blue);
+                //_tractorLine.SetColors(Color.blue, Color.blue);
+                Vector3 directionVector = (_tractorLine.transform.position - (Vector3)endPoint).normalized;
+                beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
+                beamEnd.transform.position = endPoint;
+              
             }
 
         }
@@ -303,6 +332,7 @@ public class TractorBeamControls : MonoBehaviour
         {
             //enable the beam
             _tractorLine.enabled = true;
+            beamEnd.SetActive(true);
 
             //get mouse click in world coordinates
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
@@ -311,10 +341,10 @@ public class TractorBeamControls : MonoBehaviour
             _tractorLine.SetPosition(0, transform.position);
 
             //if the tractor beam is connected
-            if (_hitDebris == true)
+            if (_hitDebris && objectScript.isTractored)
             {
                 //set the color of the beam to white
-                _tractorLine.SetColors(Color.white, Color.white);
+                //_tractorLine.SetColors(Color.white, Color.white);
                 //draw a line to show tractor beam connection
                 _tractorLine.SetPosition(1, _tractorStick.transform.position);
 
@@ -330,20 +360,28 @@ public class TractorBeamControls : MonoBehaviour
 
                 //set the end of the beam to be where the endpoint variable is
                 _tractorLine.SetPosition(1, endPoint);
+                Vector3 directionVector = (_tractorLine.transform.position - (Vector3)endPoint).normalized;
+                beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
+                beamEnd.transform.position = endPoint;
+               
                 //set the color of the beam to blue
-                _tractorLine.SetColors(Color.blue, Color.blue);
+                // _tractorLine.SetColors(Color.blue, Color.blue);
             }
         }
         else
         {
             _tractorLine.SetPosition(1, transform.position);
             _tractorLine.enabled = false;
+            beamEnd.transform.position = transform.position;
+            beamEnd.SetActive(false);
         }
 #elif UNITY_IOS || UNITY_ANDROID
         if(joystick.touchPhase() == TouchPhase.Began)
         {
             //enable the beam
             _tractorLine.enabled = true;
+            beamEnd.SetActive(true);
+
         }
 
         if (joystick.touchPhase() == TouchPhase.Moved)
@@ -352,10 +390,10 @@ public class TractorBeamControls : MonoBehaviour
             _tractorLine.SetPosition(0, transform.position);
 
             //if the tractor beam is connected
-            if (_hitDebris == true)
+            if (_hitDebris && objectScript.isTractored)
             {
                 //set the color of the beam to white
-                _tractorLine.SetColors(Color.white, Color.white);
+                //_tractorLine.SetColors(Color.white, Color.white);
                 //draw a line to show tractor beam connection
                 _tractorLine.SetPosition(1, _tractorStick.transform.position);
             }
@@ -369,14 +407,20 @@ public class TractorBeamControls : MonoBehaviour
 
                 //set the end of the beam to be where the endpoint variable is
                 _tractorLine.SetPosition(1, endPoint);
+                beamEnd.transform.position = endPoint;
                 //set the color of the beam to blue
-                _tractorLine.SetColors(Color.blue, Color.blue);
+                //_tractorLine.SetColors(Color.blue, Color.blue);
+                Vector3 directionVector = (_tractorLine.transform.position - (Vector3)endPoint).normalized;
+                beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
+                beamEnd.transform.position = endPoint;
             }
         }
         if(joystick.touchPhase() == TouchPhase.Ended)
         {
             _tractorLine.SetPosition(1, transform.position);
             _tractorLine.enabled = false;
+            beamEnd.transform.position = transform.position;
+            beamEnd.SetActive(false);
         }
 
         
@@ -402,6 +446,8 @@ public class TractorBeamControls : MonoBehaviour
             float fuelAmount = fuelScript.CollectFuel();
             _player.gainFuel(fuelAmount);
         }
+   
+        TractorConnectSound.Play();
     }
 
     //Handles reset when player releases an object
@@ -412,11 +458,14 @@ public class TractorBeamControls : MonoBehaviour
         {
             objectScript.isTractored = false;
             objectScript.transform.SetParent(null);
+
+            TractorReleaseSound.Play();
         }
 
         objectScript = null;
         _hitDebris = false;
         _tractorlength = 0;
+
     }
 
     public float getObjectSize()
