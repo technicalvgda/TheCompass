@@ -17,6 +17,8 @@ public class TractorBeamControls : MonoBehaviour
     private bool hitMyself = false;
     private Vector2 velocity;
 
+    //variable for checking if relay part collected
+    public bool partCollected; 
 
     private int _tractorlength = 0;//<the current length of the tractor beam
     private const float MAX_TRACTOR_LENGTH = 20;
@@ -446,7 +448,16 @@ public class TractorBeamControls : MonoBehaviour
             float fuelAmount = fuelScript.CollectFuel();
             _player.gainFuel(fuelAmount);
         }
-   
+    
+        if (_tractorStick.collider.name == "ShipPart")
+        {
+            // relay part destroyed
+            Destroy(_tractorStick.collider.gameObject);
+            partCollected = true;
+            
+        }
+
+
         TractorConnectSound.Play();
     }
 
