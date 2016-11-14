@@ -6,7 +6,7 @@ public class MoveableObject : MonoBehaviour
 	//PUBLIC VARIABLES
 	public bool drift, rotateActivated, splitactivated;
 	public float objectSize = 2; // small 1, medium 2, large 3 
-    public GameObject splitter, splitterShard;
+    public GameObject splitter, splitterShard, fuelDrop;
     public float splitterX, splitterY;
     public float splitShards = 4;
 
@@ -98,6 +98,11 @@ public class MoveableObject : MonoBehaviour
             {
                 
                 Instantiate(splitterShard, new Vector3(Random.Range(splitterX -objectSize*2, splitterX + objectSize*2), Random.Range(splitterY - objectSize*2, splitterY + objectSize*2), 0), Quaternion.identity);
+            }
+           
+            if (fuelDrop) //If fuel object was assigned, drop a fuel prefab on collision as well
+            {
+                Instantiate(fuelDrop, new Vector3(Random.Range(splitterX - objectSize * 2, splitterX + objectSize * 2), Random.Range(splitterY - objectSize * 2, splitterY + objectSize * 2), 0), Quaternion.identity);
             }
         }
 
