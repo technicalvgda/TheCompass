@@ -119,7 +119,6 @@ MonoBehaviour:
   maxFalloffDist: 0
   rayDamage: 0
   laserEndPt: {fileID: 4000011271564606}
-  laserSparks: {fileID: 1000012264335696}
   bounceIntensity: 0
   timeLimit: 0.5
 --- !u!114 &114000012347571424
@@ -230,7 +229,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     startLifetime:
-      scalar: 0.1
+      scalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -388,10 +387,10 @@ ParticleSystem:
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0, b: 0, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 1}
       minMaxState: 0
     startSize:
-      scalar: 0.5
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -900,7 +899,7 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 4282861567
         key1:
           serializedVersion: 2
           rgba: 4294967295

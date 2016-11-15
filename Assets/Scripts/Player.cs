@@ -100,6 +100,7 @@ public class Player : MonoBehaviour {
     PlayerShield shield;
 
     //Audio
+    private float MAX_VOLUME = 1; 
     public AudioSource AccelerateSound;
     bool engineOn = false;
     float accelerateVolume;
@@ -565,12 +566,15 @@ public class Player : MonoBehaviour {
     }
     private IEnumerator FadeSoundAndStart(AudioSource source)
     {
+        //set max volume to the current max
+        MAX_VOLUME = SoundSettingCompare("BGSlider");
+
         StopCoroutine(FadeSoundAndEnd(source));
         if (!source.isPlaying)
         {
             source.volume = 0;
             source.Play();
-            while (source.volume < 1)
+            while (source.volume < MAX_VOLUME)
             {
                 source.volume += 0.1f;
                 yield return new WaitForSeconds(0.3f);
@@ -578,6 +582,23 @@ public class Player : MonoBehaviour {
             
         }
         yield return null;
+    }
+
+    //send in the playerpref for "BGSlider" or "FXSlider" and compare it against master volume
+    //return the lower of the two
+    private float SoundSettingCompare(string prefName)
+    {
+       float compareVolume = PlayerPrefs.GetFloat(prefName);
+       float masterVolume = PlayerPrefs.GetFloat("MSTRSlider");
+       if (masterVolume > compareVolume)
+       {
+            return compareVolume;
+       }   
+       else
+       {
+            return masterVolume;
+       }
+            
     }
 
 }
