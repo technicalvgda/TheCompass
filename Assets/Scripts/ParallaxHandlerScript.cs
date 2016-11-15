@@ -4,10 +4,10 @@ using System.Collections;
 
 public class ParallaxHandlerScript : MonoBehaviour
 {
-    public GameObject boundTile;
+    //public GameObject boundTile;
     public GameObject edgeBoundTile;
 
-    public bool isTractored = false;
+    public bool hasForeground = true;
 
     //1 is closest layer, 3 is furthest layer (background panel)
     //front layer is the foreground
@@ -62,8 +62,12 @@ public class ParallaxHandlerScript : MonoBehaviour
         foreach (Transform child in layer3.transform)
         { child.GetComponent<SpriteRenderer>().sortingLayerName = "Background"; }
 
-        foreach (Transform child in frontLayer.transform)
-        { child.GetComponent<SpriteRenderer>().sortingLayerName = "Foreground"; }
+        if(hasForeground)
+        {
+            foreach (Transform child in frontLayer.transform)
+            { child.GetComponent<SpriteRenderer>().sortingLayerName = "Foreground"; }
+        }
+        
 
         //set layer math variables
         width1 = layer1.GetComponent<RectTransform>().rect.width;
@@ -72,8 +76,22 @@ public class ParallaxHandlerScript : MonoBehaviour
         height1 = layer1.GetComponent<RectTransform>().rect.height;
         height2 = layer2.GetComponent<RectTransform>().rect.height;
         height3 = layer3.GetComponent<RectTransform>().rect.height;
-        widthF = frontLayer.GetComponent<RectTransform>().rect.width;
-        heightF = frontLayer.GetComponent<RectTransform>().rect.height;
+
+        if(hasForeground)
+        {
+            widthF = frontLayer.GetComponent<RectTransform>().rect.width;
+            heightF = frontLayer.GetComponent<RectTransform>().rect.height;
+            halfWidthF = widthF / 2;
+            halfHeightF = heightF / 2;
+        }
+        else
+        {
+            widthF = 0;
+            heightF = 0;
+            halfWidthF = 0;
+            halfHeightF = 0;
+        }
+       
 
         halfWidth1 = width1 / 2;
         halfWidth2 = width2 / 2;
@@ -81,8 +99,7 @@ public class ParallaxHandlerScript : MonoBehaviour
         halfHeight1 = height1 / 2;
         halfHeight2 = height2 / 2;
         halfHeight3 = height3 / 2;
-        halfWidthF = widthF / 2;
-        halfHeightF = heightF / 2;
+       
 
         //spawn boundary tiles
         SpawnBoundaries();
@@ -98,7 +115,12 @@ public class ParallaxHandlerScript : MonoBehaviour
         HandleLayerMovement(layer1.transform, halfWidth1, halfHeight1);
         HandleLayerMovement(layer2.transform, halfWidth2, halfHeight2);
         HandleLayerMovement(layer3.transform, halfWidth3, halfHeight3);
-        HandleLayerMovement(frontLayer.transform, halfWidthF, halfHeightF);
+
+        if(hasForeground)
+        {
+            HandleLayerMovement(frontLayer.transform, halfWidthF, halfHeightF);
+        }
+       
 
     }
 
