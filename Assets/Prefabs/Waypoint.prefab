@@ -36,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010051712288}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.8, y: 14, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 7, y: 7, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -55,7 +55,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 3
 --- !u!114 &114000013703507622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176c7d5d326a5614c8044cd7aff9b48e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextLevelName: Level 0 TutorialDialogue
 --- !u!212 &212000012069772806
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -96,7 +97,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: b93c26b76a97e024da5781b31ef4fd1e, type: 3}
+  m_Color: {r: 1, g: 0.8482759, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0

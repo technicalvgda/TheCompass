@@ -4,13 +4,7 @@ using UnityEngine.UI;
 
 public class TextBoxManager : MonoBehaviour
 {
-    public GameObject textBox;
-    public GameObject toContinueTextBox;
-
-    public Text theText;
-    public Text toContinueText;
-
-    public Color textColor;
+    public Text speakerText,mainBodyText;
 
     public TextAsset textFile;
     public string[] textLines;
@@ -18,24 +12,20 @@ public class TextBoxManager : MonoBehaviour
     public int currentLine;
     public int endAtLine;
 
-    public Player player;
-
     public bool isActive;
 
     private bool isTyping = false;
     private bool cancelTyping = false;
 
     public float typeSpeed = 0.05f;
-
-
+	private RectTransform _rectTransform;
+	public float movementSpeed;
+	private bool  _dialogueIsFinished;
     // Use this for initialization
     void Start()
     {
-        player = FindObjectOfType<Player>();
-
-        
-
-        if (textFile != null)
+		_rectTransform = transform.GetComponent<RectTransform> ();
+		if (textFile != null)
         {
             textLines = (textFile.text.Split('\n'));
         }
@@ -58,13 +48,12 @@ public class TextBoxManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isActive)
-        {
-            return;
-        }
+		if (!isActive) {
+			return;
+		} 
 
         //theText.text = textLines[currentLine];
-        toContinueText.color = new Color(toContinueText.color.r, toContinueText.color.g, toContinueText.color.b, Mathf.PingPong(Time.time, 1));
+       // toContinueText.color = new Color(toContinueText.color.r, toContinueText.color.g, toContinueText.color.b, Mathf.PingPong(Time.time, 1));
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if(!isTyping)
@@ -92,33 +81,33 @@ public class TextBoxManager : MonoBehaviour
     private IEnumerator TextScroll(string lineOfText)
     {
         int letter = 0;
-        theText.text = "";
+		mainBodyText.text = "";
         isTyping = true;
         cancelTyping = false;
-        toContinueTextBox.SetActive(false);
+        //toContinueTextBox.SetActive(false);
         while(isTyping && !cancelTyping && (letter < lineOfText.Length - 1))
         {
-            theText.text += lineOfText[letter];
+			mainBodyText.text += lineOfText[letter];
             letter++;
             yield return new WaitForSeconds(typeSpeed);
         }
-        toContinueTextBox.SetActive(true);
-        theText.text = lineOfText;
+        //toContinueTextBox.SetActive(true);
+		mainBodyText.text = lineOfText;
         isTyping = false;
         cancelTyping = false;
     }
 
     public void EnableTextBox()
     {
-        textBox.SetActive(true);
-        isActive = true;
+        //textBox.SetActive(true);
+        
         StartCoroutine(TextScroll(textLines[currentLine]));
 
     }
 
     public void DisableTextBox()
     {
-        textBox.SetActive(false);
+        //textBox.SetActive(false);
         isActive = false;
     }
 
@@ -128,7 +117,43 @@ public class TextBoxManager : MonoBehaviour
         if(theText != null)
         {
             textLines = new string[1];
-            textLines = (theText.text.Split('\n'));
+            textLines = (theText.text.Split('@'));
         }
     }
+	public void setSpeakerNameText(string speakerName)
+	{
+		speakerText.text = speakerName;
+	}
+	public void startCommentaryDialogue()
+	{
+		
+		StartCoroutine (StartCommentary ());
+	}
+	IEnumerator StartCommentary()
+	{
+		//get stop position
+		Vector2 _newPos = new Vector2(_rectTransform.anchoredPosition.x, -15f);
+		//move the box up
+		while (_rectTransform.anchoredPosition.y < -16f) 
+		{
+			_rectTransform.anchoredPosition = Vector2.Lerp (_rectTransform.anchoredPosition, _newPos, Time.deltaTime * movementSpeed);
+			yield return new WaitForSeconds (0.01f);
+		}
+		//enable the commentary
+		isActive = true;
+		EnableTextBox ();
+		//wait while text is still active
+		while (isActive == true) 
+		{
+			yield return new WaitForSeconds (0.01f);
+		}
+		//get position off screen
+		_newPos = new Vector2(_rectTransform.anchoredPosition.x, -145f);
+		//move the box back down
+		while (_rectTransform.anchoredPosition.y > -144f) 
+		{
+			_rectTransform.anchoredPosition = Vector2.Lerp (_rectTransform.anchoredPosition, _newPos, Time.deltaTime * movementSpeed);
+			yield return new WaitForSeconds (0.01f);
+		}
+	}
 }

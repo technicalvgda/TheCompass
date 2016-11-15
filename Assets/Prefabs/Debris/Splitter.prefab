@@ -22,8 +22,9 @@ GameObject:
   - 212: {fileID: 212000014119418062}
   - 58: {fileID: 58000010398587474}
   - 50: {fileID: 50000010540688214}
-  - 114: {fileID: 114000011120730038}
   - 114: {fileID: 114000010279810914}
+  - 114: {fileID: 114000012579929440}
+  - 114: {fileID: 114000011737651068}
   m_Layer: 0
   m_Name: Splitter
   m_TagString: Debris
@@ -38,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011897695682}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 29.154636, y: -122.17175, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -90,7 +91,7 @@ MonoBehaviour:
   DetectionRange: 100
   arrowPrefab: {fileID: 1000013692013292, guid: 329a7898fc1955b42919de3af79b9ddd,
     type: 2}
---- !u!114 &114000011120730038
+--- !u!114 &114000011737651068
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -98,16 +99,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000011897695682}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d8a77b36775e3f4f960efb79de04e2a, type: 3}
+  m_Script: {fileID: 11500000, guid: c3b76245ee88a7a459e93944971438b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114000012579929440
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011897695682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 405aef21f13ff1e48ab9aa6ea25fc192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   drift: 0
-  objectSize: 5
+  rotateActivated: 0
+  splitactivated: 1
+  objectSize: 2
   splitter: {fileID: 1000011897695682}
   splitterShard: {fileID: 1000012885146664, guid: a639f13b11404a04ca136cdcd1021fd6,
     type: 2}
   splitterX: 0
   splitterY: 0
+  splitShards: 4
+  driftSpeed: 100
+  knockBackImpact: 500
+  isTractored: 0
+  angleCollisionDamage: 0
 --- !u!212 &212000014119418062
 SpriteRenderer:
   m_ObjectHideFlags: 1

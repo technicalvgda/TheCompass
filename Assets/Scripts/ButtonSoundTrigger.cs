@@ -14,11 +14,21 @@ public class ButtonSoundTrigger : EventTrigger
     public AudioClip ButtonHoverSound;
     public AudioClip ButtonClickSound;
     public AudioSource Source;
+	private float _masterVolume,_fxVolume;
     /*
     This script runs automatically whenever the mouse hovers over the UI
     object. It plays an instance of the hover sound (can be run simultaneously
     with other sounds)
     */
+	void Start()
+	{
+		_masterVolume = PlayerPrefs.GetFloat ("MSTRSlider");
+		_fxVolume = PlayerPrefs.GetFloat ("FXSlider");
+		if (_fxVolume > _masterVolume)
+			Source.volume = _masterVolume;
+		else
+			Source.volume = _fxVolume;
+	}
     public override void OnPointerEnter(PointerEventData eventData)
     {
         Source.PlayOneShot(ButtonHoverSound, 1f);

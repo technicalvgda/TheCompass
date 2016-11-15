@@ -33,7 +33,7 @@ public class VirtualJoystickMovement : MonoBehaviour
 	//Touch position vectors
 	private Vector3 _touchPos, _worldPos, _padPos;
 	//The varible to hold the name of the parent. This is to check for correct touch position for movement and tether joysticks
-	private string _parentName;
+	//private string _parentName;
 
     private int trackTouch;
 
@@ -44,7 +44,7 @@ public class VirtualJoystickMovement : MonoBehaviour
 		_joystickImg = transform.GetChild (0).GetComponent<Image> ();
 		_changeJoystickColor = true;
 		_joystickVisible = false;
-		_parentName = transform.parent.name;
+		//_parentName = transform.parent.name;
 	}
 
 	//Update is called once per frame

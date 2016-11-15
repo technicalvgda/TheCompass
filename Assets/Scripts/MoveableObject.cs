@@ -5,11 +5,12 @@ public class MoveableObject : MonoBehaviour
 {
 	//PUBLIC VARIABLES
 	public bool drift, rotateActivated, splitactivated;
-	public float objectSize = 5;
+	public float objectSize = 2; // small 1, medium 2, large 3 
     public GameObject splitter, splitterShard;
     public float splitterX, splitterY;
+    public float splitShards = 4;
 
-    private float driftSpeed = 100;
+    public float driftSpeed = 100;
 	private Rigidbody2D rb2d;
 	private bool iAmAsteroid = false;
 
@@ -29,6 +30,19 @@ public class MoveableObject : MonoBehaviour
 		//get rigidbody component 
 		rb2d = GetComponent<Rigidbody2D>();
 
+        if (transform.localScale.x < 0.65)
+        {
+            objectSize = 1;
+        }
+        else if (transform.localScale.x >= 0.65 && transform.localScale.x <= 1.35)
+        {
+            objectSize = 2;
+        }
+        else
+        {
+            objectSize = 3;
+        }
+
 		if (drift)
 		{
 			float x = Random.Range(-1f, 1f);
@@ -36,12 +50,6 @@ public class MoveableObject : MonoBehaviour
 			Vector2 direction = new Vector2(x, y).normalized;
 			rb2d.AddForce(direction * driftSpeed);
 		}
-
-        if(splitactivated)
-        {
-            splitterX = splitter.transform.position.x;
-            splitterY = splitter.transform.position.y;
-        }
         
 
         if ( this.gameObject.tag == "small" || this.gameObject.name == "AsteroidPlaceHolder" ) 
@@ -49,7 +57,11 @@ public class MoveableObject : MonoBehaviour
 			iAmAsteroid = true;
 		}
 
-	}
+        //give the object a random rotation
+        Vector3 euler = transform.eulerAngles;
+        euler.z = Random.Range(0f, 360f);
+        transform.eulerAngles = euler;
+    }
 
 	// Update is called once per frame
 	void Update ()
@@ -76,10 +88,16 @@ public class MoveableObject : MonoBehaviour
 	{
         if (splitactivated)
         {
+            
+            splitterX = splitter.transform.position.x;
+            splitterY = splitter.transform.position.y;
+
+            isTractored = false;
             Destroy(splitter);
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < splitShards; i++)
             {
-                Instantiate(splitterShard, new Vector3(splitterX, splitterY, 0), Quaternion.identity);
+                
+                Instantiate(splitterShard, new Vector3(Random.Range(splitterX -objectSize*2, splitterX + objectSize*2), Random.Range(splitterY - objectSize*2, splitterY + objectSize*2), 0), Quaternion.identity);
             }
         }
 

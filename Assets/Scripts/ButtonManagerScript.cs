@@ -17,7 +17,7 @@ public class ButtonManagerScript : MonoBehaviour {
 	public Text slotText;
 
 	/* Stores the gameobjects of the UI elements */ 
-	public GameObject mainMenu, saveMenu, optionMenu, loadMenu,pauseMenu,extrasMenu,cursorSelectionMenu,gameOverMenu;
+	public GameObject mainMenu, saveMenu, optionMenu, loadMenu,pauseMenu,extrasMenu,cursorSelectionMenu,gameOverMenu,confirmPrompt;
 
 	/* Stores the active screen (To be used in the onBack()) */ 
 	public GameObject activeOnScreen;
@@ -29,6 +29,7 @@ public class ButtonManagerScript : MonoBehaviour {
 	private bool _isPaused;
 	public GameObject _pauseCanvasMenuObject;
 	public GameOver _gameOverScript;
+	private string _nameOfButton;
 
 	/* Finds the UI elements and sets them to inactive. Also sets the slot text to the level that the user is on. */ 
 	void Start()
@@ -47,6 +48,8 @@ public class ButtonManagerScript : MonoBehaviour {
 		resolutionDropdown = optionMenu.GetComponentInChildren<Dropdown> ();
 		fullscreenToggle = optionMenu.GetComponentInChildren<Toggle> ();
 		slotText.text = PlayerPrefs.GetString ("onLevel");
+		confirmPrompt = GameObject.Find ("ConfirmMenu");
+
 		#if(UNITY_ANDROID)
 		{
 			resolutionDropdown.gameObject.SetActive(false);
@@ -58,7 +61,10 @@ public class ButtonManagerScript : MonoBehaviour {
 			Debug.Log("mobile");
 		}
 		#endif
-		saveMenu.SetActive (false);
+		if (confirmPrompt != null)
+			confirmPrompt.SetActive (false);
+		if(saveMenu != null)
+			saveMenu.SetActive (false);
 		optionMenu.SetActive(false);
 		if(cursorSelectionMenu != null)
 			cursorSelectionMenu.SetActive (false);
@@ -178,41 +184,23 @@ public class ButtonManagerScript : MonoBehaviour {
 
         //resolutionDropdownValueChangedHandler(resolutionDropdown);
         //if ESC button is pressed, change the pause state
-		if (Application.loadedLevelName == "MVPScene" || Application.loadedLevelName == "Level1Rough" || Application.loadedLevelName == "Level 0 Tutorial" || Application.loadedLevelName == "Level 1" || Application.loadedLevelName == "Level 2") 
-		{
-			if (_gameOverScript.isGameOver == false) 
-			{
-				if (Input.GetButtonDown ("Pause")) 
-				{
+		if (theseScenesAreActive ()) {
+			if (_gameOverScript.isGameOver == false) {
+				if (Input.GetButtonDown ("Pause")) {
 					_isPaused = !_isPaused;
+					//if paused, bring up pause menu && stop game time
+					if (_isPaused)
+					{
+						Pause ();
+					}
+					else 
+					{
+						Resume ();
+					}
+
 				}
 
-				//if paused, bring up pause menu && stop game time
-				if (_isPaused) {
-					pauseMenu.SetActive (true);
-					_pauseCanvasMenuObject.SetActive (true);
-					//PauseUI.enabled = true;
-					Time.timeScale = 0;
-				}
-
-				//if not paused, deactivate pause menu && continue game time
-				if (!_isPaused) {
-					pauseMenu.SetActive (false);
-					//PauseUI.enabled = false;
-					if (optionMenu.activeSelf == true)
-						optionMenu.SetActive (false);
-					if (saveMenu.activeSelf == true)
-						saveMenu.SetActive (false);
-					Time.timeScale = 1;
-
-					/*
-			if (optionsCanvas.enabled == true)
-				optionsCanvas.enabled = false;
-			Time.timeScale = 1;*/
-				}
-			} 
-			else if (_gameOverScript.isGameOver == true) 
-			{
+			} else if (_gameOverScript.isGameOver == true) {
 				Time.timeScale = 0;
 			}
 		}
@@ -229,6 +217,13 @@ public class ButtonManagerScript : MonoBehaviour {
 			onBack ();
 		}
 	}
+
+	/* Returns true if these scenes are active */ 
+	static bool theseScenesAreActive ()
+	{
+		return SceneManager.GetActiveScene ().name == "MVPScene" || SceneManager.GetActiveScene ().name == "Level1Rough" || SceneManager.GetActiveScene ().name == "Level 0 Tutorial" || SceneManager.GetActiveScene ().name == "Level 1" || SceneManager.GetActiveScene ().name == "Level 2" || SceneManager.GetActiveScene ().name == "Level 3" || SceneManager.GetActiveScene ().name == "Level 4" || SceneManager.GetActiveScene ().name == "Level 5";
+	}
+
 	/* Loads the level */ 
 	public void onLoad() 
 	{
@@ -245,7 +240,7 @@ public class ButtonManagerScript : MonoBehaviour {
 	/* Universal Back button that uses the activeOnScreen gameObject */ 
 	public void onBack()
 	{
-		if (Application.loadedLevelName == "MVPScene" || Application.loadedLevelName == "Level1Rough" || Application.loadedLevelName == "Level 0 Tutorial" || Application.loadedLevelName == "Level 1" || Application.loadedLevelName == "Level 2") 
+		if (theseScenesAreActive ()) 
 		{
 			if (saveMenu.activeSelf == true) 
 			{
@@ -262,9 +257,9 @@ public class ButtonManagerScript : MonoBehaviour {
 			} 
 			else if (_pauseCanvasMenuObject.activeSelf == false) 
 			{
+				activeOnScreen.SetActive (false);
 				_pauseCanvasMenuObject.SetActive (true);
-				optionMenu.SetActive (false);
-				activeOnScreen = pauseMenu;
+				activeOnScreen = _pauseCanvasMenuObject;
 				selectFirstButton ();
 			}
 			else 
@@ -275,11 +270,12 @@ public class ButtonManagerScript : MonoBehaviour {
 		} 
 		else 
 		{
-			if (saveMenu.activeSelf == true)
-			{
-				activeOnScreen.SetActive (false);
-				activeOnScreen = optionMenu;
-			} 
+			if (saveMenu != null) {
+				if (saveMenu.activeSelf == true) {
+					activeOnScreen.SetActive (false);
+					activeOnScreen = optionMenu;
+				}
+			}
 			else if (cursorSelectionMenu.activeSelf == true) 
 			{
 				activeOnScreen.SetActive (false);
@@ -294,8 +290,15 @@ public class ButtonManagerScript : MonoBehaviour {
 		}
 		if(activeOnScreen == null)
 		{
-			if(mainMenu != null)
-				mainMenu.SetActive (true);
+			if(mainMenu != null) 
+			{
+				mainMenu.SetActive (true);	
+			}
+			if(pauseMenu != null)
+			{
+				_pauseCanvasMenuObject.SetActive (true);
+			}
+			
 			selectFirstButton (); 
 
 		}
@@ -314,7 +317,7 @@ public class ButtonManagerScript : MonoBehaviour {
 	}
 
 	/* Saves the level */ 
-	public void promptYes()
+	public void savePromptYes()
 	{
 		//Random number generator to test the saving feature
 		PlayerPrefs.SetString("onLevel", "Level " + Random.Range(1,100));
@@ -324,7 +327,7 @@ public class ButtonManagerScript : MonoBehaviour {
 	}
 
 	/* Closes the prompt */ 
-	public void promptNo() 
+	public void savePromptNo() 
 	{
 		saveMenu.SetActive (false);
 	}
@@ -366,21 +369,46 @@ public class ButtonManagerScript : MonoBehaviour {
 	}
 
 	// Application closes
-	public void QuitBtn()
+	public void LeaveGameBtn(string command)
 	{
-		Application.Quit();
+		confirmPrompt.SetActive (true);
+		_pauseCanvasMenuObject.SetActive (false);
+		activeOnScreen = confirmPrompt;
+		selectFirstButton (); 
+		_nameOfButton = command;
+
+		//Application.Quit();
 	}
+	public void confirmYesButton()
+	{
+		if (_nameOfButton == "Quit")
+			Application.Quit ();
+		else if (_nameOfButton == "MainMenu")
+			SceneManager.LoadScene ("TitleMenu");
+	}
+
 
 	//Resume button method, changes pause state to original
 	public void Resume()
 	{
-		_isPaused = false;
+		pauseMenu.SetActive (false);
+		//PauseUI.enabled = false;
+		if (optionMenu.activeSelf == true)
+			optionMenu.SetActive (false);
+		if (saveMenu.activeSelf == true)
+			saveMenu.SetActive (false);
+		if (confirmPrompt.activeSelf == true)
+			confirmPrompt.SetActive (false);
+		Time.timeScale = 1;
 	}
 
 	// Pause button method, brings up the pause menu 
 	public void Pause()
 	{
-		_isPaused = true;
+		pauseMenu.SetActive (true);
+		_pauseCanvasMenuObject.SetActive (true);
+		//PauseUI.enabled = true;
+		Time.timeScale = 0;
 	}
 	public void extrasMenuEnable()
 	{
