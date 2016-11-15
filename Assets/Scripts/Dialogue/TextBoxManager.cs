@@ -9,6 +9,8 @@ public class TextBoxManager : MonoBehaviour
 
     public TextAsset textFile;
     public string[] textLines;
+    public AudioSource audioSource;
+    public AudioSource typingSoundAudioSource;
 
     public int currentLine;
     public int endAtLine;
@@ -74,7 +76,8 @@ public class TextBoxManager : MonoBehaviour
             if(!isTyping)
             {
 
-
+                AudioSource audio = GetComponent<AudioSource>();
+                audio.Stop();
                 currentLine += 1;
                 if(currentLine > endAtLine)
                 {
@@ -110,6 +113,14 @@ public class TextBoxManager : MonoBehaviour
 		mainBodyText.text = lineOfText;
         isTyping = false;
         cancelTyping = false;
+    }
+
+    public void setSourceClip(AudioClip clip)
+    {
+        AudioSource audio = GetComponent<AudioSource>();
+        audio.clip = clip;
+        audio.Play();
+        if (Input.GetKeyDown("space")) audio.Stop();
     }
 
     public void EnableTextBox()

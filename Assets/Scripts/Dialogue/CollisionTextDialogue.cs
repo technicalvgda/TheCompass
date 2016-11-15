@@ -9,6 +9,7 @@ public class CollisionTextDialogue : MonoBehaviour
 	public string speakerName;
     public int startLine;
     public int endLine;
+    public AudioClip audioClip;
 
     public TextBoxManager theTextBox;
 
@@ -31,6 +32,7 @@ public class CollisionTextDialogue : MonoBehaviour
 		if (Time.timeScale != 0) {
 			if (other.name == "PlayerPlaceholder") {
 				theTextBox.startCommentaryDialogue ();
+                theTextBox.setSourceClip(audioClip);
 				theTextBox.ReloadScript (textFile);
 				theTextBox.currentLine = startLine;
 				theTextBox.endAtLine = endLine;
@@ -54,7 +56,8 @@ public class CollisionTextDialogue : MonoBehaviour
 			if (other.name == "PlayerPlaceholder") {
 				theTextBox.startCommentaryDialogue ();
 				theTextBox.ReloadScript (textFile);
-				theTextBox.currentLine = startLine;
+                theTextBox.setSourceClip(audioClip);
+                theTextBox.currentLine = startLine;
 				theTextBox.endAtLine = endLine;
 				//theTextBox.EnableTextBox();
 				theTextBox.setSpeakerNameText (speakerName);
