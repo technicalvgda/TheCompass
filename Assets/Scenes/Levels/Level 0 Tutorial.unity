@@ -2186,6 +2186,11 @@ Prefab:
         type: 2}
       propertyPath: typingSoundAudioSource
       value: 
+      objectReference: {fileID: 975830380}
+    - target: {fileID: 114000013024907684, guid: dc990532c9eef8348b99712d28b9e6b5,
+        type: 2}
+      propertyPath: voiceOverAudioSource
+      value: 
       objectReference: {fileID: 975830379}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc990532c9eef8348b99712d28b9e6b5, type: 2}
@@ -4006,7 +4011,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0691f57c7f8eed74dbe885949c47886f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f02cfbdd6a32d2f48ab641c43f380286, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -4021,7 +4026,7 @@ AudioSource:
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
-  BypassReverbZones: 0
+  BypassReverbZones: 1
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -4080,7 +4085,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f02cfbdd6a32d2f48ab641c43f380286, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 0691f57c7f8eed74dbe885949c47886f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

@@ -9,7 +9,7 @@ public class TextBoxManager : MonoBehaviour
 
     public TextAsset textFile;
     public string[] textLines;
-    public AudioSource audioSource;
+    public AudioSource voiceOverAudioSource;
     public AudioSource typingSoundAudioSource;
 
     public int currentLine;
@@ -115,12 +115,12 @@ public class TextBoxManager : MonoBehaviour
         cancelTyping = false;
     }
 
-    public void setSourceClip(AudioClip clip)
+    public void setVoiceOverSourceClip(AudioClip clip)
     {
-        AudioSource audio = GetComponent<AudioSource>();
-        audio.clip = clip;
-        audio.Play();
-        if (Input.GetKeyDown("space")) audio.Stop();
+        //AudioSource audio = GetComponent<AudioSource>();
+        voiceOverAudioSource.clip = clip;
+        voiceOverAudioSource.Play();
+        if (Input.GetKeyDown("space")) voiceOverAudioSource.Stop();
     }
 
     public void EnableTextBox()
