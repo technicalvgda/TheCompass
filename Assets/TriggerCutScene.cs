@@ -23,6 +23,7 @@ public class TriggerCutScene : MonoBehaviour {
 	private string _playerName = "PlayerPlaceholder";
 	private bool _reachedDestination = false;
 	public float speed = 10;
+	private bool _wasTriggered = false;
 
 
 	// Use this for initialization
@@ -41,14 +42,14 @@ public class TriggerCutScene : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.name == _playerName) {
-			setReachedDestination (false);
-			_player = other;
-			_player.SendMessage ("setPlayerDestination", (Vector2)target.position);
-
-
+		if( !_wasTriggered){
+			if (other.name == _playerName) {
+				setReachedDestination (false);
+				_player = other;
+				_player.SendMessage ("setPlayerDestination", (Vector2)target.position);
+				_wasTriggered = true;
+			}
 		}
-		
 	}
 
 	public void setReachedDestination( bool hasReached)
