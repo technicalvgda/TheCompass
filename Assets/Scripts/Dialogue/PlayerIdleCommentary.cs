@@ -32,7 +32,7 @@ public class PlayerIdleCommentary : MonoBehaviour
 		{
 			_displayedIdleCommentary = true;
 			theTextBox.startCommentaryDialogue ();
-			theTextBox.setSourceClip(audioClip);
+			theTextBox.setVoiceOverSourceClip(audioClip);
 			theTextBox.ReloadScript (textFile);
 			theTextBox.currentLine = startLine;
 			theTextBox.endAtLine = endLine;

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FuelAt80PercentCommentary : MonoBehaviour
+public class FuelAtCertainPercentCommentary : MonoBehaviour
 {
 
 
@@ -11,7 +11,7 @@ public class FuelAt80PercentCommentary : MonoBehaviour
 	public int endLine;
 
 	public TextBoxManager theTextBox;
-
+	public float fuelLevelToActivate;
 	public bool destroyWhenActivated,timedDialogue;
 	public float timeUntilFinished;
 	private Player player;
@@ -27,7 +27,7 @@ public class FuelAt80PercentCommentary : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (player.getFuel01 () < 0.8f && !_triggeredOnce) 
+		if (player.getFuel01 () < fuelLevelToActivate && !_triggeredOnce) 
 		{
 			_triggeredOnce = true;
 			theTextBox.startCommentaryDialogue ();
