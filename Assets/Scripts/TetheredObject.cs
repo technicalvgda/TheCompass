@@ -17,6 +17,7 @@ public class TetheredObject : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col)
     {
+        if (col.gameObject.name == "Enemy") // if tethered object collides with an enemy object
         {
             TetheredHealth -= 1; // tethered health loses 1 health point 
             if (TetheredHealth <= 0) // if tethered health reaches zero or below
