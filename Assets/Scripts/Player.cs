@@ -67,12 +67,8 @@ public class Player : MonoBehaviour {
 	private bool restrictPlayerControl = false;
 
 	//handles player movement for cutscenes
-	private Vector2 playerDestination = new Vector2 (0, 0);
-	private Vector2 cutscenePlayerStartPos = new Vector2 (0, 0);
-	private bool disablePlayerControl = false;
-	private float cutsceneLerpTime = 1f;
-	private float remainingLerpTime = 0f;
-
+	private Vector2 _playerDestination = new Vector2 (0, 0);
+	private bool _disablePlayerControl = false;
 
 	//Values for boundary dimensions
 	public int maxXBoundary = 0;
@@ -172,7 +168,7 @@ public class Player : MonoBehaviour {
 	private void ControlPlayer()
 	{
 		//Removes player control if doing U-Turn for a set time
-		if (!disablePlayerControl && currentuTurnTime <= 0 ) {
+		if (!_disablePlayerControl && currentuTurnTime <= 0 ) {
 			if (playerMovementControlScheme == 1) {
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
 				/*
@@ -383,9 +379,9 @@ public class Player : MonoBehaviour {
 	}
 
 	//Disable player control and takes it to a determined destination
-	public void movePlayer(float speed)
+	public void cutSceneMovePlayer(float speed)
 	{
-		Vector2 deltaDestination = (playerDestination - (Vector2)transform.position).normalized;
+		Vector2 deltaDestination = (_playerDestination - (Vector2)transform.position).normalized;
 
 		//Debug.Log (deltaDestination);
 		rb2d.AddForce (deltaDestination * speed);
@@ -397,8 +393,9 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	public void setPlayerDestination( Vector2 dest ) {
-		playerDestination = dest;
+	public void setPlayerDestination( Vector2 dest ) 
+	{
+		_playerDestination = dest;
 	}
 
 	public void resetUTurnTime()
@@ -408,7 +405,7 @@ public class Player : MonoBehaviour {
 
 	private void setDisablePlayerControl(bool value) 
 	{
-		disablePlayerControl = value;
+		_disablePlayerControl = value;
 	}
 
 	public void setPlayerExitPos(Vector2 exitPos)
