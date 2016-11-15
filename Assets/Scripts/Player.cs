@@ -64,7 +64,15 @@ public class Player : MonoBehaviour {
 	const float U_TURN_TIME = 0.01f;
 	private Vector2 playerExitPos = new Vector2(0, 0);
 	private Vector2 oppositeDirection = new Vector2(0, 0);
+	private bool restrictPlayerControl = false;
+
+	//handles player movement for cutscenes
+	private Vector2 playerDestination = new Vector2 (0, 0);
+	private Vector2 cutscenePlayerStartPos = new Vector2 (0, 0);
 	private bool disablePlayerControl = false;
+	private float cutsceneLerpTime = 1f;
+	private float remainingLerpTime = 0f;
+
 
 	//Values for boundary dimensions
 	public int maxXBoundary = 0;
@@ -134,7 +142,7 @@ public class Player : MonoBehaviour {
         playerPos = transform.position;
 
 		//Function to handle player movement
-		ControlPlayer();
+		ControlPlayer ();
         LoseFuel();
         
 
@@ -164,45 +172,41 @@ public class Player : MonoBehaviour {
 	private void ControlPlayer()
 	{
 		//Removes player control if doing U-Turn for a set time
-		if (currentuTurnTime <= 0)
-		{
-			if (playerMovementControlScheme == 1)
-			{
+		if (!disablePlayerControl && currentuTurnTime <= 0 ) {
+			if (playerMovementControlScheme == 1) {
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
-                /*
+				/*
 			    Controls player movement
 				    A and D rotates player
 				    W and S accelerates and decelerates player
 			    */
-                float rotation = Input.GetAxis("Horizontal");
-				float acceleration = Input.GetAxis("Vertical");
+				float rotation = Input.GetAxis ("Horizontal");
+				float acceleration = Input.GetAxis ("Vertical");
 
-				if (acceleration == 0f){
+				if (acceleration == 0f) {
 					_enginePower = 0f;
-                    //stop accelerate sound
-                    if(engineOn)
-                    {
-                        engineOn = false;
-                        StartCoroutine(FadeSoundAndEnd(AccelerateSound));   
-                    }
+					//stop accelerate sound
+					if (engineOn) {
+						engineOn = false;
+						StartCoroutine (FadeSoundAndEnd (AccelerateSound));   
+					}
                    
                     
-                } else {
+				} else {
 					_enginePower += Time.deltaTime * LINEAR_ENGINE_POWER_COEFFICIENT;
-					_enginePower = Mathf.Clamp(_enginePower, 0, MAX_ENGINE_POWER);
-                    //play accelerate sound
-                    if(!engineOn)
-                    {
-                        engineOn = true;
-                        StartCoroutine(FadeSoundAndStart(AccelerateSound));
-                    }
+					_enginePower = Mathf.Clamp (_enginePower, 0, MAX_ENGINE_POWER);
+					//play accelerate sound
+					if (!engineOn) {
+						engineOn = true;
+						StartCoroutine (FadeSoundAndStart (AccelerateSound));
+					}
                     
 
-                }
+				}
 
-				transform.Rotate(new Vector3(0, 0, -rotationSpeed * rotation));
+				transform.Rotate (new Vector3 (0, 0, -rotationSpeed * rotation));
 
-				rb2d.AddForce(transform.up * ((_enginePower * nebulaMultiplier) - tractorSlow) * acceleration);
+				rb2d.AddForce (transform.up * ((_enginePower * nebulaMultiplier) - tractorSlow) * acceleration);
 #elif UNITY_IOS || UNITY_ANDROID
 				/*for mobile build the movement is determined by the joystick 
 				* left or right rotates the player
@@ -235,12 +239,10 @@ public class Player : MonoBehaviour {
 				rb2d.AddForce(transform.up * ((_enginePower * nebulaMultiplier) - tractorSlow) * acceleration);
 #endif
 
-            }
-            else if (playerMovementControlScheme == 2)
-			{
+			} else if (playerMovementControlScheme == 2) {
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
-                //Store the current horizontal input in the float moveHorizontal.
-                float moveHorizontal = Input.GetAxis ("Horizontal");
+				//Store the current horizontal input in the float moveHorizontal.
+				float moveHorizontal = Input.GetAxis ("Horizontal");
 
 				//Store the current vertical input in the float moveVertical.
 				float moveVertical = Input.GetAxis ("Vertical");
@@ -249,14 +251,10 @@ public class Player : MonoBehaviour {
                  * Disables player control until player is either not inputting movement or away from where they were initially heading
                  * NOTE: the reason why the comparison is  <= 0 is because the opposite direction is inversed when passing the point of entry
                  */
-				if (disablePlayerControl)
-				{
-					if ((moveHorizontal * oppositeDirection.x) <= 0 && (moveVertical * oppositeDirection.y) <= 0)
-					{
-						disablePlayerControl = false;
-					}
-					else
-					{
+				if (restrictPlayerControl) {
+					if ((moveHorizontal * oppositeDirection.x) <= 0 && (moveVertical * oppositeDirection.y) <= 0) {
+						restrictPlayerControl = false;
+					} else {
 						moveVertical = 0;
 						moveHorizontal = 0;
 					}
@@ -268,34 +266,31 @@ public class Player : MonoBehaviour {
 
 				//Increase force the longer movement direction is inputted
 				//Resets when input is in neutral position
-				if (movement.magnitude == 0f){
+				if (movement.magnitude == 0f) {
 					_enginePower = 0f;
-                    //stop accelerate sound
-                    if (engineOn)
-                    {
-                        engineOn = false;
-                        StartCoroutine(FadeSoundAndEnd(AccelerateSound));
-                    }
-                } else {
+					//stop accelerate sound
+					if (engineOn) {
+						engineOn = false;
+						StartCoroutine (FadeSoundAndEnd (AccelerateSound));
+					}
+				} else {
 					_enginePower += Time.deltaTime * LINEAR_ENGINE_POWER_COEFFICIENT;
-					_enginePower = Mathf.Clamp(_enginePower, 0, MAX_ENGINE_POWER);
-                    //play accelerate sound
-                    if (!engineOn)
-                    {
-                        engineOn = true;
-                        StartCoroutine(FadeSoundAndStart(AccelerateSound));
-                    }
-                }
+					_enginePower = Mathf.Clamp (_enginePower, 0, MAX_ENGINE_POWER);
+					//play accelerate sound
+					if (!engineOn) {
+						engineOn = true;
+						StartCoroutine (FadeSoundAndStart (AccelerateSound));
+					}
+				}
 
 
-                //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
-				rb2d.AddForce(movement * ((_enginePower * nebulaMultiplier) - tractorSlow));
+				//Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
+				rb2d.AddForce (movement * ((_enginePower * nebulaMultiplier) - tractorSlow));
 
-                //Rotates front of ship to direction of movement
-                if (movement != Vector2.zero)
-				{
-					float angle = Mathf.Atan2(-movement.x, movement.y) * Mathf.Rad2Deg;
-					transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(angle,Vector3.forward), Time.deltaTime * rotationSpeed);
+				//Rotates front of ship to direction of movement
+				if (movement != Vector2.zero) {
+					float angle = Mathf.Atan2 (-movement.x, movement.y) * Mathf.Rad2Deg;
+					transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.AngleAxis (angle, Vector3.forward), Time.deltaTime * rotationSpeed);
 				}
 
 
@@ -337,12 +332,12 @@ public class Player : MonoBehaviour {
 
 
 
-            }
+			}
+		}
 
-        }
-		currentuTurnTime = uTurnPlayer(currentuTurnTime); 
+		currentuTurnTime = uTurnPlayer (currentuTurnTime);
 	}
-
+		
 	private void checkIfPlayerOutOfBounds(int maxX, int maxY, int minX, int minY)
 	{
 		//Shows error if invalid values
@@ -376,7 +371,7 @@ public class Player : MonoBehaviour {
 			//The unit vector of the opposite the direction the player was initialling heading
 			oppositeDirection = (playerExitPos - (Vector2)transform.position).normalized;
 			rb2d.AddForce(oppositeDirection * ((PLAYER_SPEED * nebulaMultiplier) - tractorSlow));
-			disablePlayerControl = true;
+			restrictPlayerControl = true;
 			if (rb2d.velocity != Vector2.zero)
 			{
 				float angle = Mathf.Atan2(-(oppositeDirection.x), oppositeDirection.y) * Mathf.Rad2Deg;
@@ -386,10 +381,34 @@ public class Player : MonoBehaviour {
 		}
 		return lengthOfTime;
 	}
-   
+
+	//Disable player control and takes it to a determined destination
+	public void movePlayer(float speed)
+	{
+		Vector2 deltaDestination = (playerDestination - (Vector2)transform.position).normalized;
+
+		//Debug.Log (deltaDestination);
+		rb2d.AddForce (deltaDestination * speed);
+		setDisablePlayerControl (true);
+		if (rb2d.velocity != Vector2.zero)
+		{
+			float angle = Mathf.Atan2(-(deltaDestination.x), deltaDestination.y) * Mathf.Rad2Deg;
+			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * rotationSpeed);
+		}
+	}
+
+	public void setPlayerDestination( Vector2 dest ) {
+		playerDestination = dest;
+	}
+
 	public void resetUTurnTime()
 	{
 		currentuTurnTime = U_TURN_TIME;
+	}
+
+	private void setDisablePlayerControl(bool value) 
+	{
+		disablePlayerControl = value;
 	}
 
 	public void setPlayerExitPos(Vector2 exitPos)
