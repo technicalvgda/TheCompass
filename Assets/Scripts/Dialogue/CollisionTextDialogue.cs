@@ -5,15 +5,16 @@ public class CollisionTextDialogue : MonoBehaviour
 {
 
 
-    public TextAsset theText;
+    public TextAsset textFile;
 	public string speakerName;
     public int startLine;
     public int endLine;
+    public AudioClip audioClip;
 
     public TextBoxManager theTextBox;
 
-    public bool destroyWhenActivated;
-
+    public bool destroyWhenActivated,timedDialogue;
+	public float timeUntilFinished;
 	// Use this for initialization
 	void Start ()
     {
@@ -27,20 +28,49 @@ public class CollisionTextDialogue : MonoBehaviour
 	}
 
     void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.name == "PlayerPlaceholder")
-        {
-			theTextBox.startCommentaryDialogue();
-            theTextBox.ReloadScript(theText);
-            theTextBox.currentLine = startLine;
-            theTextBox.endAtLine = endLine;
-            //theTextBox.EnableTextBox();
-			theTextBox.setSpeakerNameText (speakerName);
+	{
+		if (Time.timeScale != 0) {
+			if (other.name == "PlayerPlaceholder") {
+				theTextBox.startCommentaryDialogue ();
+                theTextBox.setVoiceOverSourceClip(audioClip);
+				theTextBox.ReloadScript (textFile);
+				theTextBox.currentLine = startLine;
+				theTextBox.endAtLine = endLine;
+				//theTextBox.EnableTextBox();
+				theTextBox.setSpeakerNameText (speakerName);
 
-            if(destroyWhenActivated)
-            {
-                Destroy(gameObject);
-            }
-        }
-    }
+				if (timedDialogue) 
+				{
+					theTextBox.activateTimedCommentary (timeUntilFinished);
+				}
+				if (destroyWhenActivated) 
+				{
+					Destroy (gameObject);
+				}
+			}
+		}
+	}
+	void OnTriggerStay2D(Collider2D other)
+	{
+		if (Time.timeScale != 0) {
+			if (other.name == "PlayerPlaceholder") {
+				theTextBox.startCommentaryDialogue ();
+				theTextBox.ReloadScript (textFile);
+                theTextBox.setVoiceOverSourceClip(audioClip);
+                theTextBox.currentLine = startLine;
+				theTextBox.endAtLine = endLine;
+				//theTextBox.EnableTextBox();
+				theTextBox.setSpeakerNameText (speakerName);
+
+				if (timedDialogue) 
+				{
+					theTextBox.activateTimedCommentary (timeUntilFinished);
+				}
+				if (destroyWhenActivated) 
+				{
+					Destroy (gameObject);
+				}
+			}
+		}
+	}
 }
