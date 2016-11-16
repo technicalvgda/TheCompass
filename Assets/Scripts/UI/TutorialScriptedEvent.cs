@@ -19,6 +19,7 @@ public class TutorialScriptedEvent : MonoBehaviour {
 	private float _backgroundVolume;
 	private float _masterVolume;
 	private float _volume;
+	public bool skipIntro;
 	// Use this for initialization
 	void Start () {
 		buttonManagerScript.enterCutscene ();
@@ -30,7 +31,13 @@ public class TutorialScriptedEvent : MonoBehaviour {
 		else
 			_volume = _masterVolume;
 		backgroundAudioSource.volume = 0;
-		StartCoroutine (TutorialIntro ());
+		if (skipIntro == true) 
+		{
+			blackScreen.color = Color.clear;
+			text.color = Color.clear;
+		}
+		else
+			StartCoroutine (TutorialIntro ());
 	}
 	
 	// Update is called once per frame

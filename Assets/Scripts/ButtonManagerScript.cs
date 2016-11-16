@@ -45,9 +45,12 @@ public class ButtonManagerScript : MonoBehaviour {
 		eventSystem = GameObject.Find ("EventSystem");
 		gameOverMenu = GameObject.FindGameObjectWithTag ("GameOverMenu");
 		es = eventSystem.GetComponent<EventSystem> ();
-		resolutionDropdown = optionMenu.GetComponentInChildren<Dropdown> ();
-		fullscreenToggle = optionMenu.GetComponentInChildren<Toggle> ();
-		slotText.text = PlayerPrefs.GetString ("onLevel");
+		if (optionMenu != null) {
+			resolutionDropdown = optionMenu.GetComponentInChildren<Dropdown> ();
+			fullscreenToggle = optionMenu.GetComponentInChildren<Toggle> ();
+		}
+		if(slotText != null)
+			slotText.text = PlayerPrefs.GetString ("onLevel");
 		confirmPrompt = GameObject.Find ("ConfirmMenu");
 
 		#if(UNITY_ANDROID)
@@ -65,7 +68,8 @@ public class ButtonManagerScript : MonoBehaviour {
 			confirmPrompt.SetActive (false);
 		if(saveMenu != null)
 			saveMenu.SetActive (false);
-		optionMenu.SetActive(false);
+		if(optionMenu != null)
+			optionMenu.SetActive(false);
 		if(cursorSelectionMenu != null)
 			cursorSelectionMenu.SetActive (false);
 		if(extrasMenu != null)
@@ -219,7 +223,20 @@ public class ButtonManagerScript : MonoBehaviour {
 	/* Returns true if these scenes are active */ 
 	static bool theseScenesAreActive ()
 	{
-		return SceneManager.GetActiveScene ().name == "MVPScene" || SceneManager.GetActiveScene ().name == "Level1Rough" || SceneManager.GetActiveScene ().name == "Level 0 Tutorial" || SceneManager.GetActiveScene ().name == "Level 1" || SceneManager.GetActiveScene ().name == "Level 2" || SceneManager.GetActiveScene ().name == "Level 3" || SceneManager.GetActiveScene ().name == "Level 4" || SceneManager.GetActiveScene ().name == "Level 5";
+		return SceneManager.GetActiveScene ().name == "MVPScene" || 
+			SceneManager.GetActiveScene ().name == "Level1Rough" || 
+			SceneManager.GetActiveScene ().name == "Level 0 Tutorial" || 
+			SceneManager.GetActiveScene ().name == "Level 1" || 
+			SceneManager.GetActiveScene ().name == "Level 2" || 
+			SceneManager.GetActiveScene ().name == "Level 3" || 
+			SceneManager.GetActiveScene ().name == "Level 4" || 
+			SceneManager.GetActiveScene ().name == "Level 5" ||
+			SceneManager.GetActiveScene ().name == "Level 0 TutorialDialogue" ||
+			SceneManager.GetActiveScene ().name == "Level 1 Dialogue" ||
+			SceneManager.GetActiveScene ().name == "Level 2 Dialogue" ||
+			SceneManager.GetActiveScene ().name == "Level 3 Dialogue" ||
+			SceneManager.GetActiveScene ().name == "Level 4 Dialogue" ||
+			SceneManager.GetActiveScene ().name == "Level 5 Dialogue";
 	}
 
 	/* Loads the level */ 
