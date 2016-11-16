@@ -38,6 +38,23 @@ GameObject:
   - 4: {fileID: 4000013733177050}
   m_Layer: 0
   m_Name: Level1Commentary
+  m_TagString: CommentaryObject
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000011007151386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000011203052372}
+  - 114: {fileID: 114000013692267366}
+  - 114: {fileID: 114000011061409468}
+  m_Layer: 0
+  m_Name: PlayerIdleCommentary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,6 +76,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1000012498465080
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000012120502766}
+  - 114: {fileID: 114000014262564632}
+  m_Layer: 0
+  m_Name: PlayerHealthLowCommentary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000013077021176
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,6 +103,22 @@ GameObject:
   - 114: {fileID: 114000013801229078}
   m_Layer: 0
   m_Name: FuelAt50Perent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000013565673702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000014042448622}
+  - 114: {fileID: 114000013329790856}
+  m_Layer: 0
+  m_Name: PlayerWithinRangeOfEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,6 +183,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000013733177050}
   m_RootOrder: 1
+--- !u!4 &4000011203052372
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011007151386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000013733177050}
+  m_RootOrder: 7
 --- !u!4 &4000011818237424
 Transform:
   m_ObjectHideFlags: 1
@@ -147,6 +209,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000013733177050}
   m_RootOrder: 3
+--- !u!4 &4000012120502766
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012498465080}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000013733177050}
+  m_RootOrder: 6
 --- !u!4 &4000012335685028
 Transform:
   m_ObjectHideFlags: 1
@@ -189,6 +264,9 @@ Transform:
   - {fileID: 4000013680086076}
   - {fileID: 4000011818237424}
   - {fileID: 4000014003497026}
+  - {fileID: 4000014042448622}
+  - {fileID: 4000012120502766}
+  - {fileID: 4000011203052372}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &4000014003497026
@@ -204,6 +282,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000013733177050}
   m_RootOrder: 4
+--- !u!4 &4000014042448622
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013565673702}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000013733177050}
+  m_RootOrder: 5
 --- !u!50 &50000010590533056
 Rigidbody2D:
   serializedVersion: 2
@@ -444,6 +535,17 @@ MonoBehaviour:
   destroyWhenActivated: 1
   timedDialogue: 1
   timeUntilFinished: 10
+--- !u!114 &114000011061409468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011007151386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8de28bdf1861dbf48a79e96ec74c019e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000011398815484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -505,6 +607,48 @@ MonoBehaviour:
   destroyWhenActivated: 1
   timedDialogue: 1
   timeUntilFinished: 10
+--- !u!114 &114000013329790856
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013565673702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8908b88ffbeff7d4997a6d6be643a2d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textFile: {fileID: 4900000, guid: 348a2857aa4f41a47a9b78e14cf9c855, type: 3}
+  speakerName: OFELIA
+  startLine: 0
+  endLine: 0
+  audioClip: {fileID: 0}
+  theTextBox: {fileID: 0}
+  destroyWhenActivated: 1
+  timedDialogue: 1
+  timeUntilFinished: 10
+--- !u!114 &114000013692267366
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011007151386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a4e2d4fc6ab7a45bcec7308aa93046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textFile: {fileID: 4900000, guid: 9125e09a05c80db4694bb63e8f85fc98, type: 3}
+  speakerName: OFELIA
+  startLine: 0
+  endLine: 0
+  audioClip: {fileID: 0}
+  theTextBox: {fileID: 0}
+  destroyWhenActivated: 1
+  timedDialogue: 1
+  timeUntilFinished: 10
+  idleTimerScript: {fileID: 114000011061409468}
+  displayMessageTime: 30
 --- !u!114 &114000013801229078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -525,3 +669,24 @@ MonoBehaviour:
   destroyWhenActivated: 1
   timedDialogue: 1
   timeUntilFinished: 10
+--- !u!114 &114000014262564632
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012498465080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df07b8526858b4d40ae6eea40f6aac42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textFile: {fileID: 4900000, guid: c02bb271670ee5c468a16f660abedb40, type: 3}
+  speakerName: OFELIA
+  startLine: 0
+  endLine: 0
+  audioClip: {fileID: 0}
+  theTextBox: {fileID: 0}
+  destroyWhenActivated: 1
+  timedDialogue: 1
+  timeUntilFinished: 10
+  healthToActivateCommentary: 30
