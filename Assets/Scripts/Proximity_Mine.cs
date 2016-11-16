@@ -21,7 +21,18 @@ public class Proximity_Mine : MonoBehaviour {
 		_sprite = GetComponent<SpriteRenderer>();
 	}
 
-	void OnTriggerEnter2D(Collider2D col)
+    void Update()
+    {
+        if (Vector2.Distance(_player.transform.position, transform.position) < 10 )
+        {
+            _sprite.sprite = spriteMat;
+            _player.takeDamage(damage);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().AddForce((_player.transform.position - transform.position).normalized * pushForce * 3f, ForceMode2D.Impulse);
+            Destroy(this.gameObject, 0.1f);
+        }
+    }
+
+	/*void OnTriggerEnter2D(Collider2D col)
 	{
 		//adds all objects inside the wreck's collider into an array
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, explDiameter);
@@ -52,5 +63,5 @@ public class Proximity_Mine : MonoBehaviour {
 			//delayed destroy for purpose of explosive effect
 			Destroy(this.gameObject, 0.1f);
 		}
-	}
+	}*/
 }
