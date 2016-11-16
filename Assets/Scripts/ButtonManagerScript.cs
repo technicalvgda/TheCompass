@@ -30,7 +30,7 @@ public class ButtonManagerScript : MonoBehaviour {
 	public GameObject _pauseCanvasMenuObject;
 	public GameOver _gameOverScript;
 	private string _nameOfButton;
-
+	private bool _inCutscene;
 	/* Finds the UI elements and sets them to inactive. Also sets the slot text to the level that the user is on. */ 
 	void Start()
 	{
@@ -184,27 +184,25 @@ public class ButtonManagerScript : MonoBehaviour {
 
         //resolutionDropdownValueChangedHandler(resolutionDropdown);
         //if ESC button is pressed, change the pause state
-		if (theseScenesAreActive ()) {
-			if (_gameOverScript.isGameOver == false) {
-				if (Input.GetButtonDown ("Pause")) {
-					_isPaused = !_isPaused;
-					//if paused, bring up pause menu && stop game time
-					if (_isPaused)
-					{
-						Pause ();
-					}
-					else 
-					{
-						Resume ();
+		if (_inCutscene == false) {
+			if (theseScenesAreActive ()) {
+				if (_gameOverScript.isGameOver == false) {
+					if (Input.GetButtonDown ("Pause")) {
+						_isPaused = !_isPaused;
+						//if paused, bring up pause menu && stop game time
+						if (_isPaused) {
+							Pause ();
+						} else {
+							Resume ();
+						}
+
 					}
 
+				} else if (_gameOverScript.isGameOver == true) {
+					Time.timeScale = 0;
 				}
-
-			} else if (_gameOverScript.isGameOver == true) {
-				Time.timeScale = 0;
 			}
 		}
-
 		//Switches to joystick/keyboard mode when a vertical/horizontal axis is moved. See Edit>Project Settings>Input
 		if((Mathf.Abs(Input.GetAxis("Vertical")) > 0 || Mathf.Abs(Input.GetAxis("Horizontal")) > 0) && es.currentSelectedGameObject == null) 
 		{
@@ -499,6 +497,13 @@ public class ButtonManagerScript : MonoBehaviour {
 
 		}
 	}
-
+	public void enterCutscene()
+	{
+		_inCutscene = true;
+	}
+	public void exitCutscene()
+	{
+		_inCutscene = false;
+	}
 
 }
