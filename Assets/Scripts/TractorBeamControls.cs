@@ -26,6 +26,7 @@ public class TractorBeamControls : MonoBehaviour
 
     //PLAYER COMPONENTS
     private LineRenderer _tractorLine;
+    private LineRenderer _tractorOverlay;
     public GameObject beamEnd;
     private Player _player;
 
@@ -45,7 +46,8 @@ public class TractorBeamControls : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        _tractorLine = GetComponentInChildren<LineRenderer>();
+        _tractorLine = transform.FindChild("TractorBeam").GetComponent<LineRenderer>();//GetComponentInChildren<LineRenderer>();
+        _tractorOverlay = transform.FindChild("TractorOverlay").GetComponent<LineRenderer>();//GetComponentInChildren<LineRenderer>();
 
         _player = GetComponent<Player>();
         
@@ -281,6 +283,7 @@ public class TractorBeamControls : MonoBehaviour
         {
             //enable the beam
             _tractorLine.enabled = true;
+            _tractorOverlay.enabled = true;
             beamEnd.SetActive(true);
 
             //get mouse click in world coordinates
@@ -288,6 +291,8 @@ public class TractorBeamControls : MonoBehaviour
 
             //make sure starting position of tractor beam is at the ship
             _tractorLine.SetPosition(0, transform.position);
+            _tractorOverlay.SetPosition(0, transform.position);
+            
 
             //if the tractor beam is connected
             if (_hitDebris && objectScript.isTractored)
@@ -296,6 +301,8 @@ public class TractorBeamControls : MonoBehaviour
                 //_tractorLine.SetColors(Color.white, Color.white);
                 //draw a line to show tractor beam connection
                 _tractorLine.SetPosition(1, _tractorStick.transform.position);
+                _tractorOverlay.SetPosition(1, _tractorStick.transform.position);
+                beamEnd.transform.position = _tractorStick.transform.position;
 
             }
             else
@@ -321,10 +328,11 @@ public class TractorBeamControls : MonoBehaviour
 
                 //set the end of the beam to be where the endpoint variable is
                 _tractorLine.SetPosition(1, endPoint);
+                _tractorOverlay.SetPosition(1, endPoint);
                 //set the color of the beam to blue
                 //_tractorLine.SetColors(Color.blue, Color.blue);
                 Vector3 directionVector = (_tractorLine.transform.position - (Vector3)endPoint).normalized;
-                beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
+                //beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
                 beamEnd.transform.position = endPoint;
               
             }
@@ -334,6 +342,7 @@ public class TractorBeamControls : MonoBehaviour
         {
             //enable the beam
             _tractorLine.enabled = true;
+            _tractorOverlay.enabled = true;
             beamEnd.SetActive(true);
 
             //get mouse click in world coordinates
@@ -341,6 +350,7 @@ public class TractorBeamControls : MonoBehaviour
 
             //make sure starting position of tractor beam is at the ship
             _tractorLine.SetPosition(0, transform.position);
+            _tractorOverlay.SetPosition(0, transform.position);
 
             //if the tractor beam is connected
             if (_hitDebris && objectScript.isTractored)
@@ -349,6 +359,8 @@ public class TractorBeamControls : MonoBehaviour
                 //_tractorLine.SetColors(Color.white, Color.white);
                 //draw a line to show tractor beam connection
                 _tractorLine.SetPosition(1, _tractorStick.transform.position);
+                _tractorOverlay.SetPosition(1, _tractorStick.transform.position);
+                beamEnd.transform.position = _tractorStick.transform.position;
 
             }
             else
@@ -362,18 +374,22 @@ public class TractorBeamControls : MonoBehaviour
 
                 //set the end of the beam to be where the endpoint variable is
                 _tractorLine.SetPosition(1, endPoint);
+                _tractorOverlay.SetPosition(1, endPoint);
                 Vector3 directionVector = (_tractorLine.transform.position - (Vector3)endPoint).normalized;
-                beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
+                //beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
                 beamEnd.transform.position = endPoint;
                
                 //set the color of the beam to blue
                 // _tractorLine.SetColors(Color.blue, Color.blue);
             }
+
         }
         else
         {
             _tractorLine.SetPosition(1, transform.position);
+            _tractorOverlay.SetPosition(1, transform.position);
             _tractorLine.enabled = false;
+            _tractorOverlay.enabled = false;
             beamEnd.transform.position = transform.position;
             beamEnd.SetActive(false);
         }
@@ -382,6 +398,7 @@ public class TractorBeamControls : MonoBehaviour
         {
             //enable the beam
             _tractorLine.enabled = true;
+            _tractorOverlay.enabled = true;
             beamEnd.SetActive(true);
 
         }
@@ -421,6 +438,7 @@ public class TractorBeamControls : MonoBehaviour
         {
             _tractorLine.SetPosition(1, transform.position);
             _tractorLine.enabled = false;
+             _tractorOverlay.enabled = false;
             beamEnd.transform.position = transform.position;
             beamEnd.SetActive(false);
         }
