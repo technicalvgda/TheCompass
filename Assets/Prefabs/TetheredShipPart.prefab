@@ -27,7 +27,7 @@ GameObject:
   - 114: {fileID: 114000011785640186}
   m_Layer: 0
   m_Name: TetheredShipPart
-  m_TagString: small
+  m_TagString: TetheredPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,13 +93,10 @@ MonoBehaviour:
   objectSize: 3
   splitter: {fileID: 0}
   splitterShard: {fileID: 0}
-  splitterX: 0
-  splitterY: 0
+  fuelDrop: {fileID: 0}
   splitShards: 4
   driftSpeed: 100
-  knockBackImpact: 500
   isTractored: 0
-  angleCollisionDamage: 0
 --- !u!114 &114000011785640186
 MonoBehaviour:
   m_ObjectHideFlags: 1

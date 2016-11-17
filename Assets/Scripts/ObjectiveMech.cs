@@ -26,6 +26,18 @@ public class ObjectiveMech : MonoBehaviour {
 
             }
         }
+        else if(col.tag == "TetheredPart")
+        {
+            Debug.Log("COMPLETE,COMPLETE,COMPLETE");
+            if (nextLevelName != null)
+            {
+                SceneManager.LoadSceneAsync(nextLevelName);
+            }
+            else
+            {
+                Debug.Log("No scene set for next level on waypoint");
+            }
+        }
         
     }
 }
