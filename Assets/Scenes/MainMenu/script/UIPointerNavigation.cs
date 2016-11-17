@@ -26,6 +26,13 @@ public class UIPointerNavigation : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerEnter(PointerEventData eventData)
     {
         mousedOver = gameObject;
+
+        // The program occasionally coughs up a NullRefException around this part,
+        // so keep this around until that is sorted out.
+
+        if (sel == null)
+            Debug.Log("NULL detected in " + this.gameObject);
+
         sel.Select();
     }
 

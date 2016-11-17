@@ -39,6 +39,7 @@ GameObject:
   - 222: {fileID: 222000012149424418}
   - 114: {fileID: 114000012305807218}
   - 114: {fileID: 114000012112906224}
+  - 114: {fileID: 114000010028460746}
   - 95: {fileID: 95000010210370266}
   - 114: {fileID: 114000013397966048}
   m_Layer: 5
@@ -74,7 +75,7 @@ Animator:
   m_GameObject: {fileID: 1000012057406324}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9a2b1d4a3a84e6e4f95ade31151bf020, type: 2}
+  m_Controller: {fileID: 9100000, guid: 281a3f2bf843ced49853327d92034502, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 2
   m_ApplyRootMotion: 0
@@ -82,6 +83,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114000010028460746
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012057406324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536a716efede52c459020223a2d05fcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  current: {fileID: 0}
+  exit: 
+  enter: 
 --- !u!114 &114000010640513210
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,7 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
