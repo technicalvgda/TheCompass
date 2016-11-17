@@ -65,20 +65,21 @@ public class MoveableObject : MonoBehaviour
         //if this is a debris object and its colliding with player
 		if (gameObject.tag == "Debris" && col.gameObject.tag == "Player")
         {
+            //handle player damage and knockback
             if(col.gameObject.tag == "Player")
             {
                 Player playerObject = col.gameObject.GetComponent<Player>();
                 //calculate damage to deal, knockback is true
                 playerObject.takeDamage(CalculateAngularDamageAndKnockback(col, true));
             }
-            //TODO handled enemy damage and knockback
-            /*
+            //handled enemy damage and knockback
             if (col.gameObject.tag == "Enemy")
             {
                 EnemyCollision enemyObject = col.gameObject.GetComponent<EnemyCollision>();
-                enemyObject.takeDamage(CalculateAngularDamageAndKnockback(col));
+                //calculate damage to deal, knockback is true
+                enemyObject.TakeDamage(CalculateAngularDamageAndKnockback(col, true));
             }
-            */
+            
 
         }
 	}
