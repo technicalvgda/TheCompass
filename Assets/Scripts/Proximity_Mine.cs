@@ -23,7 +23,7 @@ public class Proximity_Mine : MonoBehaviour {
 
     void Update()
     {
-        if (Vector2.Distance(_player.transform.position, transform.position) < 10 )
+        if (Vector2.Distance(_player.transform.position, transform.position) < 7 )
         {
             _sprite.sprite = spriteMat;
             _player.takeDamage(damage);

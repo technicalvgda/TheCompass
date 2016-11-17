@@ -98,8 +98,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 166715776}
-  - 114: {fileID: 166715775}
   - 114: {fileID: 166715777}
+  - 114: {fileID: 166715775}
   m_Layer: 0
   m_Name: LaserBlaster
   m_TagString: Untagged
@@ -113,11 +113,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 166715774}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e0dfd87f504d3c4aac10fc88cff2e14, type: 3}
+  m_Script: {fileID: 11500000, guid: ce4554d44bf0b5e4d85d71307c720c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bounceIntensity: 5
+  timeLimit: 0.5
 --- !u!4 &166715776
 Transform:
   m_ObjectHideFlags: 0
@@ -140,14 +142,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 166715774}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 057b9434154769b4181ff5af43369fcb, type: 3}
+  m_Script: {fileID: 11500000, guid: fd18abc255a98bc4bb348127980377f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   laserProjectile: {fileID: 1000010883523684, guid: 3ffc0eaab3f57b44a957f50add493896,
     type: 2}
   timer: 0
   updown: 0
-  leftright: 1
+  leftright: 3
 --- !u!1 &175946066
 GameObject:
   m_ObjectHideFlags: 0
