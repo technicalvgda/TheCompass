@@ -15,7 +15,7 @@ public class EnemyTractorBeam : MonoBehaviour {
 	private float _tractorlength;
 	private RaycastHit2D _tractorStick;
     private bool _hitPlayer, _canPull = true;
-	private float MAX_TRACTOR_LENGTH = 20.0f;
+	public float MAX_TRACTOR_LENGTH = 20.0f;
 	private const float PULL_SPEED = 1.0f;
 	private LineRenderer _tractorLine, _tractorJunk;
 	private Vector3 _playerPos, _junkPos;

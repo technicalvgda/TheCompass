@@ -14,7 +14,7 @@ public class LaserBullet : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerscript = player.GetComponent<Player>();
-        bounceIntensity = 1.0f;
+        bounceIntensity = 5.0f;
 
     }
 
