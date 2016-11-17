@@ -9,7 +9,7 @@ public class DetectableObject : MonoBehaviour
     public float DetectionRange = 100;
     //Prefab for graphic displaying the direction the object is in.
     public GameObject arrowPrefab;
-
+	private PlayerWithinRangeOfEnemy _playerWithinRangeScript;
     //Cached components to reduce slow GetComponent<T>() calls. 
     Renderer _renderer;
     Rigidbody2D _rb2d;
@@ -24,6 +24,7 @@ public class DetectableObject : MonoBehaviour
         _rb2d = GetComponent<Rigidbody2D>();
         _arrow = (GameObject)Instantiate(arrowPrefab);
         _arrow.SetActive(false);
+		_playerWithinRangeScript = GameObject.FindGameObjectWithTag ("CommentaryObject").GetComponentInChildren<PlayerWithinRangeOfEnemy> ();
     }
     /*
     Check if this object meets all conditions. If yes, show arrow and update its position.
@@ -48,6 +49,14 @@ public class DetectableObject : MonoBehaviour
         //3) Is moving faster than the speed threshhold
         if (distance <= DetectionRange && !_renderer.isVisible && _rb2d.velocity.magnitude >= SpeedThreshhold)
         {
+			if (transform.tag == "Enemy") 
+			{
+				if (_playerWithinRangeScript != null) 
+				{
+					_playerWithinRangeScript.activateCommentary ();
+					_playerWithinRangeScript = null;
+				}
+			}
             _arrow.SetActive(true);
             UpdateArrow();
         }
