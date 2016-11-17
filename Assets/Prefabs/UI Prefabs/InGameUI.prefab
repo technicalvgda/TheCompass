@@ -1791,6 +1791,7 @@ GameObject:
   - 222: {fileID: 222000013726612472}
   - 114: {fileID: 114000012169990398}
   - 114: {fileID: 114000013366274196}
+  - 114: {fileID: 114000011622910692}
   m_Layer: 0
   m_Name: Minimap
   m_TagString: Untagged
@@ -2750,7 +2751,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f02cfbdd6a32d2f48ab641c43f380286, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2764,7 +2765,7 @@ AudioSource:
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
-  BypassReverbZones: 1
+  BypassReverbZones: 0
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -2898,7 +2899,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0691f57c7f8eed74dbe885949c47886f, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -4986,6 +4987,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000011622910692
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013161446926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8342a6ddb2904ae40826b46d714507cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slideSpeed: 300
 --- !u!114 &114000011624169806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11655,7 +11668,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -210, y: 0}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224000013565144728
