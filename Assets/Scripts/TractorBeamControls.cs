@@ -63,7 +63,7 @@ public class TractorBeamControls : MonoBehaviour
     {
         //update tractor beam line renderer
         TractorBeamRender();
-        
+
 
 
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
@@ -77,77 +77,81 @@ public class TractorBeamControls : MonoBehaviour
          *    the mouse it will maintain its velocity
          *        
          * */
-        //when left mouse button is clicked and held
 
-        if (Input.GetMouseButton(0))
+        //if the game is not paused or in a cutscene
+        if (Time.timeScale != 0f)
         {
-           
-            //get mouse click in world coordinates
-            _MouseClickedPoint = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
-            
-            //sends ray out to check if it hits an object when it does it records which object it hit
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, _MouseClickedPoint - transform.position, _tractorlength);
+            //when left mouse button is clicked and held
 
-            if (_tractorlength < MAX_TRACTOR_LENGTH && !_hitDebris)
+            if (Input.GetMouseButton(0))
             {
-                //Debug.DrawLine(transform.position, _MouseClickedPoint, Color.red);
-                _tractorlength++;
-            }
-            
-            //holds first object it hits and keeps it from hitting another object
-            if (!_hitDebris && hit)
-            {
-                //handles initial tractor beam connection
-                TractorConnects(hit);
-            }
 
-            //uses the initial object that was hit by the beam
-            if (_hitDebris && !objectScript.isTractored)
-            {
-                Debug.Log("TractorBeamed item destroyed");
-                TractorReleases();
-            }
-            else if (_hitDebris)
-            {
-                velocity = _tractorStick.rigidbody.velocity = (Vector2.Lerp(_MouseClickedPoint - _tractorStick.transform.position, _tractorStick.transform.position, Time.deltaTime) * PULL_SPEED / objectScript.objectSize);
+                //get mouse click in world coordinates
+                _MouseClickedPoint = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
 
-                //if the object has a MoveableObject script, store it and handle physics
-                //draw a line to show tractor beam connection
-                //Debug.DrawLine(transform.position, _tractorStick.transform.position);
+                //sends ray out to check if it hits an object when it does it records which object it hit
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, _MouseClickedPoint - transform.position, _tractorlength);
 
-                //move debris in direction of mouse with force (pullspeed/objectsize)
-                //if the object you have in your tractor beam hit you it will not gain the velocity of the ship
-
-                _tractorStick.transform.position = Vector2.Lerp(_tractorStick.transform.position, _MouseClickedPoint, Mathf.Lerp(0.01f,0f, Time.deltaTime));
-                /*if (hitMyself)
+                if (_tractorlength < MAX_TRACTOR_LENGTH && !_hitDebris)
                 {
-                    //Debug.Log(Vector2.Distance(_tractorStick.transform.position, this.transform.position));
-                    _tractorStick.rigidbody.velocity = (Vector2.Lerp(_MouseClickedPoint - _tractorStick.transform.position, _tractorStick.transform.position, Time.deltaTime) * PULL_SPEED / objectScript.objectSize);
-                }
-                else 
-                {
-                    _tractorStick.rigidbody.velocity = (Vector2.Lerp(_MouseClickedPoint - _tractorStick.transform.position, _tractorStick.transform.position, Time.deltaTime) * PULL_SPEED / objectScript.objectSize) + GetComponent<Rigidbody2D>().velocity;
-                }*/
-
-                //if the tractor beamed object is further than the max tractor push length will only be that far away
-                if ((Vector2.Distance(_tractorStick.transform.position, transform.position) - (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x)) > MAX_TRACTOR_PUSH)
-                {
-                    _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * (MAX_TRACTOR_PUSH + (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x));
+                    //Debug.DrawLine(transform.position, _MouseClickedPoint, Color.red);
+                    _tractorlength++;
                 }
 
-
-                //if the distance between the _mouse clicked point and the object is <1 the object will stop moving
-                    if ((Vector2.Distance(_tractorStick.transform.position, transform.position)- (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x)) > MAX_TRACTOR_PUSH)
+                //holds first object it hits and keeps it from hitting another object
+                if (!_hitDebris && hit)
                 {
+                    //handles initial tractor beam connection
+                    TractorConnects(hit);
+                }
+
+                //uses the initial object that was hit by the beam
+                if (_hitDebris && !objectScript.isTractored)
+                {
+                    Debug.Log("TractorBeamed item destroyed");
+                    TractorReleases();
+                }
+                else if (_hitDebris)
+                {
+                    velocity = _tractorStick.rigidbody.velocity = (Vector2.Lerp(_MouseClickedPoint - _tractorStick.transform.position, _tractorStick.transform.position, Time.deltaTime) * PULL_SPEED / objectScript.objectSize);
+
+                    //if the object has a MoveableObject script, store it and handle physics
+                    //draw a line to show tractor beam connection
+                    //Debug.DrawLine(transform.position, _tractorStick.transform.position);
+
+                    //move debris in direction of mouse with force (pullspeed/objectsize)
+                    //if the object you have in your tractor beam hit you it will not gain the velocity of the ship
+
+                    _tractorStick.transform.position = Vector2.Lerp(_tractorStick.transform.position, _MouseClickedPoint, Mathf.Lerp(0.01f, 0f, Time.deltaTime));
+                    /*if (hitMyself)
+                    {
+                        //Debug.Log(Vector2.Distance(_tractorStick.transform.position, this.transform.position));
+                        _tractorStick.rigidbody.velocity = (Vector2.Lerp(_MouseClickedPoint - _tractorStick.transform.position, _tractorStick.transform.position, Time.deltaTime) * PULL_SPEED / objectScript.objectSize);
+                    }
+                    else 
+                    {
+                        _tractorStick.rigidbody.velocity = (Vector2.Lerp(_MouseClickedPoint - _tractorStick.transform.position, _tractorStick.transform.position, Time.deltaTime) * PULL_SPEED / objectScript.objectSize) + GetComponent<Rigidbody2D>().velocity;
+                    }*/
+
+                    //if the tractor beamed object is further than the max tractor push length will only be that far away
+                    if ((Vector2.Distance(_tractorStick.transform.position, transform.position) - (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x)) > MAX_TRACTOR_PUSH)
+                    {
+                        _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * (MAX_TRACTOR_PUSH + (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x));
+                    }
+
+
+                    //if the distance between the _mouse clicked point and the object is <1 the object will stop moving
+                    if ((Vector2.Distance(_tractorStick.transform.position, transform.position) - (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x)) > MAX_TRACTOR_PUSH)
+                    {
                         _tractorStick.rigidbody.velocity = Vector2.zero;
-                }
-                
+                    }
 
+
+                }
             }
-        }
-        //if a controller is present 
-        else if (Input.GetButton("RightBumper") || Input.GetAxis("RightTrigger")>0)//Input.GetAxis("RightJoystickVertical") != 0 || Input.GetAxis("RightJoystickHorizontal") != 0
-        {
+            //if a controller is present 
+            else if (Input.GetButton("RightBumper") || Input.GetAxis("RightTrigger") > 0)//Input.GetAxis("RightJoystickVertical") != 0 || Input.GetAxis("RightJoystickHorizontal") != 0
+            {
 
                 Debug.DrawRay(transform.position, new Vector2(Input.GetAxis("RightJoystickHorizontal"), Input.GetAxis("RightJoystickVertical")) * 10, Color.blue);
                 //Debug.Log(new Vector2(Input.GetAxis("RightJoystickHorizontal"), Input.GetAxis("RightJoystickVertical")));
@@ -162,11 +166,11 @@ public class TractorBeamControls : MonoBehaviour
                 //holds first object it hits and keeps it from hitting another object
                 if (!_hitDebris && hit)
                 {
-                     //handles initial tractor beam connection
+                    //handles initial tractor beam connection
                     TractorConnects(hit);
                 }
 
-            //uses the initial object that was hit by the beam
+                //uses the initial object that was hit by the beam
                 if (_hitDebris && !objectScript.isTractored)
                 {
                     TractorReleases();
@@ -180,7 +184,7 @@ public class TractorBeamControls : MonoBehaviour
 
                     //draw a line to show tractor beam connection
                     Debug.DrawLine(transform.position, _tractorStick.transform.position);
-                    
+
                     //move debris in direction of mouse with force (pullspeed/objectsize)
                     //_tractorStick.rigidbody.AddForce(((_MouseClickedPoint - _tractorStick.rigidbody.transform.position).normalized) * PULL_SPEED / objectScript.objectSize );
                     Vector2 stick = new Vector2(Input.GetAxis("RightJoystickHorizontal"), Input.GetAxis("RightJoystickVertical")) * 20;
@@ -193,18 +197,18 @@ public class TractorBeamControls : MonoBehaviour
                         _tractorStick.rigidbody.velocity = (stick * PULL_SPEED / objectScript.objectSize);
                     }
 
-                    if ((Vector2.Distance(_tractorStick.transform.position, transform.position)- (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x)) > MAX_TRACTOR_PUSH)
+                    if ((Vector2.Distance(_tractorStick.transform.position, transform.position) - (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x)) > MAX_TRACTOR_PUSH)
                     {
                         _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * (MAX_TRACTOR_PUSH + (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x));
                     }
                 }
             }
-        //when the mouse button is released or joystick returns to center resets all of the necessary variables
+            //when the mouse button is released or joystick returns to center resets all of the necessary variables
             else if (Input.GetMouseButtonUp(0) && _tractorStick.rigidbody != null)
             {
                 _tractorStick.rigidbody.velocity = velocity;
             }
-            else 
+            else
             {
                 //Handles variable reset
                 TractorReleases();
@@ -271,128 +275,130 @@ public class TractorBeamControls : MonoBehaviour
 
 
 #endif
-
+        }
     }
 
     private void TractorBeamRender()
     {
-
-#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
-        //if the tractor beam is active
-        if (Input.GetMouseButton(0))
+        //if the game is not paused or in a cutscene
+        if (Time.timeScale != 0f)
         {
-            //enable the beam
-            _tractorLine.enabled = true;
-            _tractorOverlay.enabled = true;
-            beamEnd.SetActive(true);
-
-            //get mouse click in world coordinates
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
-
-            //make sure starting position of tractor beam is at the ship
-            _tractorLine.SetPosition(0, transform.position);
-            _tractorOverlay.SetPosition(0, transform.position);
-            
-
-            //if the tractor beam is connected
-            if (_hitDebris && objectScript.isTractored)
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+            //if the tractor beam is active
+            if (Input.GetMouseButton(0))
             {
-                //set the color of the beam to white
-                //_tractorLine.SetColors(Color.white, Color.white);
-                //draw a line to show tractor beam connection
-                _tractorLine.SetPosition(1, _tractorStick.transform.position);
-                _tractorOverlay.SetPosition(1, _tractorStick.transform.position);
-                beamEnd.transform.position = _tractorStick.transform.position;
+                //enable the beam
+                _tractorLine.enabled = true;
+                _tractorOverlay.enabled = true;
+                beamEnd.SetActive(true);
 
-            }
-            else
-            {
-                //find direction vector from ship to mouse
-                Vector2 mouseDir = mousePos - (Vector2)transform.position;
-                //make a variable for the end position
-                Vector2 endPoint;
-                //if the mouse if further away than the max length of the beam
-                if (mouseDir.magnitude > MAX_TRACTOR_LENGTH)
+                //get mouse click in world coordinates
+                Vector2 mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+
+                //make sure starting position of tractor beam is at the ship
+                _tractorLine.SetPosition(0, transform.position);
+                _tractorOverlay.SetPosition(0, transform.position);
+
+
+                //if the tractor beam is connected
+                if (_hitDebris && objectScript.isTractored)
                 {
-                    
-                    //get a position in the direction of the mouse 
-                    endPoint = (Vector2)transform.position + (mouseDir.normalized * _tractorlength);
-                    
+                    //set the color of the beam to white
+                    //_tractorLine.SetColors(Color.white, Color.white);
+                    //draw a line to show tractor beam connection
+                    _tractorLine.SetPosition(1, _tractorStick.transform.position);
+                    _tractorOverlay.SetPosition(1, _tractorStick.transform.position);
+                    beamEnd.transform.position = _tractorStick.transform.position;
+
                 }
                 else
                 {
-                   
-                    //get the mouse position
-                    endPoint = mousePos;
+                    //find direction vector from ship to mouse
+                    Vector2 mouseDir = mousePos - (Vector2)transform.position;
+                    //make a variable for the end position
+                    Vector2 endPoint;
+                    //if the mouse if further away than the max length of the beam
+                    if (mouseDir.magnitude > MAX_TRACTOR_LENGTH)
+                    {
+
+                        //get a position in the direction of the mouse 
+                        endPoint = (Vector2)transform.position + (mouseDir.normalized * _tractorlength);
+
+                    }
+                    else
+                    {
+
+                        //get the mouse position
+                        endPoint = mousePos;
+                    }
+
+                    //set the end of the beam to be where the endpoint variable is
+                    _tractorLine.SetPosition(1, endPoint);
+                    _tractorOverlay.SetPosition(1, endPoint);
+                    //set the color of the beam to blue
+                    //_tractorLine.SetColors(Color.blue, Color.blue);
+                    Vector3 directionVector = (_tractorLine.transform.position - (Vector3)endPoint).normalized;
+                    //beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
+                    beamEnd.transform.position = endPoint;
+
                 }
 
-                //set the end of the beam to be where the endpoint variable is
-                _tractorLine.SetPosition(1, endPoint);
-                _tractorOverlay.SetPosition(1, endPoint);
-                //set the color of the beam to blue
-                //_tractorLine.SetColors(Color.blue, Color.blue);
-                Vector3 directionVector = (_tractorLine.transform.position - (Vector3)endPoint).normalized;
-                //beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
-                beamEnd.transform.position = endPoint;
-              
             }
-
-        }
-        else if (Input.GetButton("RightBumper") || Input.GetAxis("RightTrigger") > 0)
-        {
-            //enable the beam
-            _tractorLine.enabled = true;
-            _tractorOverlay.enabled = true;
-            beamEnd.SetActive(true);
-
-            //get mouse click in world coordinates
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
-
-            //make sure starting position of tractor beam is at the ship
-            _tractorLine.SetPosition(0, transform.position);
-            _tractorOverlay.SetPosition(0, transform.position);
-
-            //if the tractor beam is connected
-            if (_hitDebris && objectScript.isTractored)
+            else if (Input.GetButton("RightBumper") || Input.GetAxis("RightTrigger") > 0)
             {
-                //set the color of the beam to white
-                //_tractorLine.SetColors(Color.white, Color.white);
-                //draw a line to show tractor beam connection
-                _tractorLine.SetPosition(1, _tractorStick.transform.position);
-                _tractorOverlay.SetPosition(1, _tractorStick.transform.position);
-                beamEnd.transform.position = _tractorStick.transform.position;
+                //enable the beam
+                _tractorLine.enabled = true;
+                _tractorOverlay.enabled = true;
+                beamEnd.SetActive(true);
+
+                //get mouse click in world coordinates
+                Vector2 mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+
+                //make sure starting position of tractor beam is at the ship
+                _tractorLine.SetPosition(0, transform.position);
+                _tractorOverlay.SetPosition(0, transform.position);
+
+                //if the tractor beam is connected
+                if (_hitDebris && objectScript.isTractored)
+                {
+                    //set the color of the beam to white
+                    //_tractorLine.SetColors(Color.white, Color.white);
+                    //draw a line to show tractor beam connection
+                    _tractorLine.SetPosition(1, _tractorStick.transform.position);
+                    _tractorOverlay.SetPosition(1, _tractorStick.transform.position);
+                    beamEnd.transform.position = _tractorStick.transform.position;
+
+                }
+                else
+                {
+                    //make a variable for the end position
+                    Vector2 endPoint;
+
+                    //get a position in the direction of the stick
+                    endPoint = (Vector2)transform.position + (new Vector2(Input.GetAxis("RightJoystickHorizontal"), Input.GetAxis("RightJoystickVertical")).normalized * _tractorlength);
+
+
+                    //set the end of the beam to be where the endpoint variable is
+                    _tractorLine.SetPosition(1, endPoint);
+                    _tractorOverlay.SetPosition(1, endPoint);
+                    Vector3 directionVector = (_tractorLine.transform.position - (Vector3)endPoint).normalized;
+                    //beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
+                    beamEnd.transform.position = endPoint;
+
+                    //set the color of the beam to blue
+                    // _tractorLine.SetColors(Color.blue, Color.blue);
+                }
 
             }
             else
             {
-                //make a variable for the end position
-                Vector2 endPoint;
-
-                //get a position in the direction of the stick
-                endPoint = (Vector2)transform.position + (new Vector2(Input.GetAxis("RightJoystickHorizontal"), Input.GetAxis("RightJoystickVertical")).normalized * _tractorlength);
-                
-
-                //set the end of the beam to be where the endpoint variable is
-                _tractorLine.SetPosition(1, endPoint);
-                _tractorOverlay.SetPosition(1, endPoint);
-                Vector3 directionVector = (_tractorLine.transform.position - (Vector3)endPoint).normalized;
-                //beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
-                beamEnd.transform.position = endPoint;
-               
-                //set the color of the beam to blue
-                // _tractorLine.SetColors(Color.blue, Color.blue);
+                _tractorLine.SetPosition(1, transform.position);
+                _tractorOverlay.SetPosition(1, transform.position);
+                _tractorLine.enabled = false;
+                _tractorOverlay.enabled = false;
+                beamEnd.transform.position = transform.position;
+                beamEnd.SetActive(false);
             }
-
-        }
-        else
-        {
-            _tractorLine.SetPosition(1, transform.position);
-            _tractorOverlay.SetPosition(1, transform.position);
-            _tractorLine.enabled = false;
-            _tractorOverlay.enabled = false;
-            beamEnd.transform.position = transform.position;
-            beamEnd.SetActive(false);
-        }
 #elif UNITY_IOS || UNITY_ANDROID
         if(joystick.touchPhase() == TouchPhase.Began)
         {
@@ -445,6 +451,7 @@ public class TractorBeamControls : MonoBehaviour
 
         
 #endif
+        }
 
 
     }
