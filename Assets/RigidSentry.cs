@@ -34,8 +34,9 @@ public class RigidSentry : MonoBehaviour {
 			Rigidbody2D instantProjectile = Instantiate(bullet,transform.position,transform.rotation) as Rigidbody2D;
             _spray = Random.Range(-accuracy, accuracy);
             instantProjectile.velocity = transform.TransformDirection(new Vector3(_bulletVelocity, _spray, 0 ));
-			//taking the inverse of the firerate to get projectiles per second
-			yield return new WaitForSeconds(1/fireRate);
+            instantProjectile.transform.right = instantProjectile.velocity;
+            //taking the inverse of the firerate to get projectiles per second
+            yield return new WaitForSeconds(1/fireRate);
 			_canFire = true;
 		}
 	}
