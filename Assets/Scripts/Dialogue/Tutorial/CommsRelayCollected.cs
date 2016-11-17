@@ -14,21 +14,22 @@ public class CommsRelayCollected : MonoBehaviour
 
 	public bool destroyWhenActivated,timedDialogue;
 	public float timeUntilFinished;
-	public GameObject shipPart;
-	private MoveableObject _moveableObjectScript;
+	private GameObject _player;
+	private TractorBeamControls _tractorBeamControls;
 	private bool _triggeredOnce;
 	// Use this for initialization
 	void Start ()
 	{
 		_triggeredOnce = false;
+		_player = GameObject.FindGameObjectWithTag ("Player");
 		theTextBox = FindObjectOfType<TextBoxManager>();
-		_moveableObjectScript = shipPart.GetComponent<MoveableObject> ();
+		_tractorBeamControls = _player.GetComponent<TractorBeamControls> ();
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
-		if (_moveableObjectScript.isTractored == true && !_triggeredOnce) 
+		if (_tractorBeamControls.partCollected == true && !_triggeredOnce) 
 		{
 			_triggeredOnce = true;
 			theTextBox.startCommentaryDialogue ();

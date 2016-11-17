@@ -21,7 +21,7 @@ GameObject:
   - 4: {fileID: 4000013261820020}
   m_Layer: 0
   m_Name: TutorialCommentary
-  m_TagString: Untagged
+  m_TagString: CommentaryObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -572,6 +572,7 @@ MonoBehaviour:
   startLine: 0
   endLine: 0
   theTextBox: {fileID: 0}
+  fuelLevelToActivate: 0
   destroyWhenActivated: 1
   timedDialogue: 1
   timeUntilFinished: 10
@@ -613,6 +614,7 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 0
+  audioClip: {fileID: 0}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
@@ -632,6 +634,7 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 0
+  audioClip: {fileID: 0}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
@@ -655,7 +658,6 @@ MonoBehaviour:
   destroyWhenActivated: 1
   timedDialogue: 1
   timeUntilFinished: 10
-  shipPart: {fileID: 0}
 --- !u!114 &114000012088919156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -671,6 +673,7 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 0
+  audioClip: {fileID: 0}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
@@ -690,6 +693,7 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 0
+  audioClip: {fileID: 0}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
