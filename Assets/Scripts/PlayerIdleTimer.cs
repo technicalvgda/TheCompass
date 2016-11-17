@@ -17,7 +17,7 @@ public class PlayerIdleTimer : MonoBehaviour {
 			_idleTimer += Time.deltaTime;
 		} else
 			_idleTimer = 0;
-		Debug.Log ("AFK: " + _idleTimer);
+		//Debug.Log ("AFK: " + _idleTimer);
 	}
 	public float getPlayerIdleTime()
 	{

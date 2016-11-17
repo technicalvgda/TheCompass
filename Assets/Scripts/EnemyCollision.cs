@@ -11,7 +11,7 @@ public class EnemyCollision : MonoBehaviour
 	private float Health;
 
     //Canvas to contain health bar
-    Canvas healthBarCanvas;
+    GameObject healthBarObj;
     // Actual health bar slider
     Slider healthBar;
 
@@ -22,9 +22,25 @@ public class EnemyCollision : MonoBehaviour
         Health = InitialHealth;
         UpdateHealthBar();
     }
+
+    void LateUpdate()
+    {
+        if(healthBarObj)
+        {
+            healthBarObj.transform.rotation = Quaternion.identity;
+        }
+       
+    }
     public void TakeDamage(float damage)
     {
+        
+        if (!healthBarObj.activeSelf)
+        {
+            //show health bar
+            healthBarObj.SetActive(true);
+        }
         Health -= damage;
+        Debug.Log("Damaged Enemy, health is: "+Health);
         UpdateHealthBar();
         //check if the enemy is out of health
         CheckHealth();
@@ -51,11 +67,13 @@ public class EnemyCollision : MonoBehaviour
     void InitializeHealthBar()
     {
         //Instantiate the health bar canvas at the location of the enemy
-        healthBarCanvas = Instantiate(Resources.Load("HealthBarCanvas"), transform.position, transform.rotation) as Canvas;
+        healthBarObj = Instantiate(Resources.Load("HealthBarObj"), transform.position, Quaternion.identity) as GameObject;
         //set the health bar canvas as a child of this enemy
-        healthBarCanvas.transform.parent = transform;
+        healthBarObj.transform.parent = transform;
         //Get the slider component of the health bar
-        healthBar = healthBarCanvas.transform.FindChild("HealthBar").GetComponent<Slider>();
+        healthBar = healthBarObj.GetComponentInChildren<Slider>();
+        //hide health bar
+        healthBarObj.SetActive(false);
     }
 
 	

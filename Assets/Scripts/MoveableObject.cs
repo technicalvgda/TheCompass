@@ -23,7 +23,7 @@ public class MoveableObject : MonoBehaviour
     private float curSpeed;
 
     //Constant values
-    const float MINIMUM_DAMAGE_SPEED = 30f; //Minimum speed at which an object can deal damage
+    const float MINIMUM_DAMAGE_SPEED = 20f; //Minimum speed at which an object can deal damage
 
     //amount to multiplay knockback by (currently unused)
     private float knockBackImpact = 1.2f;  // adjust the impact force
@@ -60,10 +60,11 @@ public class MoveableObject : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
 	{
+        
         if (splitactivated)
         {Split();}
         //if this is a debris object and its colliding with player
-		if (gameObject.tag == "Debris" && col.gameObject.tag == "Player")
+		if (gameObject.tag == "Debris")
         {
             //handle player damage and knockback
             if(col.gameObject.tag == "Player")
@@ -77,7 +78,7 @@ public class MoveableObject : MonoBehaviour
             {
                 EnemyCollision enemyObject = col.gameObject.GetComponent<EnemyCollision>();
                 //calculate damage to deal, knockback is true
-                enemyObject.TakeDamage(CalculateAngularDamageAndKnockback(col, true));
+                enemyObject.TakeDamage(CalculateAngularDamageAndKnockback(col, false));
             }
             
 
@@ -162,7 +163,6 @@ public class MoveableObject : MonoBehaviour
     {
         Rigidbody2D targetRB = col.gameObject.GetComponent<Rigidbody2D>();
         float _asteroidDamageForce = 0f;
-
         //if all player components are not null,the object is not tractored, and the object is moving fast enough to deal damage
         if (targetRB && !isTractored && curSpeed >= MINIMUM_DAMAGE_SPEED)
         {
@@ -174,6 +174,7 @@ public class MoveableObject : MonoBehaviour
 
             //direction status is -1 if object and player are colliding head on, 0 is player is not moving, 1 if same heading
             _asteroidDamageForce =  ((curSpeed-MINIMUM_DAMAGE_SPEED) - (_directionStatus*targetVelocity.magnitude));
+            
             //prevent the damage from being negative
             if(_asteroidDamageForce < 0)
             { _asteroidDamageForce = 0;}

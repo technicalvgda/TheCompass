@@ -63,7 +63,7 @@ public class TextBoxManager : MonoBehaviour
 		if (_timedCommentaryActive) 
 		{
 			_timer -= Time.deltaTime;
-			Debug.Log (_timer);
+			//Debug.Log (_timer);
 			if (_timer <= 0) 
 			{
 				_timedCommentaryActive = false;
