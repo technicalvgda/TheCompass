@@ -454,7 +454,7 @@ MonoBehaviour:
   ChoicePanel: {fileID: 1362937982}
   VerticalSpacing: -45
   PassageTextDisplay: {fileID: 1362937981}
-  NextScene: Level 3
+  NextScene: Credit Scene
   ContinueText: Press to Continue
   PassageText: 
   Choices: []
@@ -662,6 +662,26 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010342106906, guid: 4e6fd15f28fcc5a4fa5354c376c9ca1c,
+        type: 2}
+      propertyPath: m_ChildForceExpandWidth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010342106906, guid: 4e6fd15f28fcc5a4fa5354c376c9ca1c,
+        type: 2}
+      propertyPath: m_ChildForceExpandHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010342106906, guid: 4e6fd15f28fcc5a4fa5354c376c9ca1c,
+        type: 2}
+      propertyPath: m_ChildAlignment
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000011945583990, guid: 4e6fd15f28fcc5a4fa5354c376c9ca1c,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -15.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e6fd15f28fcc5a4fa5354c376c9ca1c, type: 2}
