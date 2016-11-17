@@ -22,6 +22,9 @@ public class MoveableObject : MonoBehaviour
 	private Vector2 curVelocity;
 	private float curSpeed;
 
+    //Flame Trail
+    GameObject flameTrail;
+
 
 
 	// Use this for initialization
@@ -29,6 +32,10 @@ public class MoveableObject : MonoBehaviour
 	{
 		//get rigidbody component 
 		rb2d = GetComponent<Rigidbody2D>();
+
+        //get flame trail
+        flameTrail = Instantiate(Resources.Load("FlameTrail"), transform.position, transform.rotation) as GameObject;
+        flameTrail.transform.parent = transform;
 
         if (transform.localScale.x < 0.65)
         {
@@ -52,7 +59,7 @@ public class MoveableObject : MonoBehaviour
 		}
         
 
-        if ( this.gameObject.tag == "small" || this.gameObject.name == "AsteroidPlaceHolder" ) 
+        if ( this.gameObject.tag == "Debris") 
 		{	
 			iAmAsteroid = true;
 		}
