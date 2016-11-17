@@ -515,7 +515,7 @@ public class TractorBeamControls : MonoBehaviour
         //Debug.Log("Hit");
         if (collision.collider == _tractorStick.collider)
         {
-            Debug.Log("hit myself");
+            //Debug.Log("hit myself");
             hitMyself = true;
         }
     }
