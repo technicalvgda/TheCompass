@@ -178,8 +178,11 @@ public class MoveableObject : MonoBehaviour
 
     public void DisableFlameTrail()
     {
-        flameTrail.transform.parent = null;
-        flameTrail = null;
+        if (flameTrail != null)
+        {
+            flameTrail.transform.parent = null;
+            flameTrail = null;
+        }
     }
 
     //calculates proper damage and knockback based on asteroid speed and angle of collision

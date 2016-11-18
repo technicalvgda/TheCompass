@@ -10,6 +10,7 @@ public class EnemyCollision : MonoBehaviour
     public float InitialHealth = 20f;
 	private float Health;
 
+    GameObject explosion;
     //Canvas to contain health bar
     GameObject healthBarObj;
     // Actual health bar slider
@@ -17,6 +18,7 @@ public class EnemyCollision : MonoBehaviour
 
     void Start()
     {
+        explosion = Resources.Load("Explosion") as GameObject;
         InitializeHealthBar();
         //set starting health
         Health = InitialHealth;
@@ -50,11 +52,17 @@ public class EnemyCollision : MonoBehaviour
     {
         if (Health <= 0)
         {
-            // kill enemy
-            Destroy(gameObject);
+            
             // increase kill counter
             Player.increaseKillCount();
-            Instantiate(Items, transform.position, Quaternion.identity);
+            if(Items != null)
+            {
+                Instantiate(Items, transform.position, Quaternion.identity);
+            }    
+            // kill enemy
+            Instantiate(explosion, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+            
         }
     }
 
