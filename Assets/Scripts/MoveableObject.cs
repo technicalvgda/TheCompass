@@ -8,6 +8,7 @@ public class MoveableObject : MonoBehaviour
 
     //Flame Trail
     GameObject flameTrail;
+    float trailWidth;
 
     //PUBLIC VARIABLES
     public bool drift, rotateActivated, splitactivated;
@@ -33,6 +34,7 @@ public class MoveableObject : MonoBehaviour
 	{
 		//get rigidbody component 
 		rb2d = GetComponent<Rigidbody2D>();
+        trailWidth = GetComponent<SpriteRenderer>().bounds.size.x/2;
         //initialize settings for object
         InitializeObj();
         //initialize flame trail
@@ -161,6 +163,7 @@ public class MoveableObject : MonoBehaviour
             //instantiate flame trail
             flameTrail = Instantiate(Resources.Load("FlameTrail"), transform.position, transform.rotation) as GameObject;
             flameTrail.transform.parent = transform;
+            flameTrail.GetComponent<FlameTrailHandler>().SetTrailWidth(trailWidth);
            
 
         }

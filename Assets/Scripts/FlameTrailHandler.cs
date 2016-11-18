@@ -4,7 +4,13 @@ using System.Collections;
 public class FlameTrailHandler : MonoBehaviour {
 
     bool startDestroy = false;
+    TrailRenderer flameTrail;
 	
+
+    void Awake()
+    {
+        flameTrail = GetComponent<TrailRenderer>();  
+    }
 	// Update is called once per frame
 	void Update ()
     {
@@ -20,5 +26,10 @@ public class FlameTrailHandler : MonoBehaviour {
         yield return new WaitForSeconds(3);
         Destroy(this.gameObject);
         yield return null;
+    }
+
+    public void SetTrailWidth(float width)
+    {
+        flameTrail.startWidth = width;
     }
 }
