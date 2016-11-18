@@ -36,7 +36,7 @@ public class MoveableObject : MonoBehaviour
         //initialize settings for object
         InitializeObj();
         //initialize flame trail
-        if (gameObject.tag == "Debris")
+        if (gameObject.tag == "Debris" || gameObject.tag == "TetheredPart")
         {InitializeFlameTrail();}
        
     }
