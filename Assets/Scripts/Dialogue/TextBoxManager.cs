@@ -190,4 +190,27 @@ public class TextBoxManager : MonoBehaviour
 		Debug.Log ("TIMER: " + _timer);
 		_timedCommentaryActive = true;
 	}
+
+	public void pressedOnDialogueBox()
+	{
+		if(!isTyping)
+		{
+
+			AudioSource audio = GetComponent<AudioSource>();
+			audio.Stop();
+			currentLine += 1;
+			if(currentLine > endAtLine)
+			{
+				DisableTextBox();
+			}
+			else
+			{
+				StartCoroutine(TextScroll(textLines[currentLine]));
+			}
+		}
+		else if(isTyping && !cancelTyping)
+		{
+			cancelTyping = true;
+		}
+	}
 }
