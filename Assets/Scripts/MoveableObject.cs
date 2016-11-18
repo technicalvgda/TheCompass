@@ -146,9 +146,9 @@ public class MoveableObject : MonoBehaviour
 
     void ToggleFlameTrail()
     {
-        //if the asteroid is moving faster than the minimum damage velocity and the flame trail is not active
+        //if the asteroid is moving faster than the minimum damage velocity and the flame trail is not active and the object is not held
 
-        if (curSpeed >= MINIMUM_DAMAGE_SPEED && !flameTrail.activeSelf)
+        if (curSpeed >= MINIMUM_DAMAGE_SPEED && !flameTrail.activeSelf && !isTractored)
         {
             flameTrail.SetActive(true);
         }
