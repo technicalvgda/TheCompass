@@ -36,8 +36,10 @@ public class MoveableObject : MonoBehaviour
         //initialize settings for object
         InitializeObj();
         //initialize flame trail
+        /*
         if (gameObject.tag == "Debris" || gameObject.tag == "TetheredPart")
         {InitializeFlameTrail();}
+        */
        
     }
 
@@ -138,7 +140,7 @@ public class MoveableObject : MonoBehaviour
         Vector2 direction = new Vector2(x, y).normalized;
         rb2d.AddForce(direction * driftSpeed);
     }
-
+    /*
     void InitializeFlameTrail()
     {
         //instantiate flame trail
@@ -148,19 +150,33 @@ public class MoveableObject : MonoBehaviour
         //set flame trail inactive
         flameTrail.SetActive(false);
     }
+    */
 
     void ToggleFlameTrail()
     {
         //if the asteroid is moving faster than the minimum damage velocity and the flame trail is not active and the object is not held
 
-        if (curSpeed >= MINIMUM_DAMAGE_SPEED && !flameTrail.activeSelf && !isTractored)
+        if (flameTrail == null && curSpeed >= MINIMUM_DAMAGE_SPEED  && !isTractored)
         {
-            flameTrail.SetActive(true);
+            //instantiate flame trail
+            flameTrail = Instantiate(Resources.Load("FlameTrail"), transform.position, transform.rotation) as GameObject;
+            flameTrail.transform.parent = transform;
+           
+
         }
-        if (curSpeed < MINIMUM_DAMAGE_SPEED && flameTrail.activeSelf)
+        if (curSpeed < MINIMUM_DAMAGE_SPEED && flameTrail != null)
         {
-            flameTrail.SetActive(false);
+           
+            flameTrail.transform.parent = null;
+            flameTrail = null;
+         
         }
+    }
+
+    public void DisableFlameTrail()
+    {
+        flameTrail.transform.parent = null;
+        flameTrail = null;
     }
 
     //calculates proper damage and knockback based on asteroid speed and angle of collision
