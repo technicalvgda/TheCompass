@@ -76,9 +76,14 @@ public class MoveableObject : MonoBehaviour
             //handled enemy damage and knockback
             if (col.gameObject.tag == "Enemy")
             {
-                EnemyCollision enemyObject = col.gameObject.GetComponent<EnemyCollision>();
-                //calculate damage to deal, knockback is true
-                enemyObject.TakeDamage(CalculateAngularDamageAndKnockback(col, false));
+                EnemyCollision enemyObject;
+                if (enemyObject = col.gameObject.GetComponent<EnemyCollision>())
+                {
+                    //calculate damage to deal, knockback is true
+                    enemyObject.TakeDamage(CalculateAngularDamageAndKnockback(col, false));
+                }
+                
+               
             }
             
 
