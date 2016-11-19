@@ -20,13 +20,14 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011653343474}
   - 212: {fileID: 212000010048885630}
-  - 114: {fileID: 114000012349782556}
   - 58: {fileID: 58000012898795460}
   - 50: {fileID: 50000011725125236}
   - 114: {fileID: 114000012776949814}
+  - 114: {fileID: 114000013703032056}
+  - 114: {fileID: 114000010585296956}
   m_Layer: 0
   m_Name: Drone
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,10 +54,10 @@ Rigidbody2D:
   m_GameObject: {fileID: 1000011112591400}
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_IsKinematic: 1
+  m_LinearDrag: 50
+  m_AngularDrag: 10
+  m_GravityScale: 0
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -70,12 +71,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 5
---- !u!114 &114000012349782556
+--- !u!114 &114000010585296956
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -83,15 +84,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000011112591400}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0272f0cff0421194e808bab12d471912, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e5c6b45eb739e447b944a22eac7fcaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shooting: 1
-  bulletPrefab: {fileID: 1000013371463570, guid: 263d8d17f3d9b6d4086b984107c40ccb,
-    type: 2}
-  bulletSpeed: 0
-  visionRange: 15
-  visionConeAngle: 45
+  viewAngle: 20
+  viewDist: 50
+  sight: 0
+  sightPos: {x: 0, y: 0, z: 0}
 --- !u!114 &114000012776949814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,8 +104,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpeedThreshhold: 0
   DetectionRange: 100
-  arrowPrefab: {fileID: 1000013997023758, guid: b4b1f5b29243b9b468e012bffe8b927c,
+  arrowPrefab: {fileID: 1000013529883644, guid: 44f6e27ddd2c0ea4c889a70fca637e23,
     type: 2}
+--- !u!114 &114000013703032056
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011112591400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9fdf9a4b2855374fa05ba223152f267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Items: {fileID: 0}
+  InitialHealth: 20
 --- !u!212 &212000010048885630
 SpriteRenderer:
   m_ObjectHideFlags: 1

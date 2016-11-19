@@ -63,7 +63,7 @@ public class TextBoxManager : MonoBehaviour
 		if (_timedCommentaryActive) 
 		{
 			_timer -= Time.deltaTime;
-			Debug.Log (_timer);
+			//Debug.Log (_timer);
 			if (_timer <= 0) 
 			{
 				_timedCommentaryActive = false;
@@ -71,7 +71,7 @@ public class TextBoxManager : MonoBehaviour
 				Debug.Log ("Timed commentary done");
 			}
 		}
-		if (Input.anyKeyDown)
+		if (Input.GetKeyDown(KeyCode.Space))
         {
             if(!isTyping)
             {
@@ -189,5 +189,28 @@ public class TextBoxManager : MonoBehaviour
 		_timer = time;
 		Debug.Log ("TIMER: " + _timer);
 		_timedCommentaryActive = true;
+	}
+
+	public void pressedOnDialogueBox()
+	{
+		if(!isTyping)
+		{
+
+			AudioSource audio = GetComponent<AudioSource>();
+			audio.Stop();
+			currentLine += 1;
+			if(currentLine > endAtLine)
+			{
+				DisableTextBox();
+			}
+			else
+			{
+				StartCoroutine(TextScroll(textLines[currentLine]));
+			}
+		}
+		else if(isTyping && !cancelTyping)
+		{
+			cancelTyping = true;
+		}
 	}
 }

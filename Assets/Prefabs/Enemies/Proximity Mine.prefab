@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012960252916}
   - 212: {fileID: 212000011635976224}
-  - 58: {fileID: 58000010229166126}
   - 114: {fileID: 114000010880068188}
   - 50: {fileID: 50000011607741232}
   m_Layer: 0
@@ -37,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011698849100}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 250.67386, y: -278.2431, z: 0}
-  m_LocalScale: {x: 1.7077793, y: 1.6873627, z: 1}
+  m_LocalPosition: {x: 754.4074, y: -314.90973, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -60,20 +59,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &58000010229166126
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011698849100}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 5
 --- !u!114 &114000010880068188
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,7 +103,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 69e3d445626a78c49beb622fff8b4f96, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ac1fe0d78e8ae194eadc60fb690c51b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

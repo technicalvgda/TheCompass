@@ -8,6 +8,7 @@ public class MoveableObject : MonoBehaviour
 
     //Flame Trail
     GameObject flameTrail;
+    float trailWidth;
 
     //PUBLIC VARIABLES
     public bool drift, rotateActivated, splitactivated;
@@ -23,7 +24,7 @@ public class MoveableObject : MonoBehaviour
     private float curSpeed;
 
     //Constant values
-    const float MINIMUM_DAMAGE_SPEED = 30f; //Minimum speed at which an object can deal damage
+    const float MINIMUM_DAMAGE_SPEED = 20f; //Minimum speed at which an object can deal damage
 
     //amount to multiplay knockback by (currently unused)
     private float knockBackImpact = 1.2f;  // adjust the impact force
@@ -33,11 +34,14 @@ public class MoveableObject : MonoBehaviour
 	{
 		//get rigidbody component 
 		rb2d = GetComponent<Rigidbody2D>();
+        trailWidth = GetComponent<SpriteRenderer>().bounds.size.x/2;
         //initialize settings for object
         InitializeObj();
         //initialize flame trail
-        if (gameObject.tag == "Debris")
+        /*
+        if (gameObject.tag == "Debris" || gameObject.tag == "TetheredPart")
         {InitializeFlameTrail();}
+        */
        
     }
 
@@ -60,10 +64,11 @@ public class MoveableObject : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
 	{
+        
         if (splitactivated)
         {Split();}
         //if this is a debris object and its colliding with player
-		if (gameObject.tag == "Debris" && col.gameObject.tag == "Player")
+		if (gameObject.tag == "Debris")
         {
             //handle player damage and knockback
             if(col.gameObject.tag == "Player")
@@ -75,9 +80,14 @@ public class MoveableObject : MonoBehaviour
             //handled enemy damage and knockback
             if (col.gameObject.tag == "Enemy")
             {
-                EnemyCollision enemyObject = col.gameObject.GetComponent<EnemyCollision>();
-                //calculate damage to deal, knockback is true
-                enemyObject.TakeDamage(CalculateAngularDamageAndKnockback(col, true));
+                EnemyCollision enemyObject;
+                if (enemyObject = col.gameObject.GetComponent<EnemyCollision>())
+                {
+                    //calculate damage to deal, knockback is true
+                    enemyObject.TakeDamage(CalculateAngularDamageAndKnockback(col, false));
+                }
+                
+               
             }
             
 
@@ -132,7 +142,7 @@ public class MoveableObject : MonoBehaviour
         Vector2 direction = new Vector2(x, y).normalized;
         rb2d.AddForce(direction * driftSpeed);
     }
-
+    /*
     void InitializeFlameTrail()
     {
         //instantiate flame trail
@@ -142,19 +152,34 @@ public class MoveableObject : MonoBehaviour
         //set flame trail inactive
         flameTrail.SetActive(false);
     }
+    */
 
     void ToggleFlameTrail()
     {
-        //if the asteroid is moving faster than the minimum damage velocity and the flame trail is not active
+        //if the asteroid is moving faster than the minimum damage velocity and the flame trail is not active and the object is not held
 
-        if (curSpeed >= MINIMUM_DAMAGE_SPEED && !flameTrail.activeSelf)
+        if (flameTrail == null && curSpeed >= MINIMUM_DAMAGE_SPEED  && !isTractored)
         {
-            flameTrail.SetActive(true);
+            //instantiate flame trail
+            flameTrail = Instantiate(Resources.Load("FlameTrail"), transform.position, transform.rotation) as GameObject;
+            flameTrail.transform.parent = transform;
+            flameTrail.GetComponent<FlameTrailHandler>().SetTrailWidth(trailWidth);
+           
+
         }
-        if (curSpeed < MINIMUM_DAMAGE_SPEED && flameTrail.activeSelf)
+        if (curSpeed < MINIMUM_DAMAGE_SPEED && flameTrail != null)
         {
-            flameTrail.SetActive(false);
+           
+            flameTrail.transform.parent = null;
+            flameTrail = null;
+         
         }
+    }
+
+    public void DisableFlameTrail()
+    {
+        flameTrail.transform.parent = null;
+        flameTrail = null;
     }
 
     //calculates proper damage and knockback based on asteroid speed and angle of collision
@@ -162,7 +187,6 @@ public class MoveableObject : MonoBehaviour
     {
         Rigidbody2D targetRB = col.gameObject.GetComponent<Rigidbody2D>();
         float _asteroidDamageForce = 0f;
-
         //if all player components are not null,the object is not tractored, and the object is moving fast enough to deal damage
         if (targetRB && !isTractored && curSpeed >= MINIMUM_DAMAGE_SPEED)
         {
@@ -174,6 +198,7 @@ public class MoveableObject : MonoBehaviour
 
             //direction status is -1 if object and player are colliding head on, 0 is player is not moving, 1 if same heading
             _asteroidDamageForce =  ((curSpeed-MINIMUM_DAMAGE_SPEED) - (_directionStatus*targetVelocity.magnitude));
+            
             //prevent the damage from being negative
             if(_asteroidDamageForce < 0)
             { _asteroidDamageForce = 0;}

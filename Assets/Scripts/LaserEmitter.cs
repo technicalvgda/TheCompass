@@ -21,6 +21,9 @@ public class LaserEmitter : MonoBehaviour
     private Vector3 _startVec, _startVecFwd;
     private Player _playerscript;
     private float _calcDamage;
+    public float rotate = 1; //The speed of the laser rotation, recommend speed to 1
+    public bool isRotating = false;
+
     // Use this for initialization
     void Start()
     {
@@ -109,6 +112,13 @@ public class LaserEmitter : MonoBehaviour
             _playerscript.enabled = true;
             timeLimit = 0.5f;
         }
+
+        if (isRotating)
+        {
+            //Rotation speed of the laser
+            transform.Rotate(0, 0, rotate);
+        }
+        
     }
     void OnDrawGizmos()
     {

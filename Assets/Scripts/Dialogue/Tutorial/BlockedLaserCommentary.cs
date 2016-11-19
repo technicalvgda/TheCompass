@@ -31,7 +31,6 @@ public class BlockedLaserCommentary : MonoBehaviour
 	{
 		//if the laser is not blocked yet and the timer is at 0
 		_timer -= Time.deltaTime;
-		Debug.Log ("UNSUCCESSFUL IN: " + _timer);
 		if (!_blockSuccessful && _timer < 0) 
 		{
 			_blockSuccessful = true;
