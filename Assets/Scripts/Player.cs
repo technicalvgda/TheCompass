@@ -567,7 +567,7 @@ public class Player : MonoBehaviour {
     private IEnumerator FadeSoundAndStart(AudioSource source)
     {
         //set max volume to the current max
-        MAX_VOLUME = SoundSettingCompare("BGSlider");
+        MAX_VOLUME = SoundSettingCompare("FXSlider");
 
         StopCoroutine(FadeSoundAndEnd(source));
         if (!source.isPlaying)

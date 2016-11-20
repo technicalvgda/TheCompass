@@ -15,16 +15,21 @@ public class SongManager : MonoBehaviour {
 
     public AudioSource audio1;
     public AudioSource audio2;
+
+    float MAX_VOLUME = 1;
     
 
     // Use this for initialization
     void Start () {
+        MAX_VOLUME = SoundSettingCompare("BGSlider");
         audio2.volume = 0f;
-        audio1.Play();
+        audio1.volume = MAX_VOLUME;
+        //audio1.Play();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         ChangeAux1to2();
 	}
 
@@ -32,39 +37,45 @@ public class SongManager : MonoBehaviour {
     {
         if (Input.anyKeyDown)
         {
-            StartCoroutine(FadeSoundAndEnd(audio1));
-            StartCoroutine(FadeSoundAndStart(audio2));
+            StartCoroutine(FadeOneToTwo());
+
+            //StartCoroutine(FadeSoundAndStart(audio2));
         }
     }
 
-    private IEnumerator FadeSoundAndEnd(AudioSource source)
+    private IEnumerator FadeOneToTwo()
     {
-        StopCoroutine(FadeSoundAndStart(source));
-        if (source.isPlaying)
+        if (audio1.isPlaying)
         {
-            while (source.volume > 0)
+            //set max volume to the current max
+            MAX_VOLUME = SoundSettingCompare("BGSlider");
+
+            audio2.volume = 0;
+            while (audio1.volume > 0 && audio2.volume < MAX_VOLUME)
             {
-                source.volume -= 0.1f;
+                audio1.volume -= 0.1f;
+                audio2.volume += 0.1f;
                 yield return new WaitForSeconds(0.3f);
             }
-            source.Stop();
         }
         yield return null;
     }
-    private IEnumerator FadeSoundAndStart(AudioSource source)
-    {
-        StopCoroutine(FadeSoundAndEnd(source));
-        if (!source.isPlaying)
-        {
-            source.volume = 0;
-            source.Play();
-            while (source.volume < 1)
-            {
-                source.volume += 0.1f;
-                yield return new WaitForSeconds(0.3f);
-            }
 
+
+    //send in the playerpref for "BGSlider" or "FXSlider" and compare it against master volume
+    //return the lower of the two
+    private float SoundSettingCompare(string prefName)
+    {
+        float compareVolume = PlayerPrefs.GetFloat(prefName);
+        float masterVolume = PlayerPrefs.GetFloat("MSTRSlider");
+        if (masterVolume > compareVolume)
+        {
+            return compareVolume;
         }
-        yield return null;
+        else
+        {
+            return masterVolume;
+        }
+
     }
 }
