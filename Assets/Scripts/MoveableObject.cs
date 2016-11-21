@@ -36,20 +36,11 @@ public class MoveableObject : MonoBehaviour
 		rb2d = GetComponent<Rigidbody2D>();
         trailWidth = GetComponent<SpriteRenderer>().bounds.size.x/2;
         //initialize settings for object
-        InitializeObj();
-        //initialize flame trail
-        /*
-        if (gameObject.tag == "Debris" || gameObject.tag == "TetheredPart")
-        {InitializeFlameTrail();}
-        */
-       
+        InitializeObj();    
     }
 
 	void FixedUpdate()
 	{
-        if (rotateActivated)
-        {RotateLeft();}
-
         curVelocity = rb2d.velocity;
         curDirection = curVelocity.normalized;
 		curSpeed = rb2d.velocity.magnitude;
@@ -57,10 +48,6 @@ public class MoveableObject : MonoBehaviour
         ToggleFlameTrail(); 
 	}
 
-    void RotateLeft()
-    {
-        transform.Rotate(Vector3.forward);
-    }
 
     void OnCollisionEnter2D(Collision2D col)
 	{
@@ -112,11 +99,22 @@ public class MoveableObject : MonoBehaviour
         euler.z = Random.Range(0f, 360f);
         transform.eulerAngles = euler;
 
+        if(rotateActivated)
+        { StartRotation(); }
+
         ///set drift
 		if (drift)
         { Drift(); }
     }
 
+    //gives the objects a random rotation direction and speed
+    void StartRotation()
+    {
+        if(rb2d != null)
+        {
+            rb2d.AddTorque(Random.Range(-10,10), ForceMode2D.Impulse);
+        }
+    }
     void Split()
     {
          float splitterX, splitterY;
@@ -142,18 +140,7 @@ public class MoveableObject : MonoBehaviour
         Vector2 direction = new Vector2(x, y).normalized;
         rb2d.AddForce(direction * driftSpeed);
     }
-    /*
-    void InitializeFlameTrail()
-    {
-        //instantiate flame trail
-        flameTrail = Instantiate(Resources.Load("FlameTrail"), transform.position, transform.rotation) as GameObject;
-        //attach as child to this game object
-        flameTrail.transform.parent = transform;
-        //set flame trail inactive
-        flameTrail.SetActive(false);
-    }
-    */
-
+ 
     void ToggleFlameTrail()
     {
         //if the asteroid is moving faster than the minimum damage velocity and the flame trail is not active and the object is not held

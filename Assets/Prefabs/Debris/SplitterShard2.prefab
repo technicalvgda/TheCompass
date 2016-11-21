@@ -54,7 +54,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -87,17 +87,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drift: 1
-  rotateActivated: 0
+  rotateActivated: 1
   splitactivated: 0
   objectSize: 1
   splitter: {fileID: 0}
   splitterShard: {fileID: 0}
-  splitterX: 0
-  splitterY: 0
+  fuelDrop: {fileID: 0}
+  splitShards: 4
   driftSpeed: 1000
-  knockBackImpact: 500
   isTractored: 0
-  angleCollisionDamage: 0
 --- !u!114 &114000013614632656
 MonoBehaviour:
   m_ObjectHideFlags: 1
