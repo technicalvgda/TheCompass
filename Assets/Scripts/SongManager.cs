@@ -51,12 +51,15 @@ public class SongManager : MonoBehaviour {
             MAX_VOLUME = SoundSettingCompare("BGSlider");
 
             audio2.volume = 0;
+            audio2.Play();
             while (audio1.volume > 0 && audio2.volume < MAX_VOLUME)
             {
                 audio1.volume -= 0.1f;
                 audio2.volume += 0.1f;
                 yield return new WaitForSeconds(0.3f);
             }
+            audio1.Stop();
+            
         }
         yield return null;
     }
