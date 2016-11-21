@@ -8,7 +8,7 @@ using System.Collections;
 /// </summary>
 
 [RequireComponent(typeof(CanvasGroup))]
-public class UIButtonNavigation : MonoBehaviour
+public class UINavigationButton : MonoBehaviour
 {
     public Button back;
     public Selectable first;
@@ -33,7 +33,7 @@ public class UIButtonNavigation : MonoBehaviour
             if (UIHelper.selected == null)
                 first.Select();
             else
-                UIPointerNavigation.ResetMousedOver();
+                UINavigationPointer.ResetMousedOver();
         }
 
         else if (UIHelper.isBackPressed && back != null)
@@ -59,7 +59,7 @@ public class UIButtonNavigation : MonoBehaviour
 
     IEnumerator _Hack()
     {
-        yield return null; UIPointerNavigation.ResetMousedOver();
-        yield return null; UIPointerNavigation.ResetMousedOver();
+        yield return null; UINavigationPointer.ResetMousedOver();
+        yield return null; UINavigationPointer.ResetMousedOver();
     }
 }

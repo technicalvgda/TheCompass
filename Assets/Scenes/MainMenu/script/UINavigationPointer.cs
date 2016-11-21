@@ -10,14 +10,16 @@ using System;
 /// </summary>
 
 [RequireComponent (typeof(Selectable))]
-public class UIPointerNavigation : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UINavigationPointer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public static GameObject mousedOver;
     Selectable sel;
 
-    void Start()
+    //void Start()
+    void Awake()
     {
         sel = GetComponent<Selectable>();
+        //Debug.Log(gameObject + " initialized");
     }
 
     // An object that is being moused over plays the Highlighted animator/sprite state,
@@ -27,11 +29,26 @@ public class UIPointerNavigation : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         mousedOver = gameObject;
 
-        // The program occasionally coughs up a NullRefException around this part,
-        // so keep this around until that is sorted out.
+        // (SOLVED) The program occasionally coughs up a NullRefException around this part.
+
+        // Reproduction:
+        // Enter any menu while LMB is held.
+        // The button in the subsequent menu at the mouse position will throw the error.
+        // This can be done by holding LMB over a button while pressing the button with Enter.
+
+        // Cause:
+        // Menus other than the initial (and subsequently their buttons) start out disabled,
+        // and sel was never initialized by the time it is moused over.
+        // This only happens once per menu on the very first frame it is enabled.
+
+        // Solution:
+        // Move initialization from Start() to Awake().
+        // Attach the Late Disable script to every menu that isn't the initial menu,
+        // then enable them all by default.
+        // Since Start() executes following Awake(), objects are initialized then disabled.
 
         if (sel == null)
-            Debug.Log("NULL detected in " + this.gameObject);
+            Debug.Log("NULL detected in " + gameObject);
 
         sel.Select();
     }

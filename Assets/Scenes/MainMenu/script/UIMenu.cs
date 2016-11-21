@@ -29,16 +29,33 @@ public class UIMenu : MonoBehaviour
         }
     }
 
+    public void Transition(ParamsTransition p)
+    {
+        Transition(true, false, p.next, p.exitHash, p.enterHash);
+    }
+
+    public void Overlay(ParamsTransition p)
+    {
+        Transition(true, true, p.next, p.exitHash, p.enterHash);
+    }
+
+    public void Back(ParamsBack p)
+    {
+        Transition(false, false, (UIMenu)menuStack.Pop(), p.exitHash, p.enterHash);
+    }
+
     // Transition sequence
     //      current   ------>    next
     //    Exit State          Enter State
-    //   (Push / Pop)       Unhide | enable
+    //   (push | pop)       Unhide | enable
     // (Hide | disable)
+    //
+    // Each transition requires a state on the first Mecanim layer and a trigger of the same name.
 
     // pushCurrent: Pushes the current menu to the menu stack. Back buttons shouldn't push.
     // overlay: Overlays the next menu on top of the current menu and takes control away from it.
 
-    public void Transition(bool pushCurrent, bool overlay, UIMenu next, int exitHash, int enterHash)
+    void Transition(bool pushCurrent, bool overlay, UIMenu next, int exitHash, int enterHash)
     {
         NavigationVoodoo();
 
@@ -54,19 +71,29 @@ public class UIMenu : MonoBehaviour
     IEnumerator _Transition(UIMenu next, int exitHash, int enterHash)
     {
         Animator anim = GetComponent<Animator>();
+
         if (anim.HasState(0, exitHash))
         {
             anim.SetTrigger(exitHash);
 
-            // Wait one frame before getting the Animation State Info,
-            // otherwise you end up with the one from the current state.
+            // State change occurs after the trigger is set, so yield is needed.
+            // But the number of frames before this happens is not consistent.
+            // If SetTrigger is called by another object (a button), it takes one frame.
+            // If called by an animation event on a different layer, it takes two frames.
+            //
+            // This was likely because the animator was being modified using
+            // an animation clip, and Unity normally doesn't allow this.
 
             do
                 yield return null;
-            while (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
+            while (anim.GetCurrentAnimatorStateInfo(0).shortNameHash != exitHash);
 
+            // Once the state is correct, yield until it is finished.
             // The exit state must not transition to any other state,
             // otherwise normalizedTime resets and the yield loop repeats.
+
+            while (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+                yield return null;
         }
 
         //Hide();
@@ -115,11 +142,6 @@ public class UIMenu : MonoBehaviour
         //}
     }
 
-    public void Back(int exitHash, int enterHash)
-    {
-        Transition(false, false, (UIMenu)menuStack.Pop(), exitHash, enterHash);
-    }
-
     public void EnableCanvasGroupInteractable()
     {
         if (cg != null)
@@ -132,17 +154,10 @@ public class UIMenu : MonoBehaviour
             cg.interactable = false;
     }
 
-    // don't use this
-    public void ToggleCanvasGroupInteractable()
-    {
-        if (cg != null)
-            cg.interactable = !cg.interactable;
-    }
-
     void NavigationVoodoo()
     {
         UIHelper.selected = null;
-        UIPointerNavigation.mousedOver = null;
+        UINavigationPointer.mousedOver = null;
         DisableCanvasGroupInteractable();
     }
 
