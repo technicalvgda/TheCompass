@@ -23,16 +23,17 @@ public class Proximity_Mine : MonoBehaviour {
 
     void Update()
     {
-        if (Vector2.Distance(_player.transform.position, transform.position) < 7 )
+        /*if (Vector2.Distance(_player.transform.position, transform.position) < 7 )
         {
+            Destroy(this.gameObject);
             _sprite.sprite = spriteMat;
             _player.takeDamage(damage);
             GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().AddForce((_player.transform.position - transform.position).normalized * pushForce * 3f, ForceMode2D.Impulse);
-            Destroy(this.gameObject, 0.1f);
-        }
+            
+        }*/
     }
 
-	/*void OnTriggerEnter2D(Collider2D col)
+	void OnTriggerEnter2D(Collider2D col)
 	{
 		//adds all objects inside the wreck's collider into an array
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, explDiameter);
@@ -57,11 +58,14 @@ public class Proximity_Mine : MonoBehaviour {
 				else
 				{
 					//objects behave to force at full force
-					hit.attachedRigidbody.AddForce(vect.normalized * pushForce, ForceMode2D.Impulse);
+					//hit.attachedRigidbody.AddForce(vect.normalized * pushForce, ForceMode2D.Impulse);
 				}
 			}
-			//delayed destroy for purpose of explosive effect
-			Destroy(this.gameObject, 0.1f);
+            //delayed destroy for purpose of explosive effect
+            //Destroy(this.transform.GetChild(0).gameObject);
+            Destroy(this.gameObject, 0.1f);
+           
+          
 		}
-	}*/
+	}
 }
