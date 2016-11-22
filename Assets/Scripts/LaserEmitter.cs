@@ -9,8 +9,8 @@ using System.Collections;
 public class LaserEmitter : MonoBehaviour
 {
     public LineRenderer line;
-    public float maxFalloffDist;    //don't set this past 10
-    public float rayDamage;
+    //public float maxFalloffDist;    //don't set this past 10
+    public float rayDamage = 20;
     public Transform laserEndPt;
     private GameObject laserSparks;
     public float bounceIntensity;  //how much the player gets bounced back upon collision with the laser
@@ -20,7 +20,7 @@ public class LaserEmitter : MonoBehaviour
     private RaycastHit2D _hit;
     private Vector3 _startVec, _startVecFwd;
     private Player _playerscript;
-    private float _calcDamage;
+    //private float _calcDamage;
     public float rotate = 1; //The speed of the laser rotation, recommend speed to 1
     public bool isRotating = false;
 
@@ -57,23 +57,24 @@ public class LaserEmitter : MonoBehaviour
             laserSparks.SetActive(true);
             laserSparks.transform.position = _hit.point;
             //TODO: Make the damage have a cooldown using the coroutine fire methods.
-            if (_hit.distance < maxFalloffDist)
+
+            /*if (_hit.distance < maxFalloffDist)
             {
-                /**Linear Fall off scaling
+                *Linear Fall off scaling
                 * 1 Unit = 10% damage reduction
-                **/
+                *
                 _calcDamage = rayDamage * (100 - (100 * (0.1f * _hit.distance)));
             }
             else
             {
                 _calcDamage = 0;
-            }
+            }*/
             
             //Hitting the player
             //Debug.Log(_hit.point);
             if (_hit.collider.gameObject == _player)
             {
-                _playerscript.takeDamage(_calcDamage);
+                _playerscript.takeDamage(rayDamage);
 
                 //applies force to the player in the opposite direction with which it is hit by the laser
                 Vector2 bounceBack = _playerscript.transform.position - transform.position;

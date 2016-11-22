@@ -49,8 +49,12 @@ public class Player : MonoBehaviour {
 	public float playerHealth;//< the player's current health
 	public float playerMaxHealth;//< the maximum health the player can have
 
-	public float healthRegen = 0;//Health to be healed over time
-	public float RegenDuration = 0;//The duration of each tick of heal
+	public float healthRegen = 5;//Health to be healed per second
+	//public float RegenDuration = 0;//The duration of each tick of heal
+    private bool isDamaged = false;
+    public float damageTimeCounter = 10;//
+    public float regenDelay = 7;
+
 
     private float _bulletDamage = 5.0f;//<amount of damage a single bullet deals
 
@@ -130,6 +134,8 @@ public class Player : MonoBehaviour {
             joystick = GameObject.Find("VirtualJoystickMovement").GetComponentInChildren<VirtualJoystickMovement>();
         }
 
+        StartCoroutine("healthDamageCoroutine");
+
         
 	}
 
@@ -141,25 +147,20 @@ public class Player : MonoBehaviour {
 		//Function to handle player movement
 		ControlPlayer ();
         LoseFuel();
-        
 
 		checkIfPlayerOutOfBounds(maxXBoundary, maxYBoundary, minXBoundary, minYBoundary);
 
 		// The health regen will only occur when we are below max health
-		if (alive && (playerHealth < playerMaxHealth))
+		/*if (alive && (playerHealth < playerMaxHealth) && !isDamaged)
 		{
 			healOverTime(healthRegen, RegenDuration);
-		}
+		}*/
 
-		//TEMP
-		//temp code for damage testing
-		if (Input.GetKeyDown (KeyCode.U))
-			playerHealth += 5f;
-		if (Input.GetKeyDown (KeyCode.J)) {
-			playerHealth -= 5f;
-			mainCam.shakeCam ();
-		}
-		//END TEMP
+        //if players health ever goes above max health will cap it at max health
+        if(playerHealth > playerMaxHealth)
+        {
+            playerHealth = playerMaxHealth;
+        }
 
 	}
 
@@ -414,7 +415,9 @@ public class Player : MonoBehaviour {
 		playerExitPos = exitPos;
 	}
 
-	public void healOverTime(float healAmount, float duration)
+
+    //old health regen co routine 
+	/*public void healOverTime(float healAmount, float duration)
 	{
 		StartCoroutine(healOverTimeCoroutine(healAmount, duration));
 	}
@@ -429,7 +432,34 @@ public class Player : MonoBehaviour {
 			amountHealed += amountPerLoop;
 			yield return new WaitForSeconds(1f);
 		}
-	}
+	}*/
+
+    //Health regen coroutine when the player is damaged it will heal at a rate of 5 persecond but whenever a player is damaged the player must not take damage for 10 seconds before he will regenerate again 
+    IEnumerator healthDamageCoroutine()
+    {
+        while (true)
+        {
+            if (isDamaged)
+            {
+                while(damageTimeCounter < regenDelay)
+                {
+                    yield return new WaitForSeconds(1f);
+                    damageTimeCounter++;
+                }
+                isDamaged = false;
+            }
+            else if (playerHealth < playerMaxHealth)
+            {
+                gainHealth(healthRegen);
+                yield return new WaitForSeconds(1f);
+            }
+            else
+            {
+                yield return new WaitForSeconds(1f);
+            }
+            
+        }       
+    }
 
 	public void gainHealth(float health)
 	{
@@ -445,8 +475,12 @@ public class Player : MonoBehaviour {
         {
             mainCam.shakeCam();
         }
+
+        damageTimeCounter = 0;
+        isDamaged = true;
 		
 	}
+
 	public float getHealth()
 	{
 		return playerHealth;

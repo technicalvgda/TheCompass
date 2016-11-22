@@ -32,6 +32,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1000013256085508
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000011233896932}
+  - 212: {fileID: 212000012720298264}
+  m_Layer: 8
+  m_Name: MapIcon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000011233896932
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013256085508}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 15, y: 15, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000012204930874}
+  m_RootOrder: 0
 --- !u!4 &4000012204930874
 Transform:
   m_ObjectHideFlags: 1
@@ -42,7 +71,8 @@ Transform:
   m_LocalPosition: {x: -7.47, y: 0.46, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 4000011233896932}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!50 &50000011686093016
@@ -105,13 +135,10 @@ MonoBehaviour:
   objectSize: 3
   splitter: {fileID: 0}
   splitterShard: {fileID: 0}
-  splitterX: 0
-  splitterY: 0
+  fuelDrop: {fileID: 0}
   splitShards: 4
   driftSpeed: 100
-  knockBackImpact: 500
   isTractored: 0
-  angleCollisionDamage: 0
 --- !u!114 &114000013049490180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -158,5 +185,38 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d8f319afea8466747908e24126d1c1c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+--- !u!212 &212000012720298264
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013256085508}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 1
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: ae3a548899fa9be4880fc5034d72fc3f, type: 3}
+  m_Color: {r: 0.94482756, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
