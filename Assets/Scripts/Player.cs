@@ -52,7 +52,8 @@ public class Player : MonoBehaviour {
 	public float healthRegen = 5;//Health to be healed per second
 	//public float RegenDuration = 0;//The duration of each tick of heal
     private bool isDamaged = false;
-    public float damageTimeCounter = 10;
+    public float damageTimeCounter = 10;//
+    public float regenDelay = 7;
 
 
     private float _bulletDamage = 5.0f;//<amount of damage a single bullet deals
@@ -440,7 +441,7 @@ public class Player : MonoBehaviour {
         {
             if (isDamaged)
             {
-                while(damageTimeCounter < 10)
+                while(damageTimeCounter < regenDelay)
                 {
                     yield return new WaitForSeconds(1f);
                     damageTimeCounter++;

@@ -4474,6 +4474,11 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 1.1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000011607946142, guid: bf81826d7b38b904daec20cb291b789b,
+        type: 2}
+      propertyPath: viewDist
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf81826d7b38b904daec20cb291b789b, type: 2}
   m_IsPrefabParent: 0
@@ -7403,6 +7408,10 @@ Prefab:
         type: 2}
       propertyPath: rotate
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010790308344, guid: 20a6f0c7cb119d645906363d7e2f6695, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20a6f0c7cb119d645906363d7e2f6695, type: 2}
