@@ -1843,11 +1843,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013442923850, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.99913096
+      value: 0.89687407
       objectReference: {fileID: 0}
     - target: {fileID: 4000013442923850, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.04168073
+      value: -0.44228604
       objectReference: {fileID: 0}
     - target: {fileID: 4000013442923850, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
       propertyPath: m_RootOrder
@@ -1856,6 +1856,20 @@ Prefab:
     - target: {fileID: 1000011544194430, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
       propertyPath: m_Name
       value: TractorBeamDrone (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013442923850, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 232.23499
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012075211048, guid: e0fa9f3134f5ae34190637666e441e6e,
+        type: 2}
+      propertyPath: viewAngle
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012075211048, guid: e0fa9f3134f5ae34190637666e441e6e,
+        type: 2}
+      propertyPath: viewDist
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
@@ -5628,11 +5642,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013442923850, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.99913096
+      value: 0.7281546
       objectReference: {fileID: 0}
     - target: {fileID: 4000013442923850, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.04168073
+      value: -0.685413
       objectReference: {fileID: 0}
     - target: {fileID: 4000013442923850, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
       propertyPath: m_RootOrder
@@ -5641,6 +5655,20 @@ Prefab:
     - target: {fileID: 1000011544194430, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
       propertyPath: m_Name
       value: TractorBeamDrone (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013442923850, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 266.636
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012075211048, guid: e0fa9f3134f5ae34190637666e441e6e,
+        type: 2}
+      propertyPath: viewAngle
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012075211048, guid: e0fa9f3134f5ae34190637666e441e6e,
+        type: 2}
+      propertyPath: viewDist
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
@@ -7284,11 +7312,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013442923850, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.99913096
+      value: 0.0073095644
       objectReference: {fileID: 0}
     - target: {fileID: 4000013442923850, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.04168073
+      value: 0.9999733
       objectReference: {fileID: 0}
     - target: {fileID: 4000013442923850, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
       propertyPath: m_RootOrder
@@ -7297,6 +7325,20 @@ Prefab:
     - target: {fileID: 1000011544194430, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
       propertyPath: m_Name
       value: TractorBeamDrone (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013442923850, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0.813
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012075211048, guid: e0fa9f3134f5ae34190637666e441e6e,
+        type: 2}
+      propertyPath: viewAngle
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012075211048, guid: e0fa9f3134f5ae34190637666e441e6e,
+        type: 2}
+      propertyPath: viewDist
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
@@ -10847,6 +10889,11 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 1.1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012075211048, guid: e0fa9f3134f5ae34190637666e441e6e,
+        type: 2}
+      propertyPath: viewAngle
+      value: 45
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
   m_IsPrefabParent: 0
@@ -13123,7 +13170,7 @@ Prefab:
     - target: {fileID: 114000012075211048, guid: e0fa9f3134f5ae34190637666e441e6e,
         type: 2}
       propertyPath: viewAngle
-      value: 90
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 114000012075211048, guid: e0fa9f3134f5ae34190637666e441e6e,
         type: 2}
@@ -14391,7 +14438,17 @@ Prefab:
     - target: {fileID: 114000012075211048, guid: e0fa9f3134f5ae34190637666e441e6e,
         type: 2}
       propertyPath: viewAngle
-      value: 90
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012075211048, guid: e0fa9f3134f5ae34190637666e441e6e,
+        type: 2}
+      propertyPath: sight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012075211048, guid: e0fa9f3134f5ae34190637666e441e6e,
+        type: 2}
+      propertyPath: viewDist
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0fa9f3134f5ae34190637666e441e6e, type: 2}
@@ -18223,7 +18280,7 @@ Prefab:
     - target: {fileID: 114000012075211048, guid: e0fa9f3134f5ae34190637666e441e6e,
         type: 2}
       propertyPath: viewAngle
-      value: 90
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 114000012075211048, guid: e0fa9f3134f5ae34190637666e441e6e,
         type: 2}
