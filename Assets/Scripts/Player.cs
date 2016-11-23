@@ -401,48 +401,23 @@ public class Player : MonoBehaviour {
         if (col.gameObject.tag == "SceneLoader")
         {
             SceneManager.LoadScene("TitleMenu");
-        }
-        else if (col.gameObject.tag == "Debris")
-        {
-            float _directionStatus;
-            _asteroidInput = col.gameObject;
-            _asteroidRigidbody = _asteroidInput.GetComponent<Rigidbody2D>();
-            _asteroidVelocity = _asteroidRigidbody.velocity.magnitude;
+        }   
+    }
 
-            //Get direction vector from asteroid to player
-            asteroidDirection = (col.transform.position - transform.position).normalized;
+    
+    //function to increase the counter of how many enemies the player has killed if the enemies' health reaches zero
+    public static void increaseKillCount()
+    {killCounter++;}
 
-            //Find the Dot to see if they are facing the same way, facing opposite ways, etc..
-            _directionStatus = Vector2.Dot(asteroidDirection, _asteroidRigidbody.velocity.normalized);
-
-            if (_asteroidVelocity > _asteroidMinimum && _directionStatus >= 0f) //temporarily set to if the asteroid is moving, it deals damage automatically
-            {
-                _playerDamaged = true;
-                _asteroidDamageForce = _asteroidVelocity * _ASTEROIDFORCECONSTANT * _directionStatus; //Damage to scale; Need requirements for damage 
-                takeDamage(_asteroidDamageForce);
-            }
-        }
-        else if (col.gameObject.tag == "Bullet")
-        {
-            Debug.Log("Player hit by bullet");
-            _playerDamaged = true;
-            //deal damage
-            takeDamage(_bulletDamage);
-
-        }
+    public void ActivatePlayerShield(bool damageDealt)
+    {
         //activate player shield
         if (shield != null)
         {
             //activate shield, send info if player was damaged
-            shield.ActivateShield(_playerDamaged);
+            shield.ActivateShield(damageDealt);
         }
-        _playerDamaged = false;
     }
-
-    
-     //function to increase the counter of how many enemies the player has killed if the enemies' health reaches zero
-     public static void increaseKillCount()
-     {killCounter++;}
 
     //Increase force the longer movement direction is inputted
     //Resets when input is in neutral position
