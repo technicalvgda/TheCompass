@@ -110,8 +110,6 @@ public class LoadingTransition : MonoBehaviour
 
     private IEnumerator TextScroll(string lineOfText)
     {
-        Time.timeScale = 0;
-        StartCoroutine(LoadLevelWithRealProgress(levelToLoad));
         int letter = 0;
         mainBodyText.text = "";
         isTyping = true;
@@ -126,6 +124,7 @@ public class LoadingTransition : MonoBehaviour
         //toContinueTextBox.SetActive(true);
         mainBodyText.text = lineOfText + "\n";
         isTyping = false;
+		StartCoroutine(LoadLevelWithRealProgress(levelToLoad));
         //cancelTyping = false;
     }
 
@@ -171,18 +170,19 @@ public class LoadingTransition : MonoBehaviour
     */
     public void startCommentaryDialogue()
     {
-
+		
         StartCoroutine(StartCommentary());
     }
     IEnumerator StartCommentary()
     {
-        
+
+		Time.timeScale = 0;
         //get stop position
         Vector2 _newPos = new Vector2(0f, _rectTransform.anchoredPosition.y);
         //move the box up
         while (_rectTransform.anchoredPosition.x < -1f)
         {
-            _rectTransform.anchoredPosition = Vector2.Lerp(_rectTransform.anchoredPosition, _newPos, Time.deltaTime * movementSpeed);
+			_rectTransform.anchoredPosition = Vector2.Lerp(_rectTransform.anchoredPosition, _newPos, Time.unscaledDeltaTime * movementSpeed);
             yield return new WaitForSecondsRealtime(0.01f);
         }
         //enable the commentary

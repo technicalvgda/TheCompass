@@ -2866,6 +2866,11 @@ Prefab:
       propertyPath: minYBoundary
       value: -100
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012489635114, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: partCollected
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b0b7fba286815dc44b0ba11b680392c4, type: 2}
   m_IsPrefabParent: 0
@@ -3846,10 +3851,10 @@ RectTransform:
   - {fileID: 1268957791}
   m_Father: {fileID: 2108170211}
   m_RootOrder: 1
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1241, y: 0.0000085831}
-  m_SizeDelta: {x: 800, y: 667.76}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -805, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &891741853
 MonoBehaviour:
@@ -3870,7 +3875,7 @@ MonoBehaviour:
   currentLine: 0
   endAtLine: 0
   isActive: 0
-  typeSpeed: 0.0005
+  typeSpeed: 0.005
   movementSpeed: 10
 --- !u!114 &891741854
 MonoBehaviour:
@@ -4901,8 +4906,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2, y: 2}
-  m_SizeDelta: {x: 731, y: 603}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 731, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1268957792
 MonoBehaviour:
@@ -4916,7 +4921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4117647, g: 0.89411765, b: 0.81960785, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -6440,6 +6445,11 @@ Prefab:
       propertyPath: commentaryDialogueBox
       value: 
       objectReference: {fileID: 1984197518}
+    - target: {fileID: 114000013509998226, guid: 9cc872d5d4821f8428a3e31e4a8e5264,
+        type: 2}
+      propertyPath: skipIntro
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9cc872d5d4821f8428a3e31e4a8e5264, type: 2}
   m_IsPrefabParent: 0
