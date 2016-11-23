@@ -5,8 +5,6 @@ using System.Collections;
 
 public class UIHelper : MonoBehaviour
 {
-    public const int PLATFORM = 0;
-
     #region Input
     const string HORIZONTAL = "Horizontal";
     const string VERTICAL = "Vertical";

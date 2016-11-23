@@ -8,16 +8,17 @@ using System.Collections;
 
 public class SettingsFullscreen : SettingsToggle
 {
+    protected override string key { get { return SettingsConst.FULLSCREEN_KEY; } }
+    protected override int defaultValue { get { return SettingsConst.FULLSCREEN_DEFAULT; } }
     Resolution res;
 
-    void Start() { base._Start(); }
+    void Awake() { base._Awake(); }
 
     protected override void Init()
     {
-        Debug.Log("SettingsFullscreen.Init()");
         res = Screen.currentResolution;
     }
-
+    
     public void SetWindowed() { Set(0, false); }
     public void SetFullscreen() { Set(1, true); }
 
@@ -32,6 +33,6 @@ public class SettingsFullscreen : SettingsToggle
         Screen.SetResolution(res.width, res.height, fullscreen);
         value = fullscreen ? 1 : 0;
 
-        Debug.Log(t + " tried to set resolution");
+        Debug.Log(t + " successfully set fullscreen");
     }
 }

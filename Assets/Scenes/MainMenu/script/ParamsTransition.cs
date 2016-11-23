@@ -8,7 +8,16 @@ public class ParamsTransition : MonoBehaviour
 
     public UIMenu next
     {
-        get { return UIHelper.PLATFORM == 0 ? nextDesktop : nextMobile; }
+        get
+        {
+#if UNITY_EDITOR
+            return SettingsConst.EDITOR_PLATFORM == 0 ? nextDesktop : nextMobile;
+#elif UNITY_STANDALONE
+            return nextDesktop;
+#else
+            return nextMobile;
+#endif
+        }
     }
 
     public int exitHash { get; private set; }

@@ -27,6 +27,8 @@ public class UINavigationPointer : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (!sel.IsInteractable()) return;
+
         mousedOver = gameObject;
 
         // (SOLVED) The program occasionally coughs up a NullRefException around this part.

@@ -18,17 +18,20 @@ public class SettingsResolution : SettingsToggle
 {
     public UnityEvent onResolutionChange;
 
+    protected override string key { get { return SettingsConst.RESOLUTION_KEY; } }
+    protected override int defaultValue { get { return SettingsConst.RESOLUTION_DEFAULT; } }
+
     Resolution res;
     Toggle lastToggle;
     bool revert = false;
 
-    void Start() { base._Start(); }
+    void Awake() { base._Awake(); }
 
     protected override void Init()
     {
         res = Screen.currentResolution;
-        lastToggle = toggles[value];
 
+        lastToggle = toggles[value];
         // Reminder: if this property is touched at all, OnValueChanged() will fire.
         lastToggle.isOn = true;
     }
@@ -43,7 +46,7 @@ public class SettingsResolution : SettingsToggle
     public void Set1152x864() { Set(7, 1152, 864); }
     public void Set1024x768() { Set(8, 1024, 768); }
 
-    void Set(int option, int width, int height)
+    void Set(int index, int width, int height)
     {
         // Always send event when toggle is clicked, even if value didn't change
         // due to already active toggle in a toggle group being clicked.
@@ -51,13 +54,13 @@ public class SettingsResolution : SettingsToggle
         //
         // t. Unity 2016
 
-        Toggle t = toggles[option];
+        Toggle t = toggles[index];
         Debug.Log(t + " tried to set resolution");
 
         // Ignore toggles that are turned off (because they still fire the event),
         // or if the player is clicking on an already toggled toggle.
 
-        if (!t.isOn || t == toggles[value]) return;
+        if (!t.isOn || t == toggles[value]) return; // Change the second check to lastToggle
 
         Screen.SetResolution(width, height, Screen.fullScreen);
 
@@ -66,10 +69,10 @@ public class SettingsResolution : SettingsToggle
             onResolutionChange.Invoke();
 
         lastToggle = toggles[value];
-        value = option;
+        value = index;
         revert = false;
         
-        Debug.Log(t + " successfully set resolution");
+        Debug.Log(t + " successfully set resolution. RESOLUTION IS NOW " + width + " x " + height);
     }
 
     public void Revert()
