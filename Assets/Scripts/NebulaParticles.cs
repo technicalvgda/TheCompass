@@ -17,7 +17,7 @@ public class NebulaParticles : MonoBehaviour
     {
         
         //set emission rate to reflect size of construct
-        float emissionRate = emissionMultiplier * transform.lossyScale.magnitude / 4;
+        //float emissionRate = emissionMultiplier * transform.lossyScale.magnitude / 4;
         particles = GetComponent<ParticleSystem>();
         /*
         ParticleSystem.EmissionModule em = particles.emission;//.rate.Equals();

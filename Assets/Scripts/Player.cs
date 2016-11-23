@@ -55,9 +55,6 @@ public class Player : MonoBehaviour {
     public float damageTimeCounter = 10;//
     public float regenDelay = 7;
 
-
-    private float _bulletDamage = 5.0f;//<amount of damage a single bullet deals
-
     //variable for keeping track of the player's current fuel
     private float currentFuel;
 
@@ -93,11 +90,7 @@ public class Player : MonoBehaviour {
 
     //COLLISION VARIABLES
     private GameObject _asteroidInput;
-    private bool _playerDamaged = false;
     private Rigidbody2D _asteroidRigidbody;
-    private float _asteroidVelocity = 0f;
-    private float _asteroidMinimum = 1f; //Minimum velocity of asteroid to deal damage to player, can be changed later
-    private float _asteroidDamageForce = 0f;
     const float _ASTEROIDFORCECONSTANT = 2f; //Can change later
     public Vector2 asteroidDirection;
     //shield script in child object
