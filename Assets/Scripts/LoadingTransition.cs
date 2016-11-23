@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LoadingTransition : MonoBehaviour
 {
 
     public Text mainBodyText;
     //public Text speakerText;
+
+    public string levelToLoad;
 
     public TextAsset textFile;
     public string[] textLines;
@@ -32,10 +35,13 @@ public class LoadingTransition : MonoBehaviour
     {
        // _timedCommentaryActive = false;
         _rectTransform = transform.GetComponent<RectTransform>();
+
+       
         if (textFile != null)
         {
             textLines = (textFile.text.Split('\n'));
         }
+       
 
         if (endAtLine == 0)
         {
@@ -50,6 +56,7 @@ public class LoadingTransition : MonoBehaviour
         {
             DisableTextBox();
         }
+        ReloadScript(textFile);
     }
 
     // Update is called once per frame
@@ -103,6 +110,8 @@ public class LoadingTransition : MonoBehaviour
 
     private IEnumerator TextScroll(string lineOfText)
     {
+        Time.timeScale = 0;
+        StartCoroutine(LoadLevelWithRealProgress(levelToLoad));
         int letter = 0;
         mainBodyText.text = "";
         isTyping = true;
@@ -115,7 +124,7 @@ public class LoadingTransition : MonoBehaviour
             yield return new WaitForSecondsRealtime(typeSpeed);
         }
         //toContinueTextBox.SetActive(true);
-        mainBodyText.text = lineOfText;
+        mainBodyText.text = lineOfText + "\n";
         isTyping = false;
         //cancelTyping = false;
     }
@@ -135,7 +144,7 @@ public class LoadingTransition : MonoBehaviour
         //textBox.SetActive(true);
         isActive = true;
         StartCoroutine(TextScroll(textLines[currentLine]));
-
+        
     }
 
     public void DisableTextBox()
@@ -151,7 +160,7 @@ public class LoadingTransition : MonoBehaviour
         if (theText != null)
         {
             textLines = new string[1];
-            textLines = (theText.text.Split('@'));
+            textLines = (theText.text.Split('#'));
         }
     }
     /*
@@ -167,13 +176,14 @@ public class LoadingTransition : MonoBehaviour
     }
     IEnumerator StartCommentary()
     {
+        
         //get stop position
         Vector2 _newPos = new Vector2(0f, _rectTransform.anchoredPosition.y);
         //move the box up
         while (_rectTransform.anchoredPosition.x < -1f)
         {
             _rectTransform.anchoredPosition = Vector2.Lerp(_rectTransform.anchoredPosition, _newPos, Time.deltaTime * movementSpeed);
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSecondsRealtime(0.01f);
         }
         //enable the commentary
         isActive = true;
@@ -181,17 +191,61 @@ public class LoadingTransition : MonoBehaviour
         //wait while text is still active
         while (isActive == true)
         {
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSecondsRealtime(0.01f);
         }
+
+        /*
         //get position off screen
         _newPos = new Vector2(_rectTransform.anchoredPosition.x, -145f);
         //move the box back down
         while (_rectTransform.anchoredPosition.y > -144f)
         {
             _rectTransform.anchoredPosition = Vector2.Lerp(_rectTransform.anchoredPosition, _newPos, Time.deltaTime * movementSpeed);
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSecondsRealtime(0.01f);
         }
+        */
     }
+
+    IEnumerator LoadLevelWithRealProgress(string levelToLoad)
+    {
+        yield return new WaitForSecondsRealtime(1);
+
+        AsyncOperation aSyncOp = SceneManager.LoadSceneAsync(levelToLoad);
+        aSyncOp.allowSceneActivation = false;
+
+        while (!aSyncOp.isDone)
+        {
+            if (aSyncOp.progress >= 0.9f)
+            {
+
+#if UNITY_STANDALONE || UNITY_WEBPLAYER
+                //if in the web player will prompt user to press spacebar
+                //loadingText.text = "Press any button to Continue"; // prompts the user to press space in order
+                //loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, Mathf.PingPong(Time.time, 1));
+                if (Input.anyKeyDown)
+                {
+                    Time.timeScale = 1;
+                    aSyncOp.allowSceneActivation = true;
+                }
+#elif UNITY_IOS || UNITY_ANDROID
+                //when built to mobile will prompt user to touch the screen to continue 
+                //loadingText.text = "Touch Screen to Continue"; // prompts the user to press space in order
+                //loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, Mathf.PingPong(Time.time, 1));
+				if (Input.touchCount > 0 || Input.GetMouseButtonDown(0))
+                {
+                    aSyncOp.allowSceneActivation = true;
+                }
+#endif
+
+            }
+
+            //Debug.Log(aSyncOp.progress);
+            yield return null;
+        }
+
+    }
+
+
     /*
     public void activateTimedCommentary(float time)
     {

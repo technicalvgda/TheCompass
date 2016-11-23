@@ -1951,11 +1951,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000010726845082, guid: 7597b4dac1288f04cb1bf7a6fb33966a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 143
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4000010726845082, guid: 7597b4dac1288f04cb1bf7a6fb33966a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4000010726845082, guid: 7597b4dac1288f04cb1bf7a6fb33966a, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2590,6 +2590,11 @@ Prefab:
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013024907684, guid: dc990532c9eef8348b99712d28b9e6b5,
+        type: 2}
+      propertyPath: typeSpeed
+      value: 0.005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc990532c9eef8348b99712d28b9e6b5, type: 2}
@@ -3858,12 +3863,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainBodyText: {fileID: 1268957792}
+  levelToLoad: MVPScene
   textFile: {fileID: 4900000, guid: b7006321d6d588a428ae0a40d5476b2f, type: 3}
   textLines: []
+  typingSoundAudioSource: {fileID: 0}
   currentLine: 0
   endAtLine: 0
   isActive: 0
-  typeSpeed: 0.05
+  typeSpeed: 0.0005
   movementSpeed: 10
 --- !u!114 &891741854
 MonoBehaviour:
