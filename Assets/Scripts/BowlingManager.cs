@@ -75,7 +75,7 @@ public class BowlingManager : MonoBehaviour {
 
     IEnumerator StartGame()
     {
-        setText("Welcome to Bowling!");
+        setText(OutputScoreBox("Welcome to Bowling!"));
         yield return new WaitForSeconds(3f);
         StartFrame();
         yield return null;
@@ -106,7 +106,7 @@ public class BowlingManager : MonoBehaviour {
         {
 
             Debug.Log("Frame "+ (currentFrame + 1)+" begin!");
-            setText("Frame " + (currentFrame + 1) + " begin!");
+            setText(OutputScoreBox("Frame " + (currentFrame + 1) + " begin!"));
             //spawn the ball
             StartCoroutine(RespawnBall());
             //spawn the pins
@@ -121,7 +121,7 @@ public class BowlingManager : MonoBehaviour {
         round2 = true;
 
         Debug.Log("Frame " + (currentFrame+1) + " round 2!");
-        setText("Frame " + (currentFrame + 1) + " round 2!");
+        setText(OutputScoreBox("Frame " + (currentFrame + 1) + " round 2!"));
         //spawn the ball
         StartCoroutine(RespawnBall());
         
@@ -155,8 +155,14 @@ public class BowlingManager : MonoBehaviour {
     //Gutterball or ball lands in back pit
     void BallDrop()
     {
+       
         //End the round
         StartCoroutine(EndRound());
+    }
+
+    public void GutterBall()
+    {
+        setText(OutputScoreBox("Gutterball (>_<)"));
     }
     //Handles the end of a round
     //checks whether to continue to round 2 or end frame
@@ -182,7 +188,7 @@ public class BowlingManager : MonoBehaviour {
 
             //output number of pins hit
             Debug.Log("You hit " + round1Score[currentFrame] + " pins!");
-            setText("You hit " + round1Score[currentFrame] + " pins!");
+            setText(OutputScoreBox("You hit " + round1Score[currentFrame] + " pins!"));
             //if the total is at 10, its a STRIKE!
             if (frameScore[currentFrame] == 10)
             {
@@ -215,18 +221,21 @@ public class BowlingManager : MonoBehaviour {
             //round 1 will already have been added
             frameScore[currentFrame] += round2Score[currentFrame];
             //output number of pins hit
-            Debug.Log("You hit " + round2Score[currentFrame] + " pins!");
-            setText("You hit " + round2Score[currentFrame] + " pins!");
+            Debug.Log("You hit " + round2Score[currentFrame] + " pins!");        
             //if the total is at 10, its a spare
             if (frameScore[currentFrame] == 10)
             {
                 Debug.Log("SPARE!");
-                setText("SPARE!");
+                setText(OutputScoreBox("SPARE!"));
                 //if this is the 10th (final) frame
                 if (currentFrame == 9)
                 {
                     bonusThrows += 1;
                 }
+            }
+            else
+            {
+                setText(OutputScoreBox("You hit " + round2Score[currentFrame] + " pins!"));
             }
             //End this frame
             EndFrame();
@@ -277,7 +286,7 @@ public class BowlingManager : MonoBehaviour {
             {
                 case 1:
                     Debug.Log("Strike!!!");
-                    setText("Strike!!!");
+                    setText(OutputScoreBox("Strike!!!"));
                     break;
                 case 2:
                     Debug.Log("Double!!!");
@@ -437,6 +446,87 @@ public class BowlingManager : MonoBehaviour {
         {
             _rectTransform.anchoredPosition = Vector2.Lerp(_rectTransform.anchoredPosition, _newPos, Time.deltaTime * movementSpeed);
             yield return new WaitForSeconds(0.01f);
+        }
+    }
+
+    //returns ASCII designed score box
+    string OutputScoreBox(string announcement)
+    {
+        return ("@@@ "+announcement+" @@@\n\n"
+                +" __1__ __2__ __3__ __4__ __5__ __6__ __7__ __8__ __9__ ___10____\n"
+                +GetRoundScores(1)+GetRoundScores(2) + GetRoundScores(3) + GetRoundScores(4) + GetRoundScores(5)
+                        +GetRoundScores(6)+GetRoundScores(7)+GetRoundScores(8)+GetRoundScores(9) + GetRoundScores(10)+"|\n"
+                +"|_"+GetFrameScore(1)+"_|_" + GetFrameScore(2) + "_|_" + GetFrameScore(3) + "_|_" + GetFrameScore(4) + "_|_" + GetFrameScore(5) + "_|_" + GetFrameScore(6)
+                + "_|_" + GetFrameScore(7) + "_|_" + GetFrameScore(8) + "_|_" + GetFrameScore(9) + "_|_" + GetFrameScore(10)+ "_|");
+    }
+    string GetRoundScores(int frame)
+    {
+        int frameIndex = frame - 1;
+        string scoreString = "";
+        if(frame == 10)
+        {
+            //if strike, get all 3 frames
+            if(round1Score[frameIndex] == 10)
+            {
+                scoreString += "| [ X ]";
+                if (round1Score[frameIndex + 1] == 10)
+                { scoreString += "[ X ]"; }
+                else { scoreString += "[ " + frameIndex + 1 + " ]"; }
+                if(round1Score[frameIndex + 2] == 10)
+                { scoreString += "[ X ]"; }
+                else { scoreString += "[ "+frameIndex + 2+" ]"; }
+            }
+            //if spare, do 2 frames
+            else if ((round1Score[frameIndex] + round2Score[frameIndex]) == 10)
+            {
+                scoreString += "| [ "+round1Score[frameIndex]+" ][ / ]";
+                if (round1Score[frameIndex + 1] == 10)
+                { scoreString += "[ X ]"; }
+                else { scoreString += "[ " + frameIndex + 1 + " ]"; }
+               
+            }
+            else
+            {
+                scoreString += ("| [ "+round1Score[frameIndex]+ " ][ " + round2Score[frameIndex] + " ][   ]");
+            }
+            return scoreString;
+           
+        }
+        //strike
+        else if(round1Score[frameIndex] == 10)
+        {
+            return ("|   [ X ]");
+        }
+        else if((round1Score[frameIndex] + round2Score[frameIndex]) == 10)
+        {
+            return ("| "+round1Score[frameIndex]+" [ / ]");
+        }
+        else
+        {
+            return ("| "+round1Score[frameIndex] + " [ "+ round2Score[frameIndex]+" ]");
+        }
+       
+    }
+    //add on padding to score 
+    string GetFrameScore(int frame)
+    {
+        string tenthPadding = "";
+        if(frame == 10)
+        {
+            tenthPadding = "____";
+        }
+        string frameScoreRough = frameScore[frame - 1].ToString();
+        if(frameScoreRough.Length == 1)
+        {
+            return tenthPadding+"00" + frameScoreRough;
+        }
+        else if(frameScoreRough.Length == 2)
+        {
+            return tenthPadding + "0" + frameScoreRough;
+        }
+        else
+        {
+            return tenthPadding + frameScoreRough;
         }
     }
 }
