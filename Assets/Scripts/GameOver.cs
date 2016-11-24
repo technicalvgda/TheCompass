@@ -39,7 +39,7 @@ public class GameOver : MonoBehaviour {
     //loads up title menu level
     public void Quit()
 	{	
-		SceneManager.LoadScene ("TitleMenu");	
+		SceneManager.LoadScene ("MainMenu");	
         //Application.LoadLevel("TitleMenu");
     }
 }

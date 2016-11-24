@@ -7,13 +7,29 @@ public class ObjectiveMech : MonoBehaviour {
     //Put the name of the scene to jump to here
     public string nextLevelName;
 
-
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.name == "ShipPart")
+        if(col.tag == "Player")
+        {
+            // win condition met if part collected
+            if (col.GetComponent<TractorBeamControls>().partCollected)
+            {
+                Debug.Log("COMPLETE,COMPLETE,COMPLETE");
+                if (nextLevelName != null)
+                {
+                    SceneManager.LoadSceneAsync(nextLevelName);
+                }
+                else
+                {
+                    Debug.Log("No scene set for next level on waypoint");
+                }
+
+            }
+        }
+        else if(col.tag == "TetheredPart")
         {
             Debug.Log("COMPLETE,COMPLETE,COMPLETE");
-            if(nextLevelName != null)
+            if (nextLevelName != null)
             {
                 SceneManager.LoadSceneAsync(nextLevelName);
             }
@@ -21,7 +37,20 @@ public class ObjectiveMech : MonoBehaviour {
             {
                 Debug.Log("No scene set for next level on waypoint");
             }
-            
         }
+
+        else if (col.tag == "RepairStation")
+        {
+            Debug.Log("COMPLETE,COMPLETE,COMPLETE");
+            if (nextLevelName != null)
+            {
+                SceneManager.LoadSceneAsync(nextLevelName);
+            }
+            else
+            {
+                Debug.Log("No scene set for next level on waypoint");
+            }
+        }
+
     }
 }

@@ -3,8 +3,8 @@ using System.Collections;
 
 public class WallKnockback : MonoBehaviour
 {
-    public float knockback;
-    public bool horizontalWall;
+    public float knockback = 50;
+    public bool UpWall;
 
     // Use this for initialization
     void Start ()
@@ -13,20 +13,15 @@ public class WallKnockback : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (horizontalWall)
+        if (UpWall)
         {
-            if (other.transform.position.y > transform.position.y)
-                other.rigidbody.AddForce(new Vector2(0, 10) * knockback);
-            else
-                other.rigidbody.AddForce(new Vector2(0, -10) * knockback);
+            other.rigidbody.AddForce(transform.up * knockback);
         }
         else
         {
-            if (other.transform.position.x < transform.position.x)
-                other.rigidbody.AddForce(new Vector2(-10, 0) * knockback);
-            else
-                other.rigidbody.AddForce(new Vector2(10, 0) * knockback);
+            other.rigidbody.AddForce(-transform.up * knockback);
         }
+        
         
 
         

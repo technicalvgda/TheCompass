@@ -12,6 +12,7 @@ public class LaserEmitter : MonoBehaviour
     public float maxFalloffDist;    //don't set this past 10
     public float rayDamage;
     public Transform laserEndPt;
+    private GameObject laserSparks;
     public float bounceIntensity;  //how much the player gets bounced back upon collision with the laser
     public float timeLimit = 0.5f;  //amount of time the player is paralyzed for
 
@@ -20,6 +21,9 @@ public class LaserEmitter : MonoBehaviour
     private Vector3 _startVec, _startVecFwd;
     private Player _playerscript;
     private float _calcDamage;
+    public float rotate = 1; //The speed of the laser rotation, recommend speed to 1
+    public bool isRotating = false;
+
     // Use this for initialization
     void Start()
     {
@@ -32,6 +36,8 @@ public class LaserEmitter : MonoBehaviour
         _playerscript = _player.GetComponent<Player>();
         line.enabled = true;
         bounceIntensity = 15.0f;
+        laserSparks = transform.Find("Sparks").gameObject;
+        laserSparks.SetActive(false);
     }
 
     // Update is called once per frame
@@ -48,6 +54,8 @@ public class LaserEmitter : MonoBehaviour
         {
             //laser hits something, so the endpoint is the collision point
             line.SetPosition(1, _hit.point);
+            laserSparks.SetActive(true);
+            laserSparks.transform.position = _hit.point;
             //TODO: Make the damage have a cooldown using the coroutine fire methods.
             if (_hit.distance < maxFalloffDist)
             {
@@ -88,6 +96,10 @@ public class LaserEmitter : MonoBehaviour
         {
             //laser hits nothing, so it will continue to its endpoint
             line.SetPosition(1, laserEndPt.position);
+            if(laserSparks != null)
+            {
+                laserSparks.SetActive(false);
+            }
         }
 
         //conditions to reactivate player script after the paralysis time has elapsed
@@ -100,6 +112,13 @@ public class LaserEmitter : MonoBehaviour
             _playerscript.enabled = true;
             timeLimit = 0.5f;
         }
+
+        if (isRotating)
+        {
+            //Rotation speed of the laser
+            transform.Rotate(0, 0, rotate);
+        }
+        
     }
     void OnDrawGizmos()
     {

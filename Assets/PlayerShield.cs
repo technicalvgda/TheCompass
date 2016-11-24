@@ -9,7 +9,7 @@ public class PlayerShield : MonoBehaviour
     */
     private float initialWaitTime = 2.0f;
     private float waitTime;
-    
+	private int _numbTimesActivated;
     Animator anim;
 
     //Shield Audio Source
@@ -42,6 +42,7 @@ public class PlayerShield : MonoBehaviour
 
     public void ActivateShield(bool playerDamaged)
     {
+		_numbTimesActivated++;
         StopCoroutine(ResetAnim());
         waitTime = initialWaitTime;
        
@@ -65,4 +66,8 @@ public class PlayerShield : MonoBehaviour
         anim.SetBool("Damage", false);
         yield return null;
     }
+	public int numbTimesShieldActivated()
+	{
+		return _numbTimesActivated;
+	}
 }

@@ -40,7 +40,7 @@ Transform:
   m_GameObject: {fileID: 1000012885146664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.397581, y: -15.660103, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -108,8 +108,10 @@ MonoBehaviour:
   objectSize: 1
   splitter: {fileID: 0}
   splitterShard: {fileID: 0}
+  fuelDrop: {fileID: 0}
   splitterX: 0
   splitterY: 0
+  splitShards: 4
   driftSpeed: 100
   knockBackImpact: 500
   isTractored: 0

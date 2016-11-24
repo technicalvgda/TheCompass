@@ -30,7 +30,7 @@ public class ButtonManagerScript : MonoBehaviour {
 	public GameObject _pauseCanvasMenuObject;
 	public GameOver _gameOverScript;
 	private string _nameOfButton;
-
+	private bool _inCutscene;
 	/* Finds the UI elements and sets them to inactive. Also sets the slot text to the level that the user is on. */ 
 	void Start()
 	{
@@ -45,9 +45,12 @@ public class ButtonManagerScript : MonoBehaviour {
 		eventSystem = GameObject.Find ("EventSystem");
 		gameOverMenu = GameObject.FindGameObjectWithTag ("GameOverMenu");
 		es = eventSystem.GetComponent<EventSystem> ();
-		resolutionDropdown = optionMenu.GetComponentInChildren<Dropdown> ();
-		fullscreenToggle = optionMenu.GetComponentInChildren<Toggle> ();
-		slotText.text = PlayerPrefs.GetString ("onLevel");
+		if (optionMenu != null) {
+			resolutionDropdown = optionMenu.GetComponentInChildren<Dropdown> ();
+			fullscreenToggle = optionMenu.GetComponentInChildren<Toggle> ();
+		}
+		if(slotText != null)
+			slotText.text = PlayerPrefs.GetString ("onLevel");
 		confirmPrompt = GameObject.Find ("ConfirmMenu");
 
 		#if(UNITY_ANDROID)
@@ -65,7 +68,8 @@ public class ButtonManagerScript : MonoBehaviour {
 			confirmPrompt.SetActive (false);
 		if(saveMenu != null)
 			saveMenu.SetActive (false);
-		optionMenu.SetActive(false);
+		if(optionMenu != null)
+			optionMenu.SetActive(false);
 		if(cursorSelectionMenu != null)
 			cursorSelectionMenu.SetActive (false);
 		if(extrasMenu != null)
@@ -184,27 +188,25 @@ public class ButtonManagerScript : MonoBehaviour {
 
         //resolutionDropdownValueChangedHandler(resolutionDropdown);
         //if ESC button is pressed, change the pause state
-		if (theseScenesAreActive ()) {
-			if (_gameOverScript.isGameOver == false) {
-				if (Input.GetButtonDown ("Pause")) {
-					_isPaused = !_isPaused;
-					//if paused, bring up pause menu && stop game time
-					if (_isPaused)
-					{
-						Pause ();
-					}
-					else 
-					{
-						Resume ();
+		if (_inCutscene == false) {
+			if (theseScenesAreActive ()) {
+				if (_gameOverScript.isGameOver == false) {
+					if (Input.GetButtonDown ("Pause")) {
+						_isPaused = !_isPaused;
+						//if paused, bring up pause menu && stop game time
+						if (_isPaused) {
+							Pause ();
+						} else {
+							Resume ();
+						}
+
 					}
 
+				} else if (_gameOverScript.isGameOver == true) {
+					Time.timeScale = 0;
 				}
-
-			} else if (_gameOverScript.isGameOver == true) {
-				Time.timeScale = 0;
 			}
 		}
-
 		//Switches to joystick/keyboard mode when a vertical/horizontal axis is moved. See Edit>Project Settings>Input
 		if((Mathf.Abs(Input.GetAxis("Vertical")) > 0 || Mathf.Abs(Input.GetAxis("Horizontal")) > 0) && es.currentSelectedGameObject == null) 
 		{
@@ -221,7 +223,20 @@ public class ButtonManagerScript : MonoBehaviour {
 	/* Returns true if these scenes are active */ 
 	static bool theseScenesAreActive ()
 	{
-		return SceneManager.GetActiveScene ().name == "MVPScene" || SceneManager.GetActiveScene ().name == "Level1Rough" || SceneManager.GetActiveScene ().name == "Level 0 Tutorial" || SceneManager.GetActiveScene ().name == "Level 1" || SceneManager.GetActiveScene ().name == "Level 2" || SceneManager.GetActiveScene ().name == "Level 3" || SceneManager.GetActiveScene ().name == "Level 4" || SceneManager.GetActiveScene ().name == "Level 5";
+		return SceneManager.GetActiveScene ().name == "MVPScene" || 
+			SceneManager.GetActiveScene ().name == "Level1Rough" || 
+			SceneManager.GetActiveScene ().name == "Level 0 Tutorial" || 
+			SceneManager.GetActiveScene ().name == "Level 1" || 
+			SceneManager.GetActiveScene ().name == "Level 2" || 
+			SceneManager.GetActiveScene ().name == "Level 3" || 
+			SceneManager.GetActiveScene ().name == "Level 4" || 
+			SceneManager.GetActiveScene ().name == "Level 5" ||
+			SceneManager.GetActiveScene ().name == "Level 0 TutorialDialogue" ||
+			SceneManager.GetActiveScene ().name == "Level 1 Dialogue" ||
+			SceneManager.GetActiveScene ().name == "Level 2 Dialogue" ||
+			SceneManager.GetActiveScene ().name == "Level 3 Dialogue" ||
+			SceneManager.GetActiveScene ().name == "Level 4 Dialogue" ||
+			SceneManager.GetActiveScene ().name == "Level 5 Dialogue";
 	}
 
 	/* Loads the level */ 
@@ -499,6 +514,13 @@ public class ButtonManagerScript : MonoBehaviour {
 
 		}
 	}
-
+	public void enterCutscene()
+	{
+		_inCutscene = true;
+	}
+	public void exitCutscene()
+	{
+		_inCutscene = false;
+	}
 
 }

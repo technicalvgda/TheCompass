@@ -3,186 +3,206 @@ using System.Collections;
 
 public class MoveableObject : MonoBehaviour
 {
-	//PUBLIC VARIABLES
-	public bool drift, rotateActivated, splitactivated;
+
+    private Rigidbody2D rb2d;
+
+    //Flame Trail
+    GameObject flameTrail;
+
+    //PUBLIC VARIABLES
+    public bool drift, rotateActivated, splitactivated;
 	public float objectSize = 2; // small 1, medium 2, large 3 
-    public GameObject splitter, splitterShard;
-    public float splitterX, splitterY;
+    public GameObject splitter, splitterShard, fuelDrop;
     public float splitShards = 4;
-
     public float driftSpeed = 100;
-	private Rigidbody2D rb2d;
-	private bool iAmAsteroid = false;
-
-	public int knockBackImpact = 500;  // adjust the impact force
     public bool isTractored = false;
-	public float angleCollisionDamage = 0f; //Angle of asteroid object collision
 
-	//Moveable Object
-	private Vector2 curVelocity;
-	private float curSpeed;
+    //Object movement variables
+    private Vector2 curVelocity;
+    private Vector2 curDirection;//< normalized velocity vector
+    private float curSpeed;
 
+    //Constant values
+    const float MINIMUM_DAMAGE_SPEED = 20f; //Minimum speed at which an object can deal damage
 
+    //amount to multiplay knockback by (currently unused)
+    private float knockBackImpact = 1.2f;  // adjust the impact force
 
 	// Use this for initialization
 	void Start ()
 	{
 		//get rigidbody component 
 		rb2d = GetComponent<Rigidbody2D>();
-
-        if (transform.localScale.x < 0.65)
-        {
-            objectSize = 1;
-        }
-        else if (transform.localScale.x >= 0.65 && transform.localScale.x <= 1.35)
-        {
-            objectSize = 2;
-        }
-        else
-        {
-            objectSize = 3;
-        }
-
-		if (drift)
-		{
-			float x = Random.Range(-1f, 1f);
-			float y = Random.Range(-1f, 1f);
-			Vector2 direction = new Vector2(x, y).normalized;
-			rb2d.AddForce(direction * driftSpeed);
-		}
-        
-
-        if ( this.gameObject.tag == "small" || this.gameObject.name == "AsteroidPlaceHolder" ) 
-		{	
-			iAmAsteroid = true;
-		}
-
-        //give the object a random rotation
-        Vector3 euler = transform.eulerAngles;
-        euler.z = Random.Range(0f, 360f);
-        transform.eulerAngles = euler;
+        //initialize settings for object
+        InitializeObj();
+        //initialize flame trail
+        if (gameObject.tag == "Debris" || gameObject.tag == "TetheredPart")
+        {InitializeFlameTrail();}
+       
     }
 
-	// Update is called once per frame
-	void Update ()
+	void FixedUpdate()
 	{
         if (rotateActivated)
-        {
-            RotateLeft();
-        }
-    }
+        {RotateLeft();}
+
+        curVelocity = rb2d.velocity;
+        curDirection = curVelocity.normalized;
+		curSpeed = rb2d.velocity.magnitude;
+        //turn flame trail on and off based on asteroid speed
+        ToggleFlameTrail(); 
+	}
 
     void RotateLeft()
     {
         transform.Rotate(Vector3.forward);
     }
 
-
-	void FixedUpdate()
-	{
-		curVelocity = rb2d.velocity.normalized;
-		curSpeed = rb2d.velocity.magnitude;
-	}
-
     void OnCollisionEnter2D(Collision2D col)
 	{
+        
         if (splitactivated)
+        {Split();}
+        //if this is a debris object and its colliding with player
+		if (gameObject.tag == "Debris")
         {
-            
-            splitterX = splitter.transform.position.x;
-            splitterY = splitter.transform.position.y;
-
-            isTractored = false;
-            Destroy(splitter);
-            for (int i = 0; i < splitShards; i++)
+            //handle player damage and knockback
+            if(col.gameObject.tag == "Player")
             {
+                Player playerObject = col.gameObject.GetComponent<Player>();
+                //calculate damage to deal, knockback is true
+                playerObject.takeDamage(CalculateAngularDamageAndKnockback(col, true));
+            }
+            //handled enemy damage and knockback
+            if (col.gameObject.tag == "Enemy")
+            {
+                EnemyCollision enemyObject;
+                if (enemyObject = col.gameObject.GetComponent<EnemyCollision>())
+                {
+                    //calculate damage to deal, knockback is true
+                    enemyObject.TakeDamage(CalculateAngularDamageAndKnockback(col, false));
+                }
                 
-                Instantiate(splitterShard, new Vector3(Random.Range(splitterX -objectSize*2, splitterX + objectSize*2), Random.Range(splitterY - objectSize*2, splitterY + objectSize*2), 0), Quaternion.identity);
+               
+            }
+            
+
+        }
+	}
+
+    //initialize the object
+    void InitializeObj()
+    {
+        ///set object size
+        if (transform.localScale.x < 0.65)
+        { objectSize = 1; }
+        else if (transform.localScale.x >= 0.65 && transform.localScale.x <= 1.35)
+        { objectSize = 2; }
+        else
+        { objectSize = 3; }
+
+        // TODO give the object a random sprite
+
+        //give the object a random rotation
+        Vector3 euler = transform.eulerAngles;
+        euler.z = Random.Range(0f, 360f);
+        transform.eulerAngles = euler;
+
+        ///set drift
+		if (drift)
+        { Drift(); }
+    }
+
+    void Split()
+    {
+         float splitterX, splitterY;
+        splitterX = splitter.transform.position.x;
+        splitterY = splitter.transform.position.y;
+
+        isTractored = false;
+        Destroy(splitter);
+        for (int i = 0; i < splitShards; i++)
+        {
+            Instantiate(splitterShard, new Vector3(Random.Range(splitterX - objectSize * 2, splitterX + objectSize * 2), Random.Range(splitterY - objectSize * 2, splitterY + objectSize * 2), 0), Quaternion.identity);
+        }
+        if (fuelDrop) //If fuel object was assigned, drop a fuel prefab on collision as well
+        {
+            Instantiate(fuelDrop, new Vector3(Random.Range(splitterX - objectSize * 2, splitterX + objectSize * 2), Random.Range(splitterY - objectSize * 2, splitterY + objectSize * 2), 0), Quaternion.identity);
+        }
+    }
+
+    void Drift()
+    {
+        float x = Random.Range(-1f, 1f);
+        float y = Random.Range(-1f, 1f);
+        Vector2 direction = new Vector2(x, y).normalized;
+        rb2d.AddForce(direction * driftSpeed);
+    }
+
+    void InitializeFlameTrail()
+    {
+        //instantiate flame trail
+        flameTrail = Instantiate(Resources.Load("FlameTrail"), transform.position, transform.rotation) as GameObject;
+        //attach as child to this game object
+        flameTrail.transform.parent = transform;
+        //set flame trail inactive
+        flameTrail.SetActive(false);
+    }
+
+    void ToggleFlameTrail()
+    {
+        //if the asteroid is moving faster than the minimum damage velocity and the flame trail is not active and the object is not held
+
+        if (curSpeed >= MINIMUM_DAMAGE_SPEED && !flameTrail.activeSelf && !isTractored)
+        {
+            flameTrail.SetActive(true);
+        }
+        if (curSpeed < MINIMUM_DAMAGE_SPEED && flameTrail.activeSelf)
+        {
+            flameTrail.SetActive(false);
+        }
+    }
+
+    //calculates proper damage and knockback based on asteroid speed and angle of collision
+    float CalculateAngularDamageAndKnockback(Collision2D col, bool knockback)
+    {
+        Rigidbody2D targetRB = col.gameObject.GetComponent<Rigidbody2D>();
+        float _asteroidDamageForce = 0f;
+        //if all player components are not null,the object is not tractored, and the object is moving fast enough to deal damage
+        if (targetRB && !isTractored && curSpeed >= MINIMUM_DAMAGE_SPEED)
+        {
+            //non normalized velocity of player
+            Vector2 targetVelocity = targetRB.velocity;
+
+            //take dot product of asteroid velocity vector and player velocity vector (normalized)
+            float _directionStatus = Vector2.Dot(curDirection, targetVelocity.normalized);
+
+            //direction status is -1 if object and player are colliding head on, 0 is player is not moving, 1 if same heading
+            _asteroidDamageForce =  ((curSpeed-MINIMUM_DAMAGE_SPEED) - (_directionStatus*targetVelocity.magnitude));
+            
+            //prevent the damage from being negative
+            if(_asteroidDamageForce < 0)
+            { _asteroidDamageForce = 0;}
+
+            //knockback object if knockback is true
+            if(knockback)
+            {
+                //calculate and execute knockback
+                CalculateKnockback(col, targetRB, _directionStatus, targetVelocity);
             }
         }
+        //return damage
+        return _asteroidDamageForce;
+    }
 
-        float _directionStatus;
-		bool _playerDamaged = false;
-		float _asteroidSpeed = 0f;
-		float _asteroidDamageForce = 0f;
-		const float _VELOCITYMINIMUM = 0f; //Change later
-		const float _ASTEROIDFORCE = 1f; //Can change later
+    void CalculateKnockback(Collision2D col,Rigidbody2D targetRB, float _directionStatus, Vector2 targetVelocity)
+    {
+        //get proper direction to knock back target object
+        Vector2 knockbackDirection = (curDirection + targetVelocity.normalized).normalized;
+        //knock back target scaled by the velocity of both objects
+        targetRB.AddForce(knockbackDirection * (curSpeed + (_directionStatus * targetVelocity.magnitude)));
+        
+    }
 
-		Vector2 asteroidDirection;
-		Player playerObject;
-		Rigidbody2D playerRb2d;
-		bool collidedWithPlayer = false;
-		// Opposite direction of player
-		Vector2 oppositeDirection = new Vector2(0, 0);
-
-		if (col.gameObject.tag == "Player") {
-			collidedWithPlayer = true;
-		}
-
-		if (iAmAsteroid && collidedWithPlayer) {
-			playerObject = col.gameObject.GetComponent<Player> ();
-			playerRb2d = col.gameObject.GetComponent<Rigidbody2D> ();
-
-			if (playerObject && playerRb2d && !isTractored) 
-			{	
-                /*
-				Debug.Log ("----------------------------------------------");
-				Debug.Log ("Current object tag: " + this.gameObject.tag);
-				Debug.Log ("Collided object tag: " + col.gameObject.tag);
-                */
-				_asteroidSpeed = rb2d.velocity.magnitude;
-                /*
-				Debug.Log ("Apos: " + col.transform.position);
-				Debug.Log ("PPos: " + transform.position);
-                */
-				asteroidDirection = (col.transform.position - transform.position).normalized;
-                /*
-				Debug.Log ("Asteroid Direction: " + rb2d.velocity.normalized);
-				Debug.Log ("Asteroid Direction from Player: " + (col.transform.position - transform.position));
-				Debug.Log ("Asteroid Direction from Player Normalized: " + asteroidDirection);
-				Debug.Log ("Asteroid rigidbody velocity: " + rb2d.velocity);
-				Debug.Log ("Asteroid rigidbody velocity Normalized: " + rb2d.velocity.normalized);
-                */
-
-				_directionStatus = Vector2.Dot (asteroidDirection, curVelocity);
-
-                /*
-				Debug.Log ("Dot Product: " + _directionStatus);
-                */
-
-				if ((_asteroidSpeed > _VELOCITYMINIMUM && _directionStatus > angleCollisionDamage) || curSpeed == 0) 
-				{
-					_playerDamaged = true;
-					_asteroidDamageForce = Mathf.Round (_asteroidSpeed * _ASTEROIDFORCE); 
-
-                    /*
-					print ("Player current health= " + playerObject.getHealth ());
-                    */
-
-					if (_playerDamaged) 
-					{	
-						playerObject.takeDamage (_asteroidDamageForce);
-						// Increase the knockback to the player when hit by an asteroid 
-						// (scaled with the speed of the asteroid )
-						oppositeDirection = -playerRb2d.velocity.normalized;
-						playerRb2d.AddForce(oppositeDirection * _asteroidSpeed * knockBackImpact);
-
-						Debug.Log ("oppositeDirection: " + oppositeDirection);
-						Debug.Log ("_asteroidSpeed " + _asteroidSpeed);
-						Debug.Log ("Force applied: " + oppositeDirection * _asteroidSpeed * knockBackImpact);
-
-                        /*
-						print ("Player damage= " + _asteroidDamageForce);
-						print ("Player health after damage= " + playerObject.getHealth ());
-                        */
-					}
-                    /*
-					print (_playerDamaged);
-					print ("Velocity= " + _asteroidSpeed);
-                    */
-				}
-			}
-		}
-	}
 
 }
