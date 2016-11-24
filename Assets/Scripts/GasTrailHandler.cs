@@ -80,6 +80,7 @@ public class GasTrailHandler : MonoBehaviour {
         yield return new WaitForSeconds(2f);
 
         GameObject trail =  Instantiate(GasTrailObj, GasGiant.transform.position, GasGiant.transform.rotation) as GameObject;
+        trail.GetComponent<TrailRenderer>().sortingLayerName = "Background";
         //trail.transform.parent = this.transform;
         //trail.GetComponent<GasTrailMovement>().SetBlackHole(BlackHole.gameObject);
         StartCoroutine(SpawnTrail());

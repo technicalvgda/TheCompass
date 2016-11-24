@@ -75,6 +75,7 @@ public class LaserEmitter : MonoBehaviour
             if (_hit.collider.gameObject == _player)
             {
                 _playerscript.takeDamage(rayDamage);
+                _playerscript.ActivatePlayerShield(true); //< true because player was dealt damage
 
                 //applies force to the player in the opposite direction with which it is hit by the laser
                 Vector2 bounceBack = _playerscript.transform.position - transform.position;

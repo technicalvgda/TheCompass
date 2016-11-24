@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 /*
 * Script to handle bowling minigame
 * Game consists of 10 frames, 2 rounds per frame
@@ -11,6 +12,13 @@ using System.Collections;
 
 public class BowlingManager : MonoBehaviour {
 
+    GameObject explosion;//< spawn effect for ball dispenser
+    ///TEXT OBJECTS
+    public Text textBox;
+    public RectTransform _rectTransform;
+    public bool isActive = false;
+    private float movementSpeed = 10f;
+
     //event declaration for spawning pins
     public delegate void SpawnAction(GameObject obj);
     public static event SpawnAction SpawnPin;
@@ -18,8 +26,6 @@ public class BowlingManager : MonoBehaviour {
     //event declaration for cleaning up pins
     public delegate void CleanAction();
     public static event CleanAction DestroyPin;
-
-
 
     public Transform ballSpawner;
     public GameObject pinObject;
@@ -60,11 +66,20 @@ public class BowlingManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        explosion = Resources.Load("Explosion") as GameObject;
+        StartCoroutine(StartCommentary());
+        StartCoroutine(StartGame());
         //start first frame
-        StartFrame();
+        //StartFrame();
     }
 
-
+    IEnumerator StartGame()
+    {
+        setText("Welcome to Bowling!");
+        yield return new WaitForSeconds(3f);
+        StartFrame();
+        yield return null;
+    }
 
     //runs at the beginning of each frame, resets pins and points counter for frame
     void StartFrame()
@@ -91,7 +106,7 @@ public class BowlingManager : MonoBehaviour {
         {
 
             Debug.Log("Frame "+ (currentFrame + 1)+" begin!");
-
+            setText("Frame " + (currentFrame + 1) + " begin!");
             //spawn the ball
             StartCoroutine(RespawnBall());
             //spawn the pins
@@ -106,7 +121,7 @@ public class BowlingManager : MonoBehaviour {
         round2 = true;
 
         Debug.Log("Frame " + (currentFrame+1) + " round 2!");
-       
+        setText("Frame " + (currentFrame + 1) + " round 2!");
         //spawn the ball
         StartCoroutine(RespawnBall());
         
@@ -164,9 +179,10 @@ public class BowlingManager : MonoBehaviour {
                 //add the score for round one of this frame to the total frame score
                 frameScore[currentFrame] += round1Score[currentFrame];
             }
-           
+
             //output number of pins hit
             Debug.Log("You hit " + round1Score[currentFrame] + " pins!");
+            setText("You hit " + round1Score[currentFrame] + " pins!");
             //if the total is at 10, its a STRIKE!
             if (frameScore[currentFrame] == 10)
             {
@@ -200,10 +216,12 @@ public class BowlingManager : MonoBehaviour {
             frameScore[currentFrame] += round2Score[currentFrame];
             //output number of pins hit
             Debug.Log("You hit " + round2Score[currentFrame] + " pins!");
+            setText("You hit " + round2Score[currentFrame] + " pins!");
             //if the total is at 10, its a spare
             if (frameScore[currentFrame] == 10)
             {
                 Debug.Log("SPARE!");
+                setText("SPARE!");
                 //if this is the 10th (final) frame
                 if (currentFrame == 9)
                 {
@@ -259,24 +277,31 @@ public class BowlingManager : MonoBehaviour {
             {
                 case 1:
                     Debug.Log("Strike!!!");
+                    setText("Strike!!!");
                     break;
                 case 2:
                     Debug.Log("Double!!!");
+                    setText("Double!!!");
                     break;
                 case 3:
                     Debug.Log("Turkey!!!");
+                    setText("Turkey!!!");
                     break;
                 case 6:
                     Debug.Log("Wild Turkey!!!");
+                    setText("Wild Turkey!!!");
                     break;
                 case 9:
                     Debug.Log("Gold Turkey!!!");
+                    setText("Gold Turkey!!!");
                     break;
                 case 12:
                     Debug.Log("PERFECT GAME!!!");
+                    setText("PERFECT GAME!!!");
                     break;
                 default:
                     Debug.Log("strike counter is at: "+strikeCounter);
+                    setText("strike counter is at: " + strikeCounter);
                     break;
             }
 
@@ -296,15 +321,22 @@ public class BowlingManager : MonoBehaviour {
                 Debug.Log("Frame " + (i + 1) + " rounds: "
                     + round1Score[i] + "/" + round2Score[i] + "/" +round1Score[10] + "/" + round1Score[11]
                     + ". Total Frame score: " + frameScore[i]);
+                setText("Frame " + (i + 1) + " rounds: "
+                    + round1Score[i] + "/" + round2Score[i] + "/" + round1Score[10] + "/" + round1Score[11]
+                    + ". Total Frame score: " + frameScore[i]);
                 finalScore += frameScore[i];
+                
             }
             else
             {
                 Debug.Log("Frame " + (i + 1) + " rounds: "
                     + round1Score[i] + "/" + round2Score[i] + ". Total Frame score: " + frameScore[i]);
+                setText("Frame " + (i + 1) + " rounds: "
+                    + round1Score[i] + "/" + round2Score[i] + ". Total Frame score: " + frameScore[i]);
                 finalScore += frameScore[i];
             }
         }
+        setText("Score for this frame: " + frameScore[currentFrame]+"\n" + "Current total score: " + finalScore);
         Debug.Log("Score for this frame: "+frameScore[currentFrame]);
         Debug.Log("Current total score: "+finalScore);
     }
@@ -331,6 +363,7 @@ public class BowlingManager : MonoBehaviour {
         //if the ball object has been assigned
         if (ballObject != null)
         {
+            Instantiate(explosion, ballSpawner.position, Quaternion.identity);
             //instantiate ball
             //GameObject ball = Instantiate(ballObject, ballSpawner.position, ballSpawner.rotation) as GameObject;
             Instantiate(ballObject, ballSpawner.position, ballSpawner.rotation);
@@ -360,13 +393,50 @@ public class BowlingManager : MonoBehaviour {
         for (int i = 0; i <= MAX_FRAMES; i++)
         {
             Debug.Log("Frame 1: "+ frameScore[i]);
+            setText("Frame 1: " + frameScore[i]+"\n");
             finalScore += frameScore[i];
         }
 
         //display score
         Debug.Log("Final Score: " + finalScore);
+        setText("Final Score: " + finalScore);
         //save score?
 
         //retry or exit
+    }
+
+    public void setText(string text)
+    {
+        textBox.text = text;
+    }
+
+    IEnumerator StartCommentary()
+    {
+        //get stop position
+        Vector2 _newPos = new Vector2(_rectTransform.anchoredPosition.x, -15f);
+        //move the box up
+        while (_rectTransform.anchoredPosition.y < -16f)
+        {
+            _rectTransform.anchoredPosition = Vector2.Lerp(_rectTransform.anchoredPosition, _newPos, Time.deltaTime * movementSpeed);
+            yield return new WaitForSeconds(0.01f);
+        }
+        //enable the commentary
+        isActive = true;
+
+        //EnableTextBox();
+
+        //wait while text is still active
+        while (isActive == true)
+        {
+            yield return new WaitForSeconds(0.01f);
+        }
+        //get position off screen
+        _newPos = new Vector2(_rectTransform.anchoredPosition.x, -145f);
+        //move the box back down
+        while (_rectTransform.anchoredPosition.y > -144f)
+        {
+            _rectTransform.anchoredPosition = Vector2.Lerp(_rectTransform.anchoredPosition, _newPos, Time.deltaTime * movementSpeed);
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 }

@@ -62,7 +62,14 @@ public class MoveableObject : MonoBehaviour
             {
                 Player playerObject = col.gameObject.GetComponent<Player>();
                 //calculate damage to deal, knockback is true
-                playerObject.takeDamage(CalculateAngularDamageAndKnockback(col, true));
+                float damageAmount = CalculateAngularDamageAndKnockback(col, true);
+                playerObject.takeDamage(damageAmount);
+                if(damageAmount > 0)
+                {playerObject.ActivatePlayerShield(true);}//< true since damage was dealt
+                else
+                { playerObject.ActivatePlayerShield(false);}//< false since no damage dealt
+
+
             }
             //handled enemy damage and knockback
             if (col.gameObject.tag == "Enemy")

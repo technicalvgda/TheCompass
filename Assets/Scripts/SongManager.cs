@@ -20,7 +20,10 @@ public class SongManager : MonoBehaviour {
     
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        PlayerPrefs.SetFloat("MSTRSlider", 1);
+        PlayerPrefs.SetFloat("BGSlider", 1);
         MAX_VOLUME = SoundSettingCompare("BGSlider");
         audio2.volume = 0f;
         audio1.volume = MAX_VOLUME;
@@ -30,17 +33,12 @@ public class SongManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        ChangeAux1to2();
+        //ChangeAux1to2();
 	}
 
-    private void ChangeAux1to2()
-    {
-        if (Input.anyKeyDown)
-        {
-            StartCoroutine(FadeOneToTwo());
-
-            //StartCoroutine(FadeSoundAndStart(audio2));
-        }
+    public void ChangeAux1to2()
+    {      
+       StartCoroutine(FadeOneToTwo());      
     }
 
     private IEnumerator FadeOneToTwo()

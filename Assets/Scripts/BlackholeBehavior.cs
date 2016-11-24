@@ -6,6 +6,7 @@ using System.Collections;
 
 public class BlackholeBehavior : MonoBehaviour {
 
+    private Player player;
 	//private int _blackHoleRadius = 100;
 	private Rigidbody2D _rb2d;
     //the transform of the debris border
@@ -26,6 +27,8 @@ public class BlackholeBehavior : MonoBehaviour {
 	{
         borderWidth =  debrisBorder.rect.width/2;
         borderHeight = debrisBorder.rect.height/2;
+
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         
     }
 
@@ -86,6 +89,10 @@ public class BlackholeBehavior : MonoBehaviour {
 
                         }    
 
+                    }
+                    else if (_spaceObject.tag == "Player")
+                    {
+                        player.setHealth(0);
                     }
                     else
                     {

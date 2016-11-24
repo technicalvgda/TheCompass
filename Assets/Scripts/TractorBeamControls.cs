@@ -3,6 +3,7 @@ using System.Collections;
 
 public class TractorBeamControls : MonoBehaviour
 {
+    SongManager songManager;
     // stuff for virtual joystick input 
     private Touch _touch;
     private Vector2 _touchPos, _worldPos;
@@ -47,6 +48,11 @@ public class TractorBeamControls : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        if (GameObject.Find("MusicManager") != null)
+        {
+            songManager = GameObject.Find("MusicManager").GetComponent<SongManager>();
+        }
+        
         _tractorLine = transform.FindChild("TractorBeam").GetComponent<LineRenderer>();//GetComponentInChildren<LineRenderer>();
         _tractorOverlay = transform.FindChild("TractorOverlay").GetComponent<LineRenderer>();//GetComponentInChildren<LineRenderer>();
 
@@ -97,6 +103,8 @@ public class TractorBeamControls : MonoBehaviour
         {
             // relay part destroyed
             Destroy(_tractorStick.collider.gameObject);
+            //switch music to next track
+            songManager.ChangeAux1to2();
             partCollected = true;
 
         }
@@ -104,6 +112,8 @@ public class TractorBeamControls : MonoBehaviour
         if (_tractorStick.collider.name == "TetheredShipPart")
         {
             _tractorStick.collider.GetComponent<TetheredObject>().tether(transform.position);
+            //switch music to next track
+            songManager.ChangeAux1to2();
         }
 
 

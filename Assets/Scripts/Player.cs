@@ -55,9 +55,6 @@ public class Player : MonoBehaviour {
     public float damageTimeCounter = 10;//
     public float regenDelay = 7;
 
-
-    private float _bulletDamage = 5.0f;//<amount of damage a single bullet deals
-
     //variable for keeping track of the player's current fuel
     private float currentFuel;
 
@@ -93,11 +90,7 @@ public class Player : MonoBehaviour {
 
     //COLLISION VARIABLES
     private GameObject _asteroidInput;
-    private bool _playerDamaged = false;
     private Rigidbody2D _asteroidRigidbody;
-    private float _asteroidVelocity = 0f;
-    private float _asteroidMinimum = 1f; //Minimum velocity of asteroid to deal damage to player, can be changed later
-    private float _asteroidDamageForce = 0f;
     const float _ASTEROIDFORCECONSTANT = 2f; //Can change later
     public Vector2 asteroidDirection;
     //shield script in child object
@@ -148,195 +141,81 @@ public class Player : MonoBehaviour {
 		ControlPlayer ();
         LoseFuel();
 
-		checkIfPlayerOutOfBounds(maxXBoundary, maxYBoundary, minXBoundary, minYBoundary);
+		checkIfPlayerOutOfBounds(maxXBoundary, maxYBoundary, minXBoundary, minYBoundary);	
 
-		// The health regen will only occur when we are below max health
-		/*if (alive && (playerHealth < playerMaxHealth) && !isDamaged)
-		{
-			healOverTime(healthRegen, RegenDuration);
-		}*/
-
-        //if players health ever goes above max health will cap it at max health
-        if(playerHealth > playerMaxHealth)
-        {
-            playerHealth = playerMaxHealth;
-        }
+        
 
 	}
 
-    
-      
-    
 	private void ControlPlayer()
 	{
 		//Removes player control if doing U-Turn for a set time
-		if (!_disablePlayerControl && currentuTurnTime <= 0 ) {
-			if (playerMovementControlScheme == 1) {
-#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
-				/*
-			    Controls player movement
-				    A and D rotates player
-				    W and S accelerates and decelerates player
-			    */
-				float rotation = Input.GetAxis ("Horizontal");
-				float acceleration = Input.GetAxis ("Vertical");
-
-				if (acceleration == 0f) {
-					_enginePower = 0f;
-					//stop accelerate sound
-					if (engineOn) {
-						engineOn = false;
-						StartCoroutine (FadeSoundAndEnd (AccelerateSound));   
-					}
-                   
-                    
-				} else {
-					_enginePower += Time.deltaTime * LINEAR_ENGINE_POWER_COEFFICIENT;
-					_enginePower = Mathf.Clamp (_enginePower, 0, MAX_ENGINE_POWER);
-					//play accelerate sound
-					if (!engineOn) {
-						engineOn = true;
-						StartCoroutine (FadeSoundAndStart (AccelerateSound));
-					}
-                    
-
-				}
-
-				transform.Rotate (new Vector3 (0, 0, -rotationSpeed * rotation));
-
-				rb2d.AddForce (transform.up * ((_enginePower * nebulaMultiplier) - tractorSlow) * acceleration);
-#elif UNITY_IOS || UNITY_ANDROID
-				/*for mobile build the movement is determined by the joystick 
-				* left or right rotates the player
-				* up accelerates the player and down decelerates the player
-				*/
-				float rotation = joystick.inputValue().x;
-				float acceleration = joystick.inputValue().y;
-
-				if (acceleration == 0f){
-					_enginePower = 0f;
-                    //stop accelerate sound
-                    if(engineOn)
-                    {
-                        engineOn = false;
-                        StartCoroutine(FadeSoundAndEnd(AccelerateSound));   
-                    }
-				} else {
-					_enginePower += Time.deltaTime * LINEAR_ENGINE_POWER_COEFFICIENT;
-					_enginePower = Mathf.Clamp(_enginePower, 0, MAX_ENGINE_POWER);
-                   //play accelerate sound
-                    if(!engineOn)
-                    {
-                        engineOn = true;
-                        StartCoroutine(FadeSoundAndStart(AccelerateSound));
-                    }
-				}
-
-				transform.Rotate(new Vector3(0, 0, -rotationSpeed * rotation));
-
-				rb2d.AddForce(transform.up * ((_enginePower * nebulaMultiplier) - tractorSlow) * acceleration);
-#endif
-
-			} else if (playerMovementControlScheme == 2) {
-#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
-				//Store the current horizontal input in the float moveHorizontal.
-				float moveHorizontal = Input.GetAxis ("Horizontal");
-
-				//Store the current vertical input in the float moveVertical.
-				float moveVertical = Input.GetAxis ("Vertical");
-
-				/*
-                 * Disables player control until player is either not inputting movement or away from where they were initially heading
-                 * NOTE: the reason why the comparison is  <= 0 is because the opposite direction is inversed when passing the point of entry
-                 */
-				if (restrictPlayerControl) {
-					if ((moveHorizontal * oppositeDirection.x) <= 0 && (moveVertical * oppositeDirection.y) <= 0) {
-						restrictPlayerControl = false;
-					} else {
-						moveVertical = 0;
-						moveHorizontal = 0;
-					}
-				}
-
-				//Use the two store floats to create a new Vector2 variable movement.
-				Vector2 movement = new Vector2 (moveHorizontal, moveVertical).normalized;
-				//Debug.Log(rb2d.velocity.magnitude);
-
-				//Increase force the longer movement direction is inputted
-				//Resets when input is in neutral position
-				if (movement.magnitude == 0f) {
-					_enginePower = 0f;
-					//stop accelerate sound
-					if (engineOn) {
-						engineOn = false;
-						StartCoroutine (FadeSoundAndEnd (AccelerateSound));
-					}
-				} else {
-					_enginePower += Time.deltaTime * LINEAR_ENGINE_POWER_COEFFICIENT;
-					_enginePower = Mathf.Clamp (_enginePower, 0, MAX_ENGINE_POWER);
-					//play accelerate sound
-					if (!engineOn) {
-						engineOn = true;
-						StartCoroutine (FadeSoundAndStart (AccelerateSound));
-					}
-				}
-
-
-				//Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
-				rb2d.AddForce (movement * ((_enginePower * nebulaMultiplier) - tractorSlow));
-
-				//Rotates front of ship to direction of movement
-				if (movement != Vector2.zero) {
-					float angle = Mathf.Atan2 (-movement.x, movement.y) * Mathf.Rad2Deg;
-					transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.AngleAxis (angle, Vector3.forward), Time.deltaTime * rotationSpeed);
-				}
-
-
-#elif UNITY_IOS || UNITY_ANDROID
-
-				//use the joystick input to create movement vector
-				Vector2 movement = joystick.inputValue().normalized;
-				Debug.Log(rb2d.velocity.magnitude);
-
-				if (movement.magnitude == 0f){
-					_enginePower = 0f;
-                     //stop accelerate sound
-                    if(engineOn)
-                    {
-                        engineOn = false;
-                        StartCoroutine(FadeSoundAndEnd(AccelerateSound));   
-                    }
-				} else {
-					_enginePower += Time.deltaTime * LINEAR_ENGINE_POWER_COEFFICIENT;
-					_enginePower = Mathf.Clamp(_enginePower, 0, MAX_ENGINE_POWER);
-                    //play accelerate sound
-                    if(!engineOn)
-                    {
-                        engineOn = true;
-                        StartCoroutine(FadeSoundAndStart(AccelerateSound));
-                    }
-				}
-
-				//Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
-				rb2d.AddForce(movement * ((PLAYER_SPEED * nebulaMultiplier) - tractorSlow));
-
-				//Rotates front of ship to direction of movement
-				if (movement != Vector2.zero)
-				{
-				float angle = Mathf.Atan2(-movement.x, movement.y) * Mathf.Rad2Deg;
-				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * rotationSpeed);
-				}
-#endif
-
-
-
-			}
-		}
-
+		if (!_disablePlayerControl && currentuTurnTime <= 0 )
+        {
+			if (playerMovementControlScheme == 1)
+            {
+                PlayerMovementSchemeOne();
+            }
+            else if (playerMovementControlScheme == 2)
+            {
+                PlayerMovementSchemeTwo();
+            }
+        }
 		currentuTurnTime = uTurnPlayer (currentuTurnTime);
 	}
-		
-	private void checkIfPlayerOutOfBounds(int maxX, int maxY, int minX, int minY)
+	private void PlayerMovementSchemeOne()
+    {
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+        float rotation = Input.GetAxis("Horizontal"); //<  A and D rotates player
+        float acceleration = Input.GetAxis("Vertical"); //< W and S accelerates and decelerates player
+#elif UNITY_IOS || UNITY_ANDROID
+		/*for mobile build the movement is determined by the joystick*/
+		float rotation = joystick.inputValue().x; //<left or right rotates the player
+		float acceleration = joystick.inputValue().y; //< up accelerates the player and down decelerates the player				
+#endif
+        HandleEngine(acceleration);
+        transform.Rotate(new Vector3(0, 0, -rotationSpeed * rotation));
+        rb2d.AddForce(transform.up * ((_enginePower * nebulaMultiplier) - tractorSlow) * acceleration);
+    }
+
+    private void PlayerMovementSchemeTwo()
+    {
+        Vector2 movement;
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+        /* Disables player control until player is either not inputting movement or away from where they were initially heading
+         * NOTE: the reason why the comparison is  <= 0 is because the opposite direction is inversed when passing the point of entry
+         */
+        if (restrictPlayerControl)
+        {
+            if ((moveHorizontal * oppositeDirection.x) <= 0 && (moveVertical * oppositeDirection.y) <= 0)
+            { restrictPlayerControl = false; }
+            else
+            {
+                moveVertical = 0;
+                moveHorizontal = 0;
+            }
+        }
+        //Use the two store floats to create a new Vector2 variable movement.
+        movement = new Vector2(moveHorizontal, moveVertical).normalized;
+#elif UNITY_IOS || UNITY_ANDROID
+				//use the joystick input to create movement vector
+				movement = joystick.inputValue().normalized;
+#endif
+        //Increase force the longer movement direction is inputted
+        //Resets when input is in neutral position
+        HandleEngine(movement.magnitude);
+        //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
+        rb2d.AddForce(movement * ((_enginePower * nebulaMultiplier) - tractorSlow));
+        //Rotates front of ship to direction of movement
+        if (movement != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(-movement.x, movement.y) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * rotationSpeed);
+        }
+    }
+    private void checkIfPlayerOutOfBounds(int maxX, int maxY, int minX, int minY)
 	{
 		//Shows error if invalid values
 		if (maxX < minX || maxY < minY) 
@@ -415,25 +294,6 @@ public class Player : MonoBehaviour {
 		playerExitPos = exitPos;
 	}
 
-
-    //old health regen co routine 
-	/*public void healOverTime(float healAmount, float duration)
-	{
-		StartCoroutine(healOverTimeCoroutine(healAmount, duration));
-	}
-
-	IEnumerator healOverTimeCoroutine(float healAmount, float duration)
-	{
-		float amountHealed = 0;
-		float amountPerLoop = healAmount / duration;
-		while (amountHealed < healAmount)
-		{
-			gainHealth(amountPerLoop);
-			amountHealed += amountPerLoop;
-			yield return new WaitForSeconds(1f);
-		}
-	}*/
-
     //Health regen coroutine when the player is damaged it will heal at a rate of 5 persecond but whenever a player is damaged the player must not take damage for 10 seconds before he will regenerate again 
     IEnumerator healthDamageCoroutine()
     {
@@ -456,20 +316,28 @@ public class Player : MonoBehaviour {
             else
             {
                 yield return new WaitForSeconds(1f);
-            }
-            
+            }     
         }       
     }
 
 	public void gainHealth(float health)
 	{
 		playerHealth += health;
-	}
+        //if players health ever goes above max health will cap it at max health
+        if (playerHealth > playerMaxHealth)
+        {
+            playerHealth = playerMaxHealth;
+        }
+    }
 
 	// function for when the player takes damage. It will shake the main camera
 	// when the player takes damage.
 	public void takeDamage(float damage)
 	{
+        //skip damage if this is the bowling scene
+        if(SceneManager.GetActiveScene().name == "Bowling")
+        { return; }
+
 		playerHealth -= damage;
         if(mainCam != null)
         {
@@ -507,16 +375,17 @@ public class Player : MonoBehaviour {
         {
             currentFuel = MAX_FUEL;
         }
-
-        Debug.Log("Your current fuel amount is increasing = " + currentFuel);
-
     }
 
     //function that decreases the Player's fuel
     //decreases faster when moving
      void LoseFuel()
      {
-        if(rb2d.velocity.magnitude < 2)
+        //skip fuel loss if this is the bowling scene
+        if (SceneManager.GetActiveScene().name == "Bowling")
+        { return; }
+
+        if (rb2d.velocity.magnitude < 2)
         {
             currentFuel -= Time.deltaTime;
         }
@@ -524,7 +393,6 @@ public class Player : MonoBehaviour {
         {
             currentFuel -= Time.deltaTime*1.5f;
         }
-        //Debug.Log("CurrentFuel is: " +currentFuel);
      }
 
     //Function that grabs velocity from the asteroid object and stores it in a var, applies damage to player if velocity is high enough, calculates a force, and subtracts that force from player health
@@ -534,59 +402,53 @@ public class Player : MonoBehaviour {
         if (col.gameObject.tag == "SceneLoader")
         {
             SceneManager.LoadScene("TitleMenu");
-        }
-        else if (col.gameObject.name == "AsteroidPlaceholder")
-        {
-            float _directionStatus;
-            _asteroidInput = col.gameObject;
-            _asteroidRigidbody = _asteroidInput.GetComponent<Rigidbody2D>();
-            _asteroidVelocity = _asteroidRigidbody.velocity.magnitude;
+        }   
+    }
 
-            //Get direction vector from asteroid to player
-            asteroidDirection = (col.transform.position - transform.position).normalized;
+    
+    //function to increase the counter of how many enemies the player has killed if the enemies' health reaches zero
+    public static void increaseKillCount()
+    {killCounter++;}
 
-            //Find the Dot to see if they are facing the same way, facing opposite ways, etc..
-            _directionStatus = Vector2.Dot(asteroidDirection, _asteroidRigidbody.velocity.normalized);
-
-            if (_asteroidVelocity > _asteroidMinimum && _directionStatus >= 0f) //temporarily set to if the asteroid is moving, it deals damage automatically
-            {
-                _playerDamaged = true;
-                _asteroidDamageForce = _asteroidVelocity * _ASTEROIDFORCECONSTANT * _directionStatus; //Damage to scale; Need requirements for damage 
-                takeDamage(_asteroidDamageForce);
-                print("Velocity= " + _asteroidVelocity);
-            }
-        }
-        else if (col.gameObject.tag == "Bullet")
-        {
-            Debug.Log("Player hit by bullet");
-            _playerDamaged = true;
-            //deal damage
-            takeDamage(_bulletDamage);
-
-        }
+    public void ActivatePlayerShield(bool damageDealt)
+    {
         //activate player shield
         if (shield != null)
         {
             //activate shield, send info if player was damaged
-            shield.ActivateShield(_playerDamaged);
-
+            shield.ActivateShield(damageDealt);
         }
-
-        _playerDamaged = false;
-
     }
 
-    /**
-     * function to increase the counter of how many enemies the player has killed if the enemies' health reaches zero
-     */
-     public static void increaseKillCount()
-     {
-         killCounter++;
-     }
+    //Increase force the longer movement direction is inputted
+    //Resets when input is in neutral position
+    private void HandleEngine(float movement)
+    {
+        if (movement == 0f)
+        {
+            _enginePower = 0f;
+            if (engineOn)
+            {
+                engineOn = false;
+                StopAllCoroutines();
+                StartCoroutine(FadeSoundAndEnd(AccelerateSound));
+            }
+        }
+        else
+        {
+            _enginePower += Time.deltaTime * LINEAR_ENGINE_POWER_COEFFICIENT;
+            _enginePower = Mathf.Clamp(_enginePower, 0, MAX_ENGINE_POWER);
+            if (!engineOn)
+            {
+                engineOn = true;
+                StopAllCoroutines();
+                StartCoroutine(FadeSoundAndStart(AccelerateSound));
+            }
+        }
+    }
 
     private IEnumerator FadeSoundAndEnd(AudioSource source)
-    {
-        StopCoroutine(FadeSoundAndStart(source));
+    {   
         if (source.isPlaying)
         {
             while(source.volume > 0)
@@ -602,8 +464,7 @@ public class Player : MonoBehaviour {
     {
         //set max volume to the current max
         MAX_VOLUME = SoundSettingCompare("FXSlider");
-
-        StopCoroutine(FadeSoundAndEnd(source));
+  
         if (!source.isPlaying)
         {
             source.volume = 0;
@@ -612,8 +473,7 @@ public class Player : MonoBehaviour {
             {
                 source.volume += 0.1f;
                 yield return new WaitForSeconds(0.3f);
-            }
-            
+            } 
         }
         yield return null;
     }
@@ -631,8 +491,6 @@ public class Player : MonoBehaviour {
        else
        {
             return masterVolume;
-       }
-            
+       }        
     }
-
 }
