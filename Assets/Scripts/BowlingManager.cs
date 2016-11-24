@@ -180,7 +180,7 @@ public class BowlingManager : MonoBehaviour {
                 //add the score for round one of this frame to the total frame score
                 frameScore[currentFrame] += round1Score[currentFrame];
             }
-           
+
             //output number of pins hit
             Debug.Log("You hit " + round1Score[currentFrame] + " pins!");
             //if the total is at 10, its a STRIKE!
