@@ -185,6 +185,8 @@ public class LoadingTransition : MonoBehaviour
 			_rectTransform.anchoredPosition = Vector2.Lerp(_rectTransform.anchoredPosition, _newPos, Time.unscaledDeltaTime * movementSpeed);
             yield return new WaitForSecondsRealtime(0.01f);
         }
+		_newPos = new Vector2 (0, 0);
+		_rectTransform.anchoredPosition = _newPos;
         //enable the commentary
         isActive = true;
         EnableTextBox();
