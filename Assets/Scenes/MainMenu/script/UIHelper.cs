@@ -50,6 +50,7 @@ public class UIHelper : MonoBehaviour
     }
     public void LoadSavedGame()
     {
+        GameData data = (GameData)SaveLoad.LoadFile(AutoSave.defaultFilePath);
         Debug.Log("Called.");
         if (data != null)
         {
