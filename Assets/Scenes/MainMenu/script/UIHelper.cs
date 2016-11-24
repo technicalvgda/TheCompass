@@ -48,7 +48,15 @@ public class UIHelper : MonoBehaviour
         if (nextScene != null)
             SceneManager.LoadScene(nextScene);
     }
-
+    public void LoadSavedGame()
+    {
+        Debug.Log("Called.");
+        if (data != null)
+        {
+            GetComponent<Animator>().Play("menuFrameExit");
+            SceneManager.LoadScene(data.Scene);
+        }
+    }
     public void Quit()
     {
         Debug.Log("Quit!");
