@@ -48,7 +48,11 @@ public class TractorBeamControls : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        songManager = GameObject.Find("MusicManager").GetComponent<SongManager>();
+        if (GameObject.Find("MusicManager") != null)
+        {
+            songManager = GameObject.Find("MusicManager").GetComponent<SongManager>();
+        }
+        
         _tractorLine = transform.FindChild("TractorBeam").GetComponent<LineRenderer>();//GetComponentInChildren<LineRenderer>();
         _tractorOverlay = transform.FindChild("TractorOverlay").GetComponent<LineRenderer>();//GetComponentInChildren<LineRenderer>();
 
