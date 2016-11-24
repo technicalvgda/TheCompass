@@ -11,6 +11,15 @@ using System.Collections;
 
 public class BowlingManager : MonoBehaviour {
 
+    ///TEXT OBJECTS
+    public TextBoxManager theTextBox;
+    public TextAsset textFile;
+    public string speakerName;
+    public int startLine;
+    public int endLine;
+    private bool timedDialogue = true;
+    private float timeUntilFinished = 10f;
+
     //event declaration for spawning pins
     public delegate void SpawnAction(GameObject obj);
     public static event SpawnAction SpawnPin;
@@ -18,8 +27,6 @@ public class BowlingManager : MonoBehaviour {
     //event declaration for cleaning up pins
     public delegate void CleanAction();
     public static event CleanAction DestroyPin;
-
-
 
     public Transform ballSpawner;
     public GameObject pinObject;
@@ -60,6 +67,12 @@ public class BowlingManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        // find the text box
+        theTextBox = FindObjectOfType<TextBoxManager>();
+        // show intro text
+       
+        // show intro text
+        ShowText();
         //start first frame
         StartFrame();
     }
@@ -368,5 +381,26 @@ public class BowlingManager : MonoBehaviour {
         //save score?
 
         //retry or exit
+    }
+
+    void ShowText()
+    {
+        if (Time.timeScale != 0)
+        {
+           
+                theTextBox.startCommentaryDialogue();
+                //theTextBox.setVoiceOverSourceClip(audioClip);
+                theTextBox.ReloadScript(textFile);
+                theTextBox.currentLine = startLine;
+                theTextBox.endAtLine = endLine;
+                //theTextBox.EnableTextBox();
+                theTextBox.setSpeakerNameText(speakerName);
+
+                if (timedDialogue)
+                {
+                    theTextBox.activateTimedCommentary(timeUntilFinished);
+                }
+            
+        }
     }
 }
