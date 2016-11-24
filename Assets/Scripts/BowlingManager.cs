@@ -11,6 +11,8 @@ using System.Collections;
 
 public class BowlingManager : MonoBehaviour {
 
+    GameObject explosion;//< spawn effect for ball dispenser
+
     ///TEXT OBJECTS
     public TextBoxManager theTextBox;
     public TextAsset textFile;
@@ -67,6 +69,7 @@ public class BowlingManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        explosion = Resources.Load("Explosion") as GameObject;
         // find the text box
         theTextBox = FindObjectOfType<TextBoxManager>();
         // show intro text
@@ -344,6 +347,7 @@ public class BowlingManager : MonoBehaviour {
         //if the ball object has been assigned
         if (ballObject != null)
         {
+            Instantiate(explosion, ballSpawner.position, Quaternion.identity);
             //instantiate ball
             //GameObject ball = Instantiate(ballObject, ballSpawner.position, ballSpawner.rotation) as GameObject;
             Instantiate(ballObject, ballSpawner.position, ballSpawner.rotation);

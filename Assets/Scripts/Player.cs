@@ -334,6 +334,10 @@ public class Player : MonoBehaviour {
 	// when the player takes damage.
 	public void takeDamage(float damage)
 	{
+        //skip damage if this is the bowling scene
+        if(SceneManager.GetActiveScene().name == "Bowling")
+        { return; }
+
 		playerHealth -= damage;
         if(mainCam != null)
         {
@@ -377,7 +381,11 @@ public class Player : MonoBehaviour {
     //decreases faster when moving
      void LoseFuel()
      {
-        if(rb2d.velocity.magnitude < 2)
+        //skip fuel loss if this is the bowling scene
+        if (SceneManager.GetActiveScene().name == "Bowling")
+        { return; }
+
+        if (rb2d.velocity.magnitude < 2)
         {
             currentFuel -= Time.deltaTime;
         }

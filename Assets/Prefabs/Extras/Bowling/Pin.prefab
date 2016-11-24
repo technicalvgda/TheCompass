@@ -52,8 +52,8 @@ Rigidbody2D:
   m_GameObject: {fileID: 1000013709436170}
   m_UseAutoMass: 0
   m_Mass: 0.01
-  m_LinearDrag: 1
-  m_AngularDrag: 1
+  m_LinearDrag: 10
+  m_AngularDrag: 5
   m_GravityScale: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -114,7 +114,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ddeb71b8297343f4d95f80fefbe01098, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ac1fe0d78e8ae194eadc60fb690c51b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
