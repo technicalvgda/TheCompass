@@ -304,7 +304,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a767625a2b928994d87572390a273544, type: 3}
+  m_audioClip: {fileID: 8300000, guid: de3808943db02d64bb3be6a451bae26b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -378,7 +378,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 55ea662d3920d6140af9090d3b2388f3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4f9fb7f74f17f0242bee5a19e1960318, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -654,7 +654,8 @@ MonoBehaviour:
   playerHealth: 0
   playerMaxHealth: 100
   healthRegen: 0
-  RegenDuration: 0
+  damageTimeCounter: 10
+  regenDelay: 7
   maxXBoundary: 100
   maxYBoundary: 100
   minXBoundary: -100
