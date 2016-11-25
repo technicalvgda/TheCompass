@@ -16,7 +16,6 @@ public abstract class SettingsToggle : MonoBehaviour
 
     protected void _Awake()
     {
-        //PlayerPrefs.DeleteKey(key); //delet this
         ReadPrefs();
         Init();
     }

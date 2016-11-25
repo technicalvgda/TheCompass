@@ -10,7 +10,7 @@ using System;
 /// </summary>
 
 [RequireComponent (typeof(Selectable))]
-public class UINavigationPointer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UINavigationPointer : MonoBehaviour, IPointerEnterHandler//, IPointerExitHandler
 {
     public static GameObject mousedOver;
     Selectable sel;
@@ -27,7 +27,24 @@ public class UINavigationPointer : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!sel.IsInteractable()) return;
+        // If this line is enabled, the player is prevented from selecting an UI element
+        // until it has finished transitioning in. But they are able to make two buttons
+        // light up at the same time by doing the following sequence:
+        //   Bring up a menu -> Hover on a button -> Press left/right. The menu's first
+        //   button and the button underneath the mouse cursor will both light up.
+        // The button underneath the mouse cursor is cursor-highlighted but not selected,
+        // and pressing Space/Enter/Confirm on it will not have any effect.
+
+        // If this line is disabled, the player will be able to preemptively select an
+        // UI element during its enter transition, but the sequence above will not work.
+        //   Bring up a menu -> Hover on a button then leave it at any point during the
+        //   transition. The button will be selected at the end of the transition.
+        // The button underneath the mouse cursor is selected, and pressing Space/Enter/
+        // Confirm will fire its OnClick() event.
+
+        // tl;dr fuck PC
+
+        //if (!sel.IsInteractable()) return;
 
         mousedOver = gameObject;
 

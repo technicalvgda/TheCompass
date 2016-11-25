@@ -9,16 +9,12 @@ public class SettingsControls : SettingsToggle
 
     protected override string key { get { return SettingsConst.CONTROLS_KEY; } }
     protected override int defaultValue { get { return SettingsConst.CONTROLS_DEFAULT; } }
-    Player player;
-
     Toggle lastToggle;
 
     void Awake() { base._Awake(); }
 
     protected override void Init()
     {
-        FindPlayer();
-
         if (value == SettingsConst.CONTROLS_A)
             lastToggle = toggles[0];
         else
@@ -27,14 +23,7 @@ public class SettingsControls : SettingsToggle
 
         SetDemos();
     }
-
-    void FindPlayer()
-    {
-        GameObject _player = GameObject.FindGameObjectWithTag("Player");
-        if (_player != null)
-            player = _player.GetComponent<Player>();
-    }
-
+    
     public void SetA() { Set(0, SettingsConst.CONTROLS_A); }
     public void SetB() { Set(1, SettingsConst.CONTROLS_B); }
 
