@@ -35,7 +35,7 @@ public class LaserEmitter : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
         _playerscript = _player.GetComponent<Player>();
         line.enabled = true;
-        bounceIntensity = 15.0f;
+        bounceIntensity = 25.0f;
         laserSparks = transform.Find("Sparks").gameObject;
         laserSparks.SetActive(false);
     }
@@ -72,14 +72,14 @@ public class LaserEmitter : MonoBehaviour
             
             //Hitting the player
             //Debug.Log(_hit.point);
-            if (_hit.collider.gameObject == _player)
+            if (_hit.collider.gameObject == _player && _playerscript.enabled)
             {
                 _playerscript.takeDamage(rayDamage);
                 _playerscript.ActivatePlayerShield(true); //< true because player was dealt damage
 
                 //applies force to the player in the opposite direction with which it is hit by the laser
-                Vector2 bounceBack = _playerscript.transform.position - transform.position;
-                bounceBack = new Vector2((bounceBack.x > 0) ? 1 : -1, (bounceBack.y > 0) ? 1 : -1);
+                Vector2 bounceBack = (_playerscript.transform.position - transform.position).normalized;
+                //bounceBack = new Vector2((bounceBack.x > 0) ? 1 : -1, (bounceBack.y > 0) ? 1 : -1);
                 _playerscript.GetComponent<Rigidbody2D>().AddForce(bounceBack * bounceIntensity, ForceMode2D.Impulse);
 
                 //deactivates the playerscript in order to simulate paralysis

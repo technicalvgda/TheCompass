@@ -110,7 +110,8 @@ public class Player : MonoBehaviour {
         maxYBoundary *= unit;
         minXBoundary *= unit;
         minYBoundary *= unit;
-
+        healthRegen = 5;
+        regenDelay = 7;
         //get rigidbody component of player object
         rb2d = GetComponent<Rigidbody2D> ();
         //get shield script
@@ -127,7 +128,7 @@ public class Player : MonoBehaviour {
             joystick = GameObject.Find("VirtualJoystickMovement").GetComponentInChildren<VirtualJoystickMovement>();
         }
 
-        StartCoroutine("healthDamageCoroutine");
+        StartCoroutine(healthDamageCoroutine());
 
         
 	}
@@ -297,6 +298,7 @@ public class Player : MonoBehaviour {
     //Health regen coroutine when the player is damaged it will heal at a rate of 5 persecond but whenever a player is damaged the player must not take damage for 10 seconds before he will regenerate again 
     IEnumerator healthDamageCoroutine()
     {
+        Debug.Log("coroutine start ");
         while (true)
         {
             if (isDamaged)
@@ -305,6 +307,8 @@ public class Player : MonoBehaviour {
                 {
                     yield return new WaitForSeconds(1f);
                     damageTimeCounter++;
+                    Debug.Log(damageTimeCounter);
+                    
                 }
                 isDamaged = false;
             }
@@ -316,8 +320,11 @@ public class Player : MonoBehaviour {
             else
             {
                 yield return new WaitForSeconds(1f);
-            }     
-        }       
+                Debug.Log("blah");  
+            }
+               
+        }
+               
     }
 
 	public void gainHealth(float health)
@@ -430,7 +437,8 @@ public class Player : MonoBehaviour {
             if (engineOn)
             {
                 engineOn = false;
-                StopAllCoroutines();
+                //StopCoroutine(FadeSoundAndEnd(AccelerateSound));
+                //StopAllCoroutines();
                 StartCoroutine(FadeSoundAndEnd(AccelerateSound));
             }
         }
@@ -441,7 +449,8 @@ public class Player : MonoBehaviour {
             if (!engineOn)
             {
                 engineOn = true;
-                StopAllCoroutines();
+                //StopCoroutine(FadeSoundAndStart(AccelerateSound));
+                //StopAllCoroutines();
                 StartCoroutine(FadeSoundAndStart(AccelerateSound));
             }
         }
