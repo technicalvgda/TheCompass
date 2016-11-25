@@ -16,28 +16,11 @@ public abstract class SettingsToggle : MonoBehaviour
 
     protected void _Awake()
     {
-        ReadPrefs();
+        value = PlayerPrefsHelper.Read(key, defaultValue);
         Init();
     }
 
     protected abstract void Init();
 
-    void ReadPrefs()
-    {
-        if (!PlayerPrefs.HasKey(key))
-        {
-            PlayerPrefs.SetInt(key, defaultValue);
-            Debug.Log("Write default (" + key + ", " + defaultValue + ")");
-        }
-        
-        value = PlayerPrefs.GetInt(key);
-
-        Debug.Log("Read (" + key + ", " + value + ")");
-    }
-
-    public void WritePrefs()
-    {
-        PlayerPrefs.SetInt(key, value);
-        Debug.Log("Write (" + key + ", " + value + ")");
-    }
+    public void WritePrefs() { PlayerPrefsHelper.Write(key, value); }
 }

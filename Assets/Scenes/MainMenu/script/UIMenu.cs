@@ -75,7 +75,7 @@ public class UIMenu : MonoBehaviour
         if (anim.HasState(0, exitHash))
         {
             anim.SetTrigger(exitHash);
-
+            
             // State change occurs after the trigger is set, so yield is needed.
             // But the number of frames before this happens is not consistent.
             // If SetTrigger is called by another object (a button), it takes one frame.

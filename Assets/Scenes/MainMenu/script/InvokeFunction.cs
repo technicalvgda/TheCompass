@@ -4,7 +4,7 @@ using System.Collections;
 
 // Used in Animation Events to call functions on objects in the scene.
 
-public class FunctionInvoke : MonoBehaviour
+public class InvokeFunction : MonoBehaviour
 {
     public UnityEvent[] events;
 
@@ -13,7 +13,6 @@ public class FunctionInvoke : MonoBehaviour
 
     public void InvokeAtIndex(int index)
     {
-        if (index < events.Length)
-            events[index].Invoke();
+        events[index].Invoke();
     }
 }
