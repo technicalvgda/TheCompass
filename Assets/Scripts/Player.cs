@@ -298,7 +298,7 @@ public class Player : MonoBehaviour {
     //Health regen coroutine when the player is damaged it will heal at a rate of 5 persecond but whenever a player is damaged the player must not take damage for 10 seconds before he will regenerate again 
     IEnumerator healthDamageCoroutine()
     {
-        Debug.Log("coroutine start ");
+        //Debug.Log("coroutine start ");
         while (true)
         {
             if (isDamaged)
@@ -320,7 +320,7 @@ public class Player : MonoBehaviour {
             else
             {
                 yield return new WaitForSeconds(1f);
-                Debug.Log("blah");  
+                //Debug.Log("blah");  
             }
                
         }
@@ -439,6 +439,8 @@ public class Player : MonoBehaviour {
                 engineOn = false;
                 //StopCoroutine(FadeSoundAndEnd(AccelerateSound));
                 //StopAllCoroutines();
+                StopCoroutine("FadeSoundAndStart");
+                StopCoroutine("FadeSoundAndEnd");
                 StartCoroutine(FadeSoundAndEnd(AccelerateSound));
             }
         }
@@ -451,6 +453,8 @@ public class Player : MonoBehaviour {
                 engineOn = true;
                 //StopCoroutine(FadeSoundAndStart(AccelerateSound));
                 //StopAllCoroutines();
+                StopCoroutine("FadeSoundAndStart");
+                StopCoroutine("FadeSoundAndEnd");
                 StartCoroutine(FadeSoundAndStart(AccelerateSound));
             }
         }
