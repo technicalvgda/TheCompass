@@ -7893,9 +7893,19 @@ Prefab:
       propertyPath: spreadCustomCurve.m_RotationOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013779083674, guid: dc990532c9eef8348b99712d28b9e6b5,
+        type: 2}
+      propertyPath: levelToLoad
+      value: Level 4 Dialogue
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc990532c9eef8348b99712d28b9e6b5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &845781102 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000010451397536, guid: dc990532c9eef8348b99712d28b9e6b5,
+    type: 2}
+  m_PrefabInternal: {fileID: 845781101}
 --- !u!1 &846104662
 GameObject:
   m_ObjectHideFlags: 0
@@ -9525,6 +9535,11 @@ Prefab:
       propertyPath: nextLevelName
       value: Level 4 Dialogue
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013703507622, guid: 7597b4dac1288f04cb1bf7a6fb33966a,
+        type: 2}
+      propertyPath: transitionBox
+      value: 
+      objectReference: {fileID: 845781102}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7597b4dac1288f04cb1bf7a6fb33966a, type: 2}
   m_IsPrefabParent: 0

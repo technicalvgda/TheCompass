@@ -416,9 +416,19 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013779083674, guid: dc990532c9eef8348b99712d28b9e6b5,
+        type: 2}
+      propertyPath: levelToLoad
+      value: Level 2 Dialogue
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc990532c9eef8348b99712d28b9e6b5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &176466769 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000010451397536, guid: dc990532c9eef8348b99712d28b9e6b5,
+    type: 2}
+  m_PrefabInternal: {fileID: 176466768}
 --- !u!1001 &241449768
 Prefab:
   m_ObjectHideFlags: 0
@@ -3004,6 +3014,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013703507622, guid: 7597b4dac1288f04cb1bf7a6fb33966a,
+        type: 2}
+      propertyPath: transitionBox
+      value: 
+      objectReference: {fileID: 176466769}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7597b4dac1288f04cb1bf7a6fb33966a, type: 2}
   m_IsPrefabParent: 0
