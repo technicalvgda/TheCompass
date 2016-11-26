@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 /*
 * Script to handle bowling minigame
 * Game consists of 10 frames, 2 rounds per frame
@@ -417,6 +418,8 @@ public class BowlingManager : MonoBehaviour {
         //save score?
 
         //retry or exit
+        //TEMP CODE
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void setText(string text)

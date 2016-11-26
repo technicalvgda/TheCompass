@@ -4161,7 +4161,20 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\n#PRETTY\n#LEGIT\n\u6B7B\u306C\u304C\u3088\u3044\n\n#LEGIT\n#PRETTY_LEGIT"
+  m_Text: "HORIZON'S PULL\r\n\r\nBased on an original concept by\r\nShaina Phillips\r\n\r\nPRODUCTION
+    LEADS\r\nNathan Moore\r\nJosh Shucker\r\n\r\n-DISCIPLINE LEADS-\n\nTECHNICAL LEAD\nMichael
+    Zatlin\r Jr.\n\nART LEAD\nNathan Moore\r\n\nNARRATIVE DESIGN LEAD\r\nElijah Wigman-Nilsson\r\n\nGAMEPLAY
+    DESIGN LEAD\r\nPeter Doria\r\n\r\nSOUND LEAD\r\nCameron Johnston\r\n\n-FEATURE
+    TEAM LEADS-\n\nPLAYER TEAM LEAD\nJosh Shucker\n\nENEMY TEAM LEAD\nEmily Rose Wilder\nMichael
+    Zatlin Jr.\n\nUI TEAM LEAD\nKen Miller\n\nTUTORIAL LEVEL LEAD\nElijah Wigman-Nilsson\n\nLEVEL
+    1 LEAD\nPeter Doria\n\nLEVEL 2 LEAD\nCameron Johnston\n\nLEVEL 3 LEAD\nHelen Pabst\n\nLEVEL
+    4 LEAD\nChristian Gumacal\n\nLEVEL 5 LEAD\nElijah Wigman-Nilsson\n\n\n\r\n-TECHNICAL
+    TEAM-\r\n\r\nCore developers:\r\n\r\nAssociate Developers:\r\n\r\nContributors:\r\n\r\n-ART
+    TEAM-\r\n\r\nCore developers:\r\n\r\nAssociate Developers:\r\n\r\nContributors:\r\n\r\n-NARRATIVE
+    TEAM-\r\n\r\nCore developers:\r\n\r\nAssociate Developers:\r\n\r\nContributors:\r\n-GAMEPLAY
+    TEAM-\r\n\r\nCore developers:\r\n\r\nAssociate Developers:\r\n\r\nContributors:\r\n\r\n-SOUND
+    TEAM-\r\n\r\nCore developers:\r\n\r\nAssociate Developers:\r\n\r\nContributors:\r\n\r\nOFELIA
+    VOICED BY:\r\nJesse Keneally\r\n\r\n\n\n\n\n\nTHANK YOU FOR PLAYING!\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n"
 --- !u!222 &461709151
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14950,8 +14963,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 135, y: -264}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 890, y: 530}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1136330139
 MonoBehaviour:
@@ -14985,7 +14998,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ayy lmao
+  m_Text: "GAMEPLAY INSTRUCTIONS:\n\r\nIn each level, you must find a part and reach
+    the goal area.\r\n\r\nAs you move, you lose fuel. Collect fuel crystals by touching
+    them with your tractor beam.\r\n\r\nYour shields can take damage when:\r\n-An
+    enemy shoots you.\r\n-You collide with a laser beam\r\n-You are hit by any debris
+    that is moving quickly\r\n\nThe edges of your screen will glow red as your shield
+    depletes.\r\n\r\nIf you run out of fuel or your shield is destroyed, you lose.\r\n"
 --- !u!222 &1136330140
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19776,8 +19794,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -41, y: 270}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 890, y: 530}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1523150987
 MonoBehaviour:
@@ -19811,7 +19829,15 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ayy lmao
+  m_Text: "CONTROLS:\nType 1:\tAccelerate - (Up on left joystick or W key)\n\tReverse
+    \t- (Down on left joystick or S key)\n\tRotate Left -(Left on left joystick or
+    A key)\n\tRotate Right -(Right on left joystick or D key)\nType 2: (Ship automatically
+    rotates in movement direction)\n\tMove Up - (Up on left joystick or W key)\n\tMove
+    Down- (Down on left joystick or S key)\n\tMove Left -(Left on left joystick or
+    A key)\n\tMove Right -(Right on left joystick or D key)\nTractor Beam Controls:\n\tActivate
+    Beam - (Press Right Bumper or click left mouse button)\n\tMove Beam - (Move right
+    joystick or mouse in desired direction)\n\tGrab Object - (Touch object with beam
+    to grab)\n\tRelease Object/Deactivate - (Release Right Bumper or left mouse button)\n"
 --- !u!222 &1523150988
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25369,6 +25395,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1430572872}
     m_Modifications:
+    - target: {fileID: 114000012493111950, guid: 169c83e4ff549c948bce7026d98eddf2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 224000010376963542, guid: 169c83e4ff549c948bce7026d98eddf2,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -25524,6 +25555,66 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.x
       value: 135
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012493111950, guid: 169c83e4ff549c948bce7026d98eddf2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012493111950, guid: 169c83e4ff549c948bce7026d98eddf2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012493111950, guid: 169c83e4ff549c948bce7026d98eddf2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1426615641}
+    - target: {fileID: 114000012493111950, guid: 169c83e4ff549c948bce7026d98eddf2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_nextScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012493111950, guid: 169c83e4ff549c948bce7026d98eddf2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012493111950, guid: 169c83e4ff549c948bce7026d98eddf2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Bowling
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012493111950, guid: 169c83e4ff549c948bce7026d98eddf2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012493111950, guid: 169c83e4ff549c948bce7026d98eddf2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012493111950, guid: 169c83e4ff549c948bce7026d98eddf2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1426615640}
+    - target: {fileID: 114000012493111950, guid: 169c83e4ff549c948bce7026d98eddf2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012493111950, guid: 169c83e4ff549c948bce7026d98eddf2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012493111950, guid: 169c83e4ff549c948bce7026d98eddf2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: menuFrameExit
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114000012292247750, guid: 169c83e4ff549c948bce7026d98eddf2, type: 2}
