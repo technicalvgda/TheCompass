@@ -39,7 +39,7 @@ GameObject:
   - 222: {fileID: 222000012149424418}
   - 114: {fileID: 114000012305807218}
   - 114: {fileID: 114000012112906224}
-  - 114: {fileID: 114000010028460746}
+  - 114: {fileID: 114000011287946832}
   - 95: {fileID: 95000010210370266}
   - 114: {fileID: 114000013397966048}
   m_Layer: 5
@@ -83,20 +83,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114000010028460746
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012057406324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 536a716efede52c459020223a2d05fcf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  current: {fileID: 0}
-  exit: 
-  enter: 
 --- !u!114 &114000010640513210
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,6 +143,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000011287946832
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012057406324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eda2853e18f36b64ba850ad82689d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exit: Exit
+  enter: Enter
 --- !u!114 &114000012112906224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -270,7 +269,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 150}
+  m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000013912765768
 RectTransform:

@@ -129,6 +129,7 @@ GameObject:
   - 82: {fileID: 82000013234898012}
   - 82: {fileID: 82000011824803702}
   - 82: {fileID: 82000013933422466}
+  - 114: {fileID: 114000013496413772}
   m_Layer: 0
   m_Name: PlayerPlaceholder
   m_TagString: Player
@@ -663,6 +664,17 @@ MonoBehaviour:
   joystick: {fileID: 0}
   asteroidDirection: {x: 0, y: 0}
   AccelerateSound: {fileID: 82000013234898012}
+--- !u!114 &114000013496413772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013920337096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84fca3bf38616ba498e9fa8bd6acb72b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000013738887394
 MonoBehaviour:
   m_ObjectHideFlags: 1
