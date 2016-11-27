@@ -10,9 +10,7 @@ public class GasTrailHandler : MonoBehaviour {
 
     //linerender attached to this object
     LineRenderer lineRndr;
-    //particles attached to child
-    ParticleSystem part;
-
+   
     Vector2 Heading;
     float distance;
     //amount to move particle emission from center of gas giant
@@ -20,13 +18,19 @@ public class GasTrailHandler : MonoBehaviour {
     //amount to adjust emitter to match border of gas giant
     float adjustment = 15;
 
-	// Use this for initialization
-	void Start ()
+    //variables for texture animation
+    //public Transform beamEnd;
+    Vector2 uvOffset = Vector2.zero;
+    int materialIndex = 0;
+    string textureName = "_MainTex";
+    public Vector2 uvAnimationRate = new Vector2(1.0f, 0.0f);
+
+    // Use this for initialization
+    void Start ()
     {
         lineRndr = GetComponent<LineRenderer>();
+        lineRndr.sortingLayerName = "Parallax2";
 
-        part = GetComponentInChildren<ParticleSystem>();
-       
         //gets radius of gas giant, assumes width and height are the same
         offset = GasGiant.GetComponent<SpriteRenderer>().bounds.size.x / 2 - adjustment;
         StartCoroutine(SpawnTrail());
@@ -43,10 +47,19 @@ public class GasTrailHandler : MonoBehaviour {
         lineRndr.SetPosition(0, transform.position);
         lineRndr.SetPosition(1, BlackHole.position);
         SetRotationOfTrail();
+    }
 
-        HandleParticleBehavior();
-
-       // Debug.Log(part.startLifetime);
+    //handles texture offset animation
+    void LateUpdate()
+    {
+        uvOffset += (uvAnimationRate * Time.deltaTime);
+        if (lineRndr.enabled)
+        {
+            //scale texture to avoid stretching
+            lineRndr.material.SetTextureScale("_MainTex", new Vector2((BlackHole.position - transform.position).magnitude / 10, 1));
+            //change offset of texture to animate
+            lineRndr.materials[materialIndex].SetTextureOffset(textureName, uvOffset);
+        }
     }
 
     //Gets proper direction of trail
@@ -61,50 +74,13 @@ public class GasTrailHandler : MonoBehaviour {
         transform.position = GasGiant.position + ((Vector3)Heading.normalized * offset);
     }
 
-    void HandleParticleBehavior()
-    {
-        // Vector3 targetLocal = transform.InverseTransformPoint(BlackHole.transform.position - transform.position);
-
-
-        // initialize an array the size of our current particle count
-        ParticleSystem.Particle[] particles = new ParticleSystem.Particle[part.particleCount];
-
-        // *pass* this array to GetParticles...
-        int num = part.GetParticles(particles);
-        //Debug.Log("Found " + num + " active particles.");
-        for (int i = 0; i < num; i++)
-        {
-            // Debug.Log("Part/Gas dist: " + Vector2.Distance(particles[i].position, GasGiant.transform.position));
-            // Debug.Log("Hole/ gas dist: "+ distance);
-            //Vector3 distToTarget = particles[i].position - targetLocal;
-
-            // if vector from particle source to target points in the same direction as
-            // vector from target to particle, it means the particle has passed the target 
-            
-            if (Vector3.Dot((particles[i].position - transform.InverseTransformPoint(BlackHole.transform.position)).normalized, (Heading).normalized) > 0)
-            {
-                particles[i].lifetime = 0;
-            }
-           
-           
-            /*
-            //if the particles are further than the distance between the gas giant and black hole
-            if (Vector2.Distance(particles[i].position, transform.position) > distance)
-            {
-                particles[i].lifetime = 0;
-            }
-            */
-            
-        }
-        // re-assign modified array
-        part.SetParticles(particles, num);
-    }
 
     public IEnumerator SpawnTrail()
     {
         yield return new WaitForSeconds(2f);
 
         GameObject trail =  Instantiate(GasTrailObj, GasGiant.transform.position, GasGiant.transform.rotation) as GameObject;
+        trail.GetComponent<TrailRenderer>().sortingLayerName = "Background";
         //trail.transform.parent = this.transform;
         //trail.GetComponent<GasTrailMovement>().SetBlackHole(BlackHole.gameObject);
         StartCoroutine(SpawnTrail());

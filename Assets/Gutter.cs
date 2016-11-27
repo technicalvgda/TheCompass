@@ -3,6 +3,10 @@ using System.Collections;
 
 public class Gutter : MonoBehaviour {
 
+    public bool isSideGutter;
+
+    public BowlingManager bowlManager;
+
     //event declaration for spawning pins
     public delegate void BallHandler ();
     public static event BallHandler LostBall;
@@ -16,6 +20,10 @@ public class Gutter : MonoBehaviour {
        
         if (col.name == "BowlingBall(Clone)")
         {
+            if(isSideGutter)
+            {
+                bowlManager.GutterBall();
+            }
             Destroy(col.gameObject);
             LostBall();
         }

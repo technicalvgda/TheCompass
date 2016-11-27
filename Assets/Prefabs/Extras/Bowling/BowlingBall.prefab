@@ -37,8 +37,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013389318122}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -29.610321, y: 16.449812, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -73,7 +73,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 3
 --- !u!114 &114000010061430928
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -86,7 +86,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drift: 0
+  rotateActivated: 0
+  splitactivated: 0
   objectSize: 4
+  splitter: {fileID: 0}
+  splitterShard: {fileID: 0}
+  fuelDrop: {fileID: 0}
+  splitShards: 4
+  driftSpeed: 100
+  isTractored: 0
 --- !u!212 &212000011946305304
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -116,7 +124,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ddeb71b8297343f4d95f80fefbe01098, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 64c13813388430142b125646b3c6f5e1, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

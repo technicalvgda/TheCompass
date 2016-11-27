@@ -8,6 +8,7 @@ public class MoveableObject : MonoBehaviour
 
     //Flame Trail
     GameObject flameTrail;
+    float trailWidth;
 
     //PUBLIC VARIABLES
     public bool drift, rotateActivated, splitactivated;
@@ -33,19 +34,13 @@ public class MoveableObject : MonoBehaviour
 	{
 		//get rigidbody component 
 		rb2d = GetComponent<Rigidbody2D>();
+        trailWidth = GetComponent<SpriteRenderer>().bounds.size.x/2;
         //initialize settings for object
-        InitializeObj();
-        //initialize flame trail
-        if (gameObject.tag == "Debris" || gameObject.tag == "TetheredPart")
-        {InitializeFlameTrail();}
-       
+        InitializeObj();    
     }
 
 	void FixedUpdate()
 	{
-        if (rotateActivated)
-        {RotateLeft();}
-
         curVelocity = rb2d.velocity;
         curDirection = curVelocity.normalized;
 		curSpeed = rb2d.velocity.magnitude;
@@ -53,10 +48,6 @@ public class MoveableObject : MonoBehaviour
         ToggleFlameTrail(); 
 	}
 
-    void RotateLeft()
-    {
-        transform.Rotate(Vector3.forward);
-    }
 
     void OnCollisionEnter2D(Collision2D col)
 	{
@@ -71,7 +62,14 @@ public class MoveableObject : MonoBehaviour
             {
                 Player playerObject = col.gameObject.GetComponent<Player>();
                 //calculate damage to deal, knockback is true
-                playerObject.takeDamage(CalculateAngularDamageAndKnockback(col, true));
+                float damageAmount = CalculateAngularDamageAndKnockback(col, true);
+                playerObject.takeDamage(damageAmount);
+                if(damageAmount > 0)
+                {playerObject.ActivatePlayerShield(true);}//< true since damage was dealt
+                else
+                { playerObject.ActivatePlayerShield(false);}//< false since no damage dealt
+
+
             }
             //handled enemy damage and knockback
             if (col.gameObject.tag == "Enemy")
@@ -108,11 +106,22 @@ public class MoveableObject : MonoBehaviour
         euler.z = Random.Range(0f, 360f);
         transform.eulerAngles = euler;
 
+        if(rotateActivated)
+        { StartRotation(); }
+
         ///set drift
 		if (drift)
         { Drift(); }
     }
 
+    //gives the objects a random rotation direction and speed
+    void StartRotation()
+    {
+        if(rb2d != null)
+        {
+            rb2d.AddTorque(Random.Range(-10,10), ForceMode2D.Impulse);
+        }
+    }
     void Split()
     {
          float splitterX, splitterY;
@@ -138,28 +147,35 @@ public class MoveableObject : MonoBehaviour
         Vector2 direction = new Vector2(x, y).normalized;
         rb2d.AddForce(direction * driftSpeed);
     }
-
-    void InitializeFlameTrail()
-    {
-        //instantiate flame trail
-        flameTrail = Instantiate(Resources.Load("FlameTrail"), transform.position, transform.rotation) as GameObject;
-        //attach as child to this game object
-        flameTrail.transform.parent = transform;
-        //set flame trail inactive
-        flameTrail.SetActive(false);
-    }
-
+ 
     void ToggleFlameTrail()
     {
         //if the asteroid is moving faster than the minimum damage velocity and the flame trail is not active and the object is not held
 
-        if (curSpeed >= MINIMUM_DAMAGE_SPEED && !flameTrail.activeSelf && !isTractored)
+        if (flameTrail == null && curSpeed >= MINIMUM_DAMAGE_SPEED  && !isTractored)
         {
-            flameTrail.SetActive(true);
+            //instantiate flame trail
+            flameTrail = Instantiate(Resources.Load("FlameTrail"), transform.position, transform.rotation) as GameObject;
+            flameTrail.transform.parent = transform;
+            flameTrail.GetComponent<FlameTrailHandler>().SetTrailWidth(trailWidth);
+           
+
         }
-        if (curSpeed < MINIMUM_DAMAGE_SPEED && flameTrail.activeSelf)
+        if (curSpeed < MINIMUM_DAMAGE_SPEED && flameTrail != null)
         {
-            flameTrail.SetActive(false);
+           
+            flameTrail.transform.parent = null;
+            flameTrail = null;
+         
+        }
+    }
+
+    public void DisableFlameTrail()
+    {
+        if (flameTrail != null)
+        {
+            flameTrail.transform.parent = null;
+            flameTrail = null;
         }
     }
 
