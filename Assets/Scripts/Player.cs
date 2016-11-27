@@ -26,6 +26,9 @@ public class Player : MonoBehaviour {
 
 	//PLAYER COMPONENTS
 	private Rigidbody2D rb2d;
+    private ParticleSystem partSys;
+    private Color trailColor;
+    private Color lowFuelColor = Color.green;
 
 	//Determines which control scheme to use.  Set to 1 or 2 (2 being the default value)
 	// 1-> W (accelerate forward), S (accelerate backwards), A (Rotate Counter-Clockwise), D (Rotate Clockwise)
@@ -114,6 +117,9 @@ public class Player : MonoBehaviour {
         regenDelay = 7;
         //get rigidbody component of player object
         rb2d = GetComponent<Rigidbody2D> ();
+        //get particle system
+        partSys = transform.FindChild("ParticleTrail").GetComponent<ParticleSystem>();
+        trailColor = partSys.startColor;
         //get shield script
         shield = GetComponentInChildren<PlayerShield>();
         //set player health to starting health
@@ -399,6 +405,15 @@ public class Player : MonoBehaviour {
         else
         {
             currentFuel -= Time.deltaTime*1.5f;
+        }
+        //if fuel is less than 40%
+        if(currentFuel < (MAX_FUEL*0.4f))
+        {
+            partSys.startColor = lowFuelColor;
+        }
+        else
+        {
+            partSys.startColor = trailColor;
         }
      }
 
