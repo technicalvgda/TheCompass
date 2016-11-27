@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections;
+using System;
 
 // Array's exact order
 // 0: 1920 x 1080 (16:9)
@@ -21,32 +22,60 @@ public class SettingsResolution : SettingsToggle
     protected override string key { get { return SettingsConst.RESOLUTION_KEY; } }
     protected override int defaultValue { get { return SettingsConst.RESOLUTION_DEFAULT; } }
 
-    Resolution res;
     Toggle lastToggle;
     bool revert = false;
 
+    struct ResolutionOption
+    {
+        public readonly int width, height;
+        public ResolutionOption(int width, int height)
+        {
+            this.width = width;
+            this.height = height;
+        }
+    }
+    ResolutionOption[] resOption;
+
     void Awake() { base._Awake(); }
 
-    protected override void Init()
+    protected override void Apply()
     {
-        res = Screen.currentResolution;
+        resOption = new ResolutionOption[9] {
+            new ResolutionOption(1920, 1080),
+            new ResolutionOption(1600, 900),
+            new ResolutionOption(1280, 720),
+            new ResolutionOption(1366, 768),
+            new ResolutionOption(1360, 768),
+            new ResolutionOption(1280, 1024),
+            new ResolutionOption(1280, 960),
+            new ResolutionOption(1152, 864),
+            new ResolutionOption(1024, 768)
+        };
 
+        Screen.SetResolution(
+            resOption[value].width,
+            resOption[value].height,
+            Screen.fullScreen);
+    }
+
+    protected override void ApplyUI()
+    {
         lastToggle = toggles[value];
         // Reminder: if this property is touched at all, OnValueChanged() will fire.
         lastToggle.isOn = true;
     }
 
-    public void Set1920x1080() { Set(0, 1920, 1080); }
-    public void Set1600x900() { Set(1, 1600, 900); }
-    public void Set1280x720() { Set(2, 1280, 720); }
-    public void Set1366x768() { Set(3, 1366, 768); }
-    public void Set1360x768() { Set(4, 1360, 768); }
-    public void Set1280x1024() { Set(5, 1280, 1024); }
-    public void Set1280x960() { Set(6, 1280, 960); }
-    public void Set1152x864() { Set(7, 1152, 864); }
-    public void Set1024x768() { Set(8, 1024, 768); }
+    public void Set1920x1080() { Set(0); }
+    public void Set1600x900() { Set(1); }
+    public void Set1280x720() { Set(2); }
+    public void Set1366x768() { Set(3); }
+    public void Set1360x768() { Set(4); }
+    public void Set1280x1024() { Set(5); }
+    public void Set1280x960() { Set(6); }
+    public void Set1152x864() { Set(7); }
+    public void Set1024x768() { Set(8); }
 
-    void Set(int index, int width, int height)
+    void Set(int index)
     {
         // Always send event when toggle is clicked, even if value didn't change
         // due to already active toggle in a toggle group being clicked.
@@ -62,7 +91,10 @@ public class SettingsResolution : SettingsToggle
 
         if (!t.isOn || t == toggles[value]) return; // Change the second check to lastToggle
 
-        Screen.SetResolution(width, height, Screen.fullScreen);
+        Screen.SetResolution(
+            resOption[index].width,
+            resOption[index].height,
+            Screen.fullScreen);
 
         // If the resolution is being reverted, the prompt should not be brought up.
         if (!revert)
@@ -72,7 +104,8 @@ public class SettingsResolution : SettingsToggle
         value = index;
         revert = false;
         
-        Debug.Log(t + " successfully set resolution. RESOLUTION IS NOW " + width + " x " + height);
+        Debug.Log(t + " successfully set resolution. RESOLUTION IS NOW " +
+            resOption[index].width + " x " + resOption[index].height);
     }
 
     public void Revert()

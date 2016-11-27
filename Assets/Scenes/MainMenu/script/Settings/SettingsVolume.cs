@@ -6,86 +6,67 @@ public class SettingsVolume : MonoBehaviour
 {
     //TODO: public audio manager
     public Slider master, music, sounds, voice;
-    Volume _master, _music, _sounds, _voice;
 
     void Awake()
     {
-        _master = new Volume(
-            master,
+        // Read
+        float valueMaster = PlayerPrefsHelper.Read(
             SettingsConst.VOLUME_MASTER_KEY,
             SettingsConst.VOLUME_MASTER_DEFAULT);
-
-        _music = new Volume(
-            music,
+        float valueMusic = PlayerPrefsHelper.Read(
             SettingsConst.VOLUME_MUSIC_KEY,
             SettingsConst.VOLUME_MUSIC_DEFAULT);
-
-        _sounds = new Volume(
-            sounds,
+        float valueSounds = PlayerPrefsHelper.Read(
             SettingsConst.VOLUME_SOUNDS_KEY,
             SettingsConst.VOLUME_SOUNDS_DEFAULT);
-
-        _voice = new Volume(
-            voice,
+        float valueVoice = PlayerPrefsHelper.Read(
             SettingsConst.VOLUME_VOICE_KEY,
             SettingsConst.VOLUME_VOICE_DEFAULT);
 
-        SetMaster(master.value);
-        SetMusic(music.value);
-        SetSounds(sounds.value);
-        SetVoice(voice.value);
+        // Apply
+        SetMaster(valueMaster);
+        SetMusic(valueMusic);
+        SetSounds(valueSounds);
+        SetVoice(valueVoice);
+
+        // Apply UI
+        master.value = valueMaster;
+        music.value = valueMusic;
+        sounds.value = valueSounds;
+        voice.value = valueVoice;
     }
 
     public void WritePrefs()
     {
-        _master.WritePrefs();
-        _music.WritePrefs();
-        _sounds.WritePrefs();
-        _voice.WritePrefs();
+        PlayerPrefsHelper.Write(SettingsConst.VOLUME_MASTER_KEY, master.value);
+        PlayerPrefsHelper.Write(SettingsConst.VOLUME_MUSIC_KEY, music.value);
+        PlayerPrefsHelper.Write(SettingsConst.VOLUME_SOUNDS_KEY, sounds.value);
+        PlayerPrefsHelper.Write(SettingsConst.VOLUME_VOICE_KEY, voice.value);
     }
 
     // WARNING: Volume range is 0 .. 10 whole numbers. Normalize the values before using.
 
     public void SetMaster(float value)
     {
-        // TODO
         Debug.Log("Master volume set to " + value);
+        // TODO
     }
 
     public void SetMusic(float value)
     {
-        // TODO
         Debug.Log("Music volume set to " + value);
+        // TODO
     }
 
     public void SetSounds(float value)
     {
-        // TODO
         Debug.Log("Sounds volume set to " + value);
+        // TODO
     }
 
     public void SetVoice(float value)
     {
-        // TODO
         Debug.Log("Voice volume set to " + value);
-    }
-
-    // Manages initialization and reading/writing for each slider
-    private class Volume
-    {
-        Slider slider;
-        string key;
-        float defaultValue;
-
-        public Volume(Slider slider, string key, float defaultValue)
-        {
-            this.slider = slider;
-            this.key = key;
-            this.defaultValue = defaultValue;
-
-            slider.value = PlayerPrefsHelper.Read(key, defaultValue);
-        }
-
-        public void WritePrefs() { PlayerPrefsHelper.Write(key, slider.value); }
+        // TODO
     }
 }

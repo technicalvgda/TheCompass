@@ -104,12 +104,12 @@ AnimationClip:
         inSlope: 2939.9998
         outSlope: -14.194571
         tangentMode: 1
-      - time: 1
+      - time: 0.8333333
         value: -245
         inSlope: -670.85266
         outSlope: -651.1881
         tangentMode: 1
-      - time: 1.5
+      - time: 1.3333334
         value: -335
         inSlope: 137.45232
         outSlope: -3479.9995
@@ -296,6 +296,21 @@ AnimationClip:
     path: Foreground cosmetics/Opener top
     classID: 224
     script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_IsActive
+    path: Footer cosmetics/Footer line
+    classID: 1
+    script: {fileID: 0}
   m_PPtrCurves: []
   m_SampleRate: 60
   m_WrapMode: 0
@@ -376,6 +391,12 @@ AnimationClip:
       classID: 1
       customType: 0
       isPPtrCurve: 0
+    - path: 1637364686
+      attribute: 2086281974
+      script: {fileID: 0}
+      classID: 1
+      customType: 0
+      isPPtrCurve: 0
     - path: 4090194295
       attribute: 1460864421
       script: {fileID: 0}
@@ -394,7 +415,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.5
+    m_StopTime: 1.3333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -498,12 +519,12 @@ AnimationClip:
         inSlope: 2939.9998
         outSlope: -14.194571
         tangentMode: 1
-      - time: 1
+      - time: 0.8333333
         value: -245
         inSlope: -670.85266
         outSlope: -651.1881
         tangentMode: 1
-      - time: 1.5
+      - time: 1.3333334
         value: -335
         inSlope: 137.45232
         outSlope: -3479.9995
@@ -689,6 +710,21 @@ AnimationClip:
     attribute: m_AnchoredPosition.x
     path: Foreground cosmetics/Opener top
     classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_IsActive
+    path: Footer cosmetics/Footer line
+    classID: 1
     script: {fileID: 0}
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0

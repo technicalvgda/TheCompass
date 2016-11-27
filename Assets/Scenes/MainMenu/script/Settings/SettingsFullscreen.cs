@@ -6,6 +6,8 @@ using System.Collections;
 // 0: Windowed
 // 1: Fullscreen
 
+    // INCOMPLETE
+
 public class SettingsFullscreen : SettingsToggle
 {
     protected override string key { get { return SettingsConst.FULLSCREEN_KEY; } }
@@ -14,9 +16,10 @@ public class SettingsFullscreen : SettingsToggle
 
     void Awake() { base._Awake(); }
 
-    protected override void Init()
+    protected override void Apply()
     {
         res = Screen.currentResolution;
+        Screen.SetResolution(res.width, res.height, false);
     }
     
     public void SetWindowed() { Set(0, false); }

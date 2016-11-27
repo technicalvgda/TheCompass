@@ -13,7 +13,7 @@ public class SettingsControls : SettingsToggle
 
     void Awake() { base._Awake(); }
 
-    protected override void Init()
+    protected override void ApplyUI()
     {
         if (value == SettingsConst.CONTROLS_A)
             lastToggle = toggles[0];
