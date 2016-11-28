@@ -6074,6 +6074,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3264bf53a378d2c44ae3a5fb15476647, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &619202785 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4000011805054722, guid: 3264bf53a378d2c44ae3a5fb15476647,
+    type: 2}
+  m_PrefabInternal: {fileID: 619202784}
 --- !u!1 &619967936
 GameObject:
   m_ObjectHideFlags: 0
@@ -8110,7 +8115,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000014096803600, guid: dc990532c9eef8348b99712d28b9e6b5, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 82000011652626310, guid: dc990532c9eef8348b99712d28b9e6b5,
         type: 2}
@@ -9236,6 +9241,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7597b4dac1288f04cb1bf7a6fb33966a, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &933641210 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4000010726845082, guid: 7597b4dac1288f04cb1bf7a6fb33966a,
+    type: 2}
+  m_PrefabInternal: {fileID: 933641209}
 --- !u!1 &941182953
 GameObject:
   m_ObjectHideFlags: 0
@@ -12993,6 +13003,70 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c9fd7ba53ba762740b8be08540711316, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1288945558
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1288945559}
+  - 114: {fileID: 1288945561}
+  - 58: {fileID: 1288945560}
+  m_Layer: 0
+  m_Name: ReachedPowerSourceCommentary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1288945559
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1288945558}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 619202785}
+  m_RootOrder: 1
+--- !u!58 &1288945560
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1288945558}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 46.88324
+--- !u!114 &1288945561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1288945558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee23d92a8ab4ec46b660889a2d66a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textFile: {fileID: 4900000, guid: e2f060074c03afe498e123151411d9f2, type: 3}
+  speakerName: OFELIA
+  startLine: 0
+  endLine: 0
+  audioClip: {fileID: 0}
+  theTextBox: {fileID: 0}
+  destroyWhenActivated: 1
+  timedDialogue: 1
+  timeUntilFinished: 10
 --- !u!4 &1290135051 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000012960252916, guid: c9fd7ba53ba762740b8be08540711316,
@@ -16154,6 +16228,70 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+--- !u!1 &1733470672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1733470673}
+  - 114: {fileID: 1733470675}
+  - 58: {fileID: 1733470674}
+  m_Layer: 0
+  m_Name: ReachedRepairStationCommentary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1733470673
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1733470672}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 933641210}
+  m_RootOrder: 1
+--- !u!58 &1733470674
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1733470672}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 9.003047
+--- !u!114 &1733470675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1733470672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee23d92a8ab4ec46b660889a2d66a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textFile: {fileID: 4900000, guid: 96859fee6cdc7444387f8d0ff3550126, type: 3}
+  speakerName: OFELIA
+  startLine: 0
+  endLine: 0
+  audioClip: {fileID: 0}
+  theTextBox: {fileID: 0}
+  destroyWhenActivated: 1
+  timedDialogue: 1
+  timeUntilFinished: 10
 --- !u!1 &1735283018
 GameObject:
   m_ObjectHideFlags: 0
@@ -17147,6 +17285,48 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+--- !u!1001 &1877963751
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4000012857373056, guid: 44ca797a71243ca40bf023a839f38f02, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 68.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012857373056, guid: 44ca797a71243ca40bf023a839f38f02, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 249.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012857373056, guid: 44ca797a71243ca40bf023a839f38f02, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012857373056, guid: 44ca797a71243ca40bf023a839f38f02, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012857373056, guid: 44ca797a71243ca40bf023a839f38f02, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012857373056, guid: 44ca797a71243ca40bf023a839f38f02, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012857373056, guid: 44ca797a71243ca40bf023a839f38f02, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012857373056, guid: 44ca797a71243ca40bf023a839f38f02, type: 2}
+      propertyPath: m_RootOrder
+      value: 22
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 44ca797a71243ca40bf023a839f38f02, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1879863097
 GameObject:
   m_ObjectHideFlags: 0
