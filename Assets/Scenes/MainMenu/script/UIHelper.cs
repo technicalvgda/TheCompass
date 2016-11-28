@@ -5,8 +5,6 @@ using System.Collections;
 
 public class UIHelper : MonoBehaviour
 {
-    public const int PLATFORM = 0;
-
     #region Input
     const string HORIZONTAL = "Horizontal";
     const string VERTICAL = "Vertical";
@@ -48,7 +46,16 @@ public class UIHelper : MonoBehaviour
         if (nextScene != null)
             SceneManager.LoadScene(nextScene);
     }
-
+    public void LoadSavedGame()
+    {
+        GameData data = (GameData)SaveLoad.LoadFile(AutoSave.defaultFilePath);
+        Debug.Log("Called.");
+        if (data != null)
+        {
+            GetComponent<Animator>().Play("menuFrameExit");
+            SceneManager.LoadScene(data.Scene);
+        }
+    }
     public void Quit()
     {
         Debug.Log("Quit!");

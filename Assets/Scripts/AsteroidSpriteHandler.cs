@@ -11,7 +11,15 @@ public class AsteroidSpriteHandler : MonoBehaviour {
 	void Start ()
     {
         rend = GetComponent<SpriteRenderer>();
-        debrisTextures = Resources.LoadAll<Sprite>("AsteroidSprites");
+        if(gameObject.name == "SplitterShard(Clone)")
+        {
+            debrisTextures = Resources.LoadAll<Sprite>("SplitterShardSprites");
+        }
+        else
+        {
+            debrisTextures = Resources.LoadAll<Sprite>("AsteroidSprites");
+        }
+        
         numOfTextures = debrisTextures.Length;
         //Debug.Log("Number of tex: "+numOfTextures);   
         rend.sprite = debrisTextures[Random.Range(0,numOfTextures-1)]; 

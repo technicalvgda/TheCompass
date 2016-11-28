@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 /*
 * Script to handle bowling minigame
 * Game consists of 10 frames, 2 rounds per frame
@@ -71,6 +72,11 @@ public class BowlingManager : MonoBehaviour {
         StartCoroutine(StartGame());
         //start first frame
         //StartFrame();
+    }
+
+    void Update()
+    {
+
     }
 
     IEnumerator StartGame()
@@ -412,6 +418,8 @@ public class BowlingManager : MonoBehaviour {
         //save score?
 
         //retry or exit
+        //TEMP CODE
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void setText(string text)
@@ -453,11 +461,11 @@ public class BowlingManager : MonoBehaviour {
     string OutputScoreBox(string announcement)
     {
         return ("@@@ "+announcement+" @@@\n\n"
-                +" __1__ __2__ __3__ __4__ __5__ __6__ __7__ __8__ __9__ ___10____\n"
+                +" __1__ __2__ __3__ __4__ __5__ __6__ __7__ __8__ __9__ ___10____|___Total___|\n"
                 +GetRoundScores(1)+GetRoundScores(2) + GetRoundScores(3) + GetRoundScores(4) + GetRoundScores(5)
-                        +GetRoundScores(6)+GetRoundScores(7)+GetRoundScores(8)+GetRoundScores(9) + GetRoundScores(10)+"|\n"
+                        +GetRoundScores(6)+GetRoundScores(7)+GetRoundScores(8)+GetRoundScores(9) + GetRoundScores(10)+"|                    |\n"
                 +"|_"+GetFrameScore(1)+"_|_" + GetFrameScore(2) + "_|_" + GetFrameScore(3) + "_|_" + GetFrameScore(4) + "_|_" + GetFrameScore(5) + "_|_" + GetFrameScore(6)
-                + "_|_" + GetFrameScore(7) + "_|_" + GetFrameScore(8) + "_|_" + GetFrameScore(9) + "_|_" + GetFrameScore(10)+ "_|");
+                + "_|_" + GetFrameScore(7) + "_|_" + GetFrameScore(8) + "_|_" + GetFrameScore(9) + "_|_" + GetFrameScore(10)+ "_|____"+PadScore(finalScore.ToString())+finalScore+"___|");
     }
     string GetRoundScores(int frame)
     {
@@ -468,20 +476,20 @@ public class BowlingManager : MonoBehaviour {
             //if strike, get all 3 frames
             if(round1Score[frameIndex] == 10)
             {
-                scoreString += "| [ X ]";
+                scoreString += "| [  x ]";
                 if (round1Score[frameIndex + 1] == 10)
-                { scoreString += "[ X ]"; }
+                { scoreString += "[  x ]"; }
                 else { scoreString += "[ " + frameIndex + 1 + " ]"; }
                 if(round1Score[frameIndex + 2] == 10)
-                { scoreString += "[ X ]"; }
+                { scoreString += "[  x ]"; }
                 else { scoreString += "[ "+frameIndex + 2+" ]"; }
             }
             //if spare, do 2 frames
             else if ((round1Score[frameIndex] + round2Score[frameIndex]) == 10)
             {
-                scoreString += "| [ "+round1Score[frameIndex]+" ][ / ]";
+                scoreString += "| [ "+round1Score[frameIndex]+" ][  / ]";
                 if (round1Score[frameIndex + 1] == 10)
-                { scoreString += "[ X ]"; }
+                { scoreString += "[  x ]"; }
                 else { scoreString += "[ " + frameIndex + 1 + " ]"; }
                
             }
@@ -495,11 +503,11 @@ public class BowlingManager : MonoBehaviour {
         //strike
         else if(round1Score[frameIndex] == 10)
         {
-            return ("|   [ X ]");
+            return ("|   [  x ]");
         }
         else if((round1Score[frameIndex] + round2Score[frameIndex]) == 10)
         {
-            return ("| "+round1Score[frameIndex]+" [ / ]");
+            return ("| "+round1Score[frameIndex]+" [  / ]");
         }
         else
         {
@@ -516,17 +524,22 @@ public class BowlingManager : MonoBehaviour {
             tenthPadding = "____";
         }
         string frameScoreRough = frameScore[frame - 1].ToString();
-        if(frameScoreRough.Length == 1)
+        return tenthPadding + PadScore(frameScoreRough) + frameScoreRough;
+    }
+
+    string PadScore(string scoreRough)
+    {
+        if (scoreRough.Length == 1)
         {
-            return tenthPadding+"00" + frameScoreRough;
+            return "00";
         }
-        else if(frameScoreRough.Length == 2)
+        else if (scoreRough.Length == 2)
         {
-            return tenthPadding + "0" + frameScoreRough;
+            return"0";
         }
         else
         {
-            return tenthPadding + frameScoreRough;
+            return "";
         }
     }
 }

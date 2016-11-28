@@ -129,6 +129,7 @@ GameObject:
   - 82: {fileID: 82000013234898012}
   - 82: {fileID: 82000011824803702}
   - 82: {fileID: 82000013933422466}
+  - 114: {fileID: 114000013496413772}
   m_Layer: 0
   m_Name: PlayerPlaceholder
   m_TagString: Player
@@ -174,7 +175,7 @@ Transform:
   m_GameObject: {fileID: 1000013800933882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000012033981452}
@@ -304,7 +305,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a767625a2b928994d87572390a273544, type: 3}
+  m_audioClip: {fileID: 8300000, guid: de3808943db02d64bb3be6a451bae26b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -378,7 +379,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 55ea662d3920d6140af9090d3b2388f3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4f9fb7f74f17f0242bee5a19e1960318, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -654,7 +655,8 @@ MonoBehaviour:
   playerHealth: 0
   playerMaxHealth: 100
   healthRegen: 0
-  RegenDuration: 0
+  damageTimeCounter: 10
+  regenDelay: 7
   maxXBoundary: 100
   maxYBoundary: 100
   minXBoundary: -100
@@ -662,6 +664,17 @@ MonoBehaviour:
   joystick: {fileID: 0}
   asteroidDirection: {x: 0, y: 0}
   AccelerateSound: {fileID: 82000013234898012}
+--- !u!114 &114000013496413772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013920337096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84fca3bf38616ba498e9fa8bd6acb72b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000013738887394
 MonoBehaviour:
   m_ObjectHideFlags: 1

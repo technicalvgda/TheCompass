@@ -150,8 +150,8 @@ MonoBehaviour:
   splitter: {fileID: 1000012917061754}
   splitterShard: {fileID: 1000010028777008, guid: a850a036eda6bdb408e1b9407426b60b,
     type: 2}
-  fuelDrop: {fileID: 0}
-  splitShards: 4
+  fuelDrop: {fileID: 1000014294361950, guid: 7ae77bbf9d029c145a4ca6d1c0f6a7f0, type: 2}
+  splitShards: 5
   driftSpeed: 100
   isTractored: 0
 --- !u!212 &212000012110097214
@@ -184,7 +184,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.94482756, g: 1, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!212 &212000013646028318

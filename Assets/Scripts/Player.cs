@@ -26,6 +26,9 @@ public class Player : MonoBehaviour {
 
 	//PLAYER COMPONENTS
 	private Rigidbody2D rb2d;
+    private ParticleSystem partSys;
+    private Color trailColor;
+    private Color lowFuelColor = Color.green;
 
 	//Determines which control scheme to use.  Set to 1 or 2 (2 being the default value)
 	// 1-> W (accelerate forward), S (accelerate backwards), A (Rotate Counter-Clockwise), D (Rotate Clockwise)
@@ -114,6 +117,9 @@ public class Player : MonoBehaviour {
         regenDelay = 7;
         //get rigidbody component of player object
         rb2d = GetComponent<Rigidbody2D> ();
+        //get particle system
+        partSys = transform.FindChild("ParticleTrail").GetComponent<ParticleSystem>();
+        trailColor = partSys.startColor;
         //get shield script
         shield = GetComponentInChildren<PlayerShield>();
         //set player health to starting health
@@ -298,7 +304,7 @@ public class Player : MonoBehaviour {
     //Health regen coroutine when the player is damaged it will heal at a rate of 5 persecond but whenever a player is damaged the player must not take damage for 10 seconds before he will regenerate again 
     IEnumerator healthDamageCoroutine()
     {
-        Debug.Log("coroutine start ");
+        //Debug.Log("coroutine start ");
         while (true)
         {
             if (isDamaged)
@@ -320,7 +326,7 @@ public class Player : MonoBehaviour {
             else
             {
                 yield return new WaitForSeconds(1f);
-                Debug.Log("blah");  
+                //Debug.Log("blah");  
             }
                
         }
@@ -400,6 +406,15 @@ public class Player : MonoBehaviour {
         {
             currentFuel -= Time.deltaTime*1.5f;
         }
+        //if fuel is less than 40%
+        if(currentFuel < (MAX_FUEL*0.4f))
+        {
+            partSys.startColor = lowFuelColor;
+        }
+        else
+        {
+            partSys.startColor = trailColor;
+        }
      }
 
     //Function that grabs velocity from the asteroid object and stores it in a var, applies damage to player if velocity is high enough, calculates a force, and subtracts that force from player health
@@ -439,6 +454,8 @@ public class Player : MonoBehaviour {
                 engineOn = false;
                 //StopCoroutine(FadeSoundAndEnd(AccelerateSound));
                 //StopAllCoroutines();
+                StopCoroutine("FadeSoundAndStart");
+                StopCoroutine("FadeSoundAndEnd");
                 StartCoroutine(FadeSoundAndEnd(AccelerateSound));
             }
         }
@@ -451,6 +468,8 @@ public class Player : MonoBehaviour {
                 engineOn = true;
                 //StopCoroutine(FadeSoundAndStart(AccelerateSound));
                 //StopAllCoroutines();
+                StopCoroutine("FadeSoundAndStart");
+                StopCoroutine("FadeSoundAndEnd");
                 StartCoroutine(FadeSoundAndStart(AccelerateSound));
             }
         }
