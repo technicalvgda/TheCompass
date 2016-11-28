@@ -330,7 +330,7 @@ GameObject:
   - 114: {fileID: 114000013779083674}
   m_Layer: 0
   m_Name: TransitionBoxImage
-  m_TagString: Untagged
+  m_TagString: TransitionObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7008,8 +7008,12 @@ MonoBehaviour:
   currentLine: 0
   endAtLine: 4
   isActive: 0
+  currentlyInCommentary: 0
+  isTyping: 0
   typeSpeed: 0.005
   movementSpeed: 10
+  loadingTransition: {fileID: 0}
+  activateTransition: 0
 --- !u!114 &114000013035951980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8135,7 +8139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainBodyText: {fileID: 114000011214125636}
-  levelToLoad: Level 0 TutorialDialogue
+  levelToLoad: Level 4 Dialogue
   textFile: {fileID: 4900000, guid: b7006321d6d588a428ae0a40d5476b2f, type: 3}
   textLines: []
   typingSoundAudioSource: {fileID: 0}
