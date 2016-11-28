@@ -16,6 +16,7 @@ public class TextBoxManager : MonoBehaviour
     public int endAtLine;
 
     public bool isActive;
+	public bool currentlyInCommentary;
 
     public bool isTyping = false;
     private bool cancelTyping = false;
@@ -26,9 +27,13 @@ public class TextBoxManager : MonoBehaviour
 	private bool  _dialogueIsFinished;
 	private float _timer;
 	private bool _timedCommentaryActive;
+
+	public LoadingTransition loadingTransition;
+	public bool activateTransition;
     // Use this for initialization
     void Start()
     {
+		loadingTransition = GameObject.FindGameObjectWithTag ("TransitionObject").GetComponent<LoadingTransition>();
 		_timedCommentaryActive = false;
 		_rectTransform = transform.GetComponent<RectTransform> ();
 		if (textFile != null)
@@ -127,6 +132,7 @@ public class TextBoxManager : MonoBehaviour
     {
         //textBox.SetActive(true);
 		isActive = true;
+	
         StartCoroutine(TextScroll(textLines[currentLine]));
 
     }
@@ -145,6 +151,8 @@ public class TextBoxManager : MonoBehaviour
         {
             textLines = new string[1];
             textLines = (theText.text.Split('@'));
+			mainBodyText.text = " ";
+			StopCoroutine(TextScroll(" "));
         }
     }
 	public void setSpeakerNameText(string speakerName)
@@ -152,14 +160,20 @@ public class TextBoxManager : MonoBehaviour
 		speakerText.text = speakerName;
 	}
 	public void startCommentaryDialogue()
-	{
-		
+	{		
+		if (currentlyInCommentary) 
+		{
+			StopAllCoroutines ();
+		}
 		StartCoroutine (StartCommentary ());
 	}
 	IEnumerator StartCommentary()
 	{
+		currentlyInCommentary = true;
 		//get stop position
-		Vector2 _newPos = new Vector2(_rectTransform.anchoredPosition.x, -15f);
+		Vector2 _newPos = new Vector2(0,-145);
+		_rectTransform.anchoredPosition = _newPos;
+		_newPos = new Vector2(_rectTransform.anchoredPosition.x, -15f);
 		//move the box up
 		while (_rectTransform.anchoredPosition.y < -16f) 
 		{
@@ -181,6 +195,12 @@ public class TextBoxManager : MonoBehaviour
 		{
 			_rectTransform.anchoredPosition = Vector2.Lerp (_rectTransform.anchoredPosition, _newPos, Time.unscaledDeltaTime * movementSpeed);
 			yield return new WaitForSecondsRealtime (0.01f);
+		}
+		currentlyInCommentary = false;
+		if (activateTransition == true) 
+		{
+			Time.timeScale = 1;
+			loadingTransition.startCommentaryDialogue ();
 		}
 	}
 	public void activateTimedCommentary(float time)
@@ -212,5 +232,10 @@ public class TextBoxManager : MonoBehaviour
 		{
 			cancelTyping = true;
 		}
+	}
+	public void activateTransitionOnFinished()
+	{
+		activateTransition = true;
+		Time.timeScale = 0;
 	}
 }

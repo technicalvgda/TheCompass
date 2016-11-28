@@ -10,7 +10,8 @@ public class ObjectiveMech : MonoBehaviour {
     public string nextLevelName;
     public LoadingTransition loadingTransition;
     public GameObject transitionBox;
-
+	public GameObject commentaryObject;
+	public bool isCommentaryTrigger;
     void Start()
     {
         loadingTransition = transitionBox.GetComponent<LoadingTransition>();
@@ -49,8 +50,16 @@ public class ObjectiveMech : MonoBehaviour {
         }
         else if(col.tag == "TetheredPart")
         {
-
-			loadingTransition.startCommentaryDialogue();
+			if (isCommentaryTrigger == true) 
+			{
+				if (commentaryObject != null) 
+				{
+					commentaryObject.GetComponent<TwoObjectsCollideCommentary> ().activateCommentary ();
+				} else
+					Debug.Log ("Commentary object not set in inspector.");
+			}
+			else
+				loadingTransition.startCommentaryDialogue();
 			/*
             Debug.Log("COMPLETE,COMPLETE,COMPLETE");
             if (nextLevelName != null)
