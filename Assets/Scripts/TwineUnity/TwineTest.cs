@@ -23,7 +23,12 @@ public class TwineTest : MonoBehaviour {
     public float AlternateEndDelayTime = 3;
 
     public string GameOverTag = "GameOver";
-
+	//The beeing audioSource
+	public AudioSource typingBeepAudioSource;
+	//bool so only one thread is active during a passage
+	private bool _activatedCoRoutine;
+	//number of seconds coroutine waits until it plays the beep again
+	public float beepSecWait;
 	[HideInInspector]
 	public string PassageText;
 	[HideInInspector]
@@ -57,17 +62,24 @@ public class TwineTest : MonoBehaviour {
                             AlternateStarts[0] : TDialogue.StartPassage;
 		PassageText = CurrentPassage.GetContent();
 		_currentlyTyping = true;
+		_activatedCoRoutine = false;
 	}
 	void Update()
 	{
 		if (Input.anyKeyDown && _currentlyTyping)
 		{
+			_activatedCoRoutine = false;
 			_currentlyTyping = false;
 			PassageTextDisplay.text = PassageText;
 			AddChoiceButtons();
 		}
 		if (_currentlyTyping)
 		{
+			if (!_activatedCoRoutine) 
+			{
+				StartCoroutine (TypingBeep (beepSecWait));
+				_activatedCoRoutine = true;
+			}
 			string currentText = PassageTextDisplay.text;
 			if (currentText.Length < PassageText.Length)
 			{
@@ -75,6 +87,7 @@ public class TwineTest : MonoBehaviour {
 			}
 			else
 			{
+				_activatedCoRoutine = false;
 				_currentlyTyping = false;
 				AddChoiceButtons();
 			}
@@ -159,6 +172,15 @@ public class TwineTest : MonoBehaviour {
             {
                 SceneManager.LoadScene(NextScene);
             }
+		}
+	}
+	//Coroutine that handles beeping for typing
+	IEnumerator TypingBeep(float sec)
+	{
+		while (_currentlyTyping)
+		{
+			typingBeepAudioSource.PlayOneShot (typingBeepAudioSource.clip);
+			yield return new WaitForSeconds(sec);
 		}
 	}
 }

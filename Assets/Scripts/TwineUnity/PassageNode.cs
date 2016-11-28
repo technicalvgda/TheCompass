@@ -60,6 +60,13 @@ public class PassageNode
     {
         return _content;
     }
+	/*
+	 	Returns the passage id.
+	*/
+	public int GetID()
+	{
+		return _passageID;
+	}
     /*
         Returns the collection of tags.
     */
