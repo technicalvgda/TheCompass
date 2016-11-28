@@ -62,17 +62,20 @@ public class Nebula : MonoBehaviour
 		}
         else
         {
-            if (type == 1) // POSITIVE SPD BUFF NEBULA
-			{
-				//Debug.Log ("GelType 1 Detected, positive stat boost");
-				speedMultiplier = 2f;
-				coll.GetComponent<Rigidbody2D>().velocity *= speedMultiplier;
-			} 
-			else if (type == 2) // NEGATIVE SPD DEBUFF NEBULA
-			{
-				//Debug.Log ("GelType 2 Detected, negative stat boost");
-				speedMultiplier = 0.5f;
-                coll.GetComponent<Rigidbody2D>().velocity *= speedMultiplier;
+            if (coll.GetComponent<Rigidbody2D>() != null)
+            {
+                if (type == 1) // POSITIVE SPD BUFF NEBULA
+                {
+                    //Debug.Log ("GelType 1 Detected, positive stat boost");
+                    speedMultiplier = 2f;
+                    coll.GetComponent<Rigidbody2D>().velocity *= speedMultiplier;
+                }
+                else if (type == 2) // NEGATIVE SPD DEBUFF NEBULA
+                {
+                    //Debug.Log ("GelType 2 Detected, negative stat boost");
+                    speedMultiplier = 0.5f;
+                    coll.GetComponent<Rigidbody2D>().velocity *= speedMultiplier;
+                }
             }
         }
 	}

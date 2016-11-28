@@ -119,6 +119,10 @@ public class LoadingTransition : MonoBehaviour
         {
             mainBodyText.text += lineOfText[letter];
             letter++;
+			mainBodyText.text += lineOfText[letter];
+			letter++;
+			mainBodyText.text += lineOfText[letter];
+			letter++;
             yield return new WaitForSecondsRealtime(typeSpeed);
         }
         //toContinueTextBox.SetActive(true);
