@@ -5,6 +5,7 @@ using System;
 
 [Serializable]
 public class BranchData {
+    //TODO: Actually increment EnemiesKilled when enemy is killed.
     public int EnemiesKilled = 0;
     public bool ColorVisited = false;
     [NonSerialized]
