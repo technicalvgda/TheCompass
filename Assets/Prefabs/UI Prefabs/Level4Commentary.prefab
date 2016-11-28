@@ -11,6 +11,22 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1000013422052906}
   m_IsPrefabParent: 1
+--- !u!1 &1000011077078340
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000012010182144}
+  - 114: {fileID: 114000011211199236}
+  m_Layer: 0
+  m_Name: ShipPartAugmented
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000011366859242
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,6 +200,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000012857373056}
   m_RootOrder: 0
+--- !u!4 &4000012010182144
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011077078340}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000012857373056}
+  m_RootOrder: 7
 --- !u!4 &4000012857373056
 Transform:
   m_ObjectHideFlags: 1
@@ -202,6 +231,7 @@ Transform:
   - {fileID: 4000010543537874}
   - {fileID: 4000013741682884}
   - {fileID: 4000013021928412}
+  - {fileID: 4000012010182144}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &4000013021928412
@@ -354,6 +384,25 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &114000011211199236
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011077078340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d725efa1872314797cad126233c89b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textFile: {fileID: 4900000, guid: e1a877ffba9a823458af2b597c6313e0, type: 3}
+  speakerName: OFELIA
+  startLine: 0
+  endLine: 0
+  theTextBox: {fileID: 0}
+  destroyWhenActivated: 1
+  timedDialogue: 1
+  timeUntilFinished: 10
 --- !u!114 &114000011445143344
 MonoBehaviour:
   m_ObjectHideFlags: 1

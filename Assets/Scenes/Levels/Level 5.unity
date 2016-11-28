@@ -862,6 +862,48 @@ Transform:
   m_PrefabParentObject: {fileID: 4000012960252916, guid: c9fd7ba53ba762740b8be08540711316,
     type: 2}
   m_PrefabInternal: {fileID: 94730716}
+--- !u!1001 &107261776
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4000012509763264, guid: 16c14652bb73d5847aa14dc358b718f0, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -80.529144
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012509763264, guid: 16c14652bb73d5847aa14dc358b718f0, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 18.556713
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012509763264, guid: 16c14652bb73d5847aa14dc358b718f0, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012509763264, guid: 16c14652bb73d5847aa14dc358b718f0, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012509763264, guid: 16c14652bb73d5847aa14dc358b718f0, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012509763264, guid: 16c14652bb73d5847aa14dc358b718f0, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012509763264, guid: 16c14652bb73d5847aa14dc358b718f0, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012509763264, guid: 16c14652bb73d5847aa14dc358b718f0, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 16c14652bb73d5847aa14dc358b718f0, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &117024252
 Prefab:
   m_ObjectHideFlags: 0
@@ -2760,54 +2802,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4000012251758694, guid: 628e5365816812e429e650997737054b,
     type: 2}
   m_PrefabInternal: {fileID: 429369634}
---- !u!1 &430892109
+--- !u!1 &430892109 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 430892110}
-  - 114: {fileID: 430892111}
-  m_Layer: 0
-  m_Name: RepairStationAtIonConstruct
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &430892110
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 430892109}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 514998276}
-  m_RootOrder: 2
---- !u!114 &430892111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 430892109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34d725efa1872314797cad126233c89b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textFile: {fileID: 4900000, guid: ea9e5050ee542c54fbd6fd9d4fe77190, type: 3}
-  speakerName: OFELIA
-  startLine: 0
-  endLine: 0
-  theTextBox: {fileID: 0}
-  destroyWhenActivated: 1
-  timedDialogue: 1
-  timeUntilFinished: 10
+  m_PrefabParentObject: {fileID: 1000013830773442, guid: 16c14652bb73d5847aa14dc358b718f0,
+    type: 2}
+  m_PrefabInternal: {fileID: 107261776}
 --- !u!1 &447711027
 GameObject:
   m_ObjectHideFlags: 0
@@ -3357,37 +3356,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4000012033981452, guid: b0b7fba286815dc44b0ba11b680392c4,
     type: 2}
   m_PrefabInternal: {fileID: 507401692}
---- !u!1 &514998275
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 514998276}
-  m_Layer: 0
-  m_Name: Level5Commentary
-  m_TagString: CommentaryObject
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &514998276
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 514998275}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -80.529144, y: 18.556713, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children:
-  - {fileID: 1337779436}
-  - {fileID: 631253353}
-  - {fileID: 430892110}
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
 --- !u!1 &516112160
 GameObject:
   m_ObjectHideFlags: 0
@@ -3931,71 +3899,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4000012251758694, guid: 628e5365816812e429e650997737054b,
     type: 2}
   m_PrefabInternal: {fileID: 612602457}
---- !u!1 &631253352
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 631253353}
-  - 68: {fileID: 631253355}
-  - 114: {fileID: 631253354}
-  m_Layer: 0
-  m_Name: AfterAmbushCommentary
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &631253353
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 631253352}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 569.4, y: -501.4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 514998276}
-  m_RootOrder: 1
---- !u!114 &631253354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 631253352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fee23d92a8ab4ec46b660889a2d66a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textFile: {fileID: 4900000, guid: e7cf2acbbf4425241b3d5bb3bf291bba, type: 3}
-  speakerName: OFELIA
-  startLine: 0
-  endLine: 0
-  audioClip: {fileID: 0}
-  theTextBox: {fileID: 0}
-  destroyWhenActivated: 1
-  timedDialogue: 1
-  timeUntilFinished: 10
---- !u!68 &631253355
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 631253352}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  m_Points:
-  - {x: -223.78339, y: -29.31601}
-  - {x: 19.776245, y: 175.49432}
 --- !u!1001 &647518306
 Prefab:
   m_ObjectHideFlags: 0
@@ -9690,70 +9593,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4000012955116674, guid: 9fbfa6dd6cab1a348b461660b6bea27d,
     type: 2}
   m_PrefabInternal: {fileID: 1320113840}
---- !u!1 &1337779435
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1337779436}
-  - 58: {fileID: 1337779438}
-  - 114: {fileID: 1337779437}
-  m_Layer: 0
-  m_Name: StartingDialogue
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1337779436
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1337779435}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 569.4, y: -501.4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 514998276}
-  m_RootOrder: 0
---- !u!114 &1337779437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1337779435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fee23d92a8ab4ec46b660889a2d66a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textFile: {fileID: 4900000, guid: cfb5c47863745f04fb9fd6fffe735b8a, type: 3}
-  speakerName: OFELIA
-  startLine: 0
-  endLine: 0
-  audioClip: {fileID: 0}
-  theTextBox: {fileID: 0}
-  destroyWhenActivated: 1
-  timedDialogue: 1
-  timeUntilFinished: 10
---- !u!58 &1337779438
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1337779435}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 33.496826
 --- !u!1001 &1342962254
 Prefab:
   m_ObjectHideFlags: 0
