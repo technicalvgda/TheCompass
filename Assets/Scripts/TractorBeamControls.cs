@@ -450,6 +450,7 @@ public class TractorBeamControls : MonoBehaviour
         {
             //make sure starting position of tractor beam is at the ship
             _tractorLine.SetPosition(0, transform.position);
+            _tractorOverlay.SetPosition(0, transform.position);
 
             //if the tractor beam is connected
             if (_hitDebris && objectScript.isTractored)
@@ -475,7 +476,7 @@ public class TractorBeamControls : MonoBehaviour
                 //set the color of the beam to blue
                 //_tractorLine.SetColors(Color.blue, Color.blue);
                 Vector3 directionVector = (_tractorLine.transform.position - (Vector3)endPoint).normalized;
-                beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
+                //beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
                 beamEnd.transform.position = endPoint;
             }
         }

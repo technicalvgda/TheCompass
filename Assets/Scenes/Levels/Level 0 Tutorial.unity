@@ -986,6 +986,24 @@ Transform:
   m_PrefabParentObject: {fileID: 4000013794431590, guid: c2a22ae9536cd3447b04f7ed90817852,
     type: 2}
   m_PrefabInternal: {fileID: 279883411}
+--- !u!1 &281398092 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000010051712288, guid: 7597b4dac1288f04cb1bf7a6fb33966a,
+    type: 2}
+  m_PrefabInternal: {fileID: 2005947483}
+--- !u!114 &281398093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 281398092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce40347ac03cccd4bad66803044d7465, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1133534360}
+  speed: 10
 --- !u!1001 &296745131
 Prefab:
   m_ObjectHideFlags: 0
@@ -4688,7 +4706,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 1574283736}
   m_Father: {fileID: 1970650755}
   m_RootOrder: 1
 --- !u!58 &1133534361
@@ -4716,6 +4735,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b437c8997cf5a4cbd5d65c518994a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endLevel: 0
+  disableCameraFollow: 1
+  target: {fileID: 1574283736}
+  speed: 50
+  transitionBox: {fileID: 0}
 --- !u!1001 &1148878861
 Prefab:
   m_ObjectHideFlags: 0
@@ -6088,13 +6112,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1574283735}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20, y: -4, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 20, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 1970650755}
-  m_RootOrder: 2
+  m_Father: {fileID: 1133534360}
+  m_RootOrder: 0
 --- !u!114 &1574283737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6106,6 +6130,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b437c8997cf5a4cbd5d65c518994a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endLevel: 1
+  disableCameraFollow: 0
+  target: {fileID: 0}
+  speed: 10
+  transitionBox: {fileID: 1729305058}
 --- !u!58 &1574283738
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8310,7 +8339,13 @@ Prefab:
       propertyPath: disableCamFollow.Array.data[0]
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114000013703507622, guid: 7597b4dac1288f04cb1bf7a6fb33966a,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114000013703507622, guid: 7597b4dac1288f04cb1bf7a6fb33966a, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 7597b4dac1288f04cb1bf7a6fb33966a, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &2015724727
