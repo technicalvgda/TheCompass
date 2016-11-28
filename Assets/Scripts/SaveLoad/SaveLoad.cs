@@ -4,6 +4,16 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class SaveLoad : MonoBehaviour {
     public static SaveLoad Singleton;
+    public static string defaultFilePath = "SaveData.bin";
+
+    public static void SaveGame()
+    {
+        SaveLoad.SaveFile(new GameData(), defaultFilePath);
+    }
+    public static GameData LoadGame()
+    {
+        return (GameData)LoadFile(defaultFilePath);
+    }
     public static void SaveFile(object data, string filePath)
     {
         Stream stream = File.Open(filePath, FileMode.Create);

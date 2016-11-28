@@ -17,6 +17,13 @@ public class TwineTest : MonoBehaviour {
 	public string NextScene;
 	public string ContinueText;
 
+    public string AlternateStartTag = "AlternateStart";
+    public string AlternateEndTag = "AlternateEnd";
+    public int EnemiesKilledThreshhold = 5;
+    public float AlternateEndDelayTime = 3;
+
+    public string GameOverTag = "GameOver";
+
 	[HideInInspector]
 	public string PassageText;
 	[HideInInspector]
@@ -25,13 +32,29 @@ public class TwineTest : MonoBehaviour {
 	public TwineDialogue TDialogue;
 	[HideInInspector]
 	public PassageNode CurrentPassage;
+    [HideInInspector]
+    public Button ContinueButton;
+    [HideInInspector]
+    public bool AlternateEndVisited = false;
+    
 
 	bool _currentlyTyping;
 	#endregion
 
+    void AlternateEndDelay()
+    {
+        PassageTextDisplay.text = "";
+        PassageText = CurrentPassage.GetContent();
+        _currentlyTyping = true;
+        AlternateEndVisited = true;
+    }
+
 	void Start () {
 		TDialogue = TwineReader.Parse(DialogueFile);
-		CurrentPassage = TDialogue.StartPassage;
+        List<PassageNode> AlternateStarts = TDialogue.GetPassagesTagged(AlternateStartTag);
+        //BranchData.Singleton.EnemiesKilled = 5; //Testing the alternate beginning.
+		CurrentPassage = AlternateStarts.Count > 0 && BranchData.Singleton.EnemiesKilled >= EnemiesKilledThreshhold ?
+                            AlternateStarts[0] : TDialogue.StartPassage;
 		PassageText = CurrentPassage.GetContent();
 		_currentlyTyping = true;
 	}
@@ -83,10 +106,17 @@ public class TwineTest : MonoBehaviour {
 		}
 		if (Choices.Count <= 0)
 		{
-			Button continueButton = (Button)Instantiate(ChoiceButtonPrefab, ChoicePanel, false);
-			continueButton.GetComponentInChildren<Text>().text = ContinueText;
-			continueButton.GetComponent<ChoiceButton>().tt = this;
-			continueButton.tag = "FirstButtonOfMenu";
+            if (CurrentPassage.GetTags().Contains(GameOverTag))
+            {
+                //TODO: IMPLEMENT GAME OVER SEQUENCE.
+            }
+            else
+            {
+                ContinueButton = (Button)Instantiate(ChoiceButtonPrefab, ChoicePanel, false);
+                ContinueButton.GetComponentInChildren<Text>().text = ContinueText;
+                ContinueButton.GetComponent<ChoiceButton>().tt = this;
+                ContinueButton.tag = "FirstButtonOfMenu";
+            }
 		}
 	}
 	public void ChoiceSelect(string choiceContent)
@@ -94,6 +124,7 @@ public class TwineTest : MonoBehaviour {
 		if (Choices.Count > 0)
 		{
 			PassageNode decision = CurrentPassage.GetDecision(choiceContent);
+            TDialogue.SetCurrentPassage(decision);
 			if (decision != null)
 			{
 				CurrentPassage = decision;
@@ -113,7 +144,21 @@ public class TwineTest : MonoBehaviour {
 		}
 		else
 		{
-			SceneManager.LoadScene(NextScene);
+            List<PassageNode> AlternateEnds = TDialogue.GetPassagesTagged(AlternateEndTag);
+            Debug.Log("AlternateEnds: "+AlternateEnds.Count);
+            Debug.Log("Visited: " + BranchData.Singleton.ColorVisited);
+            if (AlternateEnds.Count > 0 && BranchData.Singleton.ColorVisited && !AlternateEndVisited)
+            {
+                Destroy(ContinueButton.gameObject);
+                PassageTextDisplay.text = "...";
+                _currentlyTyping = false;
+                CurrentPassage = AlternateEnds[0];
+                Invoke("AlternateEndDelay", AlternateEndDelayTime);
+            }
+            else
+            {
+                SceneManager.LoadScene(NextScene);
+            }
 		}
 	}
 }
