@@ -458,6 +458,8 @@ public class TractorBeamControls : MonoBehaviour
                 //_tractorLine.SetColors(Color.white, Color.white);
                 //draw a line to show tractor beam connection
                 _tractorLine.SetPosition(1, _tractorStick.transform.position);
+                _tractorOverlay.SetPosition(1, _tractorStick.transform.position);
+                beamEnd.transform.position = _tractorStick.transform.position;
             }
             else
             {
@@ -469,7 +471,7 @@ public class TractorBeamControls : MonoBehaviour
 
                 //set the end of the beam to be where the endpoint variable is
                 _tractorLine.SetPosition(1, endPoint);
-                beamEnd.transform.position = endPoint;
+                _tractorOverlay.SetPosition(1, endPoint);
                 //set the color of the beam to blue
                 //_tractorLine.SetColors(Color.blue, Color.blue);
                 Vector3 directionVector = (_tractorLine.transform.position - (Vector3)endPoint).normalized;
