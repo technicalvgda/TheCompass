@@ -49,6 +49,9 @@ public class ObjectiveMech : MonoBehaviour {
         }
         else if(col.tag == "TetheredPart")
         {
+
+			loadingTransition.startCommentaryDialogue();
+			/*
             Debug.Log("COMPLETE,COMPLETE,COMPLETE");
             if (nextLevelName != null)
             {
@@ -57,11 +60,14 @@ public class ObjectiveMech : MonoBehaviour {
             else
             {
                 Debug.Log("No scene set for next level on waypoint");
-            }
+            }*/
         }
 
         else if (col.tag == "RepairStation")
         {
+
+			loadingTransition.startCommentaryDialogue();
+			/*
             Debug.Log("COMPLETE,COMPLETE,COMPLETE");
             if (nextLevelName != null)
             {
@@ -70,7 +76,7 @@ public class ObjectiveMech : MonoBehaviour {
             else
             {
                 Debug.Log("No scene set for next level on waypoint");
-            }
+            }*/
         }
 
     }
