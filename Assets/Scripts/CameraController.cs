@@ -5,7 +5,8 @@ public class CameraController : MonoBehaviour {
 
 	
     public Transform target;
-    
+    private bool camFollow = true;
+
     private float _dampTime = 0.15f;
     private float _xVelRatio = 2.0f;
     private float _yVelRatio = 2.0f;
@@ -36,50 +37,53 @@ public class CameraController : MonoBehaviour {
     }
 	void FixedUpdate()
 	{
-		_vertExtent = Camera.main.orthographicSize;
-		_horzExtent = _vertExtent * Screen.width / Screen.height;
-
-    	/*
-    	Uses the player's position and velocity to determine where to move the camera
-    	*/
-
-		_screenRatio = (float)Screen.height / (float)Screen.width;
-
-		if (target)
+        if (camFollow)
         {
-			
+            _vertExtent = Camera.main.orthographicSize;
+            _horzExtent = _vertExtent * Screen.width / Screen.height;
 
-            //NOTE: can modify the ratio of inputted x and y velocity to adjust how far the camera goes ahead of player
-            //aheadpoint = player position + vector of player velocity => position of player after one second
-			Vector3 aheadPoint = target.position + new Vector3(target.GetComponent<Rigidbody2D>().velocity.x / (_xVelRatio * _screenRatio) , target.GetComponent<Rigidbody2D>().velocity.y / _yVelRatio, 0);
+            /*
+            Uses the player's position and velocity to determine where to move the camera
+            */
 
+            _screenRatio = (float)Screen.height / (float)Screen.width;
 
-			//converts aheadPoint to camera viewport reference (Shown screen goes from bottom left [0,0] to top right [1,1]
-            Vector3 point = Camera.main.WorldToViewportPoint(aheadPoint);
-
-            //delta is the vector from the aheadpoint to the center of the screen
-            Vector3 delta = aheadPoint - Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));
-            
-			//destination is the point from the player to the difference between where the player will be in a second and the center of the screen
-            Vector3 destination = transform.position + delta;
+            if (target)
+            {
 
 
-			//If the player experiences sudden movement, makes camera movement smoother
-			if (playerIsJerked(target.GetComponent<Rigidbody2D>()) || _jerkCompensationTime > 0)
-			{
-				_jerkCompensationTime -= Time.fixedDeltaTime;
-				transform.position = Vector3.SmoothDamp(transform.position, destination, ref _velocity, _dampTime * (_jerkCompensationTime * 2 + 1));
-				clampCamera (_clampScreenRatio);
-			}
-			else
-			{
-				
-				//The camera position transition to the calculated destination
-				transform.position = Vector3.SmoothDamp(transform.position, destination, ref _velocity, _dampTime);
-				clampCamera (_clampScreenRatio);
-			}
+                //NOTE: can modify the ratio of inputted x and y velocity to adjust how far the camera goes ahead of player
+                //aheadpoint = player position + vector of player velocity => position of player after one second
+                Vector3 aheadPoint = target.position + new Vector3(target.GetComponent<Rigidbody2D>().velocity.x / (_xVelRatio * _screenRatio), target.GetComponent<Rigidbody2D>().velocity.y / _yVelRatio, 0);
 
-		}
+
+                //converts aheadPoint to camera viewport reference (Shown screen goes from bottom left [0,0] to top right [1,1]
+                Vector3 point = Camera.main.WorldToViewportPoint(aheadPoint);
+
+                //delta is the vector from the aheadpoint to the center of the screen
+                Vector3 delta = aheadPoint - Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));
+
+                //destination is the point from the player to the difference between where the player will be in a second and the center of the screen
+                Vector3 destination = transform.position + delta;
+
+
+                //If the player experiences sudden movement, makes camera movement smoother
+                if (playerIsJerked(target.GetComponent<Rigidbody2D>()) || _jerkCompensationTime > 0)
+                {
+                    _jerkCompensationTime -= Time.fixedDeltaTime;
+                    transform.position = Vector3.SmoothDamp(transform.position, destination, ref _velocity, _dampTime * (_jerkCompensationTime * 2 + 1));
+                    clampCamera(_clampScreenRatio);
+                }
+                else
+                {
+
+                    //The camera position transition to the calculated destination
+                    transform.position = Vector3.SmoothDamp(transform.position, destination, ref _velocity, _dampTime);
+                    clampCamera(_clampScreenRatio);
+                }
+
+            }
+        }
 	}
 
 	/*
@@ -116,5 +120,10 @@ public class CameraController : MonoBehaviour {
 
 		return deltaVel.magnitude > 3;
 	}
+
+    public void DisableCamFollow()
+    {
+        camFollow = false;
+    }
 		
 }
