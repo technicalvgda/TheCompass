@@ -10,7 +10,7 @@ using System;
 /// </summary>
 
 [RequireComponent (typeof(Selectable))]
-public class UINavigationPointer : MonoBehaviour, IPointerEnterHandler//, IPointerExitHandler
+public class UINavigationPointer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public static GameObject mousedOver;
     Selectable sel;
@@ -74,6 +74,9 @@ public class UINavigationPointer : MonoBehaviour, IPointerEnterHandler//, IPoint
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        // Bad last minute hack
+
+        ResetMousedOver();
         mousedOver = null;
     }
 

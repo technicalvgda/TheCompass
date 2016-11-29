@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: c10753e6b7f254d4aafb2da74fc01b86
-timeCreated: 1480058660
+timeCreated: 1480416151
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -183,6 +183,54 @@ TextureImporter:
     21300352: cursor3Red
     21300354: cursor3Yellow
     21300356: cursorHighlighted
+    21300358: binary3x3
+    21300360: displaySideClip
+    21300362: displaySideLock
+    21300364: inst2WayArrow
+    21300366: instHeaderFuel
+    21300368: instHeaderLevelObjective
+    21300370: instHeaderLine
+    21300372: instHeaderPlayerMovement
+    21300374: instHeaderShield
+    21300376: instHeaderTractorBeam
+    21300378: instHeaderTypeA
+    21300380: instHeaderTypeB
+    21300382: instIllustFuelCrystal
+    21300384: instIllustFuelLevel
+    21300386: instIllustShield
+    21300388: instIllustTractorActivate
+    21300390: instIllustTractorGrab
+    21300392: instKeyA
+    21300394: instKeyAp
+    21300396: instKeyD
+    21300398: instKeyDp
+    21300400: instKeyS
+    21300402: instKeySp
+    21300404: instKeyW
+    21300406: instKeyWp
+    21300408: instTextChange
+    21300410: instTextFuel0
+    21300412: instTextFuel1
+    21300414: instTextFuel2
+    21300416: instTextLeftSide
+    21300418: instTextMove
+    21300420: instTextObjective0
+    21300422: instTextRightSide
+    21300424: instTextShield0
+    21300426: instTextShield1
+    21300428: instTextShield2
+    21300430: instTextShield3
+    21300432: instTextShield4
+    21300434: instTextShield5
+    21300436: instTextTractor0Mouse
+    21300438: instTextTractor0Pad
+    21300440: instTextTractor1
+    21300442: instTextTractor2
+    21300444: instTextTurn
+    21300446: instVirtualPad
+    21300448: previewFrameCorner
+    21300450: promptTextOverwriteProceed
+    21300452: binary2x2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -208,7 +256,7 @@ TextureImporter:
   textureFormat: -3
   maxTextureSize: 2048
   textureSettings:
-    filterMode: 0
+    filterMode: 1
     aniso: 16
     mipBias: -1
     wrapMode: 1
@@ -235,8 +283,8 @@ TextureImporter:
       name: backBlank
       rect:
         serializedVersion: 2
-        x: 1889
-        y: 1296
+        x: 1942
+        y: 288
         width: 74
         height: 74
       alignment: 0
@@ -248,8 +296,8 @@ TextureImporter:
       name: backHighlighted
       rect:
         serializedVersion: 2
-        x: 1889
-        y: 1221
+        x: 1633
+        y: 1698
         width: 74
         height: 74
       alignment: 0
@@ -261,8 +309,8 @@ TextureImporter:
       name: backNormalA
       rect:
         serializedVersion: 2
-        x: 1943
-        y: 610
+        x: 1635
+        y: 1623
         width: 74
         height: 74
       alignment: 0
@@ -274,8 +322,8 @@ TextureImporter:
       name: backNormalB
       rect:
         serializedVersion: 2
-        x: 1943
-        y: 535
+        x: 1969
+        y: 376
         width: 74
         height: 74
       alignment: 0
@@ -284,11 +332,37 @@ TextureImporter:
       outline: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: binary2x2
+      rect:
+        serializedVersion: 2
+        x: 1632
+        y: 97
+        width: 2
+        height: 2
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: binary3x3
+      rect:
+        serializedVersion: 2
+        x: 1425
+        y: 576
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 1, w: 1}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: buttonControls
       rect:
         serializedVersion: 2
-        x: 1105
-        y: 968
+        x: 1282
+        y: 1615
         width: 352
         height: 42
       alignment: 0
@@ -300,8 +374,8 @@ TextureImporter:
       name: buttonControlsHighlighted
       rect:
         serializedVersion: 2
-        x: 1458
-        y: 968
+        x: 1254
+        y: 1434
         width: 352
         height: 42
       alignment: 0
@@ -313,8 +387,8 @@ TextureImporter:
       name: buttonFrame
       rect:
         serializedVersion: 2
-        x: 1873
-        y: 1911
+        x: 1092
+        y: 222
         width: 136
         height: 136
       alignment: 0
@@ -326,8 +400,8 @@ TextureImporter:
       name: buttonHighlighted
       rect:
         serializedVersion: 2
-        x: 858
-        y: 414
+        x: 1701
+        y: 1796
         width: 108
         height: 108
       alignment: 0
@@ -339,8 +413,8 @@ TextureImporter:
       name: buttonNoHighlighted
       rect:
         serializedVersion: 2
-        x: 1717
-        y: 1371
+        x: 1282
+        y: 128
         width: 188
         height: 61
       alignment: 0
@@ -352,21 +426,8 @@ TextureImporter:
       name: buttonNormalA
       rect:
         serializedVersion: 2
-        x: 1795
-        y: 828
-        width: 108
-        height: 108
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: buttonNormalB
-      rect:
-        serializedVersion: 2
-        x: 1904
-        y: 828
+        x: 1580
+        y: 203
         width: 108
         height: 108
       alignment: 0
@@ -378,8 +439,8 @@ TextureImporter:
       name: buttonText1024x768
       rect:
         serializedVersion: 2
-        x: 1873
-        y: 1888
+        x: 1632
+        y: 72
         width: 159
         height: 22
       alignment: 0
@@ -391,8 +452,8 @@ TextureImporter:
       name: buttonText1152x864
       rect:
         serializedVersion: 2
-        x: 1549
-        y: 1275
+        x: 1894
+        y: 753
         width: 151
         height: 22
       alignment: 0
@@ -404,8 +465,8 @@ TextureImporter:
       name: buttonText1280x720
       rect:
         serializedVersion: 2
-        x: 1870
-        y: 1819
+        x: 1471
+        y: 77
         width: 160
         height: 22
       alignment: 0
@@ -417,8 +478,8 @@ TextureImporter:
       name: buttonText1280x960
       rect:
         serializedVersion: 2
-        x: 1870
-        y: 1865
+        x: 1471
+        y: 123
         width: 164
         height: 22
       alignment: 0
@@ -430,8 +491,8 @@ TextureImporter:
       name: buttonText1280x1024
       rect:
         serializedVersion: 2
-        x: 1648
-        y: 234
+        x: 1667
+        y: 164
         width: 172
         height: 22
       alignment: 0
@@ -443,8 +504,8 @@ TextureImporter:
       name: buttonText1360x768
       rect:
         serializedVersion: 2
-        x: 1870
-        y: 1796
+        x: 1636
+        y: 118
         width: 160
         height: 22
       alignment: 0
@@ -456,8 +517,8 @@ TextureImporter:
       name: buttonText1366x768
       rect:
         serializedVersion: 2
-        x: 1870
-        y: 1773
+        x: 1635
+        y: 95
         width: 160
         height: 22
       alignment: 0
@@ -469,8 +530,8 @@ TextureImporter:
       name: buttonText1600x900
       rect:
         serializedVersion: 2
-        x: 1828
-        y: 685
+        x: 1667
+        y: 141
         width: 167
         height: 22
       alignment: 0
@@ -482,22 +543,9 @@ TextureImporter:
       name: buttonText1920x1080
       rect:
         serializedVersion: 2
-        x: 1795
-        y: 768
+        x: 1825
+        y: 684
         width: 174
-        height: 22
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: buttonTextBack
-      rect:
-        serializedVersion: 2
-        x: 1943
-        y: 512
-        width: 78
         height: 22
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -508,8 +556,8 @@ TextureImporter:
       name: buttonTextBowling
       rect:
         serializedVersion: 2
-        x: 1326
-        y: 130
+        x: 1092
+        y: 199
         width: 135
         height: 22
       alignment: 0
@@ -521,8 +569,8 @@ TextureImporter:
       name: buttonTextBrightness
       rect:
         serializedVersion: 2
-        x: 1639
-        y: 671
+        x: 1851
+        y: 730
         width: 185
         height: 22
       alignment: 0
@@ -534,8 +582,8 @@ TextureImporter:
       name: buttonTextContinue
       rect:
         serializedVersion: 2
-        x: 1870
-        y: 1727
+        x: 1566
+        y: 26
         width: 146
         height: 22
       alignment: 0
@@ -547,8 +595,8 @@ TextureImporter:
       name: buttonTextControls
       rect:
         serializedVersion: 2
-        x: 1870
-        y: 1750
+        x: 1595
+        y: 49
         width: 157
         height: 22
       alignment: 0
@@ -560,8 +608,8 @@ TextureImporter:
       name: buttonTextCredits
       rect:
         serializedVersion: 2
-        x: 1326
-        y: 74
+        x: 1863
+        y: 497
         width: 121
         height: 22
       alignment: 0
@@ -573,8 +621,8 @@ TextureImporter:
       name: buttonTextCursor
       rect:
         serializedVersion: 2
-        x: 858
-        y: 391
+        x: 1863
+        y: 451
         width: 120
         height: 22
       alignment: 0
@@ -586,22 +634,9 @@ TextureImporter:
       name: buttonTextExtras
       rect:
         serializedVersion: 2
-        x: 1929
-        y: 279
+        x: 1850
+        y: 363
         width: 118
-        height: 22
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: buttonTextGallery
-      rect:
-        serializedVersion: 2
-        x: 1326
-        y: 153
-        width: 137
         height: 22
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -612,22 +647,9 @@ TextureImporter:
       name: buttonTextInstructions
       rect:
         serializedVersion: 2
-        x: 1339
-        y: 176
+        x: 1689
+        y: 187
         width: 214
-        height: 22
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: buttonTextMainMenu
-      rect:
-        serializedVersion: 2
-        x: 1828
-        y: 708
-        width: 170
         height: 22
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -638,8 +660,8 @@ TextureImporter:
       name: buttonTextMaster
       rect:
         serializedVersion: 2
-        x: 1464
-        y: 153
+        x: 1863
+        y: 543
         width: 123
         height: 22
       alignment: 0
@@ -651,8 +673,8 @@ TextureImporter:
       name: buttonTextMusic
       rect:
         serializedVersion: 2
-        x: 1105
-        y: 1153
+        x: 1590
+        y: 1077
         width: 89
         height: 22
       alignment: 0
@@ -664,8 +686,8 @@ TextureImporter:
       name: buttonTextNewGame
       rect:
         serializedVersion: 2
-        x: 1870
-        y: 1842
+        x: 1471
+        y: 100
         width: 163
         height: 22
       alignment: 0
@@ -677,8 +699,8 @@ TextureImporter:
       name: buttonTextNext
       rect:
         serializedVersion: 2
-        x: 1898
-        y: 1145
+        x: 1687
+        y: 1032
         width: 72
         height: 23
       alignment: 0
@@ -690,8 +712,8 @@ TextureImporter:
       name: buttonTextPlay
       rect:
         serializedVersion: 2
-        x: 1198
-        y: 1624
+        x: 1682
+        y: 1009
         width: 79
         height: 22
       alignment: 0
@@ -703,8 +725,8 @@ TextureImporter:
       name: buttonTextPrevious
       rect:
         serializedVersion: 2
-        x: 1870
-        y: 1702
+        x: 1855
+        y: 622
         width: 140
         height: 24
       alignment: 0
@@ -716,8 +738,8 @@ TextureImporter:
       name: buttonTextQuit
       rect:
         serializedVersion: 2
-        x: 1898
-        y: 1169
+        x: 1840
+        y: 158
         width: 66
         height: 28
       alignment: 0
@@ -729,8 +751,8 @@ TextureImporter:
       name: buttonTextResolution
       rect:
         serializedVersion: 2
-        x: 1177
-        y: 681
+        x: 1825
+        y: 707
         width: 185
         height: 22
       alignment: 0
@@ -742,8 +764,8 @@ TextureImporter:
       name: buttonTextResume
       rect:
         serializedVersion: 2
-        x: 1448
-        y: 84
+        x: 1863
+        y: 474
         width: 121
         height: 22
       alignment: 0
@@ -755,8 +777,8 @@ TextureImporter:
       name: buttonTextSettings
       rect:
         serializedVersion: 2
-        x: 1870
-        y: 1679
+        x: 1566
+        y: 3
         width: 142
         height: 22
       alignment: 0
@@ -768,8 +790,8 @@ TextureImporter:
       name: buttonTextSounds
       rect:
         serializedVersion: 2
-        x: 1443
-        y: 107
+        x: 1863
+        y: 520
         width: 123
         height: 22
       alignment: 0
@@ -781,8 +803,8 @@ TextureImporter:
       name: buttonTextTitle
       rect:
         serializedVersion: 2
-        x: 1943
-        y: 489
+        x: 1835
+        y: 135
         width: 78
         height: 22
       alignment: 0
@@ -794,8 +816,8 @@ TextureImporter:
       name: buttonTextTypeA
       rect:
         serializedVersion: 2
-        x: 1326
-        y: 97
+        x: 1885
+        y: 589
         width: 116
         height: 32
       alignment: 0
@@ -807,8 +829,8 @@ TextureImporter:
       name: buttonTextTypeB
       rect:
         serializedVersion: 2
-        x: 979
-        y: 384
+        x: 1935
+        y: 2015
         width: 112
         height: 32
       alignment: 0
@@ -820,8 +842,8 @@ TextureImporter:
       name: buttonTextVoice
       rect:
         serializedVersion: 2
-        x: 1881
-        y: 1198
+        x: 1590
+        y: 1054
         width: 87
         height: 22
       alignment: 0
@@ -833,8 +855,8 @@ TextureImporter:
       name: buttonTextVolume
       rect:
         serializedVersion: 2
-        x: 1462
-        y: 130
+        x: 1863
+        y: 566
         width: 126
         height: 22
       alignment: 0
@@ -846,8 +868,8 @@ TextureImporter:
       name: buttonYesHighlighted
       rect:
         serializedVersion: 2
-        x: 1639
-        y: 694
+        x: 1282
+        y: 66
         width: 188
         height: 61
       alignment: 0
@@ -859,8 +881,8 @@ TextureImporter:
       name: controlsHighlighted
       rect:
         serializedVersion: 2
-        x: 1648
-        y: 293
+        x: 1148
+        y: 547
         width: 280
         height: 28
       alignment: 0
@@ -872,8 +894,8 @@ TextureImporter:
       name: controlsKeyGlow
       rect:
         serializedVersion: 2
-        x: 1972
-        y: 787
+        x: 1907
+        y: 159
         width: 40
         height: 40
       alignment: 0
@@ -885,8 +907,8 @@ TextureImporter:
       name: controlsKeyGlowMono
       rect:
         serializedVersion: 2
-        x: 1991
-        y: 238
+        x: 1713
+        y: 8
         width: 40
         height: 40
       alignment: 0
@@ -898,8 +920,8 @@ TextureImporter:
       name: controlsKeys
       rect:
         serializedVersion: 2
-        x: 1955
-        y: 302
+        x: 1580
+        y: 146
         width: 86
         height: 56
       alignment: 0
@@ -911,8 +933,8 @@ TextureImporter:
       name: controlsKeysMono
       rect:
         serializedVersion: 2
-        x: 1448
-        y: 27
+        x: 1961
+        y: 231
         width: 86
         height: 56
       alignment: 0
@@ -924,8 +946,8 @@ TextureImporter:
       name: controlsPad0
       rect:
         serializedVersion: 2
-        x: 1870
-        y: 1614
+        x: 1229
+        y: 294
         width: 84
         height: 64
       alignment: 0
@@ -937,8 +959,8 @@ TextureImporter:
       name: controlsPad1
       rect:
         serializedVersion: 2
-        x: 1955
-        y: 1614
+        x: 1810
+        y: 1805
         width: 84
         height: 64
       alignment: 0
@@ -950,8 +972,8 @@ TextureImporter:
       name: controlsPad2
       rect:
         serializedVersion: 2
-        x: 1804
-        y: 1269
+        x: 1799
+        y: 386
         width: 84
         height: 64
       alignment: 0
@@ -963,8 +985,8 @@ TextureImporter:
       name: controlsPad3
       rect:
         serializedVersion: 2
-        x: 967
-        y: 417
+        x: 1884
+        y: 386
         width: 84
         height: 64
       alignment: 0
@@ -976,8 +998,8 @@ TextureImporter:
       name: controlsPad4
       rect:
         serializedVersion: 2
-        x: 1535
-        y: 19
+        x: 1579
+        y: 945
         width: 84
         height: 64
       alignment: 0
@@ -989,8 +1011,8 @@ TextureImporter:
       name: controlsPad5
       rect:
         serializedVersion: 2
-        x: 1821
-        y: 192
+        x: 1579
+        y: 880
         width: 84
         height: 64
       alignment: 0
@@ -1002,8 +1024,8 @@ TextureImporter:
       name: controlsPadMono0
       rect:
         serializedVersion: 2
-        x: 1906
-        y: 214
+        x: 1664
+        y: 944
         width: 84
         height: 64
       alignment: 0
@@ -1015,8 +1037,8 @@ TextureImporter:
       name: controlsPadMono1
       rect:
         serializedVersion: 2
-        x: 1906
-        y: 149
+        x: 1664
+        y: 879
         width: 84
         height: 64
       alignment: 0
@@ -1028,8 +1050,8 @@ TextureImporter:
       name: controlsPadMono2
       rect:
         serializedVersion: 2
-        x: 1315
-        y: 9
+        x: 1954
+        y: 166
         width: 84
         height: 64
       alignment: 0
@@ -1041,8 +1063,8 @@ TextureImporter:
       name: controlsPadMono3
       rect:
         serializedVersion: 2
-        x: 1620
-        y: 169
+        x: 1797
+        y: 70
         width: 84
         height: 64
       alignment: 0
@@ -1054,8 +1076,8 @@ TextureImporter:
       name: controlsPadMono4
       rect:
         serializedVersion: 2
-        x: 1705
-        y: 169
+        x: 1882
+        y: 70
         width: 84
         height: 64
       alignment: 0
@@ -1067,8 +1089,8 @@ TextureImporter:
       name: controlsPadMono5
       rect:
         serializedVersion: 2
-        x: 1620
-        y: 104
+        x: 1754
+        y: 5
         width: 84
         height: 64
       alignment: 0
@@ -1080,8 +1102,8 @@ TextureImporter:
       name: controlsPlayer
       rect:
         serializedVersion: 2
-        x: 1639
-        y: 756
+        x: 1684
+        y: 1056
         width: 77
         height: 174
       alignment: 0
@@ -1093,8 +1115,8 @@ TextureImporter:
       name: controlsPlayerMono
       rect:
         serializedVersion: 2
-        x: 1717
-        y: 756
+        x: 1580
+        y: 312
         width: 77
         height: 174
       alignment: 0
@@ -1106,21 +1128,21 @@ TextureImporter:
       name: controlsScreen
       rect:
         serializedVersion: 2
-        x: 1282
-        y: 85
-        width: 43
-        height: 94
+        x: 1425
+        y: 580
+        width: 45
+        height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 21, y: 74, z: 21, w: 19}
+      border: {x: 22, y: 75, z: 22, w: 20}
       outline: []
       tessellationDetail: -1
     - serializedVersion: 2
       name: cursor1Blue
       rect:
         serializedVersion: 2
-        x: 1991
-        y: 205
+        x: 1429
+        y: 547
         width: 32
         height: 32
       alignment: 0
@@ -1132,8 +1154,8 @@ TextureImporter:
       name: cursor1Green
       rect:
         serializedVersion: 2
-        x: 1967
-        y: 1529
+        x: 1462
+        y: 547
         width: 32
         height: 32
       alignment: 0
@@ -1145,8 +1167,8 @@ TextureImporter:
       name: cursor1Red
       rect:
         serializedVersion: 2
-        x: 1991
-        y: 172
+        x: 1839
+        y: 37
         width: 32
         height: 32
       alignment: 0
@@ -1158,8 +1180,8 @@ TextureImporter:
       name: cursor1Yellow
       rect:
         serializedVersion: 2
-        x: 1967
-        y: 1496
+        x: 1872
+        y: 37
         width: 32
         height: 32
       alignment: 0
@@ -1171,8 +1193,8 @@ TextureImporter:
       name: cursor2Blue
       rect:
         serializedVersion: 2
-        x: 1967
-        y: 1463
+        x: 1905
+        y: 37
         width: 32
         height: 32
       alignment: 0
@@ -1184,8 +1206,8 @@ TextureImporter:
       name: cursor2Green
       rect:
         serializedVersion: 2
-        x: 1967
-        y: 1430
+        x: 1839
+        y: 4
         width: 32
         height: 32
       alignment: 0
@@ -1197,8 +1219,8 @@ TextureImporter:
       name: cursor2Purple
       rect:
         serializedVersion: 2
-        x: 1967
-        y: 1397
+        x: 1872
+        y: 4
         width: 32
         height: 32
       alignment: 0
@@ -1210,8 +1232,8 @@ TextureImporter:
       name: cursor2Red
       rect:
         serializedVersion: 2
-        x: 1967
-        y: 1364
+        x: 1905
+        y: 4
         width: 32
         height: 32
       alignment: 0
@@ -1223,8 +1245,8 @@ TextureImporter:
       name: cursor3Blue
       rect:
         serializedVersion: 2
-        x: 1967
-        y: 1331
+        x: 1938
+        y: 37
         width: 32
         height: 32
       alignment: 0
@@ -1236,8 +1258,8 @@ TextureImporter:
       name: cursor3BlueInvert
       rect:
         serializedVersion: 2
-        x: 1967
-        y: 1298
+        x: 1938
+        y: 4
         width: 32
         height: 32
       alignment: 0
@@ -1249,8 +1271,8 @@ TextureImporter:
       name: cursor3Green
       rect:
         serializedVersion: 2
-        x: 1967
-        y: 1265
+        x: 1827
+        y: 546
         width: 32
         height: 32
       alignment: 0
@@ -1262,8 +1284,8 @@ TextureImporter:
       name: cursor3Purple
       rect:
         serializedVersion: 2
-        x: 1282
-        y: 52
+        x: 1680
+        y: 1590
         width: 32
         height: 32
       alignment: 0
@@ -1275,8 +1297,8 @@ TextureImporter:
       name: cursor3Red
       rect:
         serializedVersion: 2
-        x: 1400
-        y: 41
+        x: 1672
+        y: 1557
         width: 32
         height: 32
       alignment: 0
@@ -1288,8 +1310,8 @@ TextureImporter:
       name: cursor3Yellow
       rect:
         serializedVersion: 2
-        x: 2000
-        y: 1529
+        x: 1799
+        y: 454
         width: 32
         height: 32
       alignment: 0
@@ -1301,8 +1323,8 @@ TextureImporter:
       name: cursorGlowCenter
       rect:
         serializedVersion: 2
-        x: 1198
-        y: 1271
+        x: 1282
+        y: 1721
         width: 350
         height: 100
       alignment: 0
@@ -1327,8 +1349,8 @@ TextureImporter:
       name: cursorHighlighted
       rect:
         serializedVersion: 2
-        x: 1800
-        y: 1188
+        x: 1861
+        y: 282
         width: 80
         height: 80
       alignment: 0
@@ -1340,23 +1362,10 @@ TextureImporter:
       name: displayFrameBottom
       rect:
         serializedVersion: 2
-        x: 1092
-        y: 180
+        x: 1580
+        y: 552
         width: 246
         height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: displayFrameButtonHighlighted
-      rect:
-        serializedVersion: 2
-        x: 1651
-        y: 1470
-        width: 312
-        height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1366,10 +1375,10 @@ TextureImporter:
       name: displayFrameButtonNormal
       rect:
         serializedVersion: 2
-        x: 1198
-        y: 1142
-        width: 312
-        height: 128
+        x: 1148
+        y: 576
+        width: 276
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1379,8 +1388,8 @@ TextureImporter:
       name: displayFrameLeft
       rect:
         serializedVersion: 2
-        x: 777
-        y: 395
+        x: 1499
+        y: 146
         width: 80
         height: 530
       alignment: 0
@@ -1392,8 +1401,8 @@ TextureImporter:
       name: displayFrameTop
       rect:
         serializedVersion: 2
-        x: 1282
-        y: 1614
+        x: 1
+        y: 1
         width: 541
         height: 49
       alignment: 0
@@ -1405,8 +1414,8 @@ TextureImporter:
       name: displayScan
       rect:
         serializedVersion: 2
-        x: 1198
-        y: 1599
+        x: 777
+        y: 963
         width: 780
         height: 14
       alignment: 0
@@ -1415,52 +1424,26 @@ TextureImporter:
       outline: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: displaySideClip-15
+      name: displaySideClip
       rect:
         serializedVersion: 2
-        x: 1366
-        y: 798
-        width: 272
-        height: 132
+        x: 1229
+        y: 227
+        width: 264
+        height: 66
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: displaySideClip15
+      name: displaySideLock
       rect:
         serializedVersion: 2
-        x: 1366
-        y: 665
-        width: 272
-        height: 132
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: displaySideLock-15
-      rect:
-        serializedVersion: 2
-        x: 1367
-        y: 256
+        x: 1544
+        y: 683
         width: 280
-        height: 102
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: displaySideLock15
-      rect:
-        serializedVersion: 2
-        x: 1092
-        y: 244
-        width: 274
-        height: 114
+        height: 48
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1471,7 +1454,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 99
+        y: 97
         width: 1280
         height: 80
       alignment: 0
@@ -1483,9 +1466,9 @@ TextureImporter:
       name: footerUnit
       rect:
         serializedVersion: 2
-        x: 1198
-        y: 1448
-        width: 452
+        x: 1108
+        y: 396
+        width: 226
         height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1497,7 +1480,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 53
+        y: 51
         width: 1280
         height: 45
       alignment: 0
@@ -1509,8 +1492,8 @@ TextureImporter:
       name: headerDot
       rect:
         serializedVersion: 2
-        x: 1876
-        y: 263
+        x: 1732
+        y: 1232
         width: 29
         height: 29
       alignment: 0
@@ -1522,8 +1505,8 @@ TextureImporter:
       name: headerFrameBack
       rect:
         serializedVersion: 2
-        x: 1511
-        y: 1142
+        x: 1255
+        y: 677
         width: 288
         height: 128
       alignment: 0
@@ -1535,8 +1518,8 @@ TextureImporter:
       name: headerFrameBar
       rect:
         serializedVersion: 2
-        x: 1
-        y: 13
+        x: 543
+        y: 11
         width: 1022
         height: 39
       alignment: 0
@@ -1548,8 +1531,8 @@ TextureImporter:
       name: headerGlow
       rect:
         serializedVersion: 2
-        x: 1198
-        y: 1372
+        x: 1352
+        y: 1953
         width: 518
         height: 75
       alignment: 0
@@ -1561,8 +1544,8 @@ TextureImporter:
       name: headerTextBowling
       rect:
         serializedVersion: 2
-        x: 1811
-        y: 937
+        x: 1658
+        y: 349
         width: 191
         height: 36
       alignment: 0
@@ -1574,8 +1557,8 @@ TextureImporter:
       name: headerTextBrightness
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 16
+        x: 1580
+        y: 646
         width: 250
         height: 36
       alignment: 0
@@ -1587,8 +1570,8 @@ TextureImporter:
       name: headerTextControls
       rect:
         serializedVersion: 2
-        x: 1717
-        y: 1433
+        x: 1108
+        y: 359
         width: 224
         height: 36
       alignment: 0
@@ -1600,8 +1583,8 @@ TextureImporter:
       name: headerTextCredits
       rect:
         serializedVersion: 2
-        x: 1828
-        y: 731
+        x: 1689
+        y: 275
         width: 171
         height: 36
       alignment: 0
@@ -1613,8 +1596,8 @@ TextureImporter:
       name: headerTextCursorSelect
       rect:
         serializedVersion: 2
-        x: 1440
-        y: 931
+        x: 1579
+        y: 821
         width: 331
         height: 36
       alignment: 0
@@ -1626,35 +1609,9 @@ TextureImporter:
       name: headerTextExtras
       rect:
         serializedVersion: 2
-        x: 1549
-        y: 1298
+        x: 1894
+        y: 776
         width: 153
-        height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: headerTextGallery
-      rect:
-        serializedVersion: 2
-        x: 1795
-        y: 791
-        width: 176
-        height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: headerTextHorizonsPull
-      rect:
-        serializedVersion: 2
-        x: 1105
-        y: 931
-        width: 334
         height: 36
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1665,8 +1622,8 @@ TextureImporter:
       name: headerTextInstructions
       rect:
         serializedVersion: 2
-        x: 1648
-        y: 322
+        x: 1544
+        y: 732
         width: 306
         height: 36
       alignment: 0
@@ -1678,8 +1635,8 @@ TextureImporter:
       name: headerTextMainMenu
       rect:
         serializedVersion: 2
-        x: 1648
-        y: 257
+        x: 1580
+        y: 516
         width: 227
         height: 35
       alignment: 0
@@ -1691,8 +1648,8 @@ TextureImporter:
       name: headerTextPaused
       rect:
         serializedVersion: 2
-        x: 1549
-        y: 1335
+        x: 1831
+        y: 647
         width: 156
         height: 36
       alignment: 0
@@ -1704,8 +1661,8 @@ TextureImporter:
       name: headerTextPlay
       rect:
         serializedVersion: 2
-        x: 1800
-        y: 1152
+        x: 1863
+        y: 246
         width: 97
         height: 35
       alignment: 0
@@ -1717,8 +1674,8 @@ TextureImporter:
       name: headerTextResolution
       rect:
         serializedVersion: 2
-        x: 1092
-        y: 207
+        x: 1229
+        y: 190
         width: 259
         height: 36
       alignment: 0
@@ -1730,8 +1687,8 @@ TextureImporter:
       name: headerTextSettings
       rect:
         serializedVersion: 2
-        x: 1811
-        y: 974
+        x: 1658
+        y: 312
         width: 202
         height: 36
       alignment: 0
@@ -1743,10 +1700,556 @@ TextureImporter:
       name: headerTextVolume
       rect:
         serializedVersion: 2
-        x: 1706
-        y: 1334
+        x: 1689
+        y: 238
         width: 173
         height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: inst2WayArrow
+      rect:
+        serializedVersion: 2
+        x: 1979
+        y: 1455
+        width: 40
+        height: 156
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instHeaderFuel
+      rect:
+        serializedVersion: 2
+        x: 1948
+        y: 139
+        width: 85
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instHeaderLevelObjective
+      rect:
+        serializedVersion: 2
+        x: 1579
+        y: 795
+        width: 307
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instHeaderLine
+      rect:
+        serializedVersion: 2
+        x: 1758
+        y: 1298
+        width: 3
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 0, z: 1, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instHeaderPlayerMovement
+      rect:
+        serializedVersion: 2
+        x: 1544
+        y: 769
+        width: 349
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instHeaderShield
+      rect:
+        serializedVersion: 2
+        x: 1471
+        y: 51
+        width: 123
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instHeaderTractorBeam
+      rect:
+        serializedVersion: 2
+        x: 1580
+        y: 619
+        width: 274
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instHeaderTypeA
+      rect:
+        serializedVersion: 2
+        x: 1582
+        y: 1032
+        width: 104
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instHeaderTypeB
+      rect:
+        serializedVersion: 2
+        x: 1579
+        y: 1010
+        width: 102
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instIllustFuelCrystal
+      rect:
+        serializedVersion: 2
+        x: 1658
+        y: 386
+        width: 140
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instIllustFuelLevel
+      rect:
+        serializedVersion: 2
+        x: 1282
+        y: 1822
+        width: 418
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instIllustShield
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 552
+        width: 370
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instIllustTractorActivate
+      rect:
+        serializedVersion: 2
+        x: 1298
+        y: 806
+        width: 280
+        height: 156
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instIllustTractorGrab
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 395
+        width: 330
+        height: 156
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instKeyA
+      rect:
+        serializedVersion: 2
+        x: 1908
+        y: 200
+        width: 45
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instKeyAp
+      rect:
+        serializedVersion: 2
+        x: 1979
+        y: 1344
+        width: 45
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instKeyD
+      rect:
+        serializedVersion: 2
+        x: 1989
+        y: 1298
+        width: 45
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instKeyDp
+      rect:
+        serializedVersion: 2
+        x: 1989
+        y: 1252
+        width: 45
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instKeyS
+      rect:
+        serializedVersion: 2
+        x: 1989
+        y: 1206
+        width: 45
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instKeySp
+      rect:
+        serializedVersion: 2
+        x: 1989
+        y: 1160
+        width: 45
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instKeyW
+      rect:
+        serializedVersion: 2
+        x: 1989
+        y: 1114
+        width: 45
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instKeyWp
+      rect:
+        serializedVersion: 2
+        x: 1989
+        y: 1068
+        width: 45
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instTextChange
+      rect:
+        serializedVersion: 2
+        x: 1580
+        y: 598
+        width: 304
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instTextFuel0
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 1566
+        width: 417
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instTextFuel1
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 1502
+        width: 387
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instTextFuel2
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 1075
+        width: 812
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instTextLeftSide
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 978
+        width: 771
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instTextMove
+      rect:
+        serializedVersion: 2
+        x: 1457
+        y: 1414
+        width: 76
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instTextObjective0
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 1051
+        width: 804
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instTextRightSide
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 1026
+        width: 792
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instTextShield0
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 1590
+        width: 425
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instTextShield1
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 1477
+        width: 374
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instTextShield2
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 1546
+        width: 403
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instTextShield3
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 1526
+        width: 397
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instTextShield4
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 1002
+        width: 776
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instTextShield5
+      rect:
+        serializedVersion: 2
+        x: 1352
+        y: 1929
+        width: 460
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instTextTractor0Mouse
+      rect:
+        serializedVersion: 2
+        x: 1352
+        y: 2029
+        width: 582
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instTextTractor0Pad
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 1414
+        width: 202
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instTextTractor1
+      rect:
+        serializedVersion: 2
+        x: 1580
+        y: 579
+        width: 282
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instTextTractor2
+      rect:
+        serializedVersion: 2
+        x: 1352
+        y: 1905
+        width: 436
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instTextTurn
+      rect:
+        serializedVersion: 2
+        x: 1534
+        y: 1414
+        width: 71
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: instVirtualPad
+      rect:
+        serializedVersion: 2
+        x: 1813
+        y: 1870
+        width: 82
+        height: 82
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1783,9 +2286,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 180
+        y: 178
         width: 1090
-        height: 198
+        height: 200
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 119, z: 0, w: 80}
@@ -1795,8 +2298,8 @@ TextureImporter:
       name: panelBrightness
       rect:
         serializedVersion: 2
-        x: 1105
-        y: 1011
+        x: 777
+        y: 1100
         width: 906
         height: 130
       alignment: 0
@@ -1808,10 +2311,10 @@ TextureImporter:
       name: panelClipA
       rect:
         serializedVersion: 2
-        x: 1177
-        y: 704
-        width: 188
-        height: 226
+        x: 1926
+        y: 1038
+        width: 62
+        height: 292
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1821,10 +2324,10 @@ TextureImporter:
       name: panelClipB
       rect:
         serializedVersion: 2
-        x: 988
-        y: 684
-        width: 188
-        height: 241
+        x: 1896
+        y: 1331
+        width: 82
+        height: 280
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1834,8 +2337,8 @@ TextureImporter:
       name: panelPrompt
       rect:
         serializedVersion: 2
-        x: 1282
-        y: 1664
+        x: 777
+        y: 1414
         width: 476
         height: 232
       alignment: 0
@@ -1847,23 +2350,36 @@ TextureImporter:
       name: panelShadow
       rect:
         serializedVersion: 2
-        x: 1964
-        y: 1248
-        width: 2
-        height: 350
+        x: 2026
+        y: 1909
+        width: 3
+        height: 105
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 1, y: 52, z: 1, w: 52}
       outline: []
       tessellationDetail: -1
     - serializedVersion: 2
       name: previewFrameBottom
       rect:
         serializedVersion: 2
-        x: 988
-        y: 482
+        x: 777
+        y: 1231
         width: 954
         height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: previewFrameCorner
+      rect:
+        serializedVersion: 2
+        x: 1335
+        y: 294
+        width: 163
+        height: 252
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1873,10 +2389,10 @@ TextureImporter:
       name: previewFrameLeft
       rect:
         serializedVersion: 2
-        x: 777
-        y: 926
+        x: 1732
+        y: 1327
         width: 163
-        height: 720
+        height: 468
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1886,10 +2402,10 @@ TextureImporter:
       name: previewFrameRight
       rect:
         serializedVersion: 2
-        x: 941
-        y: 926
+        x: 1762
+        y: 858
         width: 163
-        height: 720
+        height: 468
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1899,9 +2415,9 @@ TextureImporter:
       name: previewFrameTop
       rect:
         serializedVersion: 2
-        x: 1092
-        y: 359
-        width: 954
+        x: 777
+        y: 689
+        width: 477
         height: 122
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1938,8 +2454,8 @@ TextureImporter:
       name: previewGlare
       rect:
         serializedVersion: 2
-        x: 1352
-        y: 1897
+        x: 777
+        y: 812
         width: 520
         height: 150
       alignment: 0
@@ -1951,8 +2467,8 @@ TextureImporter:
       name: previewLock
       rect:
         serializedVersion: 2
-        x: 858
-        y: 523
+        x: 1896
+        y: 1612
         width: 129
         height: 402
       alignment: 0
@@ -1964,21 +2480,21 @@ TextureImporter:
       name: promptCountdown
       rect:
         serializedVersion: 2
-        x: 1363
-        y: 691
-        width: 2
+        x: 1680
+        y: 1087
+        width: 3
         height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 1, y: 0, z: 1, w: 0}
       outline: []
       tessellationDetail: -1
     - serializedVersion: 2
       name: promptCountdownTip
       rect:
         serializedVersion: 2
-        x: 1772
-        y: 939
+        x: 1989
+        y: 1039
         width: 28
         height: 28
       alignment: 0
@@ -1990,8 +2506,8 @@ TextureImporter:
       name: promptTextAreYouSure
       rect:
         serializedVersion: 2
-        x: 1352
-        y: 199
+        x: 1689
+        y: 210
         width: 218
         height: 27
       alignment: 0
@@ -2003,8 +2519,8 @@ TextureImporter:
       name: promptTextKeepChanges
       rect:
         serializedVersion: 2
-        x: 1367
-        y: 227
+        x: 1580
+        y: 487
         width: 234
         height: 28
       alignment: 0
@@ -2013,13 +2529,13 @@ TextureImporter:
       outline: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: sideRail
+      name: promptTextOverwriteProceed
       rect:
         serializedVersion: 2
-        x: 1105
-        y: 1176
-        width: 92
-        height: 470
+        x: 1282
+        y: 1658
+        width: 332
+        height: 62
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2029,34 +2545,34 @@ TextureImporter:
       name: sliderHBody
       rect:
         serializedVersion: 2
-        x: 1801
-        y: 953
-        width: 9
+        x: 1570
+        y: 1036
+        width: 11
         height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 0, z: 4, w: 0}
+      border: {x: 5, y: 0, z: 5, w: 0}
       outline: []
       tessellationDetail: -1
     - serializedVersion: 2
       name: sliderHBodyFill
       rect:
         serializedVersion: 2
-        x: 1801
-        y: 938
-        width: 9
+        x: 1282
+        y: 51
+        width: 11
         height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 0, z: 4, w: 0}
+      border: {x: 5, y: 0, z: 5, w: 0}
       outline: []
       tessellationDetail: -1
     - serializedVersion: 2
       name: sliderHKnobHighlighted
       rect:
         serializedVersion: 2
-        x: 1052
-        y: 417
+        x: 1732
+        y: 1262
         width: 25
         height: 64
       alignment: 0
@@ -2068,8 +2584,8 @@ TextureImporter:
       name: sliderHKnobNormal
       rect:
         serializedVersion: 2
-        x: 2010
-        y: 1983
+        x: 1979
+        y: 1390
         width: 25
         height: 64
       alignment: 0
@@ -2081,34 +2597,34 @@ TextureImporter:
       name: sliderVBody
       rect:
         serializedVersion: 2
-        x: 1795
-        y: 756
+        x: 1282
+        y: 1905
         width: 14
-        height: 11
+        height: 13
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 5, z: 0, w: 5}
+      border: {x: 0, y: 6, z: 0, w: 6}
       outline: []
       tessellationDetail: -1
     - serializedVersion: 2
       name: sliderVBodyFill
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
+        x: 1297
+        y: 1905
         width: 14
-        height: 11
+        height: 13
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 5, z: 0, w: 5}
+      border: {x: 0, y: 6, z: 0, w: 6}
       outline: []
       tessellationDetail: -1
     - serializedVersion: 2
       name: sliderVDecoration
       rect:
         serializedVersion: 2
-        x: 1759
-        y: 1672
+        x: 1926
+        y: 813
         width: 110
         height: 224
       alignment: 0
@@ -2120,8 +2636,8 @@ TextureImporter:
       name: sliderVKnobHighlighted
       rect:
         serializedVersion: 2
-        x: 1979
-        y: 1588
+        x: 1967
+        y: 113
         width: 64
         height: 25
       alignment: 0
@@ -2134,7 +2650,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1967
-        y: 1562
+        y: 87
         width: 64
         height: 25
       alignment: 0
@@ -2146,8 +2662,8 @@ TextureImporter:
       name: toggleChecked
       rect:
         serializedVersion: 2
-        x: 1703
-        y: 1271
+        x: 1607
+        y: 1414
         width: 100
         height: 62
       alignment: 0
@@ -2159,8 +2675,8 @@ TextureImporter:
       name: toggleFrame
       rect:
         serializedVersion: 2
-        x: 1906
-        y: 1384
+        x: 1633
+        y: 1773
         width: 48
         height: 48
       alignment: 0
@@ -2172,8 +2688,8 @@ TextureImporter:
       name: toggleHighlighted
       rect:
         serializedVersion: 2
-        x: 2000
-        y: 1496
+        x: 2011
+        y: 697
         width: 32
         height: 32
       alignment: 0
@@ -2185,8 +2701,8 @@ TextureImporter:
       name: toggleNormal
       rect:
         serializedVersion: 2
-        x: 2000
-        y: 1463
+        x: 1971
+        y: 54
         width: 32
         height: 32
       alignment: 0
