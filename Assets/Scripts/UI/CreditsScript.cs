@@ -22,6 +22,7 @@ public class CreditsScript : MonoBehaviour {
 		mainMenuHeader.SetActive (false);
 		//yield return null;
 	}
+	//This is for the back button in the credits scene
 	public void changeScene(string sceneName)
 	{
 		SceneManager.LoadScene (sceneName);
