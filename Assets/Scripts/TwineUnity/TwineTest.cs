@@ -56,7 +56,6 @@ public class TwineTest : MonoBehaviour {
         PassageText = CurrentPassage.GetContent();
         _currentlyTyping = true;
         AlternateEndVisited = true;
-        TDialogue.SetCurrentPassage(CurrentPassage);
     }
 
 	void Start () {
@@ -65,7 +64,6 @@ public class TwineTest : MonoBehaviour {
         //BranchData.Singleton.EnemiesKilled = 5; //Testing the alternate beginning.
 		CurrentPassage = AlternateStarts.Count > 0 && BranchData.Singleton.EnemiesKilled >= EnemiesKilledThreshhold ?
                             AlternateStarts[0] : TDialogue.StartPassage;
-        TDialogue.SetCurrentPassage(CurrentPassage);
 		PassageText = CurrentPassage.GetContent();
 		_currentlyTyping = true;
 		_activatedCoRoutine = false;
