@@ -23,6 +23,7 @@ public class TwineTest : MonoBehaviour {
     public float AlternateEndDelayTime = 3;
 
     public string GameOverTag = "GameOver";
+    public string LoadTag = "Load";
 	//The audio source for the voice over
 	public AudioSource voiceOverAudioSource;
 	//The beeping audioSource
@@ -125,17 +126,10 @@ public class TwineTest : MonoBehaviour {
 		}
 		if (Choices.Count <= 0)
 		{
-            if (CurrentPassage.GetTags().Contains(GameOverTag))
-            {
-                //TODO: IMPLEMENT GAME OVER SEQUENCE.
-            }
-            else
-            {
-                ContinueButton = (Button)Instantiate(ChoiceButtonPrefab, ChoicePanel, false);
-                ContinueButton.GetComponentInChildren<Text>().text = ContinueText;
-                ContinueButton.GetComponent<ChoiceButton>().tt = this;
-                ContinueButton.tag = "FirstButtonOfMenu";
-            }
+            ContinueButton = (Button)Instantiate(ChoiceButtonPrefab, ChoicePanel, false);
+            ContinueButton.GetComponentInChildren<Text>().text = ContinueText;
+            ContinueButton.GetComponent<ChoiceButton>().tt = this;
+            ContinueButton.tag = "FirstButtonOfMenu";
 		}
 	}
 	public void ChoiceSelect(string choiceContent)
@@ -176,6 +170,23 @@ public class TwineTest : MonoBehaviour {
             }
             else
             {
+                print("T1");
+                List<string> tags = CurrentPassage.GetTags();
+                if (tags.Contains(LoadTag))
+                {
+                    print("T2");
+                    tags.Remove(LoadTag);
+                    if (tags.Count == 1)
+                    {
+                        print("T3");
+                        NextScene = tags[0];
+                    }
+                }
+                else if (tags.Contains(GameOverTag))
+                {
+                    //TODO: SET NEXTSCENE TO THE GAMEOVER SCENE
+                }
+                print("T4");
                 SceneManager.LoadScene(NextScene);
             }
 		}
