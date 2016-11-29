@@ -23,11 +23,14 @@ public class TwineTest : MonoBehaviour {
     public float AlternateEndDelayTime = 3;
 
     public string GameOverTag = "GameOver";
-	//The beeing audioSource
+	//The audio source for the voice over
+	public AudioSource voiceOverAudioSource;
+	//The beeping audioSource
 	public AudioSource typingBeepAudioSource;
 	//bool so only one thread is active during a passage
 	private bool _activatedCoRoutine;
 	//number of seconds coroutine waits until it plays the beep again
+
 	public float beepSecWait;
 	[HideInInspector]
 	public string PassageText;
@@ -78,6 +81,7 @@ public class TwineTest : MonoBehaviour {
 			if (!_activatedCoRoutine) 
 			{
 				StartCoroutine (TypingBeep (beepSecWait));
+				voiceOverAudioSource.Play ();
 				_activatedCoRoutine = true;
 			}
 			string currentText = PassageTextDisplay.text;

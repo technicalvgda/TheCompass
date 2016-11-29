@@ -816,7 +816,8 @@ MonoBehaviour:
   EnemiesKilledThreshhold: 5
   AlternateEndDelayTime: 3
   GameOverTag: GameOver
-  audioSource: {fileID: 1577089050}
+  voiceOverAudioSource: {fileID: 1577089048}
+  typingBeepAudioSource: {fileID: 1577089050}
   beepSecWait: 0.08
   PassageText: 
   Choices: []
@@ -934,6 +935,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1577089048}
+  audioClips:
+  - {fileID: 8300000, guid: 0a44109042dc85241acd3b6c3d13e302, type: 3}
+  - {fileID: 8300000, guid: 0a44109042dc85241acd3b6c3d13e302, type: 3}
+  - {fileID: 8300000, guid: 0a44109042dc85241acd3b6c3d13e302, type: 3}
+  - {fileID: 8300000, guid: 0a44109042dc85241acd3b6c3d13e302, type: 3}
+  - {fileID: 8300000, guid: 0a44109042dc85241acd3b6c3d13e302, type: 3}
+  - {fileID: 8300000, guid: 0a44109042dc85241acd3b6c3d13e302, type: 3}
+  - {fileID: 8300000, guid: 0a44109042dc85241acd3b6c3d13e302, type: 3}
+  - {fileID: 8300000, guid: 0a44109042dc85241acd3b6c3d13e302, type: 3}
+  - {fileID: 8300000, guid: 0a44109042dc85241acd3b6c3d13e302, type: 3}
+  - {fileID: 8300000, guid: 0a44109042dc85241acd3b6c3d13e302, type: 3}
+  - {fileID: 8300000, guid: 0a44109042dc85241acd3b6c3d13e302, type: 3}
+  - {fileID: 8300000, guid: 0a44109042dc85241acd3b6c3d13e302, type: 3}
+  - {fileID: 8300000, guid: 0a44109042dc85241acd3b6c3d13e302, type: 3}
+  - {fileID: 8300000, guid: 0a44109042dc85241acd3b6c3d13e302, type: 3}
+  - {fileID: 8300000, guid: 0a44109042dc85241acd3b6c3d13e302, type: 3}
+  - {fileID: 8300000, guid: 0a44109042dc85241acd3b6c3d13e302, type: 3}
+  - {fileID: 8300000, guid: 0a44109042dc85241acd3b6c3d13e302, type: 3}
+  - {fileID: 8300000, guid: 0a44109042dc85241acd3b6c3d13e302, type: 3}
+  - {fileID: 8300000, guid: 0a44109042dc85241acd3b6c3d13e302, type: 3}
 --- !u!82 &1577089050
 AudioSource:
   m_ObjectHideFlags: 0

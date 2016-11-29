@@ -9,11 +9,12 @@ public class AudioEventHandler : MonoBehaviour {
 	private PassageNode _node;
 	private int _pid;
 	private AudioClip _clip;
-	Dictionary<int, AudioClip> Passage;
+	public AudioClip[] audioClips;
+	//Dictionary<int, AudioClip> Passage;
 	// Use this for initialization
 	void Start()
 	{
-		Passage = new Dictionary<int, AudioClip>();
+		//Passage = new Dictionary<int, AudioClip>();
 	}
 	void OnEnable () {
 		TwineDialogue.OnChange += GetAndPlayAudio;
@@ -25,7 +26,8 @@ public class AudioEventHandler : MonoBehaviour {
 	{
 		_node = TwineDialogue.Singleton.CurrentPassage;
 		_pid = _node.GetID ();
-		Passage.TryGetValue (_pid, out _clip);
-		audioSource.clip = _clip;
+		Debug.Log ("PID: " + _pid);
+		//Passage.TryGetValue (_pid, out _clip);
+		audioSource.clip = audioClips[_pid];
 	}
 }
