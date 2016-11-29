@@ -44,6 +44,7 @@ public class Player : MonoBehaviour {
 	private float _enginePower = 0.0f;
 	const float MAX_ENGINE_POWER = 40.0f;
 	const float LINEAR_ENGINE_POWER_COEFFICIENT = 15.0f;
+    const float FUEL_LOSS_VARIABLE = 0.75f;
 
     public float nebulaMultiplier = 1.0f;
     public float tractorSlow = 0;
@@ -73,6 +74,7 @@ public class Player : MonoBehaviour {
 	//handles player movement for cutscenes
 	private Vector2 _playerDestination = new Vector2 (0, 0);
 	private bool _disablePlayerControl = false;
+    private bool _disableFuelLoss = false;
 
 	//Values for boundary dimensions
 	public int maxXBoundary = 0;
@@ -390,21 +392,25 @@ public class Player : MonoBehaviour {
         }
     }
 
+    public void DisableFuelLoss()
+    {
+        _disableFuelLoss = true;
+    }
     //function that decreases the Player's fuel
     //decreases faster when moving
      void LoseFuel()
      {
         //skip fuel loss if this is the bowling scene
-        if (SceneManager.GetActiveScene().name == "Bowling")
+        if (SceneManager.GetActiveScene().name == "Bowling" || _disableFuelLoss == true)
         { return; }
 
         if (rb2d.velocity.magnitude < 2)
         {
-            currentFuel -= Time.deltaTime;
+            currentFuel -= Time.deltaTime * FUEL_LOSS_VARIABLE;
         }
         else
         {
-            currentFuel -= Time.deltaTime*1.5f;
+            currentFuel -= Time.deltaTime*1.5f * FUEL_LOSS_VARIABLE;
         }
         //if fuel is less than 40%
         if(currentFuel < (MAX_FUEL*0.4f))
