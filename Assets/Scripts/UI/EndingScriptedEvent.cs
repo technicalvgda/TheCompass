@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EndingScriptedEvent : MonoBehaviour {
 	public Image backgroundImage, blackFadeOutImage;
@@ -42,5 +43,7 @@ public class EndingScriptedEvent : MonoBehaviour {
 			_counter++;
 			yield return new WaitForSeconds (0.1f);
 		}
+		//Load the credits scene
+		SceneManager.LoadScene ("Credit Scene");
 	}
 }
