@@ -74,6 +74,7 @@ public class Player : MonoBehaviour {
 	//handles player movement for cutscenes
 	private Vector2 _playerDestination = new Vector2 (0, 0);
 	private bool _disablePlayerControl = false;
+    private bool _disableFuelLoss = false;
 
 	//Values for boundary dimensions
 	public int maxXBoundary = 0;
@@ -391,12 +392,16 @@ public class Player : MonoBehaviour {
         }
     }
 
+    public void DisableFuelLoss()
+    {
+        _disableFuelLoss = true;
+    }
     //function that decreases the Player's fuel
     //decreases faster when moving
      void LoseFuel()
      {
         //skip fuel loss if this is the bowling scene
-        if (SceneManager.GetActiveScene().name == "Bowling")
+        if (SceneManager.GetActiveScene().name == "Bowling" || _disableFuelLoss == true)
         { return; }
 
         if (rb2d.velocity.magnitude < 2)

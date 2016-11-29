@@ -24,6 +24,7 @@ GameObject:
   - 50: {fileID: 50000011494621134}
   - 114: {fileID: 114000013614632656}
   - 114: {fileID: 114000010063896292}
+  - 114: {fileID: 114000013191645158}
   m_Layer: 0
   m_Name: SplitterShard2
   m_TagString: Debris
@@ -126,6 +127,17 @@ MonoBehaviour:
   splitShards: 4
   driftSpeed: 1000
   isTractored: 0
+--- !u!114 &114000013191645158
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010028777008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b76245ee88a7a459e93944971438b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000013614632656
 MonoBehaviour:
   m_ObjectHideFlags: 1

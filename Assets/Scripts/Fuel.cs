@@ -8,7 +8,7 @@ public class Fuel : MonoBehaviour
     //Animator anim;
 
     float targetScale = 0.1f;
-    float shrinkSpeed = 0.5f;
+    float shrinkSpeed = 6.0f;
 
     void Start()
     {
