@@ -27,6 +27,7 @@ public class EndCutScene : MonoBehaviour
     private bool _reachedDestination = false;
     public float speed = 10;
     public float pauseTime;
+    public float lookRotation = -90f;
     private bool _wasTriggered = false;
     private CameraController camControl;
     private LoadingTransition loadingTransition;
@@ -65,9 +66,7 @@ public class EndCutScene : MonoBehaviour
                 camControl.DisableCamFollow();
             }
             _parent.SendMessage("setReachedDestination", true);
-            other.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            other.transform.position = transform.position;
-            other.transform.rotation = Quaternion.identity * Quaternion.Euler(0,0,-90);
+           
             //show ending dialogue if this is an end trigger
             if (endLevel && transitionBox != null)
             {
@@ -76,6 +75,9 @@ public class EndCutScene : MonoBehaviour
            
             if (target != null && !_wasTriggered)
             {
+                other.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                other.transform.position = transform.position;
+                other.transform.rotation = Quaternion.identity * Quaternion.Euler(0,0,lookRotation);
                 _player = other;
                 StartCoroutine(StartCutscene());
             }
