@@ -3,6 +3,10 @@ using System.Collections;
 
 public class TractorBeamControls : MonoBehaviour
 {
+    //part pickup event delegate
+    public delegate void OnPartPickupDelegate();
+    public static OnPartPickupDelegate partPickupDelegate;
+
     SongManager songManager;
     // stuff for virtual joystick input 
     private Touch _touch;
@@ -101,10 +105,12 @@ public class TractorBeamControls : MonoBehaviour
 
         if (_tractorStick.collider.name == "ShipPart")
         {
+            //call part pickup event
+            partPickupDelegate();
             // relay part destroyed
             Destroy(_tractorStick.collider.gameObject);
             //switch music to next track
-            songManager.ChangeAux1to2();
+            //songManager.ChangeAux1to2();
             partCollected = true;
 
         }
@@ -112,6 +118,7 @@ public class TractorBeamControls : MonoBehaviour
         if (_tractorStick.collider.name == "TetheredShipPart")
         {
             _tractorStick.collider.GetComponent<TetheredObject>().tether(transform.position);
+
             //switch music to next track
             songManager.ChangeAux1to2();
         }

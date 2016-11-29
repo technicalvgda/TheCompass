@@ -10,13 +10,23 @@ public class TriggerLevelEndCutscene : MonoBehaviour
     public float speed = 10;
     private bool _wasTriggered = false;
 
+    private GameObject mapIcon;
+
 
     // Use this for initialization
     void Start()
     {
-
+        TractorBeamControls.partPickupDelegate += ActivateMapIcon;
+        if(mapIcon = transform.FindChild("MapIcon").gameObject)
+        {
+            mapIcon.SetActive(false);
+        }  
     }
 
+    void OnDisable()
+    {
+        TractorBeamControls.partPickupDelegate -= ActivateMapIcon;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -51,6 +61,14 @@ public class TriggerLevelEndCutscene : MonoBehaviour
             _player.SendMessage("setDisablePlayerControl", false);
         }
         */
+    }
+
+    void ActivateMapIcon()
+    {
+        if (mapIcon != null)
+        {
+            mapIcon.SetActive(true);
+        }
     }
     
 }
