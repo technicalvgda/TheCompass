@@ -15,7 +15,9 @@ public class LoadingTransition : MonoBehaviour
     public string[] textLines;
     //public AudioSource voiceOverAudioSource;
     public AudioSource typingSoundAudioSource;
-
+	//the number of seconds to wait until each beep
+	public float typingWaitSec;
+	private bool _activatedTypingBeepCoroutine;
     public int currentLine;
     public int endAtLine;
 
@@ -29,6 +31,7 @@ public class LoadingTransition : MonoBehaviour
     public float movementSpeed;
     private bool _dialogueIsFinished;
 	private bool _readyForInput;
+
     //private float _timer;
     //private bool _timedCommentaryActive;
     // Use this for initialization
@@ -116,6 +119,12 @@ public class LoadingTransition : MonoBehaviour
         int letter = 0;
         mainBodyText.text = "";
         isTyping = true;
+		if (_activatedTypingBeepCoroutine == false) 
+		{
+			_activatedTypingBeepCoroutine = true;
+			StartCoroutine (TypingBeeping (typingWaitSec));
+
+		}
         //cancelTyping = false;
         //toContinueTextBox.SetActive(false);
         while (isTyping && /*!cancelTyping &&*/ (letter < lineOfText.Length - 1))
@@ -131,7 +140,7 @@ public class LoadingTransition : MonoBehaviour
         //toContinueTextBox.SetActive(true);
         mainBodyText.text = lineOfText + "\n";
         isTyping = false;
-
+		_activatedTypingBeepCoroutine = false;
 		_readyForInput = true;
         //cancelTyping = false;
     }
@@ -217,6 +226,15 @@ public class LoadingTransition : MonoBehaviour
         */
     }
 
+	IEnumerator TypingBeeping(float sec)
+	{
+		while (isTyping) 
+		{
+			typingSoundAudioSource.PlayOneShot (typingSoundAudioSource.clip);
+			yield return new WaitForSecondsRealtime (sec);
+		}
+	}
+
     IEnumerator LoadLevelWithRealProgress(string levelToLoad)
     {
         yield return new WaitForSecondsRealtime(1);
@@ -288,4 +306,5 @@ public class LoadingTransition : MonoBehaviour
             cancelTyping = true;
         }
     }*/
+	
 }

@@ -11,7 +11,9 @@ public class TextBoxManager : MonoBehaviour
     public string[] textLines;
     public AudioSource voiceOverAudioSource;
     public AudioSource typingSoundAudioSource;
-
+	//the number of seconds to wait until each beep
+	public float typingWaitSec;
+	private bool _activatedTypingBeepCoroutine;
     public int currentLine;
     public int endAtLine;
 
@@ -35,6 +37,7 @@ public class TextBoxManager : MonoBehaviour
     {
 		loadingTransition = GameObject.FindGameObjectWithTag ("TransitionObject").GetComponent<LoadingTransition>();
 		_timedCommentaryActive = false;
+		_activatedTypingBeepCoroutine = false;
 		_rectTransform = transform.GetComponent<RectTransform> ();
 		if (textFile != null)
         {
@@ -107,6 +110,12 @@ public class TextBoxManager : MonoBehaviour
 		mainBodyText.text = "";
         isTyping = true;
         cancelTyping = false;
+		if (_activatedTypingBeepCoroutine == false) 
+		{
+			_activatedTypingBeepCoroutine = true;
+			StartCoroutine (TypingBeeping (typingWaitSec));
+
+		}
         //toContinueTextBox.SetActive(false);
         while(isTyping && !cancelTyping && (letter < lineOfText.Length - 1))
         {
@@ -117,6 +126,7 @@ public class TextBoxManager : MonoBehaviour
         //toContinueTextBox.SetActive(true);
 		mainBodyText.text = lineOfText;
         isTyping = false;
+		_activatedTypingBeepCoroutine = false;
         cancelTyping = false;
     }
 
@@ -237,5 +247,13 @@ public class TextBoxManager : MonoBehaviour
 	{
 		activateTransition = true;
 		Time.timeScale = 0;
+	}
+	IEnumerator TypingBeeping(float sec)
+	{
+		while (isTyping) 
+		{
+			typingSoundAudioSource.PlayOneShot (typingSoundAudioSource.clip);
+			yield return new WaitForSecondsRealtime (sec);
+		}
 	}
 }
