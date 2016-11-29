@@ -44,6 +44,7 @@ public class Player : MonoBehaviour {
 	private float _enginePower = 0.0f;
 	const float MAX_ENGINE_POWER = 40.0f;
 	const float LINEAR_ENGINE_POWER_COEFFICIENT = 15.0f;
+    const float FUEL_LOSS_VARIABLE = 0.75f;
 
     public float nebulaMultiplier = 1.0f;
     public float tractorSlow = 0;
@@ -400,11 +401,11 @@ public class Player : MonoBehaviour {
 
         if (rb2d.velocity.magnitude < 2)
         {
-            currentFuel -= Time.deltaTime;
+            currentFuel -= Time.deltaTime * FUEL_LOSS_VARIABLE;
         }
         else
         {
-            currentFuel -= Time.deltaTime*1.5f;
+            currentFuel -= Time.deltaTime*1.5f * FUEL_LOSS_VARIABLE;
         }
         //if fuel is less than 40%
         if(currentFuel < (MAX_FUEL*0.4f))

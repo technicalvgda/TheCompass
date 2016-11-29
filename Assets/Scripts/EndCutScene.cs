@@ -20,11 +20,13 @@ public class EndCutScene : MonoBehaviour
     public bool disableCameraFollow = false;
     //checks if player is already in cutscene
     private bool endpointActive = false;
+    private bool nextCutscene = false;
     //if this starts another cutscene path
     public Transform target;
     private Collider2D _player;
     private bool _reachedDestination = false;
     public float speed = 10;
+    public float pauseTime;
     private bool _wasTriggered = false;
     private CameraController camControl;
     private LoadingTransition loadingTransition;
@@ -45,7 +47,7 @@ public class EndCutScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_reachedDestination && _player != null)
+        if (nextCutscene == true && !_reachedDestination && _player != null)
         {
             _player.SendMessage("cutSceneMovePlayer", speed);
         }
@@ -63,30 +65,39 @@ public class EndCutScene : MonoBehaviour
                 camControl.DisableCamFollow();
             }
             _parent.SendMessage("setReachedDestination", true);
+            other.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            other.transform.position = transform.position;
+            other.transform.rotation = Quaternion.identity * Quaternion.Euler(0,0,-90);
             //show ending dialogue if this is an end trigger
             if (endLevel && transitionBox != null)
             {
                 loadingTransition.startCommentaryDialogue();
             }
            
-            if (target != null)
+            if (target != null && !_wasTriggered)
             {
-                //start next cutscene
-                if (!_wasTriggered)
-                {
-                    target.GetComponent<EndCutScene>().SetEndpointActive();
-                    setReachedDestination(false);
-                    _player = other;
-                    _player.SendMessage("setPlayerDestination", (Vector2)target.position);
-                    _wasTriggered = true;
-                }
+                _player = other;
+                StartCoroutine(StartCutscene());
             }
         }
+    }
+
+    IEnumerator StartCutscene()
+    {
+       
+            yield return new WaitForSeconds(pauseTime);
+            nextCutscene = true;
+            target.GetComponent<EndCutScene>().SetEndpointActive();
+            setReachedDestination(false);
+            _player.SendMessage("setPlayerDestination", (Vector2)target.position);
+            _wasTriggered = true;
+        
     }
 
     public void setReachedDestination(bool hasReached)
     {
         _reachedDestination = hasReached;
+        /*
         if (_player != null && _reachedDestination == true)
         {
             
@@ -94,5 +105,6 @@ public class EndCutScene : MonoBehaviour
             
             
         }
+        */
     }
 }

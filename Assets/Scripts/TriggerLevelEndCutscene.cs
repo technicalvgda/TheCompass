@@ -41,13 +41,16 @@ public class TriggerLevelEndCutscene : MonoBehaviour
             }     
         }
     }
-
+    
     public void setReachedDestination(bool hasReached)
     {
         _reachedDestination = hasReached;
+        /*
         if (_player != null && _reachedDestination == true)
         {
             _player.SendMessage("setDisablePlayerControl", false);
         }
+        */
     }
+    
 }

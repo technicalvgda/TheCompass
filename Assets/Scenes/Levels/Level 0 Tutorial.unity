@@ -4739,6 +4739,7 @@ MonoBehaviour:
   disableCameraFollow: 1
   target: {fileID: 1574283736}
   speed: 50
+  pauseTime: 5
   transitionBox: {fileID: 0}
 --- !u!1001 &1148878861
 Prefab:
@@ -6134,6 +6135,7 @@ MonoBehaviour:
   disableCameraFollow: 0
   target: {fileID: 0}
   speed: 10
+  pauseTime: 0
   transitionBox: {fileID: 1729305058}
 --- !u!58 &1574283738
 CircleCollider2D:
