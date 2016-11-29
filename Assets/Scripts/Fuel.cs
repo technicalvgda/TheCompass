@@ -3,22 +3,24 @@ using System.Collections;
 
 public class Fuel : MonoBehaviour
 {
-    public float FuelAmount;
+    float FuelAmount;
     bool collected = false;
     //Animator anim;
 
     float targetScale = 0.1f;
-    float shrinkSpeed = 0.1f;
+    float shrinkSpeed = 6.0f;
 
     void Start()
     {
         //anim = GetComponent<Animator>();
+        FuelAmount = Random.Range(30f, 40f);
     }
 
     public float CollectFuel()
     {
         if(!collected)
         {
+            collected = true; //< prevent duplicate collection
             //start animation (animation calls destroy on final frame)
             StartCoroutine(DestroyFuel());
             //return fuel amount

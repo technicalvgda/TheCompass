@@ -78,8 +78,9 @@ public class LaserEmitter : MonoBehaviour
                 _playerscript.ActivatePlayerShield(true); //< true because player was dealt damage
 
                 //applies force to the player in the opposite direction with which it is hit by the laser
-                Vector2 bounceBack = (_playerscript.transform.position - transform.position).normalized;
+                Vector2 bounceBack = -_playerscript.transform.up;
                 //bounceBack = new Vector2((bounceBack.x > 0) ? 1 : -1, (bounceBack.y > 0) ? 1 : -1);
+                _playerscript.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 _playerscript.GetComponent<Rigidbody2D>().AddForce(bounceBack * bounceIntensity, ForceMode2D.Impulse);
 
                 //deactivates the playerscript in order to simulate paralysis

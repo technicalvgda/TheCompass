@@ -11,13 +11,16 @@ public class TextBoxManager : MonoBehaviour
     public string[] textLines;
     public AudioSource voiceOverAudioSource;
     public AudioSource typingSoundAudioSource;
-
+	//the number of seconds to wait until each beep
+	public float typingWaitSec;
+	private bool _activatedTypingBeepCoroutine;
     public int currentLine;
     public int endAtLine;
 
     public bool isActive;
+	public bool currentlyInCommentary;
 
-    private bool isTyping = false;
+    public bool isTyping = false;
     private bool cancelTyping = false;
 
     public float typeSpeed = 0.05f;
@@ -26,10 +29,15 @@ public class TextBoxManager : MonoBehaviour
 	private bool  _dialogueIsFinished;
 	private float _timer;
 	private bool _timedCommentaryActive;
+
+	public LoadingTransition loadingTransition;
+	public bool activateTransition;
     // Use this for initialization
     void Start()
     {
+		loadingTransition = GameObject.FindGameObjectWithTag ("TransitionObject").GetComponent<LoadingTransition>();
 		_timedCommentaryActive = false;
+		_activatedTypingBeepCoroutine = false;
 		_rectTransform = transform.GetComponent<RectTransform> ();
 		if (textFile != null)
         {
@@ -62,7 +70,7 @@ public class TextBoxManager : MonoBehaviour
        // toContinueText.color = new Color(toContinueText.color.r, toContinueText.color.g, toContinueText.color.b, Mathf.PingPong(Time.time, 1));
 		if (_timedCommentaryActive) 
 		{
-			_timer -= Time.deltaTime;
+			_timer -= Time.unscaledDeltaTime;
 			//Debug.Log (_timer);
 			if (_timer <= 0) 
 			{
@@ -102,6 +110,12 @@ public class TextBoxManager : MonoBehaviour
 		mainBodyText.text = "";
         isTyping = true;
         cancelTyping = false;
+		if (_activatedTypingBeepCoroutine == false) 
+		{
+			_activatedTypingBeepCoroutine = true;
+			StartCoroutine (TypingBeeping (typingWaitSec));
+
+		}
         //toContinueTextBox.SetActive(false);
         while(isTyping && !cancelTyping && (letter < lineOfText.Length - 1))
         {
@@ -112,6 +126,7 @@ public class TextBoxManager : MonoBehaviour
         //toContinueTextBox.SetActive(true);
 		mainBodyText.text = lineOfText;
         isTyping = false;
+		_activatedTypingBeepCoroutine = false;
         cancelTyping = false;
     }
 
@@ -127,6 +142,7 @@ public class TextBoxManager : MonoBehaviour
     {
         //textBox.SetActive(true);
 		isActive = true;
+	
         StartCoroutine(TextScroll(textLines[currentLine]));
 
     }
@@ -145,6 +161,8 @@ public class TextBoxManager : MonoBehaviour
         {
             textLines = new string[1];
             textLines = (theText.text.Split('@'));
+			mainBodyText.text = " ";
+			StopCoroutine(TextScroll(" "));
         }
     }
 	public void setSpeakerNameText(string speakerName)
@@ -152,19 +170,25 @@ public class TextBoxManager : MonoBehaviour
 		speakerText.text = speakerName;
 	}
 	public void startCommentaryDialogue()
-	{
-		
+	{		
+		if (currentlyInCommentary) 
+		{
+			StopAllCoroutines ();
+		}
 		StartCoroutine (StartCommentary ());
 	}
 	IEnumerator StartCommentary()
 	{
+		currentlyInCommentary = true;
 		//get stop position
-		Vector2 _newPos = new Vector2(_rectTransform.anchoredPosition.x, -15f);
+		Vector2 _newPos = new Vector2(0,-145);
+		_rectTransform.anchoredPosition = _newPos;
+		_newPos = new Vector2(_rectTransform.anchoredPosition.x, -15f);
 		//move the box up
 		while (_rectTransform.anchoredPosition.y < -16f) 
 		{
-			_rectTransform.anchoredPosition = Vector2.Lerp (_rectTransform.anchoredPosition, _newPos, Time.deltaTime * movementSpeed);
-			yield return new WaitForSeconds (0.01f);
+			_rectTransform.anchoredPosition = Vector2.Lerp (_rectTransform.anchoredPosition, _newPos, Time.unscaledDeltaTime * movementSpeed);
+			yield return new WaitForSecondsRealtime (0.01f);
 		}
 		//enable the commentary
 		isActive = true;
@@ -172,22 +196,28 @@ public class TextBoxManager : MonoBehaviour
 		//wait while text is still active
 		while (isActive == true) 
 		{
-			yield return new WaitForSeconds (0.01f);
+			yield return new WaitForSecondsRealtime (0.01f);
 		}
 		//get position off screen
 		_newPos = new Vector2(_rectTransform.anchoredPosition.x, -145f);
 		//move the box back down
 		while (_rectTransform.anchoredPosition.y > -144f) 
 		{
-			_rectTransform.anchoredPosition = Vector2.Lerp (_rectTransform.anchoredPosition, _newPos, Time.deltaTime * movementSpeed);
-			yield return new WaitForSeconds (0.01f);
+			_rectTransform.anchoredPosition = Vector2.Lerp (_rectTransform.anchoredPosition, _newPos, Time.unscaledDeltaTime * movementSpeed);
+			yield return new WaitForSecondsRealtime (0.01f);
+		}
+		currentlyInCommentary = false;
+		if (activateTransition == true) 
+		{
+			Time.timeScale = 1;
+			loadingTransition.startCommentaryDialogue ();
 		}
 	}
 	public void activateTimedCommentary(float time)
 	{
-		Debug.Log ("TIMED COMMENTARY");
+		//Debug.Log ("TIMED COMMENTARY");
 		_timer = time;
-		Debug.Log ("TIMER: " + _timer);
+		//Debug.Log ("TIMER: " + _timer);
 		_timedCommentaryActive = true;
 	}
 
@@ -211,6 +241,19 @@ public class TextBoxManager : MonoBehaviour
 		else if(isTyping && !cancelTyping)
 		{
 			cancelTyping = true;
+		}
+	}
+	public void activateTransitionOnFinished()
+	{
+		activateTransition = true;
+		Time.timeScale = 0;
+	}
+	IEnumerator TypingBeeping(float sec)
+	{
+		while (isTyping) 
+		{
+			typingSoundAudioSource.PlayOneShot (typingSoundAudioSource.clip);
+			yield return new WaitForSecondsRealtime (sec);
 		}
 	}
 }

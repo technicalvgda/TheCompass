@@ -24,6 +24,7 @@ GameObject:
   - 50: {fileID: 50000011494621134}
   - 114: {fileID: 114000013614632656}
   - 114: {fileID: 114000010063896292}
+  - 114: {fileID: 114000013191645158}
   m_Layer: 0
   m_Name: SplitterShard2
   m_TagString: Debris
@@ -55,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 1000013602938800}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 88.23529, y: 88.23529, z: 5.882353}
+  m_LocalScale: {x: 15, y: 15, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000013278662104}
@@ -68,7 +69,7 @@ Transform:
   m_GameObject: {fileID: 1000010028777008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.397581, y: -15.660103, z: 0}
-  m_LocalScale: {x: 0.17, y: 0.17, z: 0.17}
+  m_LocalScale: {x: 1, y: 1, z: 0.17}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000011423149810}
@@ -104,7 +105,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 1
 --- !u!114 &114000010063896292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126,6 +127,17 @@ MonoBehaviour:
   splitShards: 4
   driftSpeed: 1000
   isTractored: 0
+--- !u!114 &114000013191645158
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010028777008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b76245ee88a7a459e93944971438b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000013614632656
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,7 +182,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f0bd21a159d14654d86bb6271816a3c3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1bfe6fd187d6ec9488e1ab4c1c3e6556, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -204,6 +216,6 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.94482756, g: 1, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
