@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class TextBoxManager : MonoBehaviour
@@ -32,6 +33,10 @@ public class TextBoxManager : MonoBehaviour
 
 	public LoadingTransition loadingTransition;
 	public bool activateTransition;
+
+
+    public List<AudioSource> ClipList;
+
     // Use this for initialization
     void Start()
     {

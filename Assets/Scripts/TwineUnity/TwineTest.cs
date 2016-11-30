@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+[RequireComponent(typeof(VoiceOverManager))]
 public class TwineTest : MonoBehaviour {
 	#region Variable Declaration
 	public TextAsset DialogueFile;
@@ -24,8 +24,6 @@ public class TwineTest : MonoBehaviour {
 
     public string GameOverTag = "GameOver";
     public string LoadTag = "Load";
-	//The audio source for the voice over
-	public AudioSource voiceOverAudioSource;
 	//The beeping audioSource
 	public AudioSource typingBeepAudioSource;
 	//bool so only one thread is active during a passage
@@ -84,7 +82,7 @@ public class TwineTest : MonoBehaviour {
 			if (!_activatedCoRoutine) 
 			{
 				StartCoroutine (TypingBeep (beepSecWait));
-				voiceOverAudioSource.Play ();
+				VoiceOverManager.Play (CurrentPassage);
 				_activatedCoRoutine = true;
 			}
 			string currentText = PassageTextDisplay.text;
@@ -98,6 +96,7 @@ public class TwineTest : MonoBehaviour {
 				_currentlyTyping = false;
 				AddChoiceButtons();
 			}
+            //print(_currentlyTyping);
 		}
 	}
 	public void AddChoiceButtons()
@@ -170,24 +169,23 @@ public class TwineTest : MonoBehaviour {
             }
             else
             {
-                print("T1");
                 List<string> tags = CurrentPassage.GetTags();
                 if (tags.Contains(LoadTag))
                 {
-                    print("T2");
                     tags.Remove(LoadTag);
                     if (tags.Count == 1)
                     {
-                        print("T3");
                         NextScene = tags[0];
                     }
                 }
-                else if (tags.Contains(GameOverTag))
+                if (tags.Contains(GameOverTag))
                 {
-                    //TODO: SET NEXTSCENE TO THE GAMEOVER SCENE
+                    //TODO: CALL GAMEOVER FUNCTION
                 }
-                print("T4");
-                SceneManager.LoadScene(NextScene);
+                else
+                {
+                    SceneManager.LoadScene(NextScene);
+                }
             }
 		}
 	}
