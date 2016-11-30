@@ -59,7 +59,8 @@ public class TractorBeamControls : MonoBehaviour
         
         _tractorLine = transform.FindChild("TractorBeam").GetComponent<LineRenderer>();//GetComponentInChildren<LineRenderer>();
         _tractorOverlay = transform.FindChild("TractorOverlay").GetComponent<LineRenderer>();//GetComponentInChildren<LineRenderer>();
-
+        _tractorLine.sortingOrder = -1;
+        _tractorOverlay.sortingOrder = -1;
         _player = GetComponent<Player>();
 
         if (joystick == null && GameObject.Find("VirtualJoystickTether") != null)
