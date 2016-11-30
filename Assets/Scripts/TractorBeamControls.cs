@@ -217,7 +217,9 @@ public class TractorBeamControls : MonoBehaviour
                 if ((Vector2.Distance(_tractorStick.transform.position, transform.position) - (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x)) > MAX_TRACTOR_PUSH)
                 {
                     _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * (MAX_TRACTOR_PUSH + (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x));
+                    velocity = Vector2.zero;
                 }
+
 
                 //if the distance between the _mouse clicked point and the object is <1 the object will stop moving
                 if ((Vector2.Distance(_tractorStick.transform.position, _MouseClickedPoint) < 1))
