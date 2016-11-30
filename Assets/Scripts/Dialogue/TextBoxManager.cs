@@ -58,6 +58,8 @@ public class TextBoxManager : MonoBehaviour
         {
             DisableTextBox();
         }
+		//TEMPORARY DELETE AFTER LAUNCH
+		typingSoundAudioSource.volume = 0.25f;
     }
 
     // Update is called once per frame
