@@ -29,8 +29,10 @@ public class TwineTest : MonoBehaviour {
 	//bool so only one thread is active during a passage
 	private bool _activatedCoRoutine;
 	//number of seconds coroutine waits until it plays the beep again
-
 	public float beepSecWait;
+	//the black image that is to fade in when 
+	public Image blackScreenImage;
+	private Color _color;
 	[HideInInspector]
 	public string PassageText;
 	[HideInInspector]
@@ -184,7 +186,7 @@ public class TwineTest : MonoBehaviour {
                 }
                 else
                 {
-                    SceneManager.LoadScene(NextScene);
+					StartCoroutine (StartEndingDialogueTransition ());
                 }
             }
 		}
@@ -197,5 +199,22 @@ public class TwineTest : MonoBehaviour {
 			typingBeepAudioSource.PlayOneShot (typingBeepAudioSource.clip);
 			yield return new WaitForSeconds(sec);
 		}
+	}
+
+	IEnumerator StartEndingDialogueTransition()
+	{
+		//If the image isn't black
+		if (blackScreenImage.color.a != 0) 
+		{
+			_color = new Color (blackScreenImage.color.r, blackScreenImage.color.g, blackScreenImage.color.b, 0);
+			blackScreenImage.color = _color;
+		}
+		while (blackScreenImage.color.a < 1) 
+		{
+			_color = new Color (blackScreenImage.color.r, blackScreenImage.color.g, blackScreenImage.color.b, blackScreenImage.color.a + Time.deltaTime);
+			blackScreenImage.color = _color;
+			yield return null;
+		}
+		SceneManager.LoadScene(NextScene);	
 	}
 }
