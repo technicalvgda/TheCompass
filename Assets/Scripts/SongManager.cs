@@ -28,7 +28,14 @@ public class SongManager : MonoBehaviour {
         audio2.volume = 0f;
         audio1.volume = MAX_VOLUME;
         //audio1.Play();
+        //subscribe music shift function to part pickup event
+        TractorBeamControls.partPickupDelegate += ChangeAux1to2;
 	}
+
+    void OnDisable()
+    {
+        TractorBeamControls.partPickupDelegate -= ChangeAux1to2;
+    }
 	
 	// Update is called once per frame
 	void Update ()

@@ -191,6 +191,7 @@ public class ButtonManagerScript : MonoBehaviour {
 		if (_inCutscene == false) {
 			if (theseScenesAreActive ()) {
 				if (_gameOverScript.isGameOver == false) {
+					Time.timeScale = 1;
 					if (Input.GetButtonDown ("Pause")) {
 						_isPaused = !_isPaused;
 						//if paused, bring up pause menu && stop game time

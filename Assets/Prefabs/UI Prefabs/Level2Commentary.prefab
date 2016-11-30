@@ -44,6 +44,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1000012046685198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000011261730230}
+  - 114: {fileID: 114000012035793752}
+  m_Layer: 0
+  m_Name: PlayerGrabsShipPart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000012407811112
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,8 +157,22 @@ Transform:
   - {fileID: 4000013429732766}
   - {fileID: 4000012564519440}
   - {fileID: 4000012646935304}
+  - {fileID: 4000011261730230}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &4000011261730230
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012046685198}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 442.5026, y: -297.29306, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000010280884460}
+  m_RootOrder: 5
 --- !u!4 &4000012564519440
 Transform:
   m_ObjectHideFlags: 1
@@ -220,7 +250,7 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 90.43, y: -491.5}
+  m_Offset: {x: 90.43, y: -673.28}
   serializedVersion: 2
   m_Radius: 40
 --- !u!58 &58000011611751096
@@ -298,6 +328,25 @@ MonoBehaviour:
   timeUntilFinished: 10
   idleTimerScript: {fileID: 114000010281576652}
   displayMessageTime: 30
+--- !u!114 &114000012035793752
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012046685198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ed85edad1a4d0459d353a4b0649339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textFile: {fileID: 4900000, guid: 1a110314f220241409f1e6ff60e21d76, type: 3}
+  speakerName: OFELIA
+  startLine: 0
+  endLine: 0
+  theTextBox: {fileID: 0}
+  destroyWhenActivated: 1
+  timedDialogue: 1
+  timeUntilFinished: 10
 --- !u!114 &114000012916513984
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -371,7 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8908b88ffbeff7d4997a6d6be643a2d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textFile: {fileID: 4900000, guid: 348a2857aa4f41a47a9b78e14cf9c855, type: 3}
+  textFile: {fileID: 4900000, guid: ebde8aa351d28c346b87bbf664481e6f, type: 3}
   speakerName: OFELIA
   startLine: 0
   endLine: 0

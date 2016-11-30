@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewAngle: 180
-  viewDist: 10
+  viewDist: 60
   sight: 0
   sightPos: {x: -16.121737, y: 2.5514657, z: 0}
 --- !u!114 &114000013508320942
@@ -179,9 +179,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pullDelay: 5
-  pullForce: 15
-  deflection: 0
-  MAX_TRACTOR_LENGTH: 20
+  pullForce: 55
+  deflection: 1
 --- !u!120 &120000012370174408
 LineRenderer:
   m_ObjectHideFlags: 1
