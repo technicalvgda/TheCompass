@@ -10,6 +10,7 @@ public class TwoObjectsCollideCommentary : MonoBehaviour
 	public int startLine;
 	public int endLine;
 
+	public AudioClip audioClip;
 	public TextBoxManager theTextBox;
 
 	public bool destroyWhenActivated,timedDialogue;
@@ -55,6 +56,7 @@ public class TwoObjectsCollideCommentary : MonoBehaviour
 	{
 		Debug.Log ("HERE");
 		theTextBox.startCommentaryDialogue ();
+		theTextBox.setVoiceOverSourceClip(audioClip);
 		theTextBox.ReloadScript (textFile);
 		theTextBox.currentLine = startLine;
 		theTextBox.endAtLine = endLine;
