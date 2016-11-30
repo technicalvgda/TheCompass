@@ -2,8 +2,10 @@
 using System.Collections;
 
 public class AutoSave : MonoBehaviour {
-    public static string defaultFilePath = "SaveData.bin";
 	void Start () {
-        SaveLoad.SaveFile(new GameData(), defaultFilePath);	
+        GameData gd = SaveLoad.LoadGame();
+        BranchData.Singleton = gd.Branch;
+        SaveLoad.SaveGame();
+        //TODO: DELETE GAME DATA WHEN PLAYER BEATS GAME.
 	}
 }

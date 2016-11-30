@@ -109,14 +109,15 @@ public static class TwineReader
             {
                 contentText = passageGroups[5].Value;
             }
+            List<string> tags = new List<string>(passageGroups[3].Value.Split(' '));
             //Create a node based on the regex groups from the passage regex
-            PassageNode newNode = new PassageNode(result, int.Parse(passageGroups[1].Value), passageGroups[2].Value, passageGroups[3].Value, passageGroups[4].Value, contentText);
+            PassageNode newNode = new PassageNode(result, int.Parse(passageGroups[1].Value), passageGroups[2].Value, tags, passageGroups[4].Value, contentText);
             //Check if the passage ID is equal to the start node ID of the story
             if (passageGroups[1].Value.Equals(startNodeIndex))
             {
                 result.StartPassage = newNode;
             }
-            result.Passage.Add(passageGroups[2].Value, newNode);
+            result.AddPassage(passageGroups[2].Value, newNode);
             //Check all the choices in the passage
             foreach(Match cmatch in  RegexParse(CHOICE_PATTERN, passageGroups[5].Value))
             {

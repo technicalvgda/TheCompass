@@ -4,11 +4,11 @@ using System.Collections;
 
 public class TetheredObject : MonoBehaviour
 {
-    private bool tetherOn;
+    public bool tetherOn;
     private Color c1 = Color.white;
     private Vector3 playerPosition;
     private LineRenderer lineRen;
-    public int TetheredHealth = 3; //tethered object's health. Gets hit three times and health goes to zero.
+    public int TetheredHealth = 4; //tethered object's health. Gets hit three times and health goes to zero.
     //private string _sceneToLoad;  //holds a specified scene name to load when the player fails this level 
     Player playerScript;
 
@@ -59,7 +59,7 @@ public class TetheredObject : MonoBehaviour
             {
                 tetherOn = false;
                 Destroy(coll.gameObject); //the collided object goes bye bye
-                FailLevel();
+                //FailLevel(); commented out this call so the fail level can be called after commentary
             }
         }
         /*else if (coll.gameObject.name == "PlayerPlaceholder")
@@ -86,7 +86,7 @@ public class TetheredObject : MonoBehaviour
     /**
      * When the player fails this level, this method will be invoked to load a different scene
      */
-    void FailLevel()
+    public void FailLevel()
     {
         //SceneManager.LoadScene(sceneName);
 

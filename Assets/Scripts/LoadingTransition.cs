@@ -15,7 +15,9 @@ public class LoadingTransition : MonoBehaviour
     public string[] textLines;
     //public AudioSource voiceOverAudioSource;
     public AudioSource typingSoundAudioSource;
-
+	//the number of seconds to wait until each beep
+	public float typingWaitSec;
+	private bool _activatedTypingBeepCoroutine;
     public int currentLine;
     public int endAtLine;
 
@@ -28,6 +30,8 @@ public class LoadingTransition : MonoBehaviour
     private RectTransform _rectTransform;
     public float movementSpeed;
     private bool _dialogueIsFinished;
+	private bool _readyForInput;
+
     //private float _timer;
     //private bool _timedCommentaryActive;
     // Use this for initialization
@@ -35,7 +39,7 @@ public class LoadingTransition : MonoBehaviour
     {
        // _timedCommentaryActive = false;
         _rectTransform = transform.GetComponent<RectTransform>();
-
+		_readyForInput = false;
        
         if (textFile != null)
         {
@@ -66,7 +70,9 @@ public class LoadingTransition : MonoBehaviour
         {
             return;
         }
-
+		if (_readyForInput) 
+		{
+		}
         /*
         //theText.text = textLines[currentLine];
         // toContinueText.color = new Color(toContinueText.color.r, toContinueText.color.g, toContinueText.color.b, Mathf.PingPong(Time.time, 1));
@@ -113,18 +119,29 @@ public class LoadingTransition : MonoBehaviour
         int letter = 0;
         mainBodyText.text = "";
         isTyping = true;
+		if (_activatedTypingBeepCoroutine == false) 
+		{
+			_activatedTypingBeepCoroutine = true;
+			StartCoroutine (TypingBeeping (typingWaitSec));
+
+		}
         //cancelTyping = false;
         //toContinueTextBox.SetActive(false);
         while (isTyping && /*!cancelTyping &&*/ (letter < lineOfText.Length - 1))
         {
             mainBodyText.text += lineOfText[letter];
             letter++;
+			mainBodyText.text += lineOfText[letter];
+			letter++;
+			mainBodyText.text += lineOfText[letter];
+			letter++;
             yield return new WaitForSecondsRealtime(typeSpeed);
         }
         //toContinueTextBox.SetActive(true);
         mainBodyText.text = lineOfText + "\n";
         isTyping = false;
-		StartCoroutine(LoadLevelWithRealProgress(levelToLoad));
+		_activatedTypingBeepCoroutine = false;
+		_readyForInput = true;
         //cancelTyping = false;
     }
 
@@ -177,6 +194,8 @@ public class LoadingTransition : MonoBehaviour
     {
 
 		Time.timeScale = 0;
+
+		StartCoroutine(LoadLevelWithRealProgress(levelToLoad));
         //get stop position
         Vector2 _newPos = new Vector2(0f, _rectTransform.anchoredPosition.y);
         //move the box up
@@ -195,7 +214,6 @@ public class LoadingTransition : MonoBehaviour
         {
             yield return new WaitForSecondsRealtime(0.01f);
         }
-
         /*
         //get position off screen
         _newPos = new Vector2(_rectTransform.anchoredPosition.x, -145f);
@@ -208,6 +226,15 @@ public class LoadingTransition : MonoBehaviour
         */
     }
 
+	IEnumerator TypingBeeping(float sec)
+	{
+		while (isTyping) 
+		{
+			typingSoundAudioSource.PlayOneShot (typingSoundAudioSource.clip);
+			yield return new WaitForSecondsRealtime (sec);
+		}
+	}
+
     IEnumerator LoadLevelWithRealProgress(string levelToLoad)
     {
         yield return new WaitForSecondsRealtime(1);
@@ -219,16 +246,15 @@ public class LoadingTransition : MonoBehaviour
         {
             if (aSyncOp.progress >= 0.9f)
             {
-
+				if (_readyForInput == true) {
 #if UNITY_STANDALONE || UNITY_WEBPLAYER
-                //if in the web player will prompt user to press spacebar
-                //loadingText.text = "Press any button to Continue"; // prompts the user to press space in order
-                //loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, Mathf.PingPong(Time.time, 1));
-                if (Input.anyKeyDown)
-                {
-                    Time.timeScale = 1;
-                    aSyncOp.allowSceneActivation = true;
-                }
+					//if in the web player will prompt user to press spacebar
+					//loadingText.text = "Press any button to Continue"; // prompts the user to press space in order
+					//loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, Mathf.PingPong(Time.time, 1));
+					if (Input.anyKeyDown) {
+						Time.timeScale = 1;
+						aSyncOp.allowSceneActivation = true;
+					}
 #elif UNITY_IOS || UNITY_ANDROID
                 //when built to mobile will prompt user to touch the screen to continue 
                 //loadingText.text = "Touch Screen to Continue"; // prompts the user to press space in order
@@ -238,7 +264,7 @@ public class LoadingTransition : MonoBehaviour
                     aSyncOp.allowSceneActivation = true;
                 }
 #endif
-
+				}
             }
 
             //Debug.Log(aSyncOp.progress);
@@ -280,4 +306,5 @@ public class LoadingTransition : MonoBehaviour
             cancelTyping = true;
         }
     }*/
+	
 }
