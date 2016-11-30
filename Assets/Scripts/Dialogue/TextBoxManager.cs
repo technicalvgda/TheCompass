@@ -33,10 +33,6 @@ public class TextBoxManager : MonoBehaviour
 
 	public LoadingTransition loadingTransition;
 	public bool activateTransition;
-
-
-    public List<AudioSource> ClipList;
-
     // Use this for initialization
     void Start()
     {
