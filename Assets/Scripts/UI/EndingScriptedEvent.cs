@@ -43,6 +43,17 @@ public class EndingScriptedEvent : MonoBehaviour {
 			_counter++;
 			yield return new WaitForSeconds (0.1f);
 		}
+
+		//TEMP YIELD FOR SECONDS REMOVE BEFORE LAUNCH
+		yield return new WaitForSeconds (2);
+
+		//Fade in the black for smooth transition
+		while (blackFadeOutImage.color.a <1) 
+		{
+			_color = new Color (blackFadeOutImage.color.r, blackFadeOutImage.color.g, blackFadeOutImage.color.b, blackFadeOutImage.color.a + Time.deltaTime);
+			blackFadeOutImage.color = _color;
+			yield return null;
+		}
 		//Load the credits scene
 		SceneManager.LoadScene ("Credit Scene");
 	}
