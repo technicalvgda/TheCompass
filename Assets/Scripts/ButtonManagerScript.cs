@@ -83,6 +83,7 @@ public class ButtonManagerScript : MonoBehaviour {
 			_gameOverScript = gameObject.GetComponent<GameOver> ();
 			//gameOverMenu.SetActive (false);
 		}
+		//_inCutscene = false;
 	}
 	void Update()
 	{
@@ -185,25 +186,24 @@ public class ButtonManagerScript : MonoBehaviour {
             	Cursor.visible = true;
         }
 
-
         //resolutionDropdownValueChangedHandler(resolutionDropdown);
         //if ESC button is pressed, change the pause state
-		if (_inCutscene == false) {
-			if (theseScenesAreActive ()) {
-				if (_gameOverScript.isGameOver == false) {
-					Time.timeScale = 1;
-					if (Input.GetButtonDown ("Pause")) {
-						_isPaused = !_isPaused;
-						//if paused, bring up pause menu && stop game time
-						if (_isPaused) {
-							Pause ();
-						} else {
-							Resume ();
-						}
-
-					}
-
-				} else if (_gameOverScript.isGameOver == true) {
+		if (_inCutscene == false) 
+		{
+			if (theseScenesAreActive ()) 
+			{
+				if (_gameOverScript.isGameOver == false) 
+				{
+					if (Input.GetButtonDown ("Pause")) 
+						_isPaused = !_isPaused;					
+					//if paused, bring up pause menu && stop game time
+					if (_isPaused) 
+						Pause ();
+					else 
+						Resume ();
+				}
+				else if (_gameOverScript.isGameOver == true) 
+				{
 					Time.timeScale = 0;
 				}
 			}

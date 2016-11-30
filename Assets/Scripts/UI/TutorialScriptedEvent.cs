@@ -36,9 +36,12 @@ public class TutorialScriptedEvent : MonoBehaviour {
 		{
 			blackScreen.color = Color.clear;
 			text.color = Color.clear;
-		}
-		else
+			buttonManagerScript.exitCutscene ();
+		} 
+		else 
+		{			
 			StartCoroutine (TutorialIntro ());
+		}
 	}
 	
 	// Update is called once per frame

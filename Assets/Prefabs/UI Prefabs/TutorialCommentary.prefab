@@ -393,7 +393,7 @@ EdgeCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
@@ -571,6 +571,7 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 0
+  audioClip: {fileID: 0}
   theTextBox: {fileID: 0}
   fuelLevelToActivate: 0
   destroyWhenActivated: 1
@@ -594,6 +595,7 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 0
+  audioClip: {fileID: 0}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
@@ -654,6 +656,7 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 1
+  audioClip: {fileID: 0}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
