@@ -212,16 +212,19 @@ public class Player : MonoBehaviour {
 				//use the joystick input to create movement vector
 				movement = joystick.inputValue().normalized;
 #endif
-        //Increase force the longer movement direction is inputted
-        //Resets when input is in neutral position
-        HandleEngine(movement.magnitude);
-        //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
-        rb2d.AddForce(movement * ((_enginePower * nebulaMultiplier) - tractorSlow));
-        //Rotates front of ship to direction of movement
-        if (movement != Vector2.zero)
+        if (Time.timeScale == 1)
         {
-            float angle = Mathf.Atan2(-movement.x, movement.y) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * rotationSpeed);
+            //Increase force the longer movement direction is inputted
+            //Resets when input is in neutral position
+            HandleEngine(movement.magnitude);
+            //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
+            rb2d.AddForce(movement * ((_enginePower * nebulaMultiplier) - tractorSlow));
+            //Rotates front of ship to direction of movement
+            if (movement != Vector2.zero)
+            {
+                float angle = Mathf.Atan2(-movement.x, movement.y) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * rotationSpeed);
+            }
         }
     }
     private void checkIfPlayerOutOfBounds(int maxX, int maxY, int minX, int minY)
