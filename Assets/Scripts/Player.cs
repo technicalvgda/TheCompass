@@ -28,7 +28,7 @@ public class Player : MonoBehaviour {
 	private Rigidbody2D rb2d;
     private ParticleSystem partSys;
     private Color trailColor;
-    private Color lowFuelColor = Color.green;
+    private Color lowFuelColor = Color.red;
 
 	//Determines which control scheme to use.  Set to 1 or 2 (2 being the default value)
 	// 1-> W (accelerate forward), S (accelerate backwards), A (Rotate Counter-Clockwise), D (Rotate Clockwise)
@@ -415,8 +415,8 @@ public class Player : MonoBehaviour {
         {
             currentFuel -= Time.deltaTime*1.5f * FUEL_LOSS_VARIABLE;
         }
-        //if fuel is less than 40%
-        if(currentFuel < (MAX_FUEL*0.4f))
+        //if fuel is less than 35%
+        if(currentFuel < (MAX_FUEL*0.35f))
         {
             partSys.startColor = lowFuelColor;
         }
