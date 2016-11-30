@@ -64,13 +64,7 @@ public class TutorialScriptedEvent : MonoBehaviour {
 			text.color = _color;
 			yield return new WaitForSecondsRealtime (0.01f);
 		}
-		_color = new Color (1, 1, 1, 1);
-		while (blackScreen.color.a >= 0) 
-		{
-			_color = new Color (blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, blackScreen.color.a - Time.unscaledDeltaTime*colorFadeSpeed);
-			blackScreen.color = _color;
-			yield return new WaitForSecondsRealtime (0.01f);
-		}
+		
 		//Time.timeScale = 1;
 		Vector2 _newPos = new Vector2(_rectTransform.anchoredPosition.x, -15f);
 		//move the box up
@@ -106,7 +100,14 @@ public class TutorialScriptedEvent : MonoBehaviour {
 			_rectTransform.anchoredPosition = Vector2.Lerp (_rectTransform.anchoredPosition, _newPos, Time.unscaledDeltaTime * movementSpeed);
 			yield return new WaitForSecondsRealtime (0.01f);
 		}
-		buttonManagerScript.exitCutscene ();
+        _color = new Color(1, 1, 1, 1);
+        while (blackScreen.color.a >= 0)
+        {
+            _color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, blackScreen.color.a - Time.unscaledDeltaTime * colorFadeSpeed);
+            blackScreen.color = _color;
+            yield return new WaitForSecondsRealtime(0.01f);
+        }
+        buttonManagerScript.exitCutscene ();
 		Time.timeScale = 1;
 
 	}

@@ -7,6 +7,7 @@ public class Stalker : MonoBehaviour {
     private float _bulletVelocity;
 
     public Rigidbody2D bullet;
+    public float detectionRange = 200.0f;
     public float attRange, stopDist; //values to control when the stalker will attack, and when it will stop advancing on the player
     public float fireRate = 0.75f, speed = 7.3f; //how often we can fire, how fast we move
 
@@ -25,7 +26,9 @@ public class Stalker : MonoBehaviour {
             StartCoroutine(fire());
         }
         //we aren't too close to the player, so we move
-        if(Vector2.Distance(transform.position, _player.transform.position) >= stopDist)
+        float distToPlayer = Vector2.Distance(transform.position, _player.transform.position);
+        Debug.Log(distToPlayer);
+        if (distToPlayer >= stopDist && distToPlayer < detectionRange)
         {
             transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, speed * Time.smoothDeltaTime);
         }

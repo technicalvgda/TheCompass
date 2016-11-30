@@ -11,6 +11,21 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1000012621182136}
   m_IsPrefabParent: 1
+--- !u!1 &1000012491043176
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000014289593876}
+  m_Layer: 0
+  m_Name: Face
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000012621182136
 GameObject:
   m_ObjectHideFlags: 0
@@ -21,10 +36,11 @@ GameObject:
   - 4: {fileID: 4000010645184856}
   - 212: {fileID: 212000014202111856}
   - 58: {fileID: 58000010814746862}
-  - 50: {fileID: 50000011856684122}
-  - 114: {fileID: 114000013394257170}
-  - 114: {fileID: 114000011877551544}
   - 114: {fileID: 114000010110909096}
+  - 114: {fileID: 114000013889449602}
+  - 114: {fileID: 114000014169663622}
+  - 50: {fileID: 50000011856684122}
+  - 120: {fileID: 120000012011893354}
   m_Layer: 0
   m_Name: PatrollingDrone
   m_TagString: Enemy
@@ -55,10 +71,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012621182136}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -156.17606, y: 384.63623, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 4000014289593876}
   - {fileID: 4000011137246786}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -74,6 +91,19 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000010645184856}
+  m_RootOrder: 1
+--- !u!4 &4000014289593876
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012491043176}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.8, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000010645184856}
   m_RootOrder: 0
 --- !u!50 &50000011856684122
 Rigidbody2D:
@@ -84,10 +114,10 @@ Rigidbody2D:
   m_GameObject: {fileID: 1000012621182136}
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 50
-  m_AngularDrag: 10
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -117,11 +147,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5c6b45eb739e447b944a22eac7fcaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewAngle: 20
+  viewAngle: 180
   viewDist: 50
   sight: 0
-  sightPos: {x: 0, y: 0, z: 0}
---- !u!114 &114000011877551544
+  sightPos: {x: -16.121737, y: 2.5514657, z: 0}
+--- !u!114 &114000013889449602
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -129,14 +159,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012621182136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81c39d475d7b5da4ebe23688a6e6edfa, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d08071293572b84e93bfb9ed034d885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedThreshhold: 0
-  DetectionRange: 100
-  arrowPrefab: {fileID: 1000013529883644, guid: 44f6e27ddd2c0ea4c889a70fca637e23,
-    type: 2}
---- !u!114 &114000013394257170
+  xDistance: 25
+  yDistance: 7.5
+  velocity: 7
+  active: 0
+--- !u!114 &114000014169663622
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -144,21 +174,55 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012621182136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abe33ec0924095c4da098c68b3804899, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a4866eb1473fdd48b6da50848d4d54d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  droneState: 1
-  speed: 3
-  followDistance: 0
-  patrolDistance: 5
-  pattern: 1
-  circularRotationAngle: 8
-  idleScanAngle: 0
-  idleScanSpeed: 0
-  direction: 0
-  isFleet: 0
-  Fleet: []
-  isNotified: 0
+  _offest: 0
+  bullet: {fileID: 50000010395439974, guid: 5ffc42b176a54a245bf9cd9bb6e14035, type: 2}
+  accuracy: 10
+  fireRate: 10
+--- !u!120 &120000012011893354
+LineRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012621182136}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_Materials:
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 15200, guid: 0000000000000000f000000000000000, type: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: -5.15, y: 1.6344544, z: 0}
+  - {x: -5.15, y: 1.6344544, z: 0}
+  m_Parameters:
+    startWidth: 1
+    endWidth: 1
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4278190335
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4278190335
+  m_UseWorldSpace: 1
 --- !u!212 &212000011093512222
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -221,7 +285,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8947ba98e395af640b90e09e8bd88518, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8dc675a31687dd144a2f4c5f6932bd09, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -3,6 +3,10 @@ using System.Collections;
 
 public class TractorBeamControls : MonoBehaviour
 {
+    //part pickup event delegate
+    public delegate void OnPartPickupDelegate();
+    public static OnPartPickupDelegate partPickupDelegate;
+
     SongManager songManager;
     // stuff for virtual joystick input 
     private Touch _touch;
@@ -101,10 +105,12 @@ public class TractorBeamControls : MonoBehaviour
 
         if (_tractorStick.collider.name == "ShipPart")
         {
+            //call part pickup event
+            partPickupDelegate();
             // relay part destroyed
             Destroy(_tractorStick.collider.gameObject);
             //switch music to next track
-            songManager.ChangeAux1to2();
+            //songManager.ChangeAux1to2();
             partCollected = true;
 
         }
@@ -112,6 +118,7 @@ public class TractorBeamControls : MonoBehaviour
         if (_tractorStick.collider.name == "TetheredShipPart")
         {
             _tractorStick.collider.GetComponent<TetheredObject>().tether(transform.position);
+
             //switch music to next track
             songManager.ChangeAux1to2();
         }
@@ -210,7 +217,9 @@ public class TractorBeamControls : MonoBehaviour
                 if ((Vector2.Distance(_tractorStick.transform.position, transform.position) - (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x)) > MAX_TRACTOR_PUSH)
                 {
                     _tractorStick.transform.position = transform.position + (_tractorStick.transform.position - transform.position).normalized * (MAX_TRACTOR_PUSH + (_tractorStick.collider.GetComponent<CircleCollider2D>().radius * _tractorStick.transform.localScale.x));
+                    velocity = Vector2.zero;
                 }
+
 
                 //if the distance between the _mouse clicked point and the object is <1 the object will stop moving
                 if ((Vector2.Distance(_tractorStick.transform.position, _MouseClickedPoint) < 1))
@@ -450,6 +459,7 @@ public class TractorBeamControls : MonoBehaviour
         {
             //make sure starting position of tractor beam is at the ship
             _tractorLine.SetPosition(0, transform.position);
+            _tractorOverlay.SetPosition(0, transform.position);
 
             //if the tractor beam is connected
             if (_hitDebris && objectScript.isTractored)
@@ -458,6 +468,8 @@ public class TractorBeamControls : MonoBehaviour
                 //_tractorLine.SetColors(Color.white, Color.white);
                 //draw a line to show tractor beam connection
                 _tractorLine.SetPosition(1, _tractorStick.transform.position);
+                _tractorOverlay.SetPosition(1, _tractorStick.transform.position);
+                beamEnd.transform.position = _tractorStick.transform.position;
             }
             else
             {
@@ -469,11 +481,11 @@ public class TractorBeamControls : MonoBehaviour
 
                 //set the end of the beam to be where the endpoint variable is
                 _tractorLine.SetPosition(1, endPoint);
-                beamEnd.transform.position = endPoint;
+                _tractorOverlay.SetPosition(1, endPoint);
                 //set the color of the beam to blue
                 //_tractorLine.SetColors(Color.blue, Color.blue);
                 Vector3 directionVector = (_tractorLine.transform.position - (Vector3)endPoint).normalized;
-                beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
+                //beamEnd.transform.rotation = Quaternion.LookRotation(directionVector);
                 beamEnd.transform.position = endPoint;
             }
         }
