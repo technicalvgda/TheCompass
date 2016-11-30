@@ -231,6 +231,7 @@ TextureImporter:
     21300448: previewFrameCorner
     21300450: promptTextOverwriteProceed
     21300452: binary2x2
+    21300454: buttonTextHelp
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -280,24 +281,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: backBlank
-      rect:
-        serializedVersion: 2
-        x: 1942
-        y: 288
-        width: 74
-        height: 74
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
       name: backHighlighted
       rect:
         serializedVersion: 2
-        x: 1633
-        y: 1698
+        x: 1148
+        y: 463
         width: 74
         height: 74
       alignment: 0
@@ -309,8 +297,8 @@ TextureImporter:
       name: backNormalA
       rect:
         serializedVersion: 2
-        x: 1635
-        y: 1623
+        x: 1721
+        y: 512
         width: 74
         height: 74
       alignment: 0
@@ -322,8 +310,8 @@ TextureImporter:
       name: backNormalB
       rect:
         serializedVersion: 2
-        x: 1969
-        y: 376
+        x: 1721
+        y: 437
         width: 74
         height: 74
       alignment: 0
@@ -335,8 +323,8 @@ TextureImporter:
       name: binary2x2
       rect:
         serializedVersion: 2
-        x: 1632
-        y: 97
+        x: 1960
+        y: 338
         width: 2
         height: 2
       alignment: 0
@@ -348,8 +336,8 @@ TextureImporter:
       name: binary3x3
       rect:
         serializedVersion: 2
-        x: 1425
-        y: 576
+        x: 2011
+        y: 572
         width: 3
         height: 3
       alignment: 0
@@ -361,8 +349,8 @@ TextureImporter:
       name: buttonControls
       rect:
         serializedVersion: 2
-        x: 1282
-        y: 1615
+        x: 1230
+        y: 662
         width: 352
         height: 42
       alignment: 0
@@ -374,8 +362,8 @@ TextureImporter:
       name: buttonControlsHighlighted
       rect:
         serializedVersion: 2
-        x: 1254
-        y: 1434
+        x: 1282
+        y: 1621
         width: 352
         height: 42
       alignment: 0
@@ -387,8 +375,8 @@ TextureImporter:
       name: buttonFrame
       rect:
         serializedVersion: 2
-        x: 1092
-        y: 222
+        x: 1613
+        y: 1684
         width: 136
         height: 136
       alignment: 0
@@ -400,8 +388,8 @@ TextureImporter:
       name: buttonHighlighted
       rect:
         serializedVersion: 2
-        x: 1701
-        y: 1796
+        x: 1610
+        y: 253
         width: 108
         height: 108
       alignment: 0
@@ -413,8 +401,8 @@ TextureImporter:
       name: buttonNoHighlighted
       rect:
         serializedVersion: 2
-        x: 1282
-        y: 128
+        x: 1610
+        y: 82
         width: 188
         height: 61
       alignment: 0
@@ -426,8 +414,8 @@ TextureImporter:
       name: buttonNormalA
       rect:
         serializedVersion: 2
-        x: 1580
-        y: 203
+        x: 1610
+        y: 144
         width: 108
         height: 108
       alignment: 0
@@ -439,8 +427,8 @@ TextureImporter:
       name: buttonText1024x768
       rect:
         serializedVersion: 2
-        x: 1632
-        y: 72
+        x: 1806
+        y: 433
         width: 159
         height: 22
       alignment: 0
@@ -452,8 +440,8 @@ TextureImporter:
       name: buttonText1152x864
       rect:
         serializedVersion: 2
-        x: 1894
-        y: 753
+        x: 1799
+        y: 249
         width: 151
         height: 22
       alignment: 0
@@ -465,8 +453,8 @@ TextureImporter:
       name: buttonText1280x720
       rect:
         serializedVersion: 2
-        x: 1471
-        y: 77
+        x: 1806
+        y: 410
         width: 160
         height: 22
       alignment: 0
@@ -478,8 +466,8 @@ TextureImporter:
       name: buttonText1280x960
       rect:
         serializedVersion: 2
-        x: 1471
-        y: 123
+        x: 1806
+        y: 387
         width: 164
         height: 22
       alignment: 0
@@ -491,8 +479,8 @@ TextureImporter:
       name: buttonText1280x1024
       rect:
         serializedVersion: 2
-        x: 1667
-        y: 164
+        x: 1796
+        y: 530
         width: 172
         height: 22
       alignment: 0
@@ -504,8 +492,8 @@ TextureImporter:
       name: buttonText1360x768
       rect:
         serializedVersion: 2
-        x: 1636
-        y: 118
+        x: 1799
+        y: 318
         width: 160
         height: 22
       alignment: 0
@@ -517,8 +505,8 @@ TextureImporter:
       name: buttonText1366x768
       rect:
         serializedVersion: 2
-        x: 1635
-        y: 95
+        x: 1799
+        y: 295
         width: 160
         height: 22
       alignment: 0
@@ -530,8 +518,8 @@ TextureImporter:
       name: buttonText1600x900
       rect:
         serializedVersion: 2
-        x: 1667
-        y: 141
+        x: 1806
+        y: 364
         width: 167
         height: 22
       alignment: 0
@@ -543,8 +531,8 @@ TextureImporter:
       name: buttonText1920x1080
       rect:
         serializedVersion: 2
-        x: 1825
-        y: 684
+        x: 1862
+        y: 715
         width: 174
         height: 22
       alignment: 0
@@ -556,8 +544,8 @@ TextureImporter:
       name: buttonTextBowling
       rect:
         serializedVersion: 2
-        x: 1092
-        y: 199
+        x: 1902
+        y: 926
         width: 135
         height: 22
       alignment: 0
@@ -569,8 +557,8 @@ TextureImporter:
       name: buttonTextBrightness
       rect:
         serializedVersion: 2
-        x: 1851
-        y: 730
+        x: 1862
+        y: 798
         width: 185
         height: 22
       alignment: 0
@@ -582,8 +570,8 @@ TextureImporter:
       name: buttonTextContinue
       rect:
         serializedVersion: 2
-        x: 1566
-        y: 26
+        x: 1799
+        y: 226
         width: 146
         height: 22
       alignment: 0
@@ -595,8 +583,8 @@ TextureImporter:
       name: buttonTextControls
       rect:
         serializedVersion: 2
-        x: 1595
-        y: 49
+        x: 1799
+        y: 272
         width: 157
         height: 22
       alignment: 0
@@ -608,8 +596,8 @@ TextureImporter:
       name: buttonTextCredits
       rect:
         serializedVersion: 2
-        x: 1863
-        y: 497
+        x: 1799
+        y: 180
         width: 121
         height: 22
       alignment: 0
@@ -621,8 +609,8 @@ TextureImporter:
       name: buttonTextCursor
       rect:
         serializedVersion: 2
-        x: 1863
-        y: 451
+        x: 1817
+        y: 124
         width: 120
         height: 22
       alignment: 0
@@ -634,9 +622,22 @@ TextureImporter:
       name: buttonTextExtras
       rect:
         serializedVersion: 2
-        x: 1850
-        y: 363
+        x: 1799
+        y: 101
         width: 118
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: buttonTextHelp
+      rect:
+        serializedVersion: 2
+        x: 1967
+        y: 418
+        width: 74
         height: 22
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -647,8 +648,8 @@ TextureImporter:
       name: buttonTextInstructions
       rect:
         serializedVersion: 2
-        x: 1689
-        y: 187
+        x: 1796
+        y: 553
         width: 214
         height: 22
       alignment: 0
@@ -660,8 +661,8 @@ TextureImporter:
       name: buttonTextMaster
       rect:
         serializedVersion: 2
-        x: 1863
-        y: 543
+        x: 1917
+        y: 997
         width: 123
         height: 22
       alignment: 0
@@ -673,8 +674,8 @@ TextureImporter:
       name: buttonTextMusic
       rect:
         serializedVersion: 2
-        x: 1590
-        y: 1077
+        x: 1957
+        y: 253
         width: 89
         height: 22
       alignment: 0
@@ -686,8 +687,8 @@ TextureImporter:
       name: buttonTextNewGame
       rect:
         serializedVersion: 2
-        x: 1471
-        y: 100
+        x: 1799
+        y: 341
         width: 163
         height: 22
       alignment: 0
@@ -699,8 +700,8 @@ TextureImporter:
       name: buttonTextNext
       rect:
         serializedVersion: 2
-        x: 1687
-        y: 1032
+        x: 1966
+        y: 441
         width: 72
         height: 23
       alignment: 0
@@ -712,8 +713,8 @@ TextureImporter:
       name: buttonTextPlay
       rect:
         serializedVersion: 2
-        x: 1682
-        y: 1009
+        x: 1954
+        y: 1184
         width: 79
         height: 22
       alignment: 0
@@ -725,8 +726,8 @@ TextureImporter:
       name: buttonTextPrevious
       rect:
         serializedVersion: 2
-        x: 1855
-        y: 622
+        x: 1902
+        y: 972
         width: 140
         height: 24
       alignment: 0
@@ -738,8 +739,8 @@ TextureImporter:
       name: buttonTextQuit
       rect:
         serializedVersion: 2
-        x: 1840
-        y: 158
+        x: 1871
+        y: 1980
         width: 66
         height: 28
       alignment: 0
@@ -751,22 +752,9 @@ TextureImporter:
       name: buttonTextResolution
       rect:
         serializedVersion: 2
-        x: 1825
-        y: 707
+        x: 1862
+        y: 775
         width: 185
-        height: 22
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: buttonTextResume
-      rect:
-        serializedVersion: 2
-        x: 1863
-        y: 474
-        width: 121
         height: 22
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -777,8 +765,8 @@ TextureImporter:
       name: buttonTextSettings
       rect:
         serializedVersion: 2
-        x: 1566
-        y: 3
+        x: 1902
+        y: 949
         width: 142
         height: 22
       alignment: 0
@@ -790,8 +778,8 @@ TextureImporter:
       name: buttonTextSounds
       rect:
         serializedVersion: 2
-        x: 1863
-        y: 520
+        x: 1799
+        y: 203
         width: 123
         height: 22
       alignment: 0
@@ -803,8 +791,8 @@ TextureImporter:
       name: buttonTextTitle
       rect:
         serializedVersion: 2
-        x: 1835
-        y: 135
+        x: 1969
+        y: 530
         width: 78
         height: 22
       alignment: 0
@@ -816,8 +804,8 @@ TextureImporter:
       name: buttonTextTypeA
       rect:
         serializedVersion: 2
-        x: 1885
-        y: 589
+        x: 1918
+        y: 1046
         width: 116
         height: 32
       alignment: 0
@@ -829,8 +817,8 @@ TextureImporter:
       name: buttonTextTypeB
       rect:
         serializedVersion: 2
-        x: 1935
-        y: 2015
+        x: 1817
+        y: 147
         width: 112
         height: 32
       alignment: 0
@@ -842,8 +830,8 @@ TextureImporter:
       name: buttonTextVoice
       rect:
         serializedVersion: 2
-        x: 1590
-        y: 1054
+        x: 1960
+        y: 276
         width: 87
         height: 22
       alignment: 0
@@ -855,8 +843,8 @@ TextureImporter:
       name: buttonTextVolume
       rect:
         serializedVersion: 2
-        x: 1863
-        y: 566
+        x: 1902
+        y: 903
         width: 126
         height: 22
       alignment: 0
@@ -868,8 +856,8 @@ TextureImporter:
       name: buttonYesHighlighted
       rect:
         serializedVersion: 2
-        x: 1282
-        y: 66
+        x: 1844
+        y: 841
         width: 188
         height: 61
       alignment: 0
@@ -881,8 +869,8 @@ TextureImporter:
       name: controlsHighlighted
       rect:
         serializedVersion: 2
-        x: 1148
-        y: 547
+        x: 1581
+        y: 733
         width: 280
         height: 28
       alignment: 0
@@ -894,8 +882,8 @@ TextureImporter:
       name: controlsKeyGlow
       rect:
         serializedVersion: 2
-        x: 1907
-        y: 159
+        x: 1691
+        y: 1486
         width: 40
         height: 40
       alignment: 0
@@ -907,8 +895,8 @@ TextureImporter:
       name: controlsKeyGlowMono
       rect:
         serializedVersion: 2
-        x: 1713
-        y: 8
+        x: 1635
+        y: 1623
         width: 40
         height: 40
       alignment: 0
@@ -920,8 +908,8 @@ TextureImporter:
       name: controlsKeys
       rect:
         serializedVersion: 2
-        x: 1580
-        y: 146
+        x: 1148
+        y: 406
         width: 86
         height: 56
       alignment: 0
@@ -933,8 +921,8 @@ TextureImporter:
       name: controlsKeysMono
       rect:
         serializedVersion: 2
-        x: 1961
-        y: 231
+        x: 1587
+        y: 1442
         width: 86
         height: 56
       alignment: 0
@@ -946,8 +934,8 @@ TextureImporter:
       name: controlsPad0
       rect:
         serializedVersion: 2
-        x: 1229
-        y: 294
+        x: 1721
+        y: 372
         width: 84
         height: 64
       alignment: 0
@@ -959,8 +947,8 @@ TextureImporter:
       name: controlsPad1
       rect:
         serializedVersion: 2
-        x: 1810
-        y: 1805
+        x: 1963
+        y: 299
         width: 84
         height: 64
       alignment: 0
@@ -972,8 +960,8 @@ TextureImporter:
       name: controlsPad2
       rect:
         serializedVersion: 2
-        x: 1799
-        y: 386
+        x: 1748
+        y: 14
         width: 84
         height: 64
       alignment: 0
@@ -985,8 +973,8 @@ TextureImporter:
       name: controlsPad3
       rect:
         serializedVersion: 2
-        x: 1884
-        y: 386
+        x: 1833
+        y: 14
         width: 84
         height: 64
       alignment: 0
@@ -998,8 +986,8 @@ TextureImporter:
       name: controlsPad4
       rect:
         serializedVersion: 2
-        x: 1579
-        y: 945
+        x: 1953
+        y: 465
         width: 84
         height: 64
       alignment: 0
@@ -1011,8 +999,8 @@ TextureImporter:
       name: controlsPad5
       rect:
         serializedVersion: 2
-        x: 1579
-        y: 880
+        x: 1954
+        y: 1207
         width: 84
         height: 64
       alignment: 0
@@ -1024,8 +1012,8 @@ TextureImporter:
       name: controlsPadMono0
       rect:
         serializedVersion: 2
-        x: 1664
-        y: 944
+        x: 1951
+        y: 188
         width: 84
         height: 64
       alignment: 0
@@ -1037,8 +1025,8 @@ TextureImporter:
       name: controlsPadMono1
       rect:
         serializedVersion: 2
-        x: 1664
-        y: 879
+        x: 1938
+        y: 123
         width: 84
         height: 64
       alignment: 0
@@ -1050,8 +1038,8 @@ TextureImporter:
       name: controlsPadMono2
       rect:
         serializedVersion: 2
-        x: 1954
-        y: 166
+        x: 1918
+        y: 58
         width: 84
         height: 64
       alignment: 0
@@ -1063,8 +1051,8 @@ TextureImporter:
       name: controlsPadMono3
       rect:
         serializedVersion: 2
-        x: 1797
-        y: 70
+        x: 1181
+        y: 341
         width: 84
         height: 64
       alignment: 0
@@ -1076,8 +1064,8 @@ TextureImporter:
       name: controlsPadMono4
       rect:
         serializedVersion: 2
-        x: 1882
-        y: 70
+        x: 1174
+        y: 276
         width: 84
         height: 64
       alignment: 0
@@ -1089,8 +1077,8 @@ TextureImporter:
       name: controlsPadMono5
       rect:
         serializedVersion: 2
-        x: 1754
-        y: 5
+        x: 1174
+        y: 211
         width: 84
         height: 64
       alignment: 0
@@ -1102,8 +1090,8 @@ TextureImporter:
       name: controlsPlayer
       rect:
         serializedVersion: 2
-        x: 1684
-        y: 1056
+        x: 1092
+        y: 206
         width: 77
         height: 174
       alignment: 0
@@ -1115,8 +1103,8 @@ TextureImporter:
       name: controlsPlayerMono
       rect:
         serializedVersion: 2
-        x: 1580
-        y: 312
+        x: 1943
+        y: 1592
         width: 77
         height: 174
       alignment: 0
@@ -1128,8 +1116,8 @@ TextureImporter:
       name: controlsScreen
       rect:
         serializedVersion: 2
-        x: 1425
-        y: 580
+        x: 1856
+        y: 919
         width: 45
         height: 96
       alignment: 0
@@ -1141,8 +1129,8 @@ TextureImporter:
       name: cursor1Blue
       rect:
         serializedVersion: 2
-        x: 1429
-        y: 547
+        x: 1178
+        y: 178
         width: 32
         height: 32
       alignment: 0
@@ -1154,8 +1142,8 @@ TextureImporter:
       name: cursor1Green
       rect:
         serializedVersion: 2
-        x: 1462
-        y: 547
+        x: 1211
+        y: 178
         width: 32
         height: 32
       alignment: 0
@@ -1167,8 +1155,8 @@ TextureImporter:
       name: cursor1Red
       rect:
         serializedVersion: 2
-        x: 1839
-        y: 37
+        x: 1244
+        y: 178
         width: 32
         height: 32
       alignment: 0
@@ -1180,8 +1168,8 @@ TextureImporter:
       name: cursor1Yellow
       rect:
         serializedVersion: 2
-        x: 1872
-        y: 37
+        x: 1943
+        y: 1559
         width: 32
         height: 32
       alignment: 0
@@ -1193,8 +1181,8 @@ TextureImporter:
       name: cursor2Blue
       rect:
         serializedVersion: 2
-        x: 1905
-        y: 37
+        x: 1684
+        y: 1152
         width: 32
         height: 32
       alignment: 0
@@ -1206,8 +1194,8 @@ TextureImporter:
       name: cursor2Green
       rect:
         serializedVersion: 2
-        x: 1839
-        y: 4
+        x: 1943
+        y: 1526
         width: 32
         height: 32
       alignment: 0
@@ -1219,8 +1207,8 @@ TextureImporter:
       name: cursor2Purple
       rect:
         serializedVersion: 2
-        x: 1872
-        y: 4
+        x: 2015
+        y: 571
         width: 32
         height: 32
       alignment: 0
@@ -1232,8 +1220,8 @@ TextureImporter:
       name: cursor2Red
       rect:
         serializedVersion: 2
-        x: 1905
-        y: 4
+        x: 1223
+        y: 475
         width: 32
         height: 32
       alignment: 0
@@ -1245,8 +1233,8 @@ TextureImporter:
       name: cursor3Blue
       rect:
         serializedVersion: 2
-        x: 1938
-        y: 37
+        x: 1776
+        y: 1777
         width: 32
         height: 32
       alignment: 0
@@ -1258,8 +1246,8 @@ TextureImporter:
       name: cursor3BlueInvert
       rect:
         serializedVersion: 2
-        x: 1938
-        y: 4
+        x: 1719
+        y: 293
         width: 32
         height: 32
       alignment: 0
@@ -1271,8 +1259,8 @@ TextureImporter:
       name: cursor3Green
       rect:
         serializedVersion: 2
-        x: 1827
-        y: 546
+        x: 1719
+        y: 260
         width: 32
         height: 32
       alignment: 0
@@ -1284,8 +1272,8 @@ TextureImporter:
       name: cursor3Purple
       rect:
         serializedVersion: 2
-        x: 1680
-        y: 1590
+        x: 1719
+        y: 227
         width: 32
         height: 32
       alignment: 0
@@ -1297,8 +1285,8 @@ TextureImporter:
       name: cursor3Red
       rect:
         serializedVersion: 2
-        x: 1672
-        y: 1557
+        x: 1719
+        y: 194
         width: 32
         height: 32
       alignment: 0
@@ -1310,8 +1298,8 @@ TextureImporter:
       name: cursor3Yellow
       rect:
         serializedVersion: 2
-        x: 1799
-        y: 454
+        x: 2003
+        y: 90
         width: 32
         height: 32
       alignment: 0
@@ -1323,8 +1311,8 @@ TextureImporter:
       name: cursorGlowCenter
       rect:
         serializedVersion: 2
-        x: 1282
-        y: 1721
+        x: 1230
+        y: 705
         width: 350
         height: 100
       alignment: 0
@@ -1349,8 +1337,8 @@ TextureImporter:
       name: cursorHighlighted
       rect:
         serializedVersion: 2
-        x: 1861
-        y: 282
+        x: 1667
+        y: 1
         width: 80
         height: 80
       alignment: 0
@@ -1362,8 +1350,8 @@ TextureImporter:
       name: displayFrameBottom
       rect:
         serializedVersion: 2
-        x: 1580
-        y: 552
+        x: 1544
+        y: 623
         width: 246
         height: 26
       alignment: 0
@@ -1375,8 +1363,8 @@ TextureImporter:
       name: displayFrameButtonNormal
       rect:
         serializedVersion: 2
-        x: 1148
-        y: 576
+        x: 1579
+        y: 915
         width: 276
         height: 100
       alignment: 0
@@ -1388,8 +1376,8 @@ TextureImporter:
       name: displayFrameLeft
       rect:
         serializedVersion: 2
-        x: 1499
-        y: 146
+        x: 1732
+        y: 1153
         width: 80
         height: 530
       alignment: 0
@@ -1427,8 +1415,8 @@ TextureImporter:
       name: displaySideClip
       rect:
         serializedVersion: 2
-        x: 1229
-        y: 227
+        x: 1579
+        y: 848
         width: 264
         height: 66
       alignment: 0
@@ -1440,8 +1428,8 @@ TextureImporter:
       name: displaySideLock
       rect:
         serializedVersion: 2
-        x: 1544
-        y: 683
+        x: 1581
+        y: 762
         width: 280
         height: 48
       alignment: 0
@@ -1466,9 +1454,9 @@ TextureImporter:
       name: footerUnit
       rect:
         serializedVersion: 2
-        x: 1108
-        y: 396
-        width: 226
+        x: 777
+        y: 661
+        width: 452
         height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1492,8 +1480,8 @@ TextureImporter:
       name: headerDot
       rect:
         serializedVersion: 2
-        x: 1732
-        y: 1232
+        x: 1223
+        y: 508
         width: 29
         height: 29
       alignment: 0
@@ -1506,7 +1494,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1255
-        y: 677
+        y: 533
         width: 288
         height: 128
       alignment: 0
@@ -1541,24 +1529,11 @@ TextureImporter:
       outline: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: headerTextBowling
-      rect:
-        serializedVersion: 2
-        x: 1658
-        y: 349
-        width: 191
-        height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
       name: headerTextBrightness
       rect:
         serializedVersion: 2
-        x: 1580
-        y: 646
+        x: 1583
+        y: 650
         width: 250
         height: 36
       alignment: 0
@@ -1570,8 +1545,8 @@ TextureImporter:
       name: headerTextControls
       rect:
         serializedVersion: 2
-        x: 1108
-        y: 359
+        x: 1791
+        y: 604
         width: 224
         height: 36
       alignment: 0
@@ -1583,8 +1558,8 @@ TextureImporter:
       name: headerTextCredits
       rect:
         serializedVersion: 2
-        x: 1689
-        y: 275
+        x: 1866
+        y: 678
         width: 171
         height: 36
       alignment: 0
@@ -1596,8 +1571,8 @@ TextureImporter:
       name: headerTextCursorSelect
       rect:
         serializedVersion: 2
-        x: 1579
-        y: 821
+        x: 1684
+        y: 1079
         width: 331
         height: 36
       alignment: 0
@@ -1609,8 +1584,8 @@ TextureImporter:
       name: headerTextExtras
       rect:
         serializedVersion: 2
-        x: 1894
-        y: 776
+        x: 1796
+        y: 456
         width: 153
         height: 36
       alignment: 0
@@ -1622,8 +1597,8 @@ TextureImporter:
       name: headerTextInstructions
       rect:
         serializedVersion: 2
-        x: 1544
-        y: 732
+        x: 1610
+        y: 1016
         width: 306
         height: 36
       alignment: 0
@@ -1635,8 +1610,8 @@ TextureImporter:
       name: headerTextMainMenu
       rect:
         serializedVersion: 2
-        x: 1580
-        y: 516
+        x: 1544
+        y: 587
         width: 227
         height: 35
       alignment: 0
@@ -1648,8 +1623,8 @@ TextureImporter:
       name: headerTextPaused
       rect:
         serializedVersion: 2
-        x: 1831
-        y: 647
+        x: 1796
+        y: 493
         width: 156
         height: 36
       alignment: 0
@@ -1661,8 +1636,8 @@ TextureImporter:
       name: headerTextPlay
       rect:
         serializedVersion: 2
-        x: 1863
-        y: 246
+        x: 1719
+        y: 144
         width: 97
         height: 35
       alignment: 0
@@ -1674,8 +1649,8 @@ TextureImporter:
       name: headerTextResolution
       rect:
         serializedVersion: 2
-        x: 1229
-        y: 190
+        x: 1579
+        y: 811
         width: 259
         height: 36
       alignment: 0
@@ -1687,8 +1662,8 @@ TextureImporter:
       name: headerTextSettings
       rect:
         serializedVersion: 2
-        x: 1658
-        y: 312
+        x: 1834
+        y: 641
         width: 202
         height: 36
       alignment: 0
@@ -1700,8 +1675,8 @@ TextureImporter:
       name: headerTextVolume
       rect:
         serializedVersion: 2
-        x: 1689
-        y: 238
+        x: 1862
+        y: 738
         width: 173
         height: 36
       alignment: 0
@@ -1713,8 +1688,8 @@ TextureImporter:
       name: inst2WayArrow
       rect:
         serializedVersion: 2
-        x: 1979
-        y: 1455
+        x: 1691
+        y: 1527
         width: 40
         height: 156
       alignment: 0
@@ -1726,8 +1701,8 @@ TextureImporter:
       name: instHeaderFuel
       rect:
         serializedVersion: 2
-        x: 1948
-        y: 139
+        x: 1092
+        y: 179
         width: 85
         height: 26
       alignment: 0
@@ -1739,8 +1714,8 @@ TextureImporter:
       name: instHeaderLevelObjective
       rect:
         serializedVersion: 2
-        x: 1579
-        y: 795
+        x: 1610
+        y: 1053
         width: 307
         height: 25
       alignment: 0
@@ -1752,8 +1727,8 @@ TextureImporter:
       name: instHeaderLine
       rect:
         serializedVersion: 2
-        x: 1758
-        y: 1298
+        x: 1170
+        y: 246
         width: 3
         height: 28
       alignment: 0
@@ -1765,8 +1740,8 @@ TextureImporter:
       name: instHeaderPlayerMovement
       rect:
         serializedVersion: 2
-        x: 1544
-        y: 769
+        x: 1684
+        y: 1116
         width: 349
         height: 25
       alignment: 0
@@ -1778,8 +1753,8 @@ TextureImporter:
       name: instHeaderShield
       rect:
         serializedVersion: 2
-        x: 1471
-        y: 51
+        x: 1917
+        y: 1020
         width: 123
         height: 25
       alignment: 0
@@ -1791,8 +1766,8 @@ TextureImporter:
       name: instHeaderTractorBeam
       rect:
         serializedVersion: 2
-        x: 1580
-        y: 619
+        x: 1581
+        y: 706
         width: 274
         height: 26
       alignment: 0
@@ -1804,8 +1779,8 @@ TextureImporter:
       name: instHeaderTypeA
       rect:
         serializedVersion: 2
-        x: 1582
-        y: 1032
+        x: 1559
+        y: 1414
         width: 104
         height: 21
       alignment: 0
@@ -1817,8 +1792,8 @@ TextureImporter:
       name: instHeaderTypeB
       rect:
         serializedVersion: 2
-        x: 1579
-        y: 1010
+        x: 1799
+        y: 79
         width: 102
         height: 21
       alignment: 0
@@ -1830,8 +1805,8 @@ TextureImporter:
       name: instIllustFuelCrystal
       rect:
         serializedVersion: 2
-        x: 1658
-        y: 386
+        x: 1813
+        y: 1171
         width: 140
         height: 100
       alignment: 0
@@ -1844,7 +1819,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1282
-        y: 1822
+        y: 1821
         width: 418
         height: 82
       alignment: 0
@@ -1857,7 +1832,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 777
-        y: 552
+        y: 401
         width: 370
         height: 136
       alignment: 0
@@ -1882,8 +1857,8 @@ TextureImporter:
       name: instIllustTractorGrab
       rect:
         serializedVersion: 2
-        x: 777
-        y: 395
+        x: 1282
+        y: 1664
         width: 330
         height: 156
       alignment: 0
@@ -1895,8 +1870,8 @@ TextureImporter:
       name: instKeyA
       rect:
         serializedVersion: 2
-        x: 1908
-        y: 200
+        x: 1684
+        y: 1185
         width: 45
         height: 45
       alignment: 0
@@ -1908,8 +1883,8 @@ TextureImporter:
       name: instKeyAp
       rect:
         serializedVersion: 2
-        x: 1979
-        y: 1344
+        x: 1544
+        y: 541
         width: 45
         height: 45
       alignment: 0
@@ -1921,8 +1896,8 @@ TextureImporter:
       name: instKeyD
       rect:
         serializedVersion: 2
-        x: 1989
-        y: 1298
+        x: 1918
+        y: 12
         width: 45
         height: 45
       alignment: 0
@@ -1934,8 +1909,8 @@ TextureImporter:
       name: instKeyDp
       rect:
         serializedVersion: 2
-        x: 1989
-        y: 1252
+        x: 1964
+        y: 12
         width: 45
         height: 45
       alignment: 0
@@ -1947,8 +1922,8 @@ TextureImporter:
       name: instKeyS
       rect:
         serializedVersion: 2
-        x: 1989
-        y: 1206
+        x: 1674
+        y: 1440
         width: 45
         height: 45
       alignment: 0
@@ -1960,8 +1935,8 @@ TextureImporter:
       name: instKeySp
       rect:
         serializedVersion: 2
-        x: 1989
-        y: 1160
+        x: 1750
+        y: 1710
         width: 45
         height: 45
       alignment: 0
@@ -1973,8 +1948,8 @@ TextureImporter:
       name: instKeyW
       rect:
         serializedVersion: 2
-        x: 1989
-        y: 1114
+        x: 1974
+        y: 372
         width: 45
         height: 45
       alignment: 0
@@ -1986,8 +1961,8 @@ TextureImporter:
       name: instKeyWp
       rect:
         serializedVersion: 2
-        x: 1989
-        y: 1068
+        x: 1721
+        y: 326
         width: 45
         height: 45
       alignment: 0
@@ -1999,8 +1974,8 @@ TextureImporter:
       name: instTextChange
       rect:
         serializedVersion: 2
-        x: 1580
-        y: 598
+        x: 1254
+        y: 1415
         width: 304
         height: 20
       alignment: 0
@@ -2013,7 +1988,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1254
-        y: 1566
+        y: 1548
         width: 417
         height: 23
       alignment: 0
@@ -2026,7 +2001,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1254
-        y: 1502
+        y: 1524
         width: 387
         height: 23
       alignment: 0
@@ -2064,8 +2039,8 @@ TextureImporter:
       name: instTextMove
       rect:
         serializedVersion: 2
-        x: 1457
-        y: 1414
+        x: 1613
+        y: 1664
         width: 76
         height: 19
       alignment: 0
@@ -2104,7 +2079,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1254
-        y: 1590
+        y: 1596
         width: 425
         height: 24
       alignment: 0
@@ -2117,7 +2092,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1254
-        y: 1477
+        y: 1499
         width: 374
         height: 24
       alignment: 0
@@ -2129,8 +2104,8 @@ TextureImporter:
       name: instTextShield2
       rect:
         serializedVersion: 2
-        x: 1254
-        y: 1546
+        x: 777
+        y: 381
         width: 403
         height: 19
       alignment: 0
@@ -2142,10 +2117,10 @@ TextureImporter:
       name: instTextShield3
       rect:
         serializedVersion: 2
-        x: 1254
-        y: 1526
-        width: 397
-        height: 19
+        x: 1352
+        y: 1928
+        width: 482
+        height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2169,7 +2144,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1352
-        y: 1929
+        y: 1904
         width: 460
         height: 23
       alignment: 0
@@ -2194,8 +2169,8 @@ TextureImporter:
       name: instTextTractor0Pad
       rect:
         serializedVersion: 2
-        x: 1254
-        y: 1414
+        x: 1839
+        y: 821
         width: 202
         height: 19
       alignment: 0
@@ -2207,8 +2182,8 @@ TextureImporter:
       name: instTextTractor1
       rect:
         serializedVersion: 2
-        x: 1580
-        y: 579
+        x: 1583
+        y: 687
         width: 282
         height: 18
       alignment: 0
@@ -2220,8 +2195,8 @@ TextureImporter:
       name: instTextTractor2
       rect:
         serializedVersion: 2
-        x: 1352
-        y: 1905
+        x: 1254
+        y: 1572
         width: 436
         height: 23
       alignment: 0
@@ -2233,8 +2208,8 @@ TextureImporter:
       name: instTextTurn
       rect:
         serializedVersion: 2
-        x: 1534
-        y: 1414
+        x: 1871
+        y: 2009
         width: 71
         height: 19
       alignment: 0
@@ -2246,8 +2221,8 @@ TextureImporter:
       name: instVirtualPad
       rect:
         serializedVersion: 2
-        x: 1813
-        y: 1870
+        x: 1701
+        y: 1821
         width: 82
         height: 82
       alignment: 0
@@ -2311,8 +2286,8 @@ TextureImporter:
       name: panelClipA
       rect:
         serializedVersion: 2
-        x: 1926
-        y: 1038
+        x: 1977
+        y: 1299
         width: 62
         height: 292
       alignment: 0
@@ -2324,8 +2299,8 @@ TextureImporter:
       name: panelClipB
       rect:
         serializedVersion: 2
-        x: 1896
-        y: 1331
+        x: 1943
+        y: 1767
         width: 82
         height: 280
       alignment: 0
@@ -2350,8 +2325,8 @@ TextureImporter:
       name: panelShadow
       rect:
         serializedVersion: 2
-        x: 2026
-        y: 1909
+        x: 1170
+        y: 275
         width: 3
         height: 105
       alignment: 0
@@ -2376,8 +2351,8 @@ TextureImporter:
       name: previewFrameCorner
       rect:
         serializedVersion: 2
-        x: 1335
-        y: 294
+        x: 1813
+        y: 1272
         width: 163
         height: 252
       alignment: 0
@@ -2389,8 +2364,8 @@ TextureImporter:
       name: previewFrameLeft
       rect:
         serializedVersion: 2
-        x: 1732
-        y: 1327
+        x: 1282
+        y: 64
         width: 163
         height: 468
       alignment: 0
@@ -2402,8 +2377,8 @@ TextureImporter:
       name: previewFrameRight
       rect:
         serializedVersion: 2
-        x: 1762
-        y: 858
+        x: 1446
+        y: 64
         width: 163
         height: 468
       alignment: 0
@@ -2416,7 +2391,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 777
-        y: 689
+        y: 538
         width: 477
         height: 122
       alignment: 0
@@ -2467,8 +2442,8 @@ TextureImporter:
       name: previewLock
       rect:
         serializedVersion: 2
-        x: 1896
-        y: 1612
+        x: 1813
+        y: 1525
         width: 129
         height: 402
       alignment: 0
@@ -2480,8 +2455,8 @@ TextureImporter:
       name: promptCountdown
       rect:
         serializedVersion: 2
-        x: 1680
-        y: 1087
+        x: 1170
+        y: 233
         width: 3
         height: 12
       alignment: 0
@@ -2493,8 +2468,8 @@ TextureImporter:
       name: promptCountdownTip
       rect:
         serializedVersion: 2
-        x: 1989
-        y: 1039
+        x: 1784
+        y: 1810
         width: 28
         height: 28
       alignment: 0
@@ -2506,8 +2481,8 @@ TextureImporter:
       name: promptTextAreYouSure
       rect:
         serializedVersion: 2
-        x: 1689
-        y: 210
+        x: 1796
+        y: 576
         width: 218
         height: 27
       alignment: 0
@@ -2519,8 +2494,8 @@ TextureImporter:
       name: promptTextKeepChanges
       rect:
         serializedVersion: 2
-        x: 1580
-        y: 487
+        x: 1813
+        y: 1142
         width: 234
         height: 28
       alignment: 0
@@ -2532,8 +2507,8 @@ TextureImporter:
       name: promptTextOverwriteProceed
       rect:
         serializedVersion: 2
-        x: 1282
-        y: 1658
+        x: 1254
+        y: 1436
         width: 332
         height: 62
       alignment: 0
@@ -2545,8 +2520,8 @@ TextureImporter:
       name: sliderHBody
       rect:
         serializedVersion: 2
-        x: 1570
-        y: 1036
+        x: 2036
+        y: 760
         width: 11
         height: 14
       alignment: 0
@@ -2558,8 +2533,8 @@ TextureImporter:
       name: sliderHBodyFill
       rect:
         serializedVersion: 2
-        x: 1282
-        y: 51
+        x: 1720
+        y: 1471
         width: 11
         height: 14
       alignment: 0
@@ -2571,8 +2546,8 @@ TextureImporter:
       name: sliderHKnobHighlighted
       rect:
         serializedVersion: 2
-        x: 1732
-        y: 1262
+        x: 1750
+        y: 1756
         width: 25
         height: 64
       alignment: 0
@@ -2584,8 +2559,8 @@ TextureImporter:
       name: sliderHKnobNormal
       rect:
         serializedVersion: 2
-        x: 1979
-        y: 1390
+        x: 1784
+        y: 1839
         width: 25
         height: 64
       alignment: 0
@@ -2597,8 +2572,8 @@ TextureImporter:
       name: sliderVBody
       rect:
         serializedVersion: 2
-        x: 1282
-        y: 1905
+        x: 1719
+        y: 180
         width: 14
         height: 13
       alignment: 0
@@ -2610,8 +2585,8 @@ TextureImporter:
       name: sliderVBodyFill
       rect:
         serializedVersion: 2
-        x: 1297
-        y: 1905
+        x: 1734
+        y: 180
         width: 14
         height: 13
       alignment: 0
@@ -2623,8 +2598,8 @@ TextureImporter:
       name: sliderVDecoration
       rect:
         serializedVersion: 2
-        x: 1926
-        y: 813
+        x: 1610
+        y: 362
         width: 110
         height: 224
       alignment: 0
@@ -2636,8 +2611,8 @@ TextureImporter:
       name: sliderVKnobHighlighted
       rect:
         serializedVersion: 2
-        x: 1967
-        y: 113
+        x: 1871
+        y: 1954
         width: 64
         height: 25
       alignment: 0
@@ -2649,8 +2624,8 @@ TextureImporter:
       name: sliderVKnobNormal
       rect:
         serializedVersion: 2
-        x: 1967
-        y: 87
+        x: 1871
+        y: 1928
         width: 64
         height: 25
       alignment: 0
@@ -2662,8 +2637,8 @@ TextureImporter:
       name: toggleChecked
       rect:
         serializedVersion: 2
-        x: 1607
-        y: 1414
+        x: 1566
+        y: 1
         width: 100
         height: 62
       alignment: 0
@@ -2675,8 +2650,8 @@ TextureImporter:
       name: toggleFrame
       rect:
         serializedVersion: 2
-        x: 1633
-        y: 1773
+        x: 1642
+        y: 1499
         width: 48
         height: 48
       alignment: 0
@@ -2688,8 +2663,8 @@ TextureImporter:
       name: toggleHighlighted
       rect:
         serializedVersion: 2
-        x: 2011
-        y: 697
+        x: 1752
+        y: 293
         width: 32
         height: 32
       alignment: 0
@@ -2701,8 +2676,8 @@ TextureImporter:
       name: toggleNormal
       rect:
         serializedVersion: 2
-        x: 1971
-        y: 54
+        x: 1752
+        y: 260
         width: 32
         height: 32
       alignment: 0

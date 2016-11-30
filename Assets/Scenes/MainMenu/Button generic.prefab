@@ -56,9 +56,9 @@ GameObject:
   - 222: {fileID: 222000012509796196}
   - 114: {fileID: 114000011368858164}
   - 114: {fileID: 114000012493111950}
-  - 114: {fileID: 114000012446664534}
   - 95: {fileID: 95000011452007484}
   - 114: {fileID: 114000012292247750}
+  - 114: {fileID: 114000012446664534}
   m_Layer: 5
   m_Name: Button generic
   m_TagString: Untagged
@@ -226,10 +226,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44dfd9d9cdc8c694887397990eb7b327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextDesktop: {fileID: 0}
-  nextMobile: {fileID: 0}
   exit: Exit
   enter: Enter
+  nextSingle: {fileID: 0}
 --- !u!114 &114000012493111950
 MonoBehaviour:
   m_ObjectHideFlags: 1

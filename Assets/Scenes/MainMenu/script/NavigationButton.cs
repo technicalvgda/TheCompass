@@ -8,13 +8,13 @@ using System.Collections;
 /// </summary>
 
 [RequireComponent(typeof(CanvasGroup))]
-public class UINavigationButton : MonoBehaviour
+public class NavigationButton : MonoBehaviour
 {
     public Button back;
     public Selectable first;
     CanvasGroup cg;
 
-    void Start()
+    void Awake()
     {
         cg = this.GetComponent<CanvasGroup>();
     }
@@ -23,22 +23,25 @@ public class UINavigationButton : MonoBehaviour
     {
         if (!cg.interactable) return;
 
-        if (UIHelper.isButtonNavigation)
+        if (UIInput.isButtonNavigation)
         {
             // If directional key/axis is detected and nothing is selected,
             // selects the designated first element. Otherwise un-highlights
             // the object being moused over so that there is only one
             // highlighted object in the scene. See the function's summary.
 
-            if (UIHelper.selected == null)
-                first.Select();
+            if (UIInput.selected == null)
+            {
+                if (first != null)
+                    first.Select();
+            }
             else
-                UINavigationPointer.ResetMousedOver();
+                NavigationPointer.ResetObjectUnderPointer();
         }
 
-        else if (UIHelper.isBackPressed && back != null)
+        else if (UIInput.isBack && back != null)
         {
-            if (UIHelper.selected == back.gameObject)
+            if (UIInput.selected == back.gameObject)
                 back.onClick.Invoke();
             else
             {
@@ -59,7 +62,7 @@ public class UINavigationButton : MonoBehaviour
 
     IEnumerator _Hack()
     {
-        yield return null; UINavigationPointer.ResetMousedOver();
-        yield return null; UINavigationPointer.ResetMousedOver();
+        yield return null; NavigationPointer.ResetObjectUnderPointer();
+        yield return null; NavigationPointer.ResetObjectUnderPointer();
     }
 }

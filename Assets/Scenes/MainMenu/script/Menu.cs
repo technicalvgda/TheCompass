@@ -2,12 +2,12 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class UIMenu : MonoBehaviour
+public class Menu : MonoBehaviour
 {
     static Stack menuStack;
     CanvasGroup cg;
 
-    void Start()
+    void Awake()
     {
         cg = GetComponent<CanvasGroup>();
 
@@ -29,19 +29,19 @@ public class UIMenu : MonoBehaviour
         }
     }
 
-    public void Transition(ParamsTransition p)
+    public void Transition(MenuTransition p)
     {
         Transition(true, false, p.next, p.exitHash, p.enterHash);
     }
 
-    public void Overlay(ParamsTransition p)
+    public void Overlay(MenuTransition p)
     {
         Transition(true, true, p.next, p.exitHash, p.enterHash);
     }
 
-    public void Back(ParamsBack p)
+    public void Back(MenuBack p)
     {
-        Transition(false, false, (UIMenu)menuStack.Pop(), p.exitHash, p.enterHash);
+        Transition(false, false, (Menu)menuStack.Pop(), p.exitHash, p.enterHash);
     }
 
     // Transition sequence
@@ -55,7 +55,7 @@ public class UIMenu : MonoBehaviour
     // pushCurrent: Pushes the current menu to the menu stack. Back buttons shouldn't push.
     // overlay: Overlays the next menu on top of the current menu and takes control away from it.
 
-    void Transition(bool pushCurrent, bool overlay, UIMenu next, int exitHash, int enterHash)
+    void Transition(bool pushCurrent, bool overlay, Menu next, int exitHash, int enterHash)
     {
         NavigationVoodoo();
 
@@ -68,7 +68,7 @@ public class UIMenu : MonoBehaviour
             StartCoroutine(_Transition(next, exitHash, enterHash));
     }
 
-    IEnumerator _Transition(UIMenu next, int exitHash, int enterHash)
+    IEnumerator _Transition(Menu next, int exitHash, int enterHash)
     {
         Animator anim = GetComponent<Animator>();
 
@@ -101,7 +101,7 @@ public class UIMenu : MonoBehaviour
         Enter(next, enterHash);
     }
 
-    void Enter(UIMenu next, int enterHash)
+    void Enter(Menu next, int enterHash)
     {
         // This code can cause stacking of multiple submenus. If the target was disabled
         // by the time the transition away animation finishes, it will be brought back.
@@ -156,8 +156,8 @@ public class UIMenu : MonoBehaviour
 
     void NavigationVoodoo()
     {
-        UIHelper.selected = null;
-        UINavigationPointer.mousedOver = null;
+        UIInput.selected = null;
+        NavigationPointer.mousedOver = null;
         DisableCanvasGroupInteractable();
     }
 

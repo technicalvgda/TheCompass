@@ -10,7 +10,7 @@ using System;
 /// </summary>
 
 [RequireComponent (typeof(Selectable))]
-public class UINavigationPointer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class NavigationPointer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public static GameObject mousedOver;
     Selectable sel;
@@ -76,7 +76,7 @@ public class UINavigationPointer : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         // Bad last minute hack
 
-        ResetMousedOver();
+        ResetObjectUnderPointer();
         mousedOver = null;
     }
 
@@ -87,10 +87,10 @@ public class UINavigationPointer : MonoBehaviour, IPointerEnterHandler, IPointer
     /// highlighted: the next in the navigation graph and the one underneath the pointer.
     /// </summary>
 
-    public static void ResetMousedOver()
+    public static void ResetObjectUnderPointer()
     {
-        if (mousedOver != null && UIHelper.selected != null &&
-            UIHelper.selected != mousedOver)
+        if (mousedOver != null && UIInput.selected != null &&
+            UIInput.selected != mousedOver)
         {
             // Sets the object's visual state to Normal.
             // Requires an auto-generated Animator, otherwise the problem persists.

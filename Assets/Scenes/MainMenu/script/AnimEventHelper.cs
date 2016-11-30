@@ -2,9 +2,11 @@
 using UnityEngine.Events;
 using System.Collections;
 
-// Used in Animation Events to call functions on objects in the scene.
+// Used in Animation Events to do things that normally wouldn't be possible
+// - calling functions on objects in the scene
+// - disabling self
 
-public class InvokeFunction : MonoBehaviour
+public class AnimEventHelper : MonoBehaviour
 {
     public UnityEvent[] events;
 
@@ -14,5 +16,10 @@ public class InvokeFunction : MonoBehaviour
     public void InvokeAtIndex(int index)
     {
         events[index].Invoke();
+    }
+
+    public void SelfDisable()
+    {
+        gameObject.SetActive(false);
     }
 }
