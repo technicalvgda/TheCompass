@@ -33,7 +33,7 @@ public class Fuel : MonoBehaviour
 
     public IEnumerator DestroyFuel()
     {
-        while(transform.localScale.magnitude > targetScale)
+        while(transform.localScale.x > targetScale)
         {
            transform.localScale -= Vector3.one * Time.deltaTime * shrinkSpeed;
             yield return new WaitForSeconds(0.05f);

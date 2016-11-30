@@ -12,7 +12,7 @@ public class PassageNode
     //Position currently has no use.
     int _passageID;
     string _name;
-    string _tags;
+    List<string> _tags;
     string _position;
     string _content;
 
@@ -28,7 +28,7 @@ public class PassageNode
         Basic constructor that sets all the fields of the PassageNode.
         Also initializes the choice dictionary.
     */
-    public PassageNode(TwineDialogue parent, int pid, string name, string tags, string position, string content)
+    public PassageNode(TwineDialogue parent, int pid, string name, List<string> tags, string position, string content)
     {
         _parent = parent;
         _passageID = pid;
@@ -60,7 +60,20 @@ public class PassageNode
     {
         return _content;
     }
-
+	/*
+	 	Returns the passage id.
+	*/
+	public int GetID()
+	{
+		return _passageID;
+	}
+    /*
+        Returns the collection of tags.
+    */
+    public List<string> GetTags()
+    {
+        return _tags;
+    }
     /*
         Returns all the keys of the choice dictionary.
         The keys are the strings that are displayed to
@@ -84,11 +97,16 @@ public class PassageNode
         {
             if (_choiceDictionary.TryGetValue(s, out choiceString))
             {
-                if (_parent.Passage.TryGetValue(choiceString, out pn))
+                pn = _parent.GetPassage(choiceString);
+                if (pn != null)
                 {
-                    if (pn._tags.ToUpper().Equals(tag.ToUpper()))
+                    foreach(string ntag in pn._tags)
                     {
-                        resultList.Add(s);
+                        if (ntag.ToUpper().Equals(tag.ToUpper()))
+                        {
+                            resultList.Add(s);
+                            break;
+                        }
                     }
                 }
             }
@@ -109,7 +127,8 @@ public class PassageNode
         {
             if (_choiceDictionary.TryGetValue(s, out choiceString))
             {
-                if (_parent.Passage.TryGetValue(choiceString, out pn))
+                pn = _parent.GetPassage(choiceString);
+                if (pn != null)
                 {
                     if (pn.isVisited)
                     {
@@ -127,17 +146,12 @@ public class PassageNode
     */
     public PassageNode GetDecision(string s)
     {
-        PassageNode decision;
-        string key;
-        if (_choiceDictionary.TryGetValue(s, out key))
+        PassageNode decision = GetDecisionIncognito(s);
+        if (decision != null)
         {
-            if (_parent.Passage.TryGetValue(key, out decision))
-            {
-                decision.isVisited = true;
-                return decision;
-            }
+            decision.isVisited = true;
         }
-        return null;
+        return decision;
     }
 
     /*
@@ -145,14 +159,10 @@ public class PassageNode
     */
     public PassageNode GetDecisionIncognito(string s)
     {
-        PassageNode decision;
         string key;
         if (_choiceDictionary.TryGetValue(s, out key))
         {
-            if (_parent.Passage.TryGetValue(key, out decision))
-            {
-                return decision;
-            }
+            return _parent.GetPassage(key);
         }
         return null;
     }
