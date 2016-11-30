@@ -68,7 +68,7 @@ Transform:
   m_GameObject: {fileID: 1000012577847284}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -87, y: 41, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000012093515938}
@@ -117,10 +117,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 50000010395439974, guid: 5ffc42b176a54a245bf9cd9bb6e14035, type: 2}
+  detectionRange: 80
   attRange: 50
   stopDist: 15
   fireRate: 1.225
-  speed: 7.3
+  speed: 20
 --- !u!114 &114000014149204470
 MonoBehaviour:
   m_ObjectHideFlags: 1
