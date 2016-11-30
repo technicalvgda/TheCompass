@@ -13,7 +13,7 @@ public class Level4GameOver : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_playedAudio = false;
-		StartCoroutine (AlternateGameOver ());
+		//StartCoroutine (AlternateGameOver ());
 	}
 	
 	// Update is called once per frame
