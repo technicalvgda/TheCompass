@@ -30,25 +30,26 @@ public class Vision : MonoBehaviour {
 		_playerLoc = _player.transform.position;
 		_rayDirection = _playerLoc - _startVec;
 
-		Debug.DrawRay(_startVec, _startVecFwd, Color.black, 1.0f); //Black line to show our ""forward"" (which is actually the right since we are in 2d)
+		//Debug.DrawRay(_startVec, _startVecFwd, Color.black, 1.0f); //Black line to show our ""forward"" (which is actually the right since we are in 2d)
         //player is within range and within the viewing angle
-		if ((Vector3.Angle(_rayDirection, _startVecFwd)) < viewAngle && Vector3.Distance(_playerLoc, _startVec) < viewDist)
+		if (Vector3.Distance(_playerLoc, _startVec) < viewDist && (Vector3.Angle(_rayDirection, _startVecFwd)) < viewAngle)
 		{
-            Debug.DrawRay(_startVec, _rayDirection, Color.red, 5.0f);
+            //Debug.DrawRay(_startVec, _rayDirection, Color.red, 5.0f);
             //raycast to the player to check for line of sight
             _hit = Physics2D.Raycast(_startVec, _rayDirection, viewDist);
             
-			if (_hit){
-				if (_hit.collider.gameObject == _player) {
+			
+			if (_hit && _hit.collider.gameObject.tag == "Player")
+            {
 					//because our forward is on the unused z axis, we can't use lookAt()
 					//so we have to get a (distance) vector by subtracting the two points and rotate to this vector 
 					transform.right = _rayDirection;
-					Debug.DrawRay (_startVec, _rayDirection, Color.blue, 5.0f);
+					//Debug.DrawRay (_startVec, _rayDirection, Color.blue, 5.0f);
 					sightPos = _hit.transform.position;
 					sight = true;
-				}
-				//Debug.Log("I see the player.");
 			}
+				//Debug.Log("I see the player.");
+			
 			else
 			{
 				//Debug.Log("I don't see the player.");
