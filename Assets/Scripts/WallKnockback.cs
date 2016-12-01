@@ -15,10 +15,12 @@ public class WallKnockback : MonoBehaviour
     {
         if (UpWall)
         {
+            
             other.rigidbody.AddForce(transform.up * knockback);
         }
         else
         {
+            
             other.rigidbody.AddForce(-transform.up * knockback);
         }
         
