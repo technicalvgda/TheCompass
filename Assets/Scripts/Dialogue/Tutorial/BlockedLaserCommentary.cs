@@ -10,6 +10,7 @@ public class BlockedLaserCommentary : MonoBehaviour
 	public int startLine;
 	public int endLine;
 
+	public AudioClip audioClip1,audioClip2;
 	public TextBoxManager theTextBox;
 
 	public bool destroyWhenActivated,timedDialogue;
@@ -35,6 +36,7 @@ public class BlockedLaserCommentary : MonoBehaviour
 		{
 			_blockSuccessful = true;
 			theTextBox.startCommentaryDialogue ();
+			theTextBox.setVoiceOverSourceClip(audioClip1);
 			theTextBox.ReloadScript (textFileBlockNotSuccessful);
 			theTextBox.currentLine = startLine;
 			theTextBox.endAtLine = endLine;
@@ -61,6 +63,7 @@ public class BlockedLaserCommentary : MonoBehaviour
 				{
 					_blockSuccessful = true;
 					theTextBox.startCommentaryDialogue ();
+					theTextBox.setVoiceOverSourceClip(audioClip2);
 					theTextBox.ReloadScript (textFileBlockSuccessful);
 					theTextBox.currentLine = startLine;
 					theTextBox.endAtLine = endLine;

@@ -41,6 +41,7 @@ GameObject:
   - 114: {fileID: 114000012776949814}
   - 114: {fileID: 114000013703032056}
   - 114: {fileID: 114000010585296956}
+  - 114: {fileID: 114000013817158178}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Enemy
@@ -117,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5c6b45eb739e447b944a22eac7fcaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewAngle: 20
+  viewAngle: 180
   viewDist: 50
   sight: 0
   sightPos: {x: 0, y: 0, z: 0}
@@ -149,6 +150,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Items: {fileID: 0}
   InitialHealth: 20
+--- !u!114 &114000013817158178
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011112591400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9fdf9a4b2855374fa05ba223152f267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Items: {fileID: 0}
+  InitialHealth: 100
 --- !u!212 &212000010048885630
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -179,7 +193,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8947ba98e395af640b90e09e8bd88518, type: 3}
-  m_Color: {r: 0.18983108, g: 0.7941176, b: 0.07590828, a: 1}
+  m_Color: {r: 0.297, g: 0.438, b: 0.07590828, a: 1}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!212 &212000011000409474

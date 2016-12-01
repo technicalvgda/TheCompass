@@ -8,6 +8,7 @@ public class ShipPartHealthCommentary : MonoBehaviour {
 	public int startLine;
 	public int endLine;
 
+	public AudioClip audioClip1,audioClip2,audioClip3,audioClip4;
 	public TextBoxManager theTextBox;
 
 	public bool destroyWhenActivated,timedDialogue;
@@ -30,72 +31,79 @@ public class ShipPartHealthCommentary : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		if (_tetheredObjectScript.TetheredHealth == 3 && _triggeredOnce1 == false) 
-		{
-			_triggeredOnce1 = true;
-			theTextBox.startCommentaryDialogue ();
-			theTextBox.ReloadScript (DMGTextFile1);
-			theTextBox.currentLine = startLine;
-			theTextBox.endAtLine = endLine;
-			//theTextBox.EnableTextBox();
-			theTextBox.setSpeakerNameText (speakerName);
+        if (_shipPart != null)
+        {
+            if (_tetheredObjectScript.TetheredHealth == 3 && _triggeredOnce1 == false)
+            {
+                _triggeredOnce1 = true;
+                theTextBox.startCommentaryDialogue();
+                theTextBox.setVoiceOverSourceClip(audioClip1);
+                theTextBox.ReloadScript(DMGTextFile1);
+                theTextBox.currentLine = startLine;
+                theTextBox.endAtLine = endLine;
+                //theTextBox.EnableTextBox();
+                theTextBox.setSpeakerNameText(speakerName);
 
-			if (timedDialogue) 
-			{
-				theTextBox.activateTimedCommentary (timeUntilFinished);
-			}
-		}
-		else if (_tetheredObjectScript.TetheredHealth == 2 && _triggeredOnce2 == false) 
-		{
-			_triggeredOnce2 = true;
-			theTextBox.startCommentaryDialogue ();
-			theTextBox.ReloadScript (DMGTextFile2);
-			theTextBox.currentLine = startLine;
-			theTextBox.endAtLine = endLine;
-			//theTextBox.EnableTextBox();
-			theTextBox.setSpeakerNameText (speakerName);
+                if (timedDialogue)
+                {
+                    theTextBox.activateTimedCommentary(timeUntilFinished);
+                }
+            }
+            else if (_tetheredObjectScript.TetheredHealth == 2 && _triggeredOnce2 == false)
+            {
+                _triggeredOnce2 = true;
+                theTextBox.startCommentaryDialogue();
+                theTextBox.setVoiceOverSourceClip(audioClip2);
+                theTextBox.ReloadScript(DMGTextFile2);
+                theTextBox.currentLine = startLine;
+                theTextBox.endAtLine = endLine;
+                //theTextBox.EnableTextBox();
+                theTextBox.setSpeakerNameText(speakerName);
 
-			if (timedDialogue) 
-			{
-				theTextBox.activateTimedCommentary (timeUntilFinished);
-			}
-		}
-		else if (_tetheredObjectScript.TetheredHealth == 1 && _triggeredOnce3 == false) 
-		{
-			_triggeredOnce3 = true;
-			theTextBox.startCommentaryDialogue ();
-			theTextBox.ReloadScript (DMGTextFile3);
-			theTextBox.currentLine = startLine;
-			theTextBox.endAtLine = endLine;
-			//theTextBox.EnableTextBox();
-			theTextBox.setSpeakerNameText (speakerName);
+                if (timedDialogue)
+                {
+                    theTextBox.activateTimedCommentary(timeUntilFinished);
+                }
+            }
+            else if (_tetheredObjectScript.TetheredHealth == 1 && _triggeredOnce3 == false)
+            {
+                _triggeredOnce3 = true;
+                theTextBox.startCommentaryDialogue();
+                theTextBox.setVoiceOverSourceClip(audioClip3);
+                theTextBox.ReloadScript(DMGTextFile3);
+                theTextBox.currentLine = startLine;
+                theTextBox.endAtLine = endLine;
+                //theTextBox.EnableTextBox();
+                theTextBox.setSpeakerNameText(speakerName);
 
-			if (timedDialogue) 
-			{
-				theTextBox.activateTimedCommentary (timeUntilFinished);
-			}
-		}
-		else if (_tetheredObjectScript.TetheredHealth == 0 && _triggeredOnce4 == false) 
-		{
-			
-			_triggeredOnce4 = true;
-			theTextBox.startCommentaryDialogue ();
-			theTextBox.ReloadScript (destroyedTextFile);
-			theTextBox.currentLine = startLine;
-			theTextBox.endAtLine = endLine;
-			//theTextBox.EnableTextBox();
-			theTextBox.setSpeakerNameText (speakerName);
+                if (timedDialogue)
+                {
+                    theTextBox.activateTimedCommentary(timeUntilFinished);
+                }
+            }
+            else if (_tetheredObjectScript.TetheredHealth == 0 && _triggeredOnce4 == false)
+            {
 
-			if (timedDialogue) 
-			{
-				theTextBox.activateTimedCommentary (timeUntilFinished);
-			}
-			if (destroyWhenActivated) 
-			{
-				Destroy (gameObject);
-			}
-			_tetheredObjectScript.FailLevel ();
-		}
+                _triggeredOnce4 = true;
+                theTextBox.startCommentaryDialogue();
+                theTextBox.setVoiceOverSourceClip(audioClip4);
+                theTextBox.ReloadScript(destroyedTextFile);
+                theTextBox.currentLine = startLine;
+                theTextBox.endAtLine = endLine;
+                //theTextBox.EnableTextBox();
+                theTextBox.setSpeakerNameText(speakerName);
+
+                if (timedDialogue)
+                {
+                    theTextBox.activateTimedCommentary(timeUntilFinished);
+                }
+                if (destroyWhenActivated)
+                {
+                    Destroy(gameObject);
+                }
+                _tetheredObjectScript.FailLevel();
+            }
+        }
 	}
 
 	IEnumerator WaitForTextBoxToFailLevel()

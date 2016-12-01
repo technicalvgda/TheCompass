@@ -76,6 +76,12 @@ public class PlayerWithinRangeOfEnemy : MonoBehaviour
 	public void activateCommentary()
 	{
 		theTextBox.startCommentaryDialogue ();
+		if (transform.name == "PlayerWithinRangeOfEnemy") 
+		{
+
+			theTextBox.setVoiceOverSourceClip(audioClip,7.5f);
+		}
+		else
 		theTextBox.setVoiceOverSourceClip(audioClip);
 		theTextBox.ReloadScript (textFile);
 		theTextBox.currentLine = startLine;

@@ -105,23 +105,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1000012917561300
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 4000010218886802}
-  - 114: {fileID: 114000013579510592}
-  - 58: {fileID: 58000014182206880}
-  m_Layer: 0
-  m_Name: EncounterVolatileWreck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &4000010068076206
 Transform:
   m_ObjectHideFlags: 1
@@ -134,25 +117,11 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000010522374324}
-  - {fileID: 4000010218886802}
   - {fileID: 4000010993669044}
   - {fileID: 4000011144665474}
   - {fileID: 4000011548382262}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!4 &4000010218886802
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012917561300}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 4000010068076206}
-  m_RootOrder: 1
 --- !u!4 &4000010522374324
 Transform:
   m_ObjectHideFlags: 1
@@ -178,7 +147,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000010068076206}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!4 &4000011144665474
 Transform:
   m_ObjectHideFlags: 1
@@ -191,7 +160,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000010068076206}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!4 &4000011548382262
 Transform:
   m_ObjectHideFlags: 1
@@ -204,7 +173,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000010068076206}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!58 &58000010153912720
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -415,20 +384,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 11.609314
---- !u!58 &58000014182206880
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012917561300}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!114 &114000010522307624
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -444,10 +399,11 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 0
+  audioClip: {fileID: 8300000, guid: d3f6af4ba444d0d4a898c366da1c87c4, type: 3}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
-  timeUntilFinished: 10
+  timeUntilFinished: 30
 --- !u!114 &114000012494589294
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -463,11 +419,11 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 0
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 016aaf30ba96c5444bf78e7e7819c8d8, type: 3}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
-  timeUntilFinished: 10
+  timeUntilFinished: 30
 --- !u!114 &114000013294783700
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -483,31 +439,11 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 0
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 793f4ca533911d64fa9c87d09cffba94, type: 3}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
-  timeUntilFinished: 10
---- !u!114 &114000013579510592
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012917561300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fee23d92a8ab4ec46b660889a2d66a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textFile: {fileID: 4900000, guid: 2e7cf8d1bc4eeef4ea6ec0e1b10f6d62, type: 3}
-  speakerName: OFELIA
-  startLine: 0
-  endLine: 0
-  audioClip: {fileID: 0}
-  theTextBox: {fileID: 0}
-  destroyWhenActivated: 1
-  timedDialogue: 1
-  timeUntilFinished: 10
+  timeUntilFinished: 30
 --- !u!114 &114000013809522388
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -526,7 +462,11 @@ MonoBehaviour:
   speakerName: 
   startLine: 0
   endLine: 0
+  audioClip1: {fileID: 8300000, guid: 22edcaffd47dc1749b458160abcf8fc2, type: 3}
+  audioClip2: {fileID: 8300000, guid: 050798525ff742347ad0e8e0d0b48549, type: 3}
+  audioClip3: {fileID: 8300000, guid: 70e38b89a555f2b44ac51cd164fc3729, type: 3}
+  audioClip4: {fileID: 8300000, guid: 6bc868ae2f738dd448d9c51d6d2a4569, type: 3}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
-  timeUntilFinished: 10
+  timeUntilFinished: 30

@@ -105,7 +105,7 @@ GameObject:
   - 4: {fileID: 4000012857373056}
   m_Layer: 0
   m_Name: Level4Commentary
-  m_TagString: Untagged
+  m_TagString: CommentaryObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -354,10 +354,12 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 2
+  audioClip1: {fileID: 8300000, guid: 22fa8a08469d55a478385ddff3cf096e, type: 3}
+  audioClip2: {fileID: 8300000, guid: fd3274690bfc18f4095dcf17ebda8c53, type: 3}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
-  timeUntilFinished: 20
+  timeUntilFinished: 60
 --- !u!114 &114000011445143344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -373,11 +375,11 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 0
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: c785de0be7c4e2347978f23cbc575527, type: 3}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
-  timeUntilFinished: 20
+  timeUntilFinished: 30
 --- !u!114 &114000011575469096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -393,11 +395,11 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 1
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 8f489ca1243a28342b330842b747f18b, type: 3}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
-  timeUntilFinished: 20
+  timeUntilFinished: 30
 --- !u!114 &114000012460452118
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -413,11 +415,11 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 0
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 3ee396dfc25f20542a77cbf15f18d8bd, type: 3}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
-  timeUntilFinished: 20
+  timeUntilFinished: 30
 --- !u!114 &114000012953577186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -433,11 +435,11 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 0
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 3a99e49235121004a921889705a97a84, type: 3}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
-  timeUntilFinished: 20
+  timeUntilFinished: 30
 --- !u!114 &114000013955196146
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -453,11 +455,11 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 0
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: adb39cca3ac03294696c732d1d0aeb7c, type: 3}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
-  timeUntilFinished: 20
+  timeUntilFinished: 30
 --- !u!114 &114000014075226958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -473,8 +475,8 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 0
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 7045578babc714d42b6122bfda3a92f0, type: 3}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
-  timeUntilFinished: 10
+  timeUntilFinished: 30

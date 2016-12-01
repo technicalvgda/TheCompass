@@ -18,7 +18,6 @@ public class PlayerShield : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
         //collision = true;
         waitTime = initialWaitTime;
         
@@ -52,6 +51,7 @@ public class PlayerShield : MonoBehaviour
             anim.SetBool("Colliding", true);
            
         }
+        audioSrc.volume = SoundSettingCompare("FXSlider");
         // Activate Sound on collision
         if (audioSrc != null)
         {
@@ -70,4 +70,20 @@ public class PlayerShield : MonoBehaviour
 	{
 		return _numbTimesActivated;
 	}
+
+    //send in the playerpref for "BGSlider" or "FXSlider" and compare it against master volume
+    //return the lower of the two
+    private float SoundSettingCompare(string prefName)
+    {
+        float compareVolume = PlayerPrefs.GetFloat(prefName);
+        float masterVolume = PlayerPrefs.GetFloat("MSTRSlider");
+        if (masterVolume > compareVolume)
+        {
+            return compareVolume;
+        }
+        else
+        {
+            return masterVolume;
+        }
+    }
 }

@@ -26,6 +26,7 @@ GameObject:
   - 114: {fileID: 114000014174192190}
   - 114: {fileID: 114000012075211048}
   - 114: {fileID: 114000013508320942}
+  - 114: {fileID: 114000013730501732}
   m_Layer: 0
   m_Name: TractorBeamDrone
   m_TagString: Enemy
@@ -115,8 +116,8 @@ Rigidbody2D:
   m_GameObject: {fileID: 1000011544194430}
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 50
+  m_AngularDrag: 10
   m_GravityScale: 1
   m_IsKinematic: 1
   m_Interpolate: 0
@@ -149,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewAngle: 180
-  viewDist: 30
+  viewDist: 60
   sight: 0
   sightPos: {x: -16.121737, y: 2.5514657, z: 0}
 --- !u!114 &114000013508320942
@@ -167,6 +168,19 @@ MonoBehaviour:
   DetectionRange: 100
   arrowPrefab: {fileID: 1000013529883644, guid: 44f6e27ddd2c0ea4c889a70fca637e23,
     type: 2}
+--- !u!114 &114000013730501732
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011544194430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9fdf9a4b2855374fa05ba223152f267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Items: {fileID: 0}
+  InitialHealth: 100
 --- !u!114 &114000014174192190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -179,8 +193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pullDelay: 5
-  pullForce: 15
-  deflection: 0
+  pullForce: 55
+  deflection: 1
 --- !u!120 &120000012370174408
 LineRenderer:
   m_ObjectHideFlags: 1

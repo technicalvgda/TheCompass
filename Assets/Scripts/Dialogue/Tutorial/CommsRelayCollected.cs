@@ -10,6 +10,7 @@ public class CommsRelayCollected : MonoBehaviour
 	public int startLine;
 	public int endLine;
 
+	public AudioClip audioClip1,audioClip2;
 	public TextBoxManager theTextBox;
 
 	public bool destroyWhenActivated,timedDialogue;
@@ -33,6 +34,8 @@ public class CommsRelayCollected : MonoBehaviour
 		{
 			_triggeredOnce = true;
 			theTextBox.startCommentaryDialogue ();
+			theTextBox.setVoiceOverSourceClip(audioClip1);
+			theTextBox.setSecondVoiceOverSourceClip (audioClip2);
 			theTextBox.ReloadScript (textFile);
 			theTextBox.currentLine = startLine;
 			theTextBox.endAtLine = endLine;

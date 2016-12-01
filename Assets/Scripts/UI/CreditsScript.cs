@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 public class CreditsScript : MonoBehaviour {
 	public GameObject creditsObject,mainMenuHeader;
 	public float waitTime;
+	public Image blackOutImage;
+	private Color _color;
 	// Use this for initialization
 	void Start () {
 		
@@ -25,6 +27,16 @@ public class CreditsScript : MonoBehaviour {
 	//This is for the back button in the credits scene
 	public void changeScene(string sceneName)
 	{
+		StartCoroutine (CreditsTransitionBlackOut (sceneName));
+	}
+	IEnumerator CreditsTransitionBlackOut(string sceneName)
+	{
+		while (blackOutImage.color.a < 1) 
+		{
+			_color = new Color (blackOutImage.color.r, blackOutImage.color.g, blackOutImage.color.b, blackOutImage.color.a + Time.deltaTime);
+			blackOutImage.color = _color;
+			yield return null;
+		}
 		SceneManager.LoadScene (sceneName);
 	}
 }

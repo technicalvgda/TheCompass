@@ -314,9 +314,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'TEST
-
-'
+  m_Text: 
 --- !u!222 &609950687
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -471,6 +469,7 @@ GameObject:
   - 92: {fileID: 1253593076}
   - 124: {fileID: 1253593075}
   - 81: {fileID: 1253593074}
+  - 114: {fileID: 1253593081}
   - 114: {fileID: 1253593079}
   - 82: {fileID: 1253593080}
   m_Layer: 0
@@ -554,7 +553,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1253593073}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18d55483c70d7d24aa7aa149629285d3, type: 3}
   m_Name: 
@@ -563,6 +562,11 @@ MonoBehaviour:
   blackFadeOutImage: {fileID: 693185824}
   theText: {fileID: 609950686}
   audioSource: {fileID: 1253593080}
+  textFiles:
+  - {fileID: 4900000, guid: 65c0c39771079874884e6db04eef3e1e, type: 3}
+  - {fileID: 4900000, guid: 9156231a621806a46bbe4e8891789f09, type: 3}
+  audioClips:
+  - {fileID: 8300000, guid: c0540dba7590c6349a5bd877f83b7999, type: 3}
 --- !u!82 &1253593080
 AudioSource:
   m_ObjectHideFlags: 0
@@ -637,3 +641,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1253593081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1253593073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3cb3ad21accacf429b3b183fcb970bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundImage: {fileID: 645255376}
+  blackFadeOutImage: {fileID: 693185824}
+  numbOfEndings: 2
+  theText: {fileID: 609950686}
+  audioSource: {fileID: 1253593080}
+  Heroic1And2Clip: {fileID: 8300000, guid: c0540dba7590c6349a5bd877f83b7999, type: 3}
+  Heroic3Clip: {fileID: 8300000, guid: 2ad7546e7f7abf94fb74a3575116fc61, type: 3}
+  textFilesHeroic1And2:
+  - {fileID: 4900000, guid: 65c0c39771079874884e6db04eef3e1e, type: 3}
+  - {fileID: 4900000, guid: 9156231a621806a46bbe4e8891789f09, type: 3}
+  textFilesHeroic3:
+  - {fileID: 4900000, guid: 8a11dcfbd094db6428e2cf4416dcf0a2, type: 3}
+  waitForSecArrayHeroic1And2:
+  - 20
+  - 18
+  waitForSecArrayHeroic3:
+  - 12
