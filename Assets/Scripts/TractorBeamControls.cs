@@ -116,7 +116,7 @@ public class TractorBeamControls : MonoBehaviour
 
         }
 
-        if (_tractorStick.collider.name == "TetheredShipPart")
+        if (_tractorStick.collider.tag == "TetheredPart")
         {
             //call part pickup event
             partPickupDelegate();

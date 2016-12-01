@@ -4,6 +4,9 @@ using System.Collections;
 
 public class TetheredObject : MonoBehaviour
 {
+    bool invincible = false;
+    float invincibleTime = 3.0f;
+
     public bool tetherOn;
     private Color c1 = Color.white;
     private Vector3 playerPosition;
@@ -56,9 +59,11 @@ public class TetheredObject : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-
-        if (coll.gameObject.tag == "Enemy" || coll.gameObject.tag == "Debris") // if tethered object collides with an enemy object
+        
+        if ((coll.gameObject.tag == "Enemy" || coll.gameObject.tag == "Debris") && invincible == false) // if tethered object collides with an enemy object
         {
+            invincible = true;
+            StartCoroutine(DamageDelay());
             Debug.Log("Tethered health is: " + TetheredHealth);
             TetheredHealth -= 1; // tethered health loses 1 health point 
 
@@ -96,6 +101,14 @@ public class TetheredObject : MonoBehaviour
 		}
         */
 
+    }
+
+    //prevent the tether part from taking damage quickly
+    IEnumerator DamageDelay()
+    {
+        yield return new WaitForSeconds(invincibleTime);
+        invincible = false;
+        yield return null;
     }
 
     /**

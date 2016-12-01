@@ -70,6 +70,7 @@ public class SongManager : MonoBehaviour {
         {
             audio1.volume = MAX_VOLUME;
         }
+        yield return StartCoroutine(CoroutineUtil.WaitForRealSeconds(0.5f));
         StartCoroutine(CheckVolumeLevels());
         yield return null;
    }
