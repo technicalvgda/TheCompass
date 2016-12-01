@@ -26,6 +26,7 @@ GameObject:
   - 114: {fileID: 114000014174192190}
   - 114: {fileID: 114000012075211048}
   - 114: {fileID: 114000013508320942}
+  - 114: {fileID: 114000013730501732}
   m_Layer: 0
   m_Name: TractorBeamDrone
   m_TagString: Enemy
@@ -167,6 +168,19 @@ MonoBehaviour:
   DetectionRange: 100
   arrowPrefab: {fileID: 1000013529883644, guid: 44f6e27ddd2c0ea4c889a70fca637e23,
     type: 2}
+--- !u!114 &114000013730501732
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011544194430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9fdf9a4b2855374fa05ba223152f267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Items: {fileID: 0}
+  InitialHealth: 20
 --- !u!114 &114000014174192190
 MonoBehaviour:
   m_ObjectHideFlags: 1

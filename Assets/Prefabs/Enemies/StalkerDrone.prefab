@@ -24,6 +24,7 @@ GameObject:
   - 50: {fileID: 50000012604709430}
   - 114: {fileID: 114000014149204470}
   - 114: {fileID: 114000014141885440}
+  - 114: {fileID: 114000013465936018}
   m_Layer: 0
   m_Name: StalkerDrone
   m_TagString: Untagged
@@ -105,6 +106,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 5
+--- !u!114 &114000013465936018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012577847284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9fdf9a4b2855374fa05ba223152f267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Items: {fileID: 0}
+  InitialHealth: 20
 --- !u!114 &114000014141885440
 MonoBehaviour:
   m_ObjectHideFlags: 1
