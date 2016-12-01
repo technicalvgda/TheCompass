@@ -3237,7 +3237,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 521185733}
   m_Layer: 0
-  m_Name: Endpoint
+  m_Name: CutsceneEndPoint
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3249,13 +3249,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 521185732}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.6, y: -3.1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.04, y: -2.1, z: 0}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 103756297}
-  m_RootOrder: 3
+  m_Father: {fileID: 2065685913}
+  m_RootOrder: 0
 --- !u!4 &539346654 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000011100802626, guid: 5a0aeadabf405bb42ae85c350132e8e6,
@@ -8243,6 +8243,21 @@ Prefab:
       propertyPath: levelToLoad
       value: Level 3 Dialogue
       objectReference: {fileID: 0}
+    - target: {fileID: 82000013230137336, guid: dc990532c9eef8348b99712d28b9e6b5,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82000012488289402, guid: dc990532c9eef8348b99712d28b9e6b5,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82000014139077866, guid: dc990532c9eef8348b99712d28b9e6b5,
+        type: 2}
+      propertyPath: Priority
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc990532c9eef8348b99712d28b9e6b5, type: 2}
   m_IsPrefabParent: 0
@@ -12572,7 +12587,8 @@ Transform:
   m_LocalPosition: {x: 112, y: -124, z: 100}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 521185733}
   m_Father: {fileID: 54764325}
   m_RootOrder: 0
 --- !u!212 &2065685914
@@ -12893,7 +12909,7 @@ MonoBehaviour:
   - {fileID: 521185733}
   speedToTarget:
   - 10
-  - 5
+  - 10
   lookRotation: -90
   transitionBox: {fileID: 1219259124}
 --- !u!4 &2102941525 stripped

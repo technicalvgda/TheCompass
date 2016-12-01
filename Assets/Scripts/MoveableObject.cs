@@ -83,7 +83,20 @@ public class MoveableObject : MonoBehaviour
                 
                
             }
-            
+            if (col.gameObject.tag == "TetheredPart")
+            {
+                TetheredObject tetherObject = col.gameObject.GetComponent<TetheredObject>();
+                //calculate damage to deal, knockback is true
+                float damageAmount = CalculateAngularDamageAndKnockback(col, false);
+                //if the damage is over a limit, cause a hit to the tether object
+                if (damageAmount > 10)
+                {
+                    tetherObject.HandleImpact();
+                }
+
+
+            }
+
 
         }
 	}

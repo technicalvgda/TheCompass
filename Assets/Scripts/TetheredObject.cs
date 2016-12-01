@@ -45,13 +45,15 @@ public class TetheredObject : MonoBehaviour
             lineRen.SetPosition(0, playerPosition);
             if ((playerPosition - transform.position).magnitude > 10f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, playerPosition, .5f);
+                //transform.position = Vector3.MoveTowards(transform.position, playerPosition, 1.5f);
+                transform.position = Vector3.Lerp(transform.position, playerPosition, Time.deltaTime);
                 rb2d.velocity = Vector3.zero;
                 rb2d.angularVelocity = 0;
             }
             if ((playerPosition - transform.position).magnitude < 6f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, playerPosition * -1, .5f);
+                //transform.position = Vector3.MoveTowards(transform.position, playerPosition * -1, 1.5f);
+                transform.position = Vector3.Lerp(transform.position, -playerPosition, Time.deltaTime);
                 rb2d.velocity = Vector3.zero;
                 rb2d.angularVelocity = 0;
             }
@@ -59,10 +61,22 @@ public class TetheredObject : MonoBehaviour
         }
     }
 
+    
     void OnCollisionEnter2D(Collision2D coll)
     {
         
-        if ((coll.gameObject.tag == "Enemy" || coll.gameObject.tag == "Debris") && invincible == false) // if tethered object collides with an enemy object
+        if (coll.gameObject.tag == "Enemy") // if tethered object collides with an enemy object
+        {
+            HandleImpact();
+        }
+       
+
+    }
+
+
+    public void HandleImpact()
+    {
+        if(invincible == false)
         {
             invincible = true;
             StartCoroutine(DamageDelay());
@@ -71,40 +85,21 @@ public class TetheredObject : MonoBehaviour
 
             //change image to show damage
             imageIndex++;
-            if(imageIndex < damageImages.Length)
+            if (imageIndex < damageImages.Length)
             {
                 spriteRen.sprite = damageImages[imageIndex];
             }
-            
+
 
             if (TetheredHealth <= 0) // if tethered health reaches zero or below
             {
                 tetherOn = false;
-                Destroy(coll.gameObject); //the collided object goes bye bye
-                //FailLevel(); commented out this call so the fail level can be called after commentary
+                //Destroy(coll.gameObject); //the collided object goes bye bye
+                                          //FailLevel(); commented out this call so the fail level can be called after commentary
             }
         }
-        /*else if (coll.gameObject.name == "PlayerPlaceholder")
-		{
-			tetherOn = true;
-            playerPosition = coll.transform.position;
-		} */
-        /*
-		else
-		{
-            Debug.Log("Tethered health is: " + TetheredHealth);
-            TetheredHealth -= 1; // tethered health loses 1 health point 
-			if (TetheredHealth <= 0) // if tethered health reaches zero or below
-			{
-				tetherOn = false;
-				Destroy (coll.gameObject); //the collided object goes bye bye
-                FailLevel(_sceneToLoad);
-			}
-		}
-        */
-
+       
     }
-
     //prevent the tether part from taking damage quickly
     IEnumerator DamageDelay()
     {
