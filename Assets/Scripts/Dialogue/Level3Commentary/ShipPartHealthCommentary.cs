@@ -8,7 +8,7 @@ public class ShipPartHealthCommentary : MonoBehaviour {
 	public int startLine;
 	public int endLine;
 
-	public AudioClip audioClip1,audioClip2,audioClip3;
+	public AudioClip audioClip1,audioClip2,audioClip3,audioClip4;
 	public TextBoxManager theTextBox;
 
 	public bool destroyWhenActivated,timedDialogue;
@@ -84,6 +84,7 @@ public class ShipPartHealthCommentary : MonoBehaviour {
 			
 			_triggeredOnce4 = true;
 			theTextBox.startCommentaryDialogue ();
+			theTextBox.setVoiceOverSourceClip(audioClip4);
 			theTextBox.ReloadScript (destroyedTextFile);
 			theTextBox.currentLine = startLine;
 			theTextBox.endAtLine = endLine;

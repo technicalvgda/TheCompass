@@ -147,6 +147,14 @@ public class TextBoxManager : MonoBehaviour
         voiceOverAudioSource.Play();
         if (Input.GetKeyDown("space")) voiceOverAudioSource.Stop();
     }
+	public void setVoiceOverSourceClip(AudioClip clip,float sec)
+	{
+		//AudioSource audio = GetComponent<AudioSource>();
+		voiceOverAudioSource.clip = clip;
+		voiceOverAudioSource.Play();
+		voiceOverAudioSource.time = sec;
+		if (Input.GetKeyDown("space")) voiceOverAudioSource.Stop();
+	}
 	public void setSecondVoiceOverSourceClip(AudioClip clip)
 	{
 		//AudioSource audio = GetComponent<AudioSource>();

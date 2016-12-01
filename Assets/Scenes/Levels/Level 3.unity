@@ -707,48 +707,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4000013794431590, guid: c2a22ae9536cd3447b04f7ed90817852,
     type: 2}
   m_PrefabInternal: {fileID: 155645776}
---- !u!1001 &167107682
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4000010068076206, guid: 6b72e24ff205b6e4ca19a6432819d71b, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 430
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010068076206, guid: 6b72e24ff205b6e4ca19a6432819d71b, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -285
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010068076206, guid: 6b72e24ff205b6e4ca19a6432819d71b, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010068076206, guid: 6b72e24ff205b6e4ca19a6432819d71b, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010068076206, guid: 6b72e24ff205b6e4ca19a6432819d71b, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010068076206, guid: 6b72e24ff205b6e4ca19a6432819d71b, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010068076206, guid: 6b72e24ff205b6e4ca19a6432819d71b, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010068076206, guid: 6b72e24ff205b6e4ca19a6432819d71b, type: 2}
-      propertyPath: m_RootOrder
-      value: 14
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 6b72e24ff205b6e4ca19a6432819d71b, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &168282797
 Prefab:
   m_ObjectHideFlags: 0
@@ -1049,6 +1007,48 @@ Transform:
   m_PrefabParentObject: {fileID: 4000012249292780, guid: 7ae77bbf9d029c145a4ca6d1c0f6a7f0,
     type: 2}
   m_PrefabInternal: {fileID: 579577060}
+--- !u!1001 &234915430
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4000010068076206, guid: 6b72e24ff205b6e4ca19a6432819d71b, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 430
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010068076206, guid: 6b72e24ff205b6e4ca19a6432819d71b, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -285
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010068076206, guid: 6b72e24ff205b6e4ca19a6432819d71b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010068076206, guid: 6b72e24ff205b6e4ca19a6432819d71b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010068076206, guid: 6b72e24ff205b6e4ca19a6432819d71b, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010068076206, guid: 6b72e24ff205b6e4ca19a6432819d71b, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010068076206, guid: 6b72e24ff205b6e4ca19a6432819d71b, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010068076206, guid: 6b72e24ff205b6e4ca19a6432819d71b, type: 2}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 6b72e24ff205b6e4ca19a6432819d71b, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &240356275
 Prefab:
   m_ObjectHideFlags: 0
@@ -3545,7 +3545,7 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 0
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 9c5cce6ce080d3f48adc6457413974a7, type: 3}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
@@ -4379,7 +4379,7 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 0
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: c32c4fb1deecf144386b4ba96e53a0eb, type: 3}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
