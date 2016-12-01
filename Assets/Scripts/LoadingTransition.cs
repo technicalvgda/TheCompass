@@ -238,7 +238,7 @@ public class LoadingTransition : MonoBehaviour
     IEnumerator LoadLevelWithRealProgress(string levelToLoad)
     {
         yield return new WaitForSecondsRealtime(1);
-
+        SaveLoad.SaveGameWithScene(levelToLoad);
         AsyncOperation aSyncOp = SceneManager.LoadSceneAsync(levelToLoad);
         aSyncOp.allowSceneActivation = false;
 
