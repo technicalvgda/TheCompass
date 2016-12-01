@@ -7,9 +7,11 @@ public class TriggerLevel4EndCutscene : MonoBehaviour
     private Transform target;
     //all targets along the cutscene path
     public Transform[] allTargets;
+    public Transform powerSourceTarget;
     public float[] speedToTarget;
     private int targetIndex = 0;
     private GameObject _player;
+    private GameObject upgradeSphere;
     //private bool _reachedDestination = false;
     private float speed = 10;
     private bool _wasTriggered = false;
@@ -29,6 +31,7 @@ public class TriggerLevel4EndCutscene : MonoBehaviour
 
     private LoadingTransition loadingTransition;
     public GameObject transitionBox;
+    public GameObject commentaryObject;
 
     private AudioSource audioSrc;
 
@@ -37,6 +40,8 @@ public class TriggerLevel4EndCutscene : MonoBehaviour
     {
         _player = GameObject.FindGameObjectWithTag("Player");
         audioSrc = GetComponent<AudioSource>();
+        upgradeSphere = transform.FindChild("UpgradeSphere").gameObject;
+        upgradeSphere.SetActive(false);
         //subscribe map icon function to part pickup event
         TractorBeamControls.partPickupDelegate += ActivateMapIcon;
         //get map icon components and set inactive at start
@@ -92,9 +97,10 @@ public class TriggerLevel4EndCutscene : MonoBehaviour
         {
             //set triggered to true (to prevent multiple calls)
             _wasTriggered = true;
-            TetheredObject tether = other.GetComponent<TetheredObject>();
-            tether.tetherOn = false;
-            tether.ShrinkAndDestroy();
+            GameObject tether = other.gameObject;
+            tether.GetComponent<TetheredObject>().tetherOn = false;
+            //move power source to proper location
+            StartCoroutine(MovePowerToTarget(tether.transform));
             //disable collisions
             _player.GetComponent<CircleCollider2D>().enabled = false;
             //disable fuel loss
@@ -120,6 +126,17 @@ public class TriggerLevel4EndCutscene : MonoBehaviour
 
     }
 
+    IEnumerator MovePowerToTarget(Transform powerSource)
+    {
+        Vector3 startPos = powerSource.position;
+        while(Vector3.Distance(powerSource.position, powerSourceTarget.position) > 0.5)
+        {
+            powerSource.position = Vector3.Lerp(startPos, powerSourceTarget.position, Time.deltaTime*2);
+            yield return new WaitForSeconds(0.05f);
+        }
+        yield return null;
+    }
+
     IEnumerator ReachedTarget()
     {
 
@@ -138,7 +155,10 @@ public class TriggerLevel4EndCutscene : MonoBehaviour
             StartCoroutine(ShrinkPlayer());
             */
             StartCoroutine(PlayAudio());
+            //commentaryObject.GetComponent<TwoObjectsCollideCommentary>().activateCommentary();
+            upgradeSphere.SetActive(true);
             yield return new WaitForSeconds(pauseTime);
+            upgradeSphere.SetActive(false);
 
             target = allTargets[targetIndex];
             BeginCutscene();
