@@ -8,18 +8,20 @@ public class SaveLoad : MonoBehaviour {
 
     public static void SaveGame()
     {
-        SaveLoad.SaveFile(new GameData(), defaultFilePath);
+        SaveFile(new GameData(), defaultFilePath);
     }
     public static void SaveGameWithScene(string NextScene)
     {
+        Debug.Log("SaveGameWithScene -- "+NextScene);
         GameData game = SaveLoad.LoadGame();
         game = game == null ? new GameData() : game;
         game.Scene = NextScene;
-        SaveLoad.SaveGame(game);
+        Debug.Log(NextScene);
+        SaveGame(game);
     }
     public static void SaveGame(GameData game)
     {
-        SaveLoad.SaveFile(game, defaultFilePath);
+        SaveFile(game, defaultFilePath);
     }
     public static GameData LoadGame()
     {
@@ -31,6 +33,7 @@ public class SaveLoad : MonoBehaviour {
         BinaryFormatter bformatter = new BinaryFormatter();
         bformatter.Serialize(stream, data);
         stream.Close();
+
     }
     public static object LoadFile(string filePath)
     {
@@ -42,7 +45,7 @@ public class SaveLoad : MonoBehaviour {
             data = bformatter.Deserialize(stream);
             stream.Close();
         }
-        catch(IOException)
+        catch (IOException)
         {
             return null;
         }

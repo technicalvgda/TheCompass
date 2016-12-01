@@ -22,6 +22,7 @@ public class BranchHandler : MonoBehaviour {
         }
         for(int i = 0; i < tags.Count; i++)
         {
+            Debug.Log(tags[i]);
             if (tags[i].Equals(CounterTag) && i < tags.Count - 2)
             {
                 int increment;
@@ -30,6 +31,7 @@ public class BranchHandler : MonoBehaviour {
                     if (tags[i+1].Equals(LeaveTag))
                     {
                         BranchData.Singleton.LeaveCounter += increment;
+
                     }
                     else if (tags[i+1].Equals(CharismaticTag))
                     {
