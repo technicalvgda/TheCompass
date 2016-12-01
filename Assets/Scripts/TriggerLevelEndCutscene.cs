@@ -101,8 +101,7 @@ public class TriggerLevelEndCutscene : MonoBehaviour
                 //disable fuel loss
                 _player.GetComponent<Player>().DisableFuelLoss();
                 //disable camera follow and center camera
-                StartCoroutine(CenterCamera());
-
+                //StartCoroutine(CenterCamera());
                 BeginCutscene();             
             }     
         }
@@ -121,6 +120,7 @@ public class TriggerLevelEndCutscene : MonoBehaviour
         movePlayer = true;
         
     }
+    /*
     IEnumerator CenterCamera()
     {
         Camera.main.GetComponent<CameraController>().enabled = false;//DisableCamFollow();
@@ -137,6 +137,7 @@ public class TriggerLevelEndCutscene : MonoBehaviour
         
         yield return null;
     }
+    */
     IEnumerator ReachedTarget()
     {
 
@@ -145,6 +146,8 @@ public class TriggerLevelEndCutscene : MonoBehaviour
         {
             //get next target
             target = allTargets[targetIndex];
+            //For docking
+            Camera.main.GetComponent<CameraController>().enabled = false;//DisableCamFollow();
             StartCoroutine(PlayAudio());
             yield return new WaitForSeconds(pauseTime);
             BeginCutscene();

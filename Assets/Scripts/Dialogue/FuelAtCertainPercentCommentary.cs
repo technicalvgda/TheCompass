@@ -10,6 +10,7 @@ public class FuelAtCertainPercentCommentary : MonoBehaviour
 	public int startLine;
 	public int endLine;
 
+	public AudioClip audioClip;
 	public TextBoxManager theTextBox;
 	public float fuelLevelToActivate;
 	public bool destroyWhenActivated,timedDialogue;
@@ -31,6 +32,7 @@ public class FuelAtCertainPercentCommentary : MonoBehaviour
 		{
 			_triggeredOnce = true;
 			theTextBox.startCommentaryDialogue ();
+			theTextBox.setVoiceOverSourceClip(audioClip);
 			theTextBox.ReloadScript (textFile);
 			theTextBox.currentLine = startLine;
 			theTextBox.endAtLine = endLine;

@@ -63,8 +63,8 @@ public class BlackholeBehavior : MonoBehaviour {
 					{
                         //choose a border for each object
                         int border = Random.Range(1, 4);
-
-                        switch(border)
+                        _spaceObject.GetComponent<MoveableObject>().DisableFlameTrail();
+                        switch (border)
                         {
                             case 1:
                                 //set at pos x border and at random position between -height and positive height

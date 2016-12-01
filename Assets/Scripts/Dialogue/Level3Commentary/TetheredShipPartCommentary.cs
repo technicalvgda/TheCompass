@@ -10,6 +10,7 @@ public class TetheredShipPartCommentary : MonoBehaviour
 	public int startLine;
 	public int endLine;
 
+	public AudioClip audioClip;
 	public TextBoxManager theTextBox;
 
 	public bool destroyWhenActivated,timedDialogue;
@@ -33,6 +34,7 @@ public class TetheredShipPartCommentary : MonoBehaviour
 		{
 			_triggeredOnce = true;
 			theTextBox.startCommentaryDialogue ();
+			theTextBox.setVoiceOverSourceClip(audioClip);
 			theTextBox.ReloadScript (textFile);
 			theTextBox.currentLine = startLine;
 			theTextBox.endAtLine = endLine;
