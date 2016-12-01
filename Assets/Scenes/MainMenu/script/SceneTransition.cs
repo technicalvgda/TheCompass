@@ -19,32 +19,26 @@ public class SceneTransition : MonoBehaviour
 
     public void LoadScene(string scene)
     {
-        Debug.Log("asdada");
         nextScene = scene;
         anim.SetTrigger(-556287998); // "Exit Scene"
     }
 
     void LoadNextScene()
     {
-        Debug.Log("LoadNextScene()");
         if (nextScene != null)
         {
-            Debug.Log("NEXT SCENE");
-            SaveLoad.SaveGameWithScene(nextScene);
             SceneManager.LoadScene(nextScene);
         }
         else
         {
-            Debug.Log("FALLBACK");
-            SaveLoad.SaveGameWithScene(FALLBACK_SCENE);
             SceneManager.LoadScene(FALLBACK_SCENE);
         }
     }
 
     public void LoadSavedGame()
     {
-        GameData data = (GameData)SaveLoad.LoadFile(SaveLoad.defaultFilePath);
-        Debug.Log(data.Scene);
+        //GameData data = (GameData)SaveLoad.LoadFile(AutoSave.defaultFilePath);
+        GameData data = null;
         if (data != null)
         {
             LoadScene(data.Scene);
