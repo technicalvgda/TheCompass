@@ -42,7 +42,9 @@ public class NavigationButton : MonoBehaviour
         else if (UIInput.isBack && back != null)
         {
             if (UIInput.selected == back.gameObject)
+            {
                 back.onClick.Invoke();
+            }
             else
             {
                 back.Select();

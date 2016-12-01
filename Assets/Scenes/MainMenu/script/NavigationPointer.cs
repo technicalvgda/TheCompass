@@ -6,7 +6,7 @@ using System;
 
 /// <summary>
 /// Logic to handle object selection when a UI element is moused over.
-/// Per object, attach this script to individual buttons/sliders.
+/// Per object, attach this script to individual buttons/sliders/toggles.
 /// </summary>
 
 [RequireComponent (typeof(Selectable))]
@@ -97,7 +97,9 @@ public class NavigationPointer : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
             Animator anim = mousedOver.GetComponent<Animator>();
             if (anim != null && anim.isInitialized)
+            {
                 anim.SetTrigger(640249298); // = "Normal"
+            }
 
             // + Avoids hardcoding the trigger hash
             // - Passes by string

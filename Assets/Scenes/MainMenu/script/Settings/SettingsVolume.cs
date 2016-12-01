@@ -4,7 +4,8 @@ using System.Collections;
 
 public class SettingsVolume : MonoBehaviour
 {
-    //TODO: public audio manager
+    public UIAudio sourceUI; // UI sounds
+    public UIAudioManager sourceOthers; // Other sounds
     public Slider master, music, sounds, voice;
 
     void Awake()
@@ -30,10 +31,10 @@ public class SettingsVolume : MonoBehaviour
         SetVoice(valueVoice);
 
         // Apply UI
-        master.value = valueMaster;
-        music.value = valueMusic;
-        sounds.value = valueSounds;
-        voice.value = valueVoice;
+        if (master != null) master.value = valueMaster;
+        if (music != null) music.value = valueMusic;
+        if (sounds != null) sounds.value = valueSounds;
+        if (voice != null) voice.value = valueVoice;
     }
 
     public void WritePrefs()
@@ -48,25 +49,35 @@ public class SettingsVolume : MonoBehaviour
 
     public void SetMaster(float value)
     {
-        Debug.Log("Master volume set to " + value);
-        // TODO
+        //Debug.Log("Master volume set to " + value);
+
+        sourceUI.SetMasterVolume(value * 0.1f);
+
+        // TODO: set source1
     }
 
     public void SetMusic(float value)
     {
-        Debug.Log("Music volume set to " + value);
-        // TODO
+        //Debug.Log("Music volume set to " + value);
+
+        sourceUI.SetBGMVolume(value * 0.1f);
+
+        // TODO: set source1
     }
 
     public void SetSounds(float value)
     {
-        Debug.Log("Sounds volume set to " + value);
-        // TODO
+        //Debug.Log("Sounds volume set to " + value);
+
+        sourceUI.SetSEVolume(value * 0.1f);
+
+        // TODO: set source1
     }
 
     public void SetVoice(float value)
     {
-        Debug.Log("Voice volume set to " + value);
-        // TODO
+        //Debug.Log("Voice volume set to " + value);
+
+        // TODO: set source1
     }
 }

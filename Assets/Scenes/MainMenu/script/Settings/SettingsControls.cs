@@ -16,9 +16,13 @@ public class SettingsControls : SettingsToggle
     protected override void ApplyUI()
     {
         if (value == SettingsConst.CONTROLS_A)
+        {
             lastToggle = toggles[0];
+        }
         else
+        {
             lastToggle = toggles[1];
+        }
         lastToggle.isOn = true;
 
         SetDemos();

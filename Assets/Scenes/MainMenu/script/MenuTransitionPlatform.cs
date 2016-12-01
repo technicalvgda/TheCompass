@@ -12,9 +12,9 @@ public class MenuTransitionPlatform : MenuTransition
 #if UNITY_EDITOR
             return SettingsConst.EDITOR_PLATFORM == 0 ? nextDesktop : nextMobile;
 #elif UNITY_STANDALONE
-                    return nextDesktop;
+            return nextDesktop;
 #else
-                    return nextMobile;
+            return nextMobile;
 #endif
         }
     }

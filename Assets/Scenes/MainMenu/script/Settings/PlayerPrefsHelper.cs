@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// This mostly exists so that all the logging are in one place
-// and to minimize error from copy pasting code
+// This mostly exists so that all the logging is in one place
+// and error from copy pasting code is minimized
 
 abstract class PlayerPrefsHelper : MonoBehaviour
 {

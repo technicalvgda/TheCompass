@@ -34,6 +34,24 @@ public class InstructionPage : MonoBehaviour
         anim.SetTrigger(triggers[current]);
     }
 
+    public void Previous()
+    {
+        if (current > 0)
+        {
+            current--;
+            anim.SetTrigger(triggers[current]);
+        }
+    }
+
+    public void Next()
+    {
+        if (current < triggers.Length - 1)
+        {
+            current++;
+            anim.SetTrigger(triggers[current]);
+        }
+    }
+
     // Slightly more precise axis check than just using GetAxis, with rate
     // Gouged straight from UI Input since only the instruction menu really needs the check
 
@@ -60,7 +78,7 @@ public class InstructionPage : MonoBehaviour
             if (rate % 20 == 0 && next.IsInteractable())
             {
                 rate = 0;
-                next.onClick.Invoke();
+                Next();
             }
             rate++;
         }
@@ -69,29 +87,10 @@ public class InstructionPage : MonoBehaviour
             if (rate % 20 == 0 && previous.IsInteractable())
             {
                 rate = 0;
-                previous.onClick.Invoke();
+                Previous();
             }
             rate++;
         }
-        else
-            rate = 0;
-    }
-
-    public void Previous()
-    {
-        if (current > 0)
-        {
-            current--;
-            anim.SetTrigger(triggers[current]);
-        }
-    }
-
-    public void Next()
-    {
-        if (current < triggers.Length - 1)
-        {
-            current++;
-            anim.SetTrigger(triggers[current]);
-        }
+        else rate = 0;
     }
 }

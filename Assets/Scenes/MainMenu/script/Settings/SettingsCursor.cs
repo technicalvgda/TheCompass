@@ -6,9 +6,9 @@ public class SettingsCursor : MonoBehaviour
     // nice engine dude
     // https://feedback.unity3d.com/suggestions/allow-access-to-sprite-packer-atlas-to-retrieve-sprites-by-name
 
+    public Animator cursorChange;
     //public Sprite[] cursors;
     public Texture2D[] cursors;
-    public Animator cursorChange;
     int value = -1;
 
     const string key = SettingsConst.CURSOR_KEY;
@@ -34,6 +34,6 @@ public class SettingsCursor : MonoBehaviour
 
         value = index;
 
-        Debug.Log("Cursor set to " + index);
+        //Debug.Log("Cursor set to " + index);
     }
 }

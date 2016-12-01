@@ -26,18 +26,26 @@ public class SceneTransition : MonoBehaviour
     void LoadNextScene()
     {
         if (nextScene != null)
+        {
             SceneManager.LoadScene(nextScene);
+        }
         else
+        {
             SceneManager.LoadScene(FALLBACK_SCENE);
+        }
     }
 
     public void LoadSavedGame()
     {
         GameData data = (GameData)SaveLoad.LoadFile(AutoSave.defaultFilePath);
         if (data != null)
+        {
             LoadScene(data.Scene);
+        }
         else
+        {
             LoadScene(null);
+        }
     }
 
     public void Quit()

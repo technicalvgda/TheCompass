@@ -9,8 +9,8 @@ public class SettingsBrightness : MonoBehaviour
     // to initialize them and save their values to PlayerPrefs.
     // Do not directly modify their values in Set() functions.
 
-    public Slider brightness;
     public EffectBrightness mainCamera;
+    public Slider brightness;
 
     void Awake()
     {
@@ -23,8 +23,7 @@ public class SettingsBrightness : MonoBehaviour
         Set(value);
 
         // ApplyUI
-        if (brightness != null)
-            brightness.value = value;
+        if (brightness != null) brightness.value = value;
 
         // Unlike toggles, sliders don't fire the event if the value doesn't change.
     }

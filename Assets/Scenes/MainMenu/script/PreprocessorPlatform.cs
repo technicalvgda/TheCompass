@@ -9,8 +9,13 @@ public class PreprocessorPlatform : MonoBehaviour
     {
 #if UNITY_EDITOR
         if (SettingsConst.EDITOR_PLATFORM == 0)
+        {
             OnDesktop();
-        else OnMobile();
+        }
+        else
+        {
+            OnMobile();
+        }
 #elif UNITY_STANDALONE
         OnDesktop();
 #else
@@ -34,6 +39,8 @@ public class PreprocessorPlatform : MonoBehaviour
     protected void SetActiveGroup(GameObject[] group, bool active)
     {
         for (int i = 0; i < group.Length; i++)
+        {
             group[i].SetActive(active);
+        }
     }
 }

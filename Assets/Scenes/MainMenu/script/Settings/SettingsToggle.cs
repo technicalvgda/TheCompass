@@ -29,7 +29,9 @@ public abstract class SettingsToggle : MonoBehaviour
         Apply();
 
         if (toggleGroup != null && toggles.Length > 0)
+        {
             ApplyUI();
+        }
     }
 
     protected virtual void Apply() { }

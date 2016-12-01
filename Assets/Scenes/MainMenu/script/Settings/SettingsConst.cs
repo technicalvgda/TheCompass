@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SettingsConst : MonoBehaviour
 {
-    public const int EDITOR_PLATFORM = 1;
+    public const int EDITOR_PLATFORM = 0;
 
     public const string CURSOR_KEY = "CURSOR";
     public const int CURSOR_DEFAULT = 0;

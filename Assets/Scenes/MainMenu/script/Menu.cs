@@ -12,22 +12,24 @@ public class Menu : MonoBehaviour
         cg = GetComponent<CanvasGroup>();
 
         if (menuStack == null)
+        {
             menuStack = new Stack();
+        }
 
         //Hide();
     }
 
     // delet this
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            while (menuStack.Count > 0)
-            {
-                Debug.Log(menuStack.Pop());
-            }
-        }
-    }
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.P))
+    //    {
+    //        while (menuStack.Count > 0)
+    //        {
+    //            Debug.Log(menuStack.Pop());
+    //        }
+    //    }
+    //}
 
     public void Transition(MenuTransition p)
     {
@@ -58,14 +60,20 @@ public class Menu : MonoBehaviour
     void Transition(bool pushCurrent, bool overlay, Menu next, int exitHash, int enterHash)
     {
         NavigationVoodoo();
-
+        
         if (pushCurrent)
+        {
             menuStack.Push(this);
+        }
 
         if (overlay)
+        {
             Enter(next, enterHash);
+        }
         else
+        {
             StartCoroutine(_Transition(next, exitHash, enterHash));
+        }
     }
 
     IEnumerator _Transition(Menu next, int exitHash, int enterHash)
@@ -75,7 +83,7 @@ public class Menu : MonoBehaviour
         if (anim.HasState(0, exitHash))
         {
             anim.SetTrigger(exitHash);
-            
+
             // State change occurs after the trigger is set, so yield is needed.
             // But the number of frames before this happens is not consistent.
             // If SetTrigger is called by another object (a button), it takes one frame.
@@ -85,15 +93,18 @@ public class Menu : MonoBehaviour
             // an animation clip, and Unity normally doesn't allow this.
 
             do
+            {
                 yield return null;
-            while (anim.GetCurrentAnimatorStateInfo(0).shortNameHash != exitHash);
+            } while (anim.GetCurrentAnimatorStateInfo(0).shortNameHash != exitHash);
 
             // Once the state is correct, yield until it is finished.
             // The exit state must not transition to any other state,
             // otherwise normalizedTime resets and the yield loop repeats.
 
             while (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+            {
                 yield return null;
+            }
         }
 
         //Hide();
@@ -111,13 +122,14 @@ public class Menu : MonoBehaviour
         if (next != null)
         {
             if (next.isActiveAndEnabled)
-
+            {
                 // This line by itself allows plinking on the frame the target menu is enabled.
                 // Do not bring it outside of this conditional. What this conditional does is
                 // restore interactability to menus coming from an overlay menu. Regular menus
                 // already have this method called in their Enter animation clip.
 
                 next.EnableCanvasGroupInteractable();
+            }
             else
             {
                 next.gameObject.SetActive(true);
@@ -145,13 +157,17 @@ public class Menu : MonoBehaviour
     public void EnableCanvasGroupInteractable()
     {
         if (cg != null)
+        {
             cg.interactable = true;
+        }
     }
 
     public void DisableCanvasGroupInteractable()
     {
         if (cg != null)
+        {
             cg.interactable = false;
+        }
     }
 
     void NavigationVoodoo()

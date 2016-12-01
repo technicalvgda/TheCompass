@@ -98,7 +98,9 @@ public class SettingsResolution : SettingsToggle
 
         // If the resolution is being reverted, the prompt should not be brought up.
         if (!revert)
+        {
             onResolutionChange.Invoke();
+        }
 
         lastToggle = toggles[value];
         value = index;

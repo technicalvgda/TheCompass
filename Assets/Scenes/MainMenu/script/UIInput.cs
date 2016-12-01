@@ -19,7 +19,7 @@ public class UIInput : MonoBehaviour
 
     // Plain GetAxis check is extremely wonky with key presses,
     // with deflection periods that are not supposed to be there etc.
-    // This is caused by keys, pad and dpad all being grouped under the same tag.
+    // This is caused by keys and sticks all being grouped under the same tag.
 
     public static float horizontalAxis { get { return Input.GetAxis(HORIZONTAL); } }
     public static float verticalAxis { get { return Input.GetAxis(VERTICAL); } }
@@ -38,6 +38,9 @@ public class UIInput : MonoBehaviour
     {
         get { return Input.GetButtonDown(CANCEL); }
     }
+
+    // Although the "Horizontal" group covers this, there NEEDS to be a distinction
+    // between keys and sticks because they just don't output the same way.
 
     public static bool isLeftKey
     {
@@ -67,10 +70,9 @@ public class UIInput : MonoBehaviour
     //void Update()
     //{
     //    float xCurrent = Input.GetAxis(HORIZONTAL);
-    //    float xDiff = Mathf.Abs(xCurrent - xPrev);
 
-    //    isPositiveX = xCurrent >= xDiff && xCurrent > DEAD_ZONE;
-    //    isNegativeX = xCurrent <= xDiff && xCurrent < -DEAD_ZONE;
+    //    isPositiveX = xCurrent >= xPrev && xCurrent > DEAD_ZONE;
+    //    isNegativeX = xCurrent <= xPrev && xCurrent < -DEAD_ZONE;
 
     //    xPrev = xCurrent;
     //}
