@@ -11,6 +11,7 @@ public class TetheredObject : MonoBehaviour
     private Color c1 = Color.white;
     private Vector3 playerPosition;
     private LineRenderer lineRen;
+    private Rigidbody2D rb2d;
     private SpriteRenderer spriteRen;
     public int TetheredHealth = 4; //tethered object's health. Gets hit three times and health goes to zero.
     //private string _sceneToLoad;  //holds a specified scene name to load when the player fails this level 
@@ -23,7 +24,8 @@ public class TetheredObject : MonoBehaviour
     void Start()
     {
         tetherOn = false;
-        spriteRen = gameObject.GetComponent<SpriteRenderer>();
+        spriteRen = GetComponent<SpriteRenderer>();
+        rb2d = GetComponent<Rigidbody2D>();
         lineRen = gameObject.AddComponent<LineRenderer>();
         lineRen.material = new Material(Shader.Find("Particles/Additive"));
         lineRen.SetWidth(.1f, .1f);
@@ -44,14 +46,14 @@ public class TetheredObject : MonoBehaviour
             if ((playerPosition - transform.position).magnitude > 10f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, playerPosition, .5f);
-                GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                GetComponent<Rigidbody2D>().angularVelocity = 0;
+                rb2d.velocity = Vector3.zero;
+                rb2d.angularVelocity = 0;
             }
             if ((playerPosition - transform.position).magnitude < 6f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, playerPosition * -1, .5f);
-                GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                GetComponent<Rigidbody2D>().angularVelocity = 0;
+                rb2d.velocity = Vector3.zero;
+                rb2d.angularVelocity = 0;
             }
             lineRen.SetPosition(1, transform.position);
         }
