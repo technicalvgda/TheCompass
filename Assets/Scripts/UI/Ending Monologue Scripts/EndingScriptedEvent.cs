@@ -9,6 +9,7 @@ public class EndingScriptedEvent : MonoBehaviour {
 	public AudioSource audioSource;
 	public TextAsset[] textFiles;
 	public AudioClip[] audioClips;
+	public float[] waitForSecsArray;
 	private Color _color;
 	private int _counter;
 	// Use this for initialization
@@ -41,9 +42,12 @@ public class EndingScriptedEvent : MonoBehaviour {
 		} 
 		else 
 		{
-			theText.text = textFiles [_counter].ToString();
-			_counter++;
-			yield return new WaitForSeconds (18);
+			while (_counter < textFiles.Length) 
+			{
+				theText.text = textFiles [_counter].ToString ();
+				_counter++;
+				yield return new WaitForSeconds (waitForSecsArray [_counter - 1]);
+			}
 		}
 
 		//TEMP YIELD FOR SECONDS REMOVE BEFORE LAUNCH
