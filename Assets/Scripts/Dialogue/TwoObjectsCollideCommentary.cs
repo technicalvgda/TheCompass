@@ -10,7 +10,7 @@ public class TwoObjectsCollideCommentary : MonoBehaviour
 	public int startLine;
 	public int endLine;
 
-	public AudioClip audioClip;
+	public AudioClip audioClip1,audioClip2;
 	public TextBoxManager theTextBox;
 
 	public bool destroyWhenActivated,timedDialogue;
@@ -54,9 +54,11 @@ public class TwoObjectsCollideCommentary : MonoBehaviour
 	}
 	public void activateCommentary()
 	{
-		Debug.Log ("HERE");
 		theTextBox.startCommentaryDialogue ();
-		theTextBox.setVoiceOverSourceClip(audioClip);
+		theTextBox.setVoiceOverSourceClip(audioClip1);
+		if (audioClip2 != null) {
+			theTextBox.setSecondVoiceOverSourceClip(audioClip2);
+		}
 		theTextBox.ReloadScript (textFile);
 		theTextBox.currentLine = startLine;
 		theTextBox.endAtLine = endLine;

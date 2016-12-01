@@ -10,7 +10,7 @@ public class TextBoxManager : MonoBehaviour
 
     public TextAsset textFile;
     public string[] textLines;
-    public AudioSource voiceOverAudioSource;
+    public AudioSource voiceOverAudioSource,secondVoiceOverAudioSource;
     public AudioSource typingSoundAudioSource;
 	//the number of seconds to wait until each beep
 	public float typingWaitSec;
@@ -33,9 +33,11 @@ public class TextBoxManager : MonoBehaviour
 
 	public LoadingTransition loadingTransition;
 	public bool activateTransition;
+	private bool _playedSecondAudioClipOnce;
     // Use this for initialization
     void Start()
     {
+		_playedSecondAudioClipOnce = false;
 		loadingTransition = GameObject.FindGameObjectWithTag ("TransitionObject").GetComponent<LoadingTransition>();
 		_timedCommentaryActive = false;
 		_activatedTypingBeepCoroutine = false;
@@ -59,7 +61,7 @@ public class TextBoxManager : MonoBehaviour
             DisableTextBox();
         }
 		//TEMPORARY DELETE AFTER LAUNCH
-		typingSoundAudioSource.volume = 0.25f;
+		typingSoundAudioSource.volume = 0.1f;
     }
 
     // Update is called once per frame
@@ -97,6 +99,11 @@ public class TextBoxManager : MonoBehaviour
                 else
                 {
                     StartCoroutine(TextScroll(textLines[currentLine]));
+					if (secondVoiceOverAudioSource.clip != null && currentLine == 1 && !_playedSecondAudioClipOnce) 
+					{
+						secondVoiceOverAudioSource.Play ();
+						_playedSecondAudioClipOnce = true;
+					}
                 }
             }
             else if(isTyping && !cancelTyping)
@@ -140,6 +147,12 @@ public class TextBoxManager : MonoBehaviour
         voiceOverAudioSource.Play();
         if (Input.GetKeyDown("space")) voiceOverAudioSource.Stop();
     }
+	public void setSecondVoiceOverSourceClip(AudioClip clip)
+	{
+		//AudioSource audio = GetComponent<AudioSource>();
+		secondVoiceOverAudioSource.clip = clip;
+		_playedSecondAudioClipOnce = false;
+	}
 
     public void EnableTextBox()
     {
