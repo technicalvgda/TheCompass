@@ -17,21 +17,21 @@ public class PlayerHealthLowCommentary : MonoBehaviour
 	public float timeUntilFinished;
 	private Player _player;
 	public float healthToActivateCommentary;
-	private bool _displayedIdleCommentary;
+	private bool _displayedLowHealthCommentary;
 	// Use this for initialization
 	void Start ()
 	{
 		_player = GameObject.FindGameObjectWithTag ("Player").GetComponent<Player>();
 		theTextBox = FindObjectOfType<TextBoxManager>();
-		_displayedIdleCommentary = false;
+		_displayedLowHealthCommentary = false;
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
-		if (_player.getHealth() <= healthToActivateCommentary) 
+		if (_player.getHealth() <= healthToActivateCommentary && !_displayedLowHealthCommentary) 
 		{
-			_displayedIdleCommentary = true;
+			_displayedLowHealthCommentary = true;
 			theTextBox.startCommentaryDialogue ();
 			theTextBox.setVoiceOverSourceClip(audioClip);
 			theTextBox.ReloadScript (textFile);
