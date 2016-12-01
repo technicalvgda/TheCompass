@@ -118,10 +118,13 @@ public class TractorBeamControls : MonoBehaviour
 
         if (_tractorStick.collider.name == "TetheredShipPart")
         {
-            _tractorStick.collider.GetComponent<TetheredObject>().tether(transform.position);
+            //call part pickup event
+            partPickupDelegate();
 
+            _tractorStick.collider.GetComponent<TetheredObject>().tether(transform.position);
+            
             //switch music to next track
-            songManager.ChangeAux1to2();
+            //songManager.ChangeAux1to2();
         }
 
        //TractorConnectSound.Play();

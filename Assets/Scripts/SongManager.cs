@@ -17,6 +17,8 @@ public class SongManager : MonoBehaviour {
     public AudioSource audio2;
 
     float MAX_VOLUME = 1;
+
+    private bool checkVolume = false;
     
 
     // Use this for initialization
@@ -40,8 +42,37 @@ public class SongManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        //if the game is paused and the volume check hasnt been triggered
+        if(Time.timeScale == 0 && checkVolume == false)
+        {
+            checkVolume = true;
+            StartCoroutine(CheckVolumeLevels());      
+        }
+        
+        if(Time.timeScale == 1 && checkVolume == true)
+        {
+            //CheckVolumeLevels();
+            checkVolume = false;
+        }
+        
         //ChangeAux1to2();
 	}
+
+    IEnumerator CheckVolumeLevels()
+    {
+        //set max volume to the current max
+        MAX_VOLUME = SoundSettingCompare("BGSlider");
+        if (audio2.isPlaying)
+        {
+            audio2.volume = MAX_VOLUME;
+        }
+        else if(audio1.isPlaying)
+        {
+            audio1.volume = MAX_VOLUME;
+        }
+        StartCoroutine(CheckVolumeLevels());
+        yield return null;
+   }
 
     public void ChangeAux1to2()
     {      

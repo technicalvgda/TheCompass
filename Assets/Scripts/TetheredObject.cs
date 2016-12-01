@@ -8,20 +8,26 @@ public class TetheredObject : MonoBehaviour
     private Color c1 = Color.white;
     private Vector3 playerPosition;
     private LineRenderer lineRen;
+    private SpriteRenderer spriteRen;
     public int TetheredHealth = 4; //tethered object's health. Gets hit three times and health goes to zero.
     //private string _sceneToLoad;  //holds a specified scene name to load when the player fails this level 
     Player playerScript;
+
+    Sprite[] damageImages;
+    int imageIndex = 0;
 
     // Use this for initialization
     void Start()
     {
         tetherOn = false;
+        spriteRen = gameObject.GetComponent<SpriteRenderer>();
         lineRen = gameObject.AddComponent<LineRenderer>();
         lineRen.material = new Material(Shader.Find("Particles/Additive"));
         lineRen.SetWidth(.1f, .1f);
         lineRen.SetColors(c1, c1);
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         //_sceneToLoad = "MVPScene";  //change this to the specified scene that is to be loaded when the player fails this level
+        InitializeSprites();
     }
 
     // Update is called once per frame
@@ -55,6 +61,15 @@ public class TetheredObject : MonoBehaviour
         {
             Debug.Log("Tethered health is: " + TetheredHealth);
             TetheredHealth -= 1; // tethered health loses 1 health point 
+
+            //change image to show damage
+            imageIndex++;
+            if(imageIndex < damageImages.Length)
+            {
+                spriteRen.sprite = damageImages[imageIndex];
+            }
+            
+
             if (TetheredHealth <= 0) // if tethered health reaches zero or below
             {
                 tetherOn = false;
@@ -99,5 +114,15 @@ public class TetheredObject : MonoBehaviour
     {
         tetherOn = true;
         playerPosition = position;
+    }
+
+    void InitializeSprites()
+    {
+        if(gameObject.name == "SignalBooster")
+        {
+            damageImages = Resources.LoadAll<Sprite>("SignalBooster");
+            spriteRen.sprite = damageImages[imageIndex];
+
+        }
     }
 }
