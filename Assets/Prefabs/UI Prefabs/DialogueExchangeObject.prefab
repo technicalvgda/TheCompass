@@ -359,6 +359,8 @@ GameObject:
   - 114: {fileID: 114000011530543980}
   - 82: {fileID: 82000013229100454}
   - 82: {fileID: 82000012566928106}
+  - 114: {fileID: 114000013361252598}
+  - 114: {fileID: 114000011943532812}
   m_Layer: 0
   m_Name: DialogueExchangeGameManager
   m_TagString: Untagged
@@ -1242,6 +1244,9 @@ MonoBehaviour:
   AlternateEndDelayTime: 3
   GameOverTag: GameOver
   LoadTag: Load
+  RequireTag: Require
+  LeaveTag: Leave
+  CharismaticTag: Charismatic
   typingBeepAudioSource: {fileID: 82000012566928106}
   beepSecWait: 0.08
   blackScreenImage: {fileID: 114000013393241548}
@@ -1306,6 +1311,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000011943532812
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013667558360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84fca3bf38616ba498e9fa8bd6acb72b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000012253742490
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1488,6 +1504,21 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000013361252598
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013667558360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12d5abab8ef4de34db9e9fa3576140b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ColorChangeTag: FlagColor
+  CounterTag: Counter
+  LeaveTag: Leave
+  CharismaticTag: Charismatic
 --- !u!114 &114000013393241548
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -44,6 +44,7 @@ public class UIHelper : MonoBehaviour
     public void LoadNextScene()
     {
         if (nextScene != null)
+            SaveLoad.SaveGameWithScene(nextScene);
             SceneManager.LoadScene(nextScene);
     }
     public void LoadSavedGame()

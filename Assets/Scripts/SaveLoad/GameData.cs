@@ -23,7 +23,7 @@ public class GameData : ISerializable
     public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
     {
         info.AddValue("Version", GameVersion);
-        info.AddValue("Scene", SceneManager.GetActiveScene().name);
+        info.AddValue("Scene", Scene);
         info.AddValue("Branch", BranchData.Singleton);
     }
 }

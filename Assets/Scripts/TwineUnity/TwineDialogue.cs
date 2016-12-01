@@ -6,7 +6,7 @@ public class TwineDialogue {
     #region Variable Declaration
     public static TwineDialogue Singleton;
 
-    Dictionary<string, PassageNode> Passage;
+    public Dictionary<string, PassageNode> Passage;
 
     public delegate void PassageChange();
     public static event PassageChange OnChange;

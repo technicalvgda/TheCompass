@@ -24,8 +24,11 @@ public class TwineTest : MonoBehaviour {
 
     public string GameOverTag = "GameOver";
     public string LoadTag = "Load";
-	//The beeping audioSource
-	public AudioSource typingBeepAudioSource;
+    public string RequireTag = "Require";
+    public string LeaveTag = "Leave";
+    public string CharismaticTag = "Charismatic";
+    //The beeping audioSource
+    public AudioSource typingBeepAudioSource;
 	//bool so only one thread is active during a passage
 	private bool _activatedCoRoutine;
 	//number of seconds coroutine waits until it plays the beep again
@@ -105,6 +108,22 @@ public class TwineTest : MonoBehaviour {
 	{
 		List<string> choiceList = CurrentPassage.GetChoices();
 		List<string> disabledChoices = CurrentPassage.GetChoicesVisited(CurrentPassage.GetChoicesTagged(choiceList, TDialogue.ShowOnceTag));
+        List<string> requireChoices = CurrentPassage.GetChoicesTagged(choiceList, RequireTag);
+        if(requireChoices.Count > 0)
+        {
+            List<string> LeaveChoice = CurrentPassage.GetChoicesTagged(requireChoices, LeaveTag);
+            List<string> CharismaticChoice = CurrentPassage.GetChoicesTagged(requireChoices, CharismaticTag);
+            Debug.Log(BranchData.Singleton.LeaveCounter);
+            Debug.Log(BranchData.Singleton.CharismaticCounter); ;
+            if (BranchData.Singleton.LeaveCounter < 3)
+            {
+                choiceList.Remove(LeaveChoice[0]);
+            }
+            if (BranchData.Singleton.CharismaticCounter < 4)
+            {
+                choiceList.Remove(CharismaticChoice[0]);
+            }
+        }
 		for (int i = 0; i < choiceList.Count; i++)
 		{
 			if (!disabledChoices.Contains(choiceList[i]))
@@ -215,6 +234,7 @@ public class TwineTest : MonoBehaviour {
 			blackScreenImage.color = _color;
 			yield return null;
 		}
+        SaveLoad.SaveGameWithScene(NextScene);
 		SceneManager.LoadScene(NextScene);	
 	}
 }
