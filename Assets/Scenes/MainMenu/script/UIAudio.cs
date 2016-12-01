@@ -3,9 +3,9 @@ using System.Collections;
 
 public class UIAudio : MonoBehaviour
 {
-    public AudioSource reservedBGM;
-    public AudioSource[] reservedSE;
-    public AudioSource[] freeSE;
+    public AudioSource sourceBGM;
+    public AudioSource[] sourceSE;
+    public AudioClip[] clips;
 
     public void SetMasterVolume(float value)
     {
@@ -14,67 +14,63 @@ public class UIAudio : MonoBehaviour
 
     public void SetBGMVolume(float value)
     {
-        reservedBGM.volume = value;
+        sourceBGM.volume = value;
     }
 
     public void SetSEVolume(float value)
     {
-        for (int i = 0; i < reservedSE.Length; i++)
+        for (int i = 0; i < sourceSE.Length; i++)
         {
-            if (reservedSE[i] != null)
-                reservedSE[i].volume = value;
+            if (sourceSE[i] != null)
+                sourceSE[i].volume = value;
         }
-
-        for (int i = 0; i < freeSE.Length; i++)
-        {
-            if (freeSE[i] != null)
-                freeSE[i].volume = value;
-        }
-    }
-
-    public void PlayBGM(bool loop)
-    {
-        if (reservedBGM.isPlaying)
-        {
-            reservedBGM.Stop();
-        }
-        reservedBGM.loop = loop;
-        reservedBGM.Play();
     }
 
     public void PlayBGM(AudioClip clip, bool loop)
     {
-        if (reservedBGM.isPlaying)
+        if (sourceBGM.isPlaying)
         {
-            reservedBGM.Stop();
+            sourceBGM.Stop();
         }
-        reservedBGM.clip = clip;
-        reservedBGM.loop = loop;
-        reservedBGM.Play();
+        sourceBGM.clip = clip;
+        sourceBGM.loop = loop;
+        sourceBGM.Play();
     }
 
-    public void PlaySE(int index)
+    public void PlayBGM(bool loop)
     {
-        //if (reservedSE[index].isPlaying)
-        //{
-        //    reservedSE[index].Stop();
-        //}
-        reservedSE[index].PlayOneShot(reservedSE[index].clip);
+        if (sourceBGM.isPlaying)
+        {
+            sourceBGM.Stop();
+        }
+        sourceBGM.loop = loop;
+        sourceBGM.Play();
     }
+
+    // PlayOneShot instantiates an Audio Source and destroys it 4U
+    // Produces garbage. Do not use it especially for repeated sound effects
+
+    // Crude pooling that iterates every time and picks out an unused source
+    // Ideally a linked list would be used for O(1)
 
     public void PlaySE(AudioClip clip)
     {
-        for (int i = 0; i < freeSE.Length; i++)
+        for (int i = 0; i < sourceSE.Length; i++)
         {
-            if (!freeSE[i].isPlaying)
+            if (!sourceSE[i].isPlaying)
             {
-                freeSE[i].clip = clip;
-                freeSE[i].Play();
+                sourceSE[i].clip = clip;
+                sourceSE[i].Play();
                 return;
             }
         }
         // If all sources are busy, no sound will be played
-        // Next time use a linked list instead
+        // Maybe force the oldest source to play instead
+    }
+
+    public void PlaySE(int index)
+    {
+        PlaySE(clips[index]);
     }
 
     //void Awake()
