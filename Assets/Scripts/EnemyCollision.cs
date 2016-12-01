@@ -44,8 +44,7 @@ public class EnemyCollision : MonoBehaviour
         Health -= damage;
         Debug.Log("Damaged Enemy, health is: "+Health);
         UpdateHealthBar();
-        //check if the enemy is out of health
-        CheckHealth();
+        
     }
 
     void CheckHealth()
@@ -61,6 +60,7 @@ public class EnemyCollision : MonoBehaviour
             }    
             // kill enemy
             Instantiate(explosion, transform.position, Quaternion.identity);
+            Destroy(healthBarObj);
             Destroy(gameObject);
             
         }
@@ -69,7 +69,11 @@ public class EnemyCollision : MonoBehaviour
     //returns a value between 0 and 1 based on health remaining (1 is full, 0 is empty)
     void UpdateHealthBar()
     {
+        if(Health < 0)
+        { Health = 0; }
         healthBar.value = Health / InitialHealth;
+        //check if the enemy is out of health
+        CheckHealth();
     }
 
     void InitializeHealthBar()

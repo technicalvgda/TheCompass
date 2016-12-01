@@ -28,7 +28,7 @@ public class Player : MonoBehaviour {
 	private Rigidbody2D rb2d;
     private ParticleSystem partSys;
     private Color trailColor;
-    private Color lowFuelColor = Color.green;
+    private Color lowFuelColor = Color.red;
 
 	//Determines which control scheme to use.  Set to 1 or 2 (2 being the default value)
 	// 1-> W (accelerate forward), S (accelerate backwards), A (Rotate Counter-Clockwise), D (Rotate Clockwise)
@@ -212,16 +212,19 @@ public class Player : MonoBehaviour {
 				//use the joystick input to create movement vector
 				movement = joystick.inputValue().normalized;
 #endif
-        //Increase force the longer movement direction is inputted
-        //Resets when input is in neutral position
-        HandleEngine(movement.magnitude);
-        //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
-        rb2d.AddForce(movement * ((_enginePower * nebulaMultiplier) - tractorSlow));
-        //Rotates front of ship to direction of movement
-        if (movement != Vector2.zero)
+        if (Time.timeScale == 1)
         {
-            float angle = Mathf.Atan2(-movement.x, movement.y) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * rotationSpeed);
+            //Increase force the longer movement direction is inputted
+            //Resets when input is in neutral position
+            HandleEngine(movement.magnitude);
+            //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
+            rb2d.AddForce(movement * ((_enginePower * nebulaMultiplier) - tractorSlow));
+            //Rotates front of ship to direction of movement
+            if (movement != Vector2.zero)
+            {
+                float angle = Mathf.Atan2(-movement.x, movement.y) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * rotationSpeed);
+            }
         }
     }
     private void checkIfPlayerOutOfBounds(int maxX, int maxY, int minX, int minY)
@@ -412,8 +415,8 @@ public class Player : MonoBehaviour {
         {
             currentFuel -= Time.deltaTime*1.5f * FUEL_LOSS_VARIABLE;
         }
-        //if fuel is less than 40%
-        if(currentFuel < (MAX_FUEL*0.4f))
+        //if fuel is less than 35%
+        if(currentFuel < (MAX_FUEL*0.35f))
         {
             partSys.startColor = lowFuelColor;
         }

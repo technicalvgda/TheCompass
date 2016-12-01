@@ -9,7 +9,7 @@ public class PlayerShieldActivation : MonoBehaviour
 	public string speakerName;
 	public int startLine;
 	public int endLine;
-	//public AudioClip audioClip;
+	public AudioClip audioClip;
 
 	public TextBoxManager theTextBox;
 
@@ -37,7 +37,7 @@ public class PlayerShieldActivation : MonoBehaviour
 				if (_numbTimesOutOfBounds == 1) 
 				{
 					theTextBox.startCommentaryDialogue ();
-					//theTextBox.setVoiceOverSourceClip(audioClip);
+					theTextBox.setVoiceOverSourceClip(audioClip);
 					theTextBox.ReloadScript (shieldActivationText1);
 					theTextBox.currentLine = startLine;
 					theTextBox.endAtLine = endLine;
@@ -52,7 +52,7 @@ public class PlayerShieldActivation : MonoBehaviour
 				else if (_numbTimesOutOfBounds == 2) 
 				{
 					theTextBox.startCommentaryDialogue ();
-					//theTextBox.setVoiceOverSourceClip(audioClip);
+					theTextBox.setVoiceOverSourceClip(audioClip);
 					theTextBox.ReloadScript (shieldActivation2);
 					theTextBox.currentLine = startLine;
 					theTextBox.endAtLine = endLine;

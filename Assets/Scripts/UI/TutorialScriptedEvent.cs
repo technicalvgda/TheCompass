@@ -15,6 +15,7 @@ public class TutorialScriptedEvent : MonoBehaviour {
 	private Color _color;
 	public TextAsset[] textFiles;
 	public string[] speakers;
+	public AudioClip[] audioClips;
 	private RectTransform _rectTransform;
 	private float _backgroundVolume;
 	private float _masterVolume;
@@ -35,9 +36,12 @@ public class TutorialScriptedEvent : MonoBehaviour {
 		{
 			blackScreen.color = Color.clear;
 			text.color = Color.clear;
-		}
-		else
+			buttonManagerScript.exitCutscene ();
+		} 
+		else 
+		{			
 			StartCoroutine (TutorialIntro ());
+		}
 	}
 	
 	// Update is called once per frame
@@ -84,8 +88,10 @@ public class TutorialScriptedEvent : MonoBehaviour {
 				textBoxManager.endAtLine = 0;
 				textBoxManager.setSpeakerNameText (speakers [i]);
 				textBoxManager.EnableTextBox ();
+				if (textBoxManager.speakerText.text != "Pilot")					
+					textBoxManager.setVoiceOverSourceClip (audioClips [i]);
 				i++;
-			}
+			} 
 
 			yield return new WaitForSecondsRealtime (0.1f);
 		}
