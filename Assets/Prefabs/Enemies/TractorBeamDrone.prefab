@@ -27,6 +27,7 @@ GameObject:
   - 114: {fileID: 114000012075211048}
   - 114: {fileID: 114000013508320942}
   - 114: {fileID: 114000013730501732}
+  - 114: {fileID: 114000014281112006}
   m_Layer: 0
   m_Name: TractorBeamDrone
   m_TagString: Enemy
@@ -194,6 +195,17 @@ MonoBehaviour:
   pullDelay: 5
   pullForce: 55
   deflection: 1
+--- !u!114 &114000014281112006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011544194430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b76245ee88a7a459e93944971438b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!120 &120000012370174408
 LineRenderer:
   m_ObjectHideFlags: 1

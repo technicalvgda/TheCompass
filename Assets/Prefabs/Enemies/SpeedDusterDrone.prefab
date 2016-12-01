@@ -43,6 +43,7 @@ GameObject:
   - 114: {fileID: 114000011122588806}
   - 114: {fileID: 114000010810480840}
   - 114: {fileID: 114000010618495488}
+  - 114: {fileID: 114000010106474984}
   m_Layer: 0
   m_Name: SpeedDusterDrone
   m_TagString: Enemy
@@ -108,6 +109,17 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 5
+--- !u!114 &114000010106474984
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012179273374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b76245ee88a7a459e93944971438b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000010618495488
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -27,6 +27,7 @@ GameObject:
   - 114: {fileID: 114000011832713334}
   - 114: {fileID: 114000011295199278}
   - 114: {fileID: 114000012788176414}
+  - 114: {fileID: 114000014161946804}
   m_Layer: 0
   m_Name: DamageDusterDrone
   m_TagString: Enemy
@@ -186,6 +187,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Items: {fileID: 0}
   InitialHealth: 100
+--- !u!114 &114000014161946804
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012020068090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b76245ee88a7a459e93944971438b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212000010013046608
 SpriteRenderer:
   m_ObjectHideFlags: 1

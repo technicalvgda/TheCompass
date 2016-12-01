@@ -27,6 +27,7 @@ GameObject:
   - 50: {fileID: 50000012815062902}
   - 120: {fileID: 120000013991279956}
   - 114: {fileID: 114000012530075146}
+  - 114: {fileID: 114000013830090668}
   m_Layer: 0
   m_Name: RigidSentry
   m_TagString: Enemy
@@ -180,6 +181,17 @@ MonoBehaviour:
   bullet: {fileID: 50000010395439974, guid: 5ffc42b176a54a245bf9cd9bb6e14035, type: 2}
   accuracy: 10
   fireRate: 10
+--- !u!114 &114000013830090668
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012459373490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b76245ee88a7a459e93944971438b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000014283298296
 MonoBehaviour:
   m_ObjectHideFlags: 1

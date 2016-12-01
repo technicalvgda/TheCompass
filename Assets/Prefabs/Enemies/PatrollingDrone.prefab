@@ -42,6 +42,7 @@ GameObject:
   - 50: {fileID: 50000011856684122}
   - 120: {fileID: 120000012011893354}
   - 114: {fileID: 114000012457619732}
+  - 114: {fileID: 114000010354972664}
   m_Layer: 0
   m_Name: PatrollingDrone
   m_TagString: Enemy
@@ -152,6 +153,17 @@ MonoBehaviour:
   viewDist: 50
   sight: 0
   sightPos: {x: -16.121737, y: 2.5514657, z: 0}
+--- !u!114 &114000010354972664
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012621182136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b76245ee88a7a459e93944971438b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000012457619732
 MonoBehaviour:
   m_ObjectHideFlags: 1
