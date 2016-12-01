@@ -92,7 +92,9 @@ public class TriggerLevel3EndCutscene : MonoBehaviour
         {
             //set triggered to true (to prevent multiple calls)
             _wasTriggered = true;
-            
+            TetheredObject tether = other.GetComponent<TetheredObject>();
+            tether.tetherOn = false;
+            tether.ShrinkAndDestroy();
             //disable collisions
             _player.GetComponent<CircleCollider2D>().enabled = false;
             //disable fuel loss
@@ -125,6 +127,15 @@ public class TriggerLevel3EndCutscene : MonoBehaviour
         if (targetIndex < allTargets.Length)
         {
             //get next target
+
+            //swap layer
+            SpriteRenderer playerRend = _player.GetComponent<SpriteRenderer>();
+            playerRend.sortingLayerName = "Parallax2";
+            playerRend.sortingOrder = -2;
+
+            //start shrinking player
+            StartCoroutine(ShrinkPlayer());
+
             target = allTargets[targetIndex];  
             BeginCutscene();
         }
@@ -138,6 +149,18 @@ public class TriggerLevel3EndCutscene : MonoBehaviour
             }
         }
         yield return null;
+    }
+
+    IEnumerator ShrinkPlayer()
+    {
+        Vector3 shrinkVec = new Vector3(0.05f,0.05f,0);
+        while (_player.transform.localScale.x > 0.1)
+        {
+            _player.transform.localScale -= shrinkVec;
+            yield return new WaitForSeconds(1);
+        }
+        yield return null;
+       
     }
 
     void ActivateMapIcon()

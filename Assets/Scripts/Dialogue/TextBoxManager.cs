@@ -89,8 +89,8 @@ public class TextBoxManager : MonoBehaviour
             if(!isTyping)
             {
 
-                AudioSource audio = GetComponent<AudioSource>();
-                audio.Stop();
+                //AudioSource audio = GetComponent<AudioSource>();
+                //audio.Stop();
                 currentLine += 1;
                 if(currentLine > endAtLine)
                 {
@@ -101,6 +101,7 @@ public class TextBoxManager : MonoBehaviour
                     StartCoroutine(TextScroll(textLines[currentLine]));
 					if (secondVoiceOverAudioSource.clip != null && currentLine == 1 && !_playedSecondAudioClipOnce) 
 					{
+						voiceOverAudioSource.Stop ();
 						secondVoiceOverAudioSource.Play ();
 						_playedSecondAudioClipOnce = true;
 					}
@@ -111,8 +112,9 @@ public class TextBoxManager : MonoBehaviour
                 cancelTyping = true;
 				if(voiceOverAudioSource.isPlaying)
 					voiceOverAudioSource.Stop ();
-            }
-            
+				if(secondVoiceOverAudioSource.isPlaying)
+					secondVoiceOverAudioSource.Stop ();
+            }            
         }
     }
 

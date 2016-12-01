@@ -466,6 +466,26 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!1 &1108949727 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000013667558360, guid: 10d094935f7b1274eb084e5eb5b06fd5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1920522946}
+--- !u!114 &1108949729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1108949727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12d5abab8ef4de34db9e9fa3576140b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ColorChangeTag: FlagColor
+  CounterTag: Counter
+  LeaveTag: Leave
+  CharismaticTag: Charismatic
 --- !u!4 &1220951171 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000013344319508, guid: 10d094935f7b1274eb084e5eb5b06fd5,
@@ -845,6 +865,11 @@ Prefab:
       propertyPath: DialogueFile
       value: 
       objectReference: {fileID: 4900000, guid: cb75332174881f9439e56b68f63bb493, type: 3}
+    - target: {fileID: 114000011517530692, guid: 10d094935f7b1274eb084e5eb5b06fd5,
+        type: 2}
+      propertyPath: NextScene
+      value: Level 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 10d094935f7b1274eb084e5eb5b06fd5, type: 2}
   m_IsPrefabParent: 0
