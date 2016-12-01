@@ -84,38 +84,34 @@ public class TextBoxManager : MonoBehaviour
 				Debug.Log ("Timed commentary done");
 			}
 		}
-		if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if(!isTyping)
-            {
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			if (!isTyping) {
 
-                //AudioSource audio = GetComponent<AudioSource>();
-                //audio.Stop();
-                currentLine += 1;
-                if(currentLine > endAtLine)
-                {
-                    DisableTextBox();
-                }
-                else
-                {
-                    StartCoroutine(TextScroll(textLines[currentLine]));
-					if (secondVoiceOverAudioSource.clip != null && currentLine == 1 && !_playedSecondAudioClipOnce) 
-					{
+				//AudioSource audio = GetComponent<AudioSource>();
+				//audio.Stop();
+				currentLine += 1;
+				if (currentLine > endAtLine) {
+					DisableTextBox ();
+				} else {
+					StartCoroutine (TextScroll (textLines [currentLine]));
+					if (secondVoiceOverAudioSource.clip != null && currentLine == 1 && !_playedSecondAudioClipOnce) {
 						voiceOverAudioSource.Stop ();
 						secondVoiceOverAudioSource.Play ();
 						_playedSecondAudioClipOnce = true;
 					}
-                }
-            }
-            else if(isTyping && !cancelTyping)
-            {
-                cancelTyping = true;
-				if(voiceOverAudioSource.isPlaying)
+				}
+			} else if (isTyping && !cancelTyping) {
+				cancelTyping = true;
+				if (voiceOverAudioSource.isPlaying)
 					voiceOverAudioSource.Stop ();
-				if(secondVoiceOverAudioSource.isPlaying)
+				if (secondVoiceOverAudioSource.isPlaying)
 					secondVoiceOverAudioSource.Stop ();
-            }            
-        }
+			}            
+		} else if (!voiceOverAudioSource.isPlaying) 
+		{
+			DisableTextBox ();
+			cancelTyping = true;
+		}
     }
 
     private IEnumerator TextScroll(string lineOfText)
