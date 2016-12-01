@@ -24,6 +24,11 @@ public class SceneTransition : MonoBehaviour
         anim.SetTrigger(-556287998); // "Exit Scene"
     }
 
+    public void LoadSceneInstant(string scene)
+    {
+        SceneManager.LoadScene(scene);
+    }
+
     void LoadNextScene()
     {
 		Debug.Log("LoadNextScene()");
@@ -55,6 +60,12 @@ public class SceneTransition : MonoBehaviour
         {
             LoadScene(null);
         }
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
     }
 
     public void Quit()
