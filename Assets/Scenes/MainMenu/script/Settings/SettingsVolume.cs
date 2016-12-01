@@ -51,7 +51,8 @@ public class SettingsVolume : MonoBehaviour
     {
         //Debug.Log("Master volume set to " + value);
 
-        sourceUI.SetMasterVolume(value * 0.1f);
+        if (sourceUI != null)
+            sourceUI.SetMasterVolume(value * 0.1f);
 
         // TODO: set source1
     }
@@ -60,7 +61,8 @@ public class SettingsVolume : MonoBehaviour
     {
         //Debug.Log("Music volume set to " + value);
 
-        sourceUI.SetBGMVolume(value * 0.1f);
+        if (sourceUI != null)
+            sourceUI.SetBGMVolume(value * 0.1f);
 
         // TODO: set source1
     }
@@ -69,7 +71,8 @@ public class SettingsVolume : MonoBehaviour
     {
         //Debug.Log("Sounds volume set to " + value);
 
-        sourceUI.SetSEVolume(value * 0.1f);
+        if (sourceUI != null)
+            sourceUI.SetSEVolume(value * 0.1f);
 
         // TODO: set source1
     }

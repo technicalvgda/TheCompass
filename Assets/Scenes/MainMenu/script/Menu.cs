@@ -177,6 +177,13 @@ public class Menu : MonoBehaviour
         DisableCanvasGroupInteractable();
     }
 
+    // uhh
+    public void DeselectAll()
+    {
+        UIInput.selected = null;
+        NavigationPointer.mousedOver = null;
+    }
+
     // Menus are scaled to zero and made uninteractable when "disabled", and restored when
     // "enabled". All menus have to be enabled from the start in the editor.
     // Objects with zero scale will not drive up the number of draw batches and setpasses.

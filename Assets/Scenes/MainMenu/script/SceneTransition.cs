@@ -37,7 +37,8 @@ public class SceneTransition : MonoBehaviour
 
     public void LoadSavedGame()
     {
-        GameData data = (GameData)SaveLoad.LoadFile(AutoSave.defaultFilePath);
+        //GameData data = (GameData)SaveLoad.LoadFile(AutoSave.defaultFilePath);
+        GameData data = null;
         if (data != null)
         {
             LoadScene(data.Scene);

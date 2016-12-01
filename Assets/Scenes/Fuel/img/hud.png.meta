@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b6d63e966e8a3f44b921a4248d0fac65
-timeCreated: 1477807058
+timeCreated: 1480603154
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -43,6 +43,29 @@ TextureImporter:
     21300072: fuelLow
     21300074: fuelNormal
     21300076: pauseClamp
+    21300078: glitchBar
+    21300080: glitchNoise0
+    21300082: glitchNoise1
+    21300084: glitchNoise2
+    21300086: glitchNoise3
+    21300088: glitchNoise4
+    21300090: glitchNoise5
+    21300092: messageDed0
+    21300094: messageDed2
+    21300096: messageDed3
+    21300098: messageDedBar0
+    21300100: messageDedBar1
+    21300102: messageDedBar2
+    21300104: messageDedBar3
+    21300106: messageDedBar4
+    21300108: messageDedBar5
+    21300110: messageTextbox
+    21300112: pauseButtonHighlighted
+    21300114: pauseClamp0
+    21300116: pauseClamp1
+    21300118: slashUnit
+    21300120: binary2x2
+    21300122: binary3x3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -65,10 +88,10 @@ TextureImporter:
   cubemapConvolutionSteps: 7
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: -3
   maxTextureSize: 2048
   textureSettings:
-    filterMode: 0
+    filterMode: 1
     aniso: 16
     mipBias: -1
     wrapMode: 1
@@ -87,36 +110,44 @@ TextureImporter:
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings:
-  - buildTarget: Standalone
-    maxTextureSize: 2048
-    textureFormat: -3
-    compressionQuality: 50
-    allowsAlphaSplitting: 0
+  buildTargetSettings: []
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fuelBody
+      name: binary2x2
       rect:
         serializedVersion: 2
-        x: 1
-        y: 486
-        width: 421
-        height: 25
+        x: 509
+        y: 477
+        width: 2
+        height: 2
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: fuelHoldBottom
+      name: binary3x3
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 476
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 1, w: 1}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: fuelBody
       rect:
         serializedVersion: 2
         x: 1
-        y: 170
-        width: 115
-        height: 85
+        y: 324
+        width: 421
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -126,8 +157,8 @@ TextureImporter:
       name: fuelHoldLeft
       rect:
         serializedVersion: 2
-        x: 87
-        y: 56
+        x: 464
+        y: 312
         width: 18
         height: 113
       alignment: 0
@@ -139,23 +170,10 @@ TextureImporter:
       name: fuelHoldRight
       rect:
         serializedVersion: 2
-        x: 1
-        y: 54
+        x: 104
+        y: 52
         width: 85
         height: 115
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: fuelHoldTop
-      rect:
-        serializedVersion: 2
-        x: 123
-        y: 319
-        width: 113
-        height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,7 +184,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 345
+        y: 313
         width: 252
         height: 6
       alignment: 0
@@ -179,7 +197,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 381
+        y: 23
         width: 252
         height: 28
       alignment: 0
@@ -191,8 +209,8 @@ TextureImporter:
       name: fuelNormal
       rect:
         serializedVersion: 2
-        x: 1
-        y: 338
+        x: 254
+        y: 94
         width: 252
         height: 6
       alignment: 0
@@ -204,8 +222,8 @@ TextureImporter:
       name: fuelNormalGlow
       rect:
         serializedVersion: 2
-        x: 1
-        y: 352
+        x: 254
+        y: 101
         width: 252
         height: 28
       alignment: 0
@@ -214,11 +232,232 @@ TextureImporter:
       outline: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: glitchBar
+      rect:
+        serializedVersion: 2
+        x: 501
+        y: 219
+        width: 3
+        height: 260
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 0, z: 1, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: glitchNoise0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 219
+        width: 256
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: glitchNoise1
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 202
+        width: 256
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: glitchNoise2
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 185
+        width: 256
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: glitchNoise3
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 168
+        width: 256
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: glitchNoise4
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 151
+        width: 256
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: glitchNoise5
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 134
+        width: 256
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: messageDed0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 350
+        width: 438
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: messageDed2
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 458
+        width: 477
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: messageDed3
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 404
+        width: 462
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: messageDedBar0
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 316
+        width: 174
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 1, z: 0, w: 1}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: messageDedBar1
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 232
+        width: 227
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 1, z: 0, w: 1}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: messageDedBar2
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 320
+        width: 352
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 1, z: 0, w: 1}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: messageDedBar3
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 19
+        width: 334
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 1, z: 0, w: 1}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: messageDedBar4
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 130
+        width: 316
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 1, z: 0, w: 1}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: messageDedBar5
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 228
+        width: 218
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 1, z: 0, w: 1}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: messageTextbox
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 480
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 15, y: 15, z: 15, w: 15}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: pauseButton
       rect:
         serializedVersion: 2
         x: 1
-        y: 410
+        y: 236
         width: 228
         height: 75
       alignment: 0
@@ -227,13 +466,39 @@ TextureImporter:
       outline: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: pauseClamp
+      name: pauseButtonHighlighted
       rect:
         serializedVersion: 2
-        x: 1
-        y: 256
+        x: 230
+        y: 236
+        width: 228
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: pauseClamp0
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 65
         width: 121
-        height: 81
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: pauseClamp1
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 426
+        width: 21
+        height: 53
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -243,13 +508,26 @@ TextureImporter:
       name: pauseLid
       rect:
         serializedVersion: 2
-        x: 230
-        y: 415
+        x: 312
+        y: 23
         width: 184
         height: 70
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: slashUnit
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 52
+        width: 102
+        height: 166
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 0, z: 1, w: 0}
       outline: []
       tessellationDetail: -1
     outline: []
