@@ -15,7 +15,7 @@ using UnityEngine.SceneManagement;
 */
 public class Player : MonoBehaviour {
 
-
+    public FuelGauge fuelGauge;
     //variable to keep track of how many enemies the player has killed
     public static int killCounter;
 
@@ -143,6 +143,7 @@ public class Player : MonoBehaviour {
 
 	void Update ()
 	{
+        fuelGauge.Set(getFuel01());
         //update static vector for player position
         playerPos = transform.position;
 

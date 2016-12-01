@@ -3225,6 +3225,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2a22ae9536cd3447b04f7ed90817852, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &323482761 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000011975812674, guid: dc990532c9eef8348b99712d28b9e6b5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1880497156}
+  m_Script: {fileID: 11500000, guid: 3a853f3afe03d014698596dae9d814aa, type: 3}
 --- !u!4 &324702787 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000010555197692, guid: a639f13b11404a04ca136cdcd1021fd6,
@@ -4654,6 +4660,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 48.511
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013312837990, guid: b0b7fba286815dc44b0ba11b680392c4,
+        type: 2}
+      propertyPath: fuelGauge
+      value: 
+      objectReference: {fileID: 323482761}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b0b7fba286815dc44b0ba11b680392c4, type: 2}
   m_IsPrefabParent: 0
