@@ -126,8 +126,16 @@ public class TractorBeamControls : MonoBehaviour
             //switch music to next track
             //songManager.ChangeAux1to2();
         }
+        if (_tractorStick.collider.tag == "RepairStation")
+        {
+            //call part pickup event
+            partPickupDelegate();
+            _tractorStick.collider.GetComponent<RepairStation>().DeactivateIcon();
+            //switch music to next track
+            //songManager.ChangeAux1to2();
+        }
 
-       //TractorConnectSound.Play();
+        //TractorConnectSound.Play();
     }
 
     //Handles reset when player releases an object
@@ -136,6 +144,10 @@ public class TractorBeamControls : MonoBehaviour
         //Debug.Log("Click up");
         if (objectScript != null)
         {
+            if(objectScript.gameObject.tag == "RepairStation")
+            {
+                _tractorStick.collider.GetComponent<RepairStation>().ActivateIcon();
+            }
             objectScript.isTractored = false;
             objectScript.transform.SetParent(null);
             //TractorReleaseSound.Play();

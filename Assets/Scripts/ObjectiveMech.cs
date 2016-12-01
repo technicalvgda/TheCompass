@@ -21,10 +21,7 @@ public class ObjectiveMech : MonoBehaviour {
     {
         if(col.tag == "Player")
         {
-            
-               
-            
-           
+
             // win condition met if part collected
             if (col.GetComponent<TractorBeamControls>().partCollected)
             {
