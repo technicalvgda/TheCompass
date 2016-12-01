@@ -59,7 +59,7 @@ public class UIAudio : MonoBehaviour
         //{
         //    reservedSE[index].Stop();
         //}
-        reservedSE[index].Play();
+        reservedSE[index].PlayOneShot(reservedSE[index].clip);
     }
 
     public void PlaySE(AudioClip clip)
