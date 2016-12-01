@@ -55,11 +55,16 @@ public class UIAudio : MonoBehaviour
 
     public void PlaySE(int index)
     {
-        //if (reservedSE[index].isPlaying)
-        //{
-        //    reservedSE[index].Stop();
-        //}
-        reservedSE[index].PlayOneShot(reservedSE[index].clip);
+        if (reservedSE[index].isPlaying)
+        {
+            reservedSE[index].Stop();
+        }
+        reservedSE[index].Play();
+
+        // Instantiates an Audio Source and destroys it 4u
+        // Produces garbage
+
+        //reservedSE[index].PlayOneShot(reservedSE[index].clip);
     }
 
     public void PlaySE(AudioClip clip)
