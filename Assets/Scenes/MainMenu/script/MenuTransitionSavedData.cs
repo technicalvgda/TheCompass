@@ -11,9 +11,9 @@ public class MenuTransitionSavedData : MenuTransition
     {
         get
         {
-            //bool hasSavedData = File.Exists(AutoSave.defaultFilePath);
+			bool hasSavedData = File.Exists(SaveLoad.defaultFilePath);
             //Debug.Log("hasSavedData = " + hasSavedData);
-            bool hasSavedData = true;
+           // bool hasSavedData = true;
 
             return !hasSavedData ? nextNew : nextContinue;
         }
