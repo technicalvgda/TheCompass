@@ -7,6 +7,10 @@ public class TractorBeamControls : MonoBehaviour
     public delegate void OnPartPickupDelegate();
     public static OnPartPickupDelegate partPickupDelegate;
 
+    //part release event delegate
+    public delegate void OnPartReleaseDelegate();
+    public static OnPartReleaseDelegate partReleaseDelegate;
+
     SongManager songManager;
     // stuff for virtual joystick input 
     private Touch _touch;
@@ -146,6 +150,7 @@ public class TractorBeamControls : MonoBehaviour
         {
             if(objectScript.gameObject.tag == "RepairStation")
             {
+                partReleaseDelegate();
                 _tractorStick.collider.GetComponent<RepairStation>().ActivateIcon();
             }
             objectScript.isTractored = false;

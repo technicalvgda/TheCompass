@@ -12,11 +12,28 @@ public class ObjectiveMech : MonoBehaviour {
     public GameObject transitionBox;
 	public GameObject commentaryObject;
 	public bool isCommentaryTrigger;
+
+    GameObject mapIcon;
     void Start()
     {
         loadingTransition = transitionBox.GetComponent<LoadingTransition>();
+        mapIcon = transform.FindChild("MapIcon").gameObject;
+        DeactivateMapIcon();
+        if(SceneManager.GetActiveScene().name == "Level 5")
+        {
+            TractorBeamControls.partPickupDelegate += ActivateMapIcon;
+            TractorBeamControls.partReleaseDelegate += DeactivateMapIcon;
+        }
     }
 
+    void OnDisable()
+    {
+        if (SceneManager.GetActiveScene().name == "Level 5")
+        {
+            TractorBeamControls.partPickupDelegate -= ActivateMapIcon;
+            TractorBeamControls.partReleaseDelegate -= DeactivateMapIcon;
+        }
+    }
     void OnTriggerEnter2D(Collider2D col)
     {
         if(col.tag == "Player")
@@ -85,5 +102,15 @@ public class ObjectiveMech : MonoBehaviour {
             }*/
         }
 
+    }
+
+    void ActivateMapIcon()
+    {
+        mapIcon.SetActive(true);
+    }
+
+    void DeactivateMapIcon()
+    {
+        mapIcon.SetActive(false);
     }
 }
