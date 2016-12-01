@@ -92,7 +92,9 @@ public class TriggerLevel3EndCutscene : MonoBehaviour
         {
             //set triggered to true (to prevent multiple calls)
             _wasTriggered = true;
-            
+            TetheredObject tether = other.GetComponent<TetheredObject>();
+            tether.tetherOn = false;
+            tether.ShrinkAndDestroy();
             //disable collisions
             _player.GetComponent<CircleCollider2D>().enabled = false;
             //disable fuel loss

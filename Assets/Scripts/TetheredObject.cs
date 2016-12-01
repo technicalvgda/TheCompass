@@ -115,6 +115,22 @@ public class TetheredObject : MonoBehaviour
         yield return null;
     }
 
+    public void ShrinkAndDestroy()
+    {
+        StartCoroutine(ShrinkDestroy());
+    }
+    IEnumerator ShrinkDestroy()
+    {
+        Vector3 shrinkVec = new Vector3(0.1f, 0.1f, 0);
+        while (transform.localScale.x > 0.1)
+        {
+            transform.localScale -= shrinkVec;
+            yield return new WaitForSeconds(0.1f);
+        }
+        Destroy(gameObject);
+        yield return null;
+    }
+
     /**
      * When the player fails this level, this method will be invoked to load a different scene
      */
