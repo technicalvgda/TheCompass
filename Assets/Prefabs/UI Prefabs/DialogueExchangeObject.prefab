@@ -241,7 +241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000012293617346
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,7 +1155,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 2f98519948d9aec409cd91be529d8cfa, type: 3}
-    m_FontSize: 14
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1226,7 +1226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f29eeffe797d95140aeb25a1d3ccc17b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DialogueFile: {fileID: 4900000, guid: 29993d76b0103094595d3c00451d29bf, type: 3}
+  DialogueFile: {fileID: 4900000, guid: 6ece88edccd7bd542a1afc35e6a243c0, type: 3}
   ChoiceButtonPrefab: {fileID: 114000014154300136, guid: 89e85f54004df1745a15cd57a8fff7e8,
     type: 2}
   ChoiceButtonDisabledPrefab: {fileID: 114000013400998972, guid: ac2da22cfdcfd36458c211fb448cf61a,
@@ -1234,7 +1234,7 @@ MonoBehaviour:
   ChoicePanel: {fileID: 224000012606073678}
   VerticalSpacing: -45
   PassageTextDisplay: {fileID: 114000011198331230}
-  NextScene: Level 2
+  NextScene: Credit Scene
   ContinueText: Press to Continue
   AlternateStartTag: AlternateStart
   AlternateEndTag: AlternateEnd
@@ -5399,7 +5399,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -40}
+  m_AnchoredPosition: {x: 0, y: -24}
   m_SizeDelta: {x: 700, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000010424320164
@@ -5509,7 +5509,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 14.6}
   m_SizeDelta: {x: 670, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000011499343896

@@ -89,8 +89,8 @@ public class TextBoxManager : MonoBehaviour
             if(!isTyping)
             {
 
-                AudioSource audio = GetComponent<AudioSource>();
-                audio.Stop();
+                //AudioSource audio = GetComponent<AudioSource>();
+                //audio.Stop();
                 currentLine += 1;
                 if(currentLine > endAtLine)
                 {
@@ -101,6 +101,7 @@ public class TextBoxManager : MonoBehaviour
                     StartCoroutine(TextScroll(textLines[currentLine]));
 					if (secondVoiceOverAudioSource.clip != null && currentLine == 1 && !_playedSecondAudioClipOnce) 
 					{
+						voiceOverAudioSource.Stop ();
 						secondVoiceOverAudioSource.Play ();
 						_playedSecondAudioClipOnce = true;
 					}
@@ -109,8 +110,11 @@ public class TextBoxManager : MonoBehaviour
             else if(isTyping && !cancelTyping)
             {
                 cancelTyping = true;
-            }
-            
+				if(voiceOverAudioSource.isPlaying)
+					voiceOverAudioSource.Stop ();
+				if(secondVoiceOverAudioSource.isPlaying)
+					secondVoiceOverAudioSource.Stop ();
+            }            
         }
     }
 
@@ -143,6 +147,8 @@ public class TextBoxManager : MonoBehaviour
     public void setVoiceOverSourceClip(AudioClip clip)
     {
         //AudioSource audio = GetComponent<AudioSource>();
+		if(voiceOverAudioSource.isPlaying)
+			voiceOverAudioSource.Stop ();
         voiceOverAudioSource.clip = clip;
         voiceOverAudioSource.Play();
         if (Input.GetKeyDown("space")) voiceOverAudioSource.Stop();
@@ -150,6 +156,8 @@ public class TextBoxManager : MonoBehaviour
 	public void setVoiceOverSourceClip(AudioClip clip,float sec)
 	{
 		//AudioSource audio = GetComponent<AudioSource>();
+		if(voiceOverAudioSource.isPlaying)
+			voiceOverAudioSource.Stop ();
 		voiceOverAudioSource.clip = clip;
 		voiceOverAudioSource.Play();
 		voiceOverAudioSource.time = sec;
