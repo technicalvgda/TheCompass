@@ -26,6 +26,7 @@ GameObject:
   - 114: {fileID: 114000012884243674}
   - 50: {fileID: 50000012815062902}
   - 120: {fileID: 120000013991279956}
+  - 114: {fileID: 114000012530075146}
   m_Layer: 0
   m_Name: RigidSentry
   m_TagString: Enemy
@@ -151,6 +152,18 @@ MonoBehaviour:
   viewDist: 50
   sight: 0
   sightPos: {x: -16.121737, y: 2.5514657, z: 0}
+--- !u!114 &114000012530075146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012459373490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9fdf9a4b2855374fa05ba223152f267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Items: {fileID: 0}
 --- !u!114 &114000012884243674
 MonoBehaviour:
   m_ObjectHideFlags: 1
