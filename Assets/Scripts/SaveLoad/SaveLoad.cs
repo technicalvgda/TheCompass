@@ -10,6 +10,17 @@ public class SaveLoad : MonoBehaviour {
     {
         SaveLoad.SaveFile(new GameData(), defaultFilePath);
     }
+    public static void SaveGameWithScene(string NextScene)
+    {
+        GameData game = SaveLoad.LoadGame();
+        game = game == null ? new GameData() : game;
+        game.Scene = NextScene;
+        SaveLoad.SaveGame(game);
+    }
+    public static void SaveGame(GameData game)
+    {
+        SaveLoad.SaveFile(game, defaultFilePath);
+    }
     public static GameData LoadGame()
     {
         return (GameData)LoadFile(defaultFilePath);

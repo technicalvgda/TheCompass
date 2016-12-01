@@ -215,6 +215,7 @@ public class TwineTest : MonoBehaviour {
 			blackScreenImage.color = _color;
 			yield return null;
 		}
+        SaveLoad.SaveGameWithScene(NextScene);
 		SceneManager.LoadScene(NextScene);	
 	}
 }
