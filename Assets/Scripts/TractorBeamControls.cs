@@ -37,7 +37,7 @@ public class TractorBeamControls : MonoBehaviour
     private Player _player;
 
     //Audio
-    public AudioSource TractorConnectSound, TractorReleaseSound;
+    public AudioSource TractorConnectSound, TractorReleaseSound, TractorActiveSound;
 
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
 
@@ -124,8 +124,7 @@ public class TractorBeamControls : MonoBehaviour
             songManager.ChangeAux1to2();
         }
 
-
-        TractorConnectSound.Play();
+       //TractorConnectSound.Play();
     }
 
     //Handles reset when player releases an object
@@ -136,8 +135,7 @@ public class TractorBeamControls : MonoBehaviour
         {
             objectScript.isTractored = false;
             objectScript.transform.SetParent(null);
-
-            TractorReleaseSound.Play();
+            //TractorReleaseSound.Play();
         }
         buildSpeed = 0;
 
@@ -145,6 +143,37 @@ public class TractorBeamControls : MonoBehaviour
         _hitDebris = false;
         _tractorlength = 0;
 
+    }
+    void PlayTractorBeamSound()
+    {
+        if(!TractorActiveSound.isPlaying)
+        {
+            StopCoroutine(FadeOutTractorActiveSound());
+            TractorActiveSound.volume = SoundSettingCompare("FXSlider");
+            TractorActiveSound.Play();
+        }
+       
+    }
+
+    void StopTractorBeamSound()
+    {
+        if (TractorActiveSound.isPlaying)
+        {
+            StartCoroutine(FadeOutTractorActiveSound());
+        }
+    }
+    IEnumerator FadeOutTractorActiveSound()
+    {
+        if(TractorActiveSound.isPlaying)
+        {
+            while(TractorActiveSound.volume > 0)
+            {
+                TractorActiveSound.volume -= 0.1f;
+                yield return new WaitForSeconds(0.1f);
+            }
+            TractorActiveSound.Stop();
+        }
+        yield return null;
     }
 
     public float getObjectSize()
@@ -183,6 +212,7 @@ public class TractorBeamControls : MonoBehaviour
         //when left mouse button is clicked and held
         if (Input.GetMouseButton(0))
         {
+            PlayTractorBeamSound();
             //get mouse click in world coordinates
             _MouseClickedPoint = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
             //sends ray out to check if it hits an object when it does it records which object it hit
@@ -233,6 +263,7 @@ public class TractorBeamControls : MonoBehaviour
         //if a controller is present 
         else if (Input.GetButton("RightBumper") || Input.GetAxis("RightTrigger") > 0)//Input.GetAxis("RightJoystickVertical") != 0 || Input.GetAxis("RightJoystickHorizontal") != 0
         {
+            PlayTractorBeamSound();
             //sends ray out to check if it hits an object when it does it records which object it hit
             RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(Input.GetAxis("RightJoystickHorizontal"), Input.GetAxis("RightJoystickVertical")), _tractorlength);
             if (_tractorlength < MAX_TRACTOR_LENGTH && !_hitDebris)
@@ -271,10 +302,12 @@ public class TractorBeamControls : MonoBehaviour
         //when the mouse button is released or joystick returns to center resets all of the necessary variables
         else if (Input.GetMouseButtonUp(0) && _tractorStick.rigidbody != null)
         {
+            StopTractorBeamSound();
             _tractorStick.rigidbody.velocity = velocity;
         }
         else
         {
+            StopTractorBeamSound();
             //Handles variable reset
             TractorReleases();
         }
@@ -403,6 +436,7 @@ public class TractorBeamControls : MonoBehaviour
     {
         if (joystick.touchPhase() == TouchPhase.Moved)
         {
+            PlayTractorBeamSound();
             RaycastHit2D hit = Physics2D.Raycast(transform.position, joystick.inputValue(), _tractorlength);
             if (_tractorlength < MAX_TRACTOR_LENGTH && !_hitDebris)
             {
@@ -440,6 +474,7 @@ public class TractorBeamControls : MonoBehaviour
         }
         else if (joystick.touchPhase() == TouchPhase.Ended)
         {
+             StopTractorBeamSound();
             //Handles variable reset
             TractorReleases();
         }
@@ -500,5 +535,21 @@ public class TractorBeamControls : MonoBehaviour
         }
     }
 #endif
+
+    //send in the playerpref for "BGSlider" or "FXSlider" and compare it against master volume
+    //return the lower of the two
+    private float SoundSettingCompare(string prefName)
+    {
+        float compareVolume = PlayerPrefs.GetFloat(prefName);
+        float masterVolume = PlayerPrefs.GetFloat("MSTRSlider");
+        if (masterVolume > compareVolume)
+        {
+            return compareVolume;
+        }
+        else
+        {
+            return masterVolume;
+        }
+    }
 
 }
