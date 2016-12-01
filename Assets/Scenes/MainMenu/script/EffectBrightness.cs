@@ -9,6 +9,8 @@ public class EffectBrightness : MonoBehaviour
 
     void OnRenderImage(RenderTexture src, RenderTexture dest)
     {
+        if (brightness == 1) return;
+
         material.SetFloat("_Brightness", brightness);
         Graphics.Blit(src, dest, material);
     }
