@@ -56,9 +56,10 @@ GameObject:
   - 222: {fileID: 222000012509796196}
   - 114: {fileID: 114000011368858164}
   - 114: {fileID: 114000012493111950}
-  - 114: {fileID: 114000012446664534}
   - 95: {fileID: 95000011452007484}
   - 114: {fileID: 114000012292247750}
+  - 114: {fileID: 114000012446664534}
+  - 114: {fileID: 114000012737530486}
   m_Layer: 5
   m_Name: Button generic
   m_TagString: Untagged
@@ -226,10 +227,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44dfd9d9cdc8c694887397990eb7b327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextDesktop: {fileID: 0}
-  nextMobile: {fileID: 0}
   exit: Exit
   enter: Enter
+  nextSingle: {fileID: 0}
 --- !u!114 &114000012493111950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -271,6 +271,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114000012737530486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011157420528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e900dd4fbe6687d4fa8a6c9443cf54c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 0}
 --- !u!114 &114000013463351250
 MonoBehaviour:
   m_ObjectHideFlags: 1

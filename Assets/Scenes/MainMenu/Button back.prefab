@@ -39,9 +39,10 @@ GameObject:
   - 222: {fileID: 222000012149424418}
   - 114: {fileID: 114000012305807218}
   - 114: {fileID: 114000012112906224}
-  - 114: {fileID: 114000011287946832}
   - 95: {fileID: 95000010210370266}
   - 114: {fileID: 114000013397966048}
+  - 114: {fileID: 114000011287946832}
+  - 114: {fileID: 114000011718468810}
   m_Layer: 5
   m_Name: Button back
   m_TagString: Untagged
@@ -156,6 +157,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exit: Exit
   enter: Enter
+--- !u!114 &114000011718468810
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012057406324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e900dd4fbe6687d4fa8a6c9443cf54c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 0}
 --- !u!114 &114000012112906224
 MonoBehaviour:
   m_ObjectHideFlags: 1
