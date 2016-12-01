@@ -18,19 +18,25 @@ public class Stalker : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        transform.right = _player.transform.position - transform.position;
-        //player is within firing range and in sight
-        if(Vector2.Distance(transform.position, _player.transform.position) <= attRange)
-        {
-            StartCoroutine(fire());
-        }
+	void Update ()
+    {
         //we aren't too close to the player, so we move
         float distToPlayer = Vector2.Distance(transform.position, _player.transform.position);
-        //Debug.Log(distToPlayer);
-        if (distToPlayer >= stopDist && distToPlayer < detectionRange)
+        //check if needs to move
+        if (distToPlayer < detectionRange)
         {
-            transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, speed * Time.smoothDeltaTime);
+            if(distToPlayer >= stopDist)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, speed * Time.smoothDeltaTime);
+            }
+
+            transform.right = _player.transform.position - transform.position;
+            //player is within firing range and in sight
+            if (Vector2.Distance(transform.position, _player.transform.position) <= attRange)
+            {
+                StartCoroutine(fire());
+            }
+
         }
 	}
 
