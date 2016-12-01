@@ -27,7 +27,7 @@ public class Stalker : MonoBehaviour {
         }
         //we aren't too close to the player, so we move
         float distToPlayer = Vector2.Distance(transform.position, _player.transform.position);
-        Debug.Log(distToPlayer);
+        //Debug.Log(distToPlayer);
         if (distToPlayer >= stopDist && distToPlayer < detectionRange)
         {
             transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, speed * Time.smoothDeltaTime);
