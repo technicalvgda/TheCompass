@@ -157,5 +157,10 @@ public class TetheredObject : MonoBehaviour
             spriteRen.sprite = damageImages[imageIndex];
 
         }
+        if(gameObject.name == "TetheredPowerSource")
+        {
+            damageImages = Resources.LoadAll<Sprite>("PowerCore");
+            spriteRen.sprite = damageImages[imageIndex];
+        }
     }
 }
