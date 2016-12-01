@@ -94,7 +94,7 @@ public class BlackholeBehavior : MonoBehaviour {
                     {
                         player.setHealth(0);
                     }
-                    else
+                    else if (_spaceObject.tag != "RepairStation")
                     {
                         Destroy(_spaceObject.gameObject);
                     }

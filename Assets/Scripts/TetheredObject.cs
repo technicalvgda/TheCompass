@@ -101,6 +101,10 @@ public class TetheredObject : MonoBehaviour
             if (TetheredHealth <= 0) // if tethered health reaches zero or below
             {
                 tetherOn = false;
+                if(SceneManager.GetActiveScene().name == "Level 4")
+                {
+                    FailLevel();
+                }
                 //Destroy(coll.gameObject); //the collided object goes bye bye
                                           //FailLevel(); commented out this call so the fail level can be called after commentary
             }

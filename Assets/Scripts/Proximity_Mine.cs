@@ -15,11 +15,14 @@ public class Proximity_Mine : MonoBehaviour {
 	private CircleCollider2D _col;
 	private Player _player;
 
-	void Start()
+    GameObject explosion;
+
+    void Start()
 	{
 		_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 		_sprite = GetComponent<SpriteRenderer>();
-	}
+        explosion = Resources.Load("Explosion") as GameObject;
+    }
 
     void Update()
     {
@@ -40,7 +43,7 @@ public class Proximity_Mine : MonoBehaviour {
 		if(col.gameObject == _player.gameObject)
 		{
 			//change sprite into an explosion effect
-			_sprite.sprite = spriteMat;
+			//_sprite.sprite = spriteMat;
 			_player.takeDamage(damage);
 			//essentially a for loop
 			foreach(Collider2D hit in colliders)
@@ -63,6 +66,7 @@ public class Proximity_Mine : MonoBehaviour {
 			}
             //delayed destroy for purpose of explosive effect
             //Destroy(this.transform.GetChild(0).gameObject);
+            Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(this.gameObject, 0.1f);
            
           
