@@ -11,23 +11,6 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1000010947754424}
   m_IsPrefabParent: 1
---- !u!1 &1000010869531578
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 4000010267326582}
-  - 114: {fileID: 114000011753398978}
-  - 58: {fileID: 58000013627330266}
-  m_Layer: 0
-  m_Name: EncounterShipPart
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1000010947754424
 GameObject:
   m_ObjectHideFlags: 0
@@ -83,19 +66,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4000010267326582
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010869531578}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 4000012204930874}
-  m_RootOrder: 1
 --- !u!4 &4000011233896932
 Transform:
   m_ObjectHideFlags: 1
@@ -122,7 +92,6 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000011233896932}
-  - {fileID: 4000010267326582}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &4000013812452154
@@ -155,20 +124,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &58000013627330266
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010869531578}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 54.796234
 --- !u!58 &58000013733701584
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -234,26 +189,6 @@ MonoBehaviour:
   splitShards: 4
   driftSpeed: 100
   isTractored: 0
---- !u!114 &114000011753398978
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010869531578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fee23d92a8ab4ec46b660889a2d66a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textFile: {fileID: 4900000, guid: c920a263da3550449b5917e3846a9300, type: 3}
-  speakerName: OFELIA
-  startLine: 0
-  endLine: 0
-  audioClip: {fileID: 8300000, guid: c32c4fb1deecf144386b4ba96e53a0eb, type: 3}
-  theTextBox: {fileID: 0}
-  destroyWhenActivated: 1
-  timedDialogue: 1
-  timeUntilFinished: 10
 --- !u!114 &114000012871159206
 MonoBehaviour:
   m_ObjectHideFlags: 1
