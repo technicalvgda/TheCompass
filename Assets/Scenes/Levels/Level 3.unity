@@ -4087,7 +4087,7 @@ MonoBehaviour:
   speakerName: OFELIA
   startLine: 0
   endLine: 0
-  audioClip: {fileID: 8300000, guid: 9c5cce6ce080d3f48adc6457413974a7, type: 3}
+  audioClip: {fileID: 8300000, guid: 3b298258e31e17448bfcc234192403aa, type: 3}
   theTextBox: {fileID: 0}
   destroyWhenActivated: 1
   timedDialogue: 1
@@ -8545,6 +8545,11 @@ Prefab:
       propertyPath: m_Name
       value: SignalBooster
       objectReference: {fileID: 0}
+    - target: {fileID: 114000011753398978, guid: a665a9a8c3e18b84c9d0297974e0fd92,
+        type: 2}
+      propertyPath: audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 88f64b402b2c430409fdc3ee908c3cf2, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a665a9a8c3e18b84c9d0297974e0fd92, type: 2}
   m_IsPrefabParent: 0

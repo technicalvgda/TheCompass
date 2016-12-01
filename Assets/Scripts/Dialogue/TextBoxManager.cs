@@ -109,6 +109,8 @@ public class TextBoxManager : MonoBehaviour
             else if(isTyping && !cancelTyping)
             {
                 cancelTyping = true;
+				if(voiceOverAudioSource.isPlaying)
+					voiceOverAudioSource.Stop ();
             }
             
         }
@@ -143,6 +145,8 @@ public class TextBoxManager : MonoBehaviour
     public void setVoiceOverSourceClip(AudioClip clip)
     {
         //AudioSource audio = GetComponent<AudioSource>();
+		if(voiceOverAudioSource.isPlaying)
+			voiceOverAudioSource.Stop ();
         voiceOverAudioSource.clip = clip;
         voiceOverAudioSource.Play();
         if (Input.GetKeyDown("space")) voiceOverAudioSource.Stop();
@@ -150,6 +154,8 @@ public class TextBoxManager : MonoBehaviour
 	public void setVoiceOverSourceClip(AudioClip clip,float sec)
 	{
 		//AudioSource audio = GetComponent<AudioSource>();
+		if(voiceOverAudioSource.isPlaying)
+			voiceOverAudioSource.Stop ();
 		voiceOverAudioSource.clip = clip;
 		voiceOverAudioSource.Play();
 		voiceOverAudioSource.time = sec;
