@@ -213,7 +213,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: ec0762e35ae7ee044b98cd2244809e41, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 689d0ec03c29b8f4a9bd8282d50ec8ed, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -365,9 +365,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'TEST
-
-'
+  m_Text: 
 --- !u!222 &1813251633
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -508,8 +506,18 @@ MonoBehaviour:
   blackFadeOutImage: {fileID: 2036324966}
   theText: {fileID: 1813251632}
   audioSource: {fileID: 1854057549}
-  textFiles: []
-  audioClips: []
+  textFiles:
+  - {fileID: 4900000, guid: ec44539a5d1f90f488ab974b23ddee45, type: 3}
+  - {fileID: 4900000, guid: baf462b3c14b8fb49bad984fe27b1330, type: 3}
+  - {fileID: 4900000, guid: c57ed1de6106ef64187372e66d4b3f10, type: 3}
+  - {fileID: 4900000, guid: ce509e06bd3d82e4790d1c8ba81daeef, type: 3}
+  audioClips:
+  - {fileID: 8300000, guid: 14da46bd7e5301f4ea6ababf252ac44f, type: 3}
+  waitForSecsArray:
+  - 18
+  - 14
+  - 12
+  - 9
 --- !u!81 &1854057551
 AudioListener:
   m_ObjectHideFlags: 0
