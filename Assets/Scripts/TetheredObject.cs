@@ -13,6 +13,7 @@ public class TetheredObject : MonoBehaviour
     private LineRenderer lineRen;
     private Rigidbody2D rb2d;
     private SpriteRenderer spriteRen;
+    private GameObject mapIcon;
     public int TetheredHealth = 4; //tethered object's health. Gets hit three times and health goes to zero.
     //private string _sceneToLoad;  //holds a specified scene name to load when the player fails this level 
     Player playerScript;
@@ -31,6 +32,7 @@ public class TetheredObject : MonoBehaviour
         lineRen.SetWidth(.1f, .1f);
         lineRen.SetColors(c1, c1);
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        mapIcon = transform.FindChild("MapIcon").gameObject;
         //_sceneToLoad = "MVPScene";  //change this to the specified scene that is to be loaded when the player fails this level
         InitializeSprites();
     }
@@ -40,6 +42,11 @@ public class TetheredObject : MonoBehaviour
     {
         if (tetherOn == true)
         {
+            //disable map icon
+            if(mapIcon.activeSelf)
+            {
+                mapIcon.SetActive(false);
+            }
             //get static variable of player position from Player script
             playerPosition = Player.playerPos;
             lineRen.SetPosition(0, playerPosition);
