@@ -12,6 +12,8 @@ public class EndingScriptedEvent : MonoBehaviour {
 	public float[] waitForSecsArray;
 	private Color _color;
 	private int _counter;
+
+    public Animator endingAnimation;
 	// Use this for initialization
 	void Start () {
 		_counter = 0;
@@ -49,7 +51,10 @@ public class EndingScriptedEvent : MonoBehaviour {
 				yield return new WaitForSeconds (waitForSecsArray [_counter - 1]);
 			}
 		}
-
+        if(endingAnimation != null)
+        {
+            endingAnimation.Play("EndingIdeal");
+        }
 		//TEMP YIELD FOR SECONDS REMOVE BEFORE LAUNCH
 		yield return new WaitForSeconds (2);
 

@@ -17,7 +17,7 @@ public class TriggerLevelEndCutscene : MonoBehaviour
     private GameObject mapIcon;
     private bool movePlayer = false;
     private float distToTarget;
-    private const float arrivalDist = 0.5f;
+    private const float arrivalDist = 1.0f;
 
     public float lookRotation = -90.0f;
     private Quaternion dockRotation;
