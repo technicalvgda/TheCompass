@@ -26,7 +26,8 @@ public class GameOver : MonoBehaviour {
         {
            	GameOverUI.SetActive(true);
 			isGameOver = true;
-			//_butManagerScript.selectFirstButtonForGameOverCanvas ();
+            Time.timeScale = 0;
+            //_butManagerScript.selectFirstButtonForGameOverCanvas ();
         }
     }
 

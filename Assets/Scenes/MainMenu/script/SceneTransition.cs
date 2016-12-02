@@ -19,19 +19,22 @@ public class SceneTransition : MonoBehaviour
 
     public void LoadScene(string scene)
 	{
-		Debug.Log("asdada");
+        Time.timeScale = 1;
+        Debug.Log("asdada");
         nextScene = scene;
         anim.SetTrigger(-556287998); // "Exit Scene"
     }
 
     public void LoadSceneInstant(string scene)
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(scene);
     }
 
     void LoadNextScene()
     {
-		Debug.Log("LoadNextScene()");
+        Time.timeScale = 1;
+        Debug.Log("LoadNextScene()");
         if (nextScene != null)
         {
 			Debug.Log("NEXT SCENE");
@@ -48,7 +51,8 @@ public class SceneTransition : MonoBehaviour
 
     public void LoadSavedGame()
     {
-		GameData data = (GameData)SaveLoad.LoadFile(SaveLoad.defaultFilePath);
+        Time.timeScale = 1;
+        GameData data = (GameData)SaveLoad.LoadFile(SaveLoad.defaultFilePath);
 		Debug.Log(data.Scene);
         //GameData data = (GameData)SaveLoad.LoadFile(AutoSave.defaultFilePath);
         //GameData data = null;
@@ -64,8 +68,8 @@ public class SceneTransition : MonoBehaviour
 
     public void ReloadScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Quit()
