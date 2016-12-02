@@ -34,7 +34,7 @@ public class SettingsControls : SettingsToggle
     void Set(int index, int option)
     {
         Toggle t = toggles[index];
-        Debug.Log(t + " tried to set control type from " + value + " to " + option);
+        //Debug.Log(t + " tried to set control type from " + value + " to " + option);
 
         // Every toggle fires when a toggle is clicked.
         // Only let through the ones that are on.
@@ -45,7 +45,7 @@ public class SettingsControls : SettingsToggle
         value = option;
         SetDemos();
 
-        Debug.Log(t + " successfully set control type to " + value);
+        //Debug.Log(t + " successfully set control type to " + value);
     }
 
     void SetDemos()

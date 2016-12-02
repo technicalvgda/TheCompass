@@ -84,7 +84,7 @@ public class SettingsResolution : SettingsToggle
         // t. Unity 2016
 
         Toggle t = toggles[index];
-        Debug.Log(t + " tried to set resolution");
+        //Debug.Log(t + " tried to set resolution");
 
         // Ignore toggles that are turned off (because they still fire the event),
         // or if the player is clicking on an already toggled toggle.
@@ -106,8 +106,8 @@ public class SettingsResolution : SettingsToggle
         value = index;
         revert = false;
         
-        Debug.Log(t + " successfully set resolution. RESOLUTION IS NOW " +
-            resOption[index].width + " x " + resOption[index].height);
+        //Debug.Log(t + " successfully set resolution. RESOLUTION IS NOW " +
+        //    resOption[index].width + " x " + resOption[index].height);
     }
 
     public void Revert()
