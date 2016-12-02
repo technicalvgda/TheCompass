@@ -19,16 +19,18 @@ AnimationClip:
   - curve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
-        value: -2260
-        inSlope: 45.2
-        outSlope: 45.2
-        tangentMode: 10
-      - time: 100
-        value: 2260
-        inSlope: 45.2
-        outSlope: 45.2
-        tangentMode: 10
+      - serializedVersion: 2
+        time: 0
+        value: -4077
+        inSlope: 170.11111
+        outSlope: 183.93333
+        tangentMode: 69
+      - serializedVersion: 2
+        time: 45
+        value: 4200
+        inSlope: 183.93333
+        outSlope: 0
+        tangentMode: 69
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -37,7 +39,7 @@ AnimationClip:
     classID: 224
     script: {fileID: 0}
   m_PPtrCurves: []
-  m_SampleRate: 6
+  m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -56,7 +58,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 101
+    m_StopTime: 45.166668
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -75,16 +77,18 @@ AnimationClip:
   - curve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
-        value: -2260
-        inSlope: 45.2
-        outSlope: 45.2
-        tangentMode: 10
-      - time: 100
-        value: 2260
-        inSlope: 45.2
-        outSlope: 45.2
-        tangentMode: 10
+      - serializedVersion: 2
+        time: 0
+        value: -4077
+        inSlope: 170.11111
+        outSlope: 183.93333
+        tangentMode: 69
+      - serializedVersion: 2
+        time: 45
+        value: 4200
+        inSlope: 183.93333
+        outSlope: 0
+        tangentMode: 69
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -96,15 +100,16 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
+  m_IsEmpty: 0
   m_Events:
-  - time: 97
+  - time: 44.833332
     functionName: InvokeAtIndex
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 101
+  - time: 45.166668
     functionName: InvokeAtIndex
     data: 
     objectReferenceParameter: {fileID: 0}
