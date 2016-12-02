@@ -65,7 +65,8 @@ public class TriggerLevelEndCutscene : MonoBehaviour
             if(distToTarget <= arrivalDist)
             {
                 _player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                if(playerRotation == null)
+                _player.GetComponent<Rigidbody2D>().angularVelocity = 0;
+                if (playerRotation == null)
                 { playerRotation = _player.transform.rotation; }
 
                 _player.transform.rotation = Quaternion.Lerp(playerRotation, dockRotation, Time.deltaTime*rotationSpeed);
