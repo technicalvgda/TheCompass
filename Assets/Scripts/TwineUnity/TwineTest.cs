@@ -17,6 +17,8 @@ public class TwineTest : MonoBehaviour {
 	public string NextScene;
 	public string ContinueText;
 
+    public GameObject GAMEOVERTHING;
+
     public string AlternateStartTag = "AlternateStart";
     public string AlternateEndTag = "AlternateEnd";
     public int EnemiesKilledThreshhold = 5;
@@ -202,6 +204,12 @@ public class TwineTest : MonoBehaviour {
                 if (tags.Contains(GameOverTag))
                 {
                     //TODO: CALL GAMEOVER FUNCTION
+                    if (GAMEOVERTHING != null)
+                    {
+                        GAMEOVERTHING.SetActive(true);
+                        Time.timeScale = 0f;
+                       
+                    }
                 }
                 else
                 {

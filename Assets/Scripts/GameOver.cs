@@ -21,6 +21,8 @@ public class GameOver : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        if (player == null) return;
+
         //if player's health is 0 or less, stop game time & set game over canvas to active
         if (player.getHealth() <= 0 || player.getFuel01() <= 0)
         {
