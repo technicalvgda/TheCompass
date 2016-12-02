@@ -246,7 +246,8 @@ public class LoadingTransition : MonoBehaviour
         {
             if (aSyncOp.progress >= 0.9f)
             {
-				if (_readyForInput == true) {
+				if (_readyForInput == true)
+                {
 #if UNITY_STANDALONE || UNITY_WEBPLAYER
 					//if in the web player will prompt user to press spacebar
 					//loadingText.text = "Press any button to Continue"; // prompts the user to press space in order
@@ -256,13 +257,15 @@ public class LoadingTransition : MonoBehaviour
 						aSyncOp.allowSceneActivation = true;
 					}
 #elif UNITY_IOS || UNITY_ANDROID
-                //when built to mobile will prompt user to touch the screen to continue 
-                //loadingText.text = "Touch Screen to Continue"; // prompts the user to press space in order
-                //loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, Mathf.PingPong(Time.time, 1));
-				if (Input.touchCount > 0 || Input.GetMouseButtonDown(0))
-                {
-                    aSyncOp.allowSceneActivation = true;
-                }
+                    //when built to mobile will prompt user to touch the screen to continue 
+                    //loadingText.text = "Touch Screen to Continue"; // prompts the user to press space in order
+                    //loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, Mathf.PingPong(Time.time, 1));
+				    if (Input.touchCount > 0 || Input.GetMouseButtonDown(0))
+                    {
+                        //allow time to move again before jumping
+                        Time.timeScale = 1;
+                        aSyncOp.allowSceneActivation = true;
+                    }
 #endif
 				}
             }
