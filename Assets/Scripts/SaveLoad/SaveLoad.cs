@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Collections.Generic;
+
 
 public class SaveLoad : MonoBehaviour {
     public static SaveLoad Singleton;
-    public static string defaultFilePath = "SaveData.bin";
+    public static string defaultFilePath = "SaveData.dat";
+    public static string[] SceneExceptions = { "MainMenu", "Logo", "LoadingScreenScene" };
+    public static List<string> SceneExceptionList = new List<string>(SceneExceptions);
 
     public static void SaveGame()
     {
@@ -12,6 +16,7 @@ public class SaveLoad : MonoBehaviour {
     }
     public static void SaveGameWithScene(string NextScene)
     {
+        if (SceneExceptionList.Contains(NextScene)) return;
         Debug.Log("SaveGameWithScene -- "+NextScene);
         GameData game = SaveLoad.LoadGame();
         game = game == null ? new GameData() : game;
@@ -40,10 +45,13 @@ public class SaveLoad : MonoBehaviour {
         object data = null;
         try
         {
-            Stream stream = File.Open(filePath, FileMode.Open);
-            BinaryFormatter bformatter = new BinaryFormatter();
-            data = bformatter.Deserialize(stream);
-            stream.Close();
+            if (File.Exists(defaultFilePath))
+            {
+                Stream stream = File.Open(filePath, FileMode.Open);
+                BinaryFormatter bformatter = new BinaryFormatter();
+                data = bformatter.Deserialize(stream);
+                stream.Close();
+            }
         }
         catch (IOException)
         {
