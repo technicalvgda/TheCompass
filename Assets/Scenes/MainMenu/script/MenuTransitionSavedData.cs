@@ -11,7 +11,7 @@ public class MenuTransitionSavedData : MenuTransition
     {
         get
         {
-			bool hasSavedData = File.Exists(SaveLoad.defaultFilePath);
+            bool hasSavedData = PlayerPrefs.HasKey("scene");//File.Exists(SaveLoad.defaultFilePath);
             //Debug.Log("hasSavedData = " + hasSavedData);
            // bool hasSavedData = true;
 
