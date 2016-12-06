@@ -32,12 +32,15 @@ public class TriggerLevel4EndCutscene : MonoBehaviour
     private LoadingTransition loadingTransition;
     public GameObject transitionBox;
     public GameObject commentaryObject;
+    public GameObject commentaryBox;
+    public TextBoxManager commentaryScript;
 
     private AudioSource audioSrc;
 
     // Use this for initialization
     void Start()
     {
+        commentaryScript = commentaryBox.GetComponent<TextBoxManager>();
         _player = GameObject.FindGameObjectWithTag("Player");
         audioSrc = GetComponent<AudioSource>();
         upgradeSphere = transform.FindChild("UpgradeSphere").gameObject;
@@ -101,6 +104,7 @@ public class TriggerLevel4EndCutscene : MonoBehaviour
             tether.GetComponent<TetheredObject>().tetherOn = false;
             //move power source to proper location
             StartCoroutine(MovePowerToTarget(tether.transform));
+
             //disable collisions
             _player.GetComponent<CircleCollider2D>().enabled = false;
             //disable fuel loss
@@ -128,12 +132,16 @@ public class TriggerLevel4EndCutscene : MonoBehaviour
 
     IEnumerator MovePowerToTarget(Transform powerSource)
     {
+        powerSource.position = powerSourceTarget.position;//TEMP CODE TO FIX STUCK CORE
+        powerSource.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        /*
         Vector3 startPos = powerSource.position;
         while(Vector3.Distance(powerSource.position, powerSourceTarget.position) > 0.5)
         {
             powerSource.position = Vector3.Lerp(startPos, powerSourceTarget.position, Time.deltaTime*2);
             yield return new WaitForSeconds(0.05f);
         }
+        */
         yield return null;
     }
 
@@ -154,14 +162,20 @@ public class TriggerLevel4EndCutscene : MonoBehaviour
             //start shrinking player
             StartCoroutine(ShrinkPlayer());
             */
-            StartCoroutine(PlayAudio());
-            //commentaryObject.GetComponent<TwoObjectsCollideCommentary>().activateCommentary();
+            //StartCoroutine(PlayAudio());
+
+            commentaryObject.GetComponent<Level4EndDialogue>().ActivateCommentary();
             upgradeSphere.SetActive(true);
-            yield return new WaitForSeconds(pauseTime);
+            while(commentaryScript.currentlyInCommentary)
+            {
+                yield return new WaitForSeconds(1f);
+            }
+            //yield return new WaitForSeconds(pauseTime);
             upgradeSphere.SetActive(false);
 
             target = allTargets[targetIndex];
             BeginCutscene();
+           
         }
         else
         {

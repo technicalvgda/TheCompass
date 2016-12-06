@@ -22610,6 +22610,7 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 95000012660830948, guid: 7597b4dac1288f04cb1bf7a6fb33966a, type: 2}
+    - {fileID: 114000013703507622, guid: 7597b4dac1288f04cb1bf7a6fb33966a, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 7597b4dac1288f04cb1bf7a6fb33966a, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &933641210 stripped
@@ -22641,8 +22642,10 @@ MonoBehaviour:
   - 10
   - 30
   lookRotation: -90
-  transitionBox: {fileID: 0}
+  transitionBox: {fileID: 1108647533}
   commentaryObject: {fileID: 2102956323}
+  commentaryBox: {fileID: 1429517135}
+  commentaryScript: {fileID: 0}
 --- !u!82 &933641213
 AudioSource:
   m_ObjectHideFlags: 0
@@ -27441,6 +27444,16 @@ Prefab:
         type: 2}
       propertyPath: levelToLoad
       value: Level 4 Dialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 82000012488289402, guid: dc990532c9eef8348b99712d28b9e6b5,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82000013230137336, guid: dc990532c9eef8348b99712d28b9e6b5,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc990532c9eef8348b99712d28b9e6b5, type: 2}
@@ -34494,6 +34507,11 @@ Prefab:
     - {fileID: 114000013817158178, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a946a39ba7729a9488f335fc6dc4b10c, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1429517135 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000013533848180, guid: dc990532c9eef8348b99712d28b9e6b5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1108647530}
 --- !u!1 &1429757924
 GameObject:
   m_ObjectHideFlags: 0
@@ -48387,6 +48405,27 @@ GameObject:
   m_PrefabParentObject: {fileID: 1000011077078340, guid: 44ca797a71243ca40bf023a839f38f02,
     type: 2}
   m_PrefabInternal: {fileID: 2115659907}
+--- !u!114 &2102956325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2102956323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763185c84c371774b9e8e7d20a46c5f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textFile: {fileID: 4900000, guid: e1a877ffba9a823458af2b597c6313e0, type: 3}
+  speakerName: OFELIA
+  startLine: 0
+  endLine: 2
+  audioClip: {fileID: 8300000, guid: fd3274690bfc18f4095dcf17ebda8c53, type: 3}
+  audioClip2: {fileID: 8300000, guid: 22fa8a08469d55a478385ddff3cf096e, type: 3}
+  theTextBox: {fileID: 0}
+  destroyWhenActivated: 1
+  timedDialogue: 1
+  timeUntilFinished: 60
 --- !u!1001 &2108301077
 Prefab:
   m_ObjectHideFlags: 0
@@ -48665,7 +48704,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011211199236, guid: 44ca797a71243ca40bf023a839f38f02, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 44ca797a71243ca40bf023a839f38f02, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &2119698065
