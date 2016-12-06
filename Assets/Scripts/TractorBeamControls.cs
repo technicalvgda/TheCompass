@@ -99,6 +99,8 @@ public class TractorBeamControls : MonoBehaviour
         {
             objectScript.isTractored = true;
             _hitDebris = true;
+            //prevent collisions on held objects
+            _tractorStick.collider.GetComponent<CircleCollider2D>().enabled = false;
         }
         //if the connected object is fuel
         if (_tractorStick.collider.CompareTag("Fuel"))
@@ -155,6 +157,7 @@ public class TractorBeamControls : MonoBehaviour
             }
             objectScript.isTractored = false;
             objectScript.transform.SetParent(null);
+            _tractorStick.collider.GetComponent<CircleCollider2D>().enabled = true;
             //TractorReleaseSound.Play();
         }
         buildSpeed = 0;
