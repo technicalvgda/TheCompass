@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class SaveLoad : MonoBehaviour {
     public static SaveLoad Singleton;
     public static string defaultFilePath = "SaveData.dat";
-    public static string[] SceneExceptions = { "MainMenu", "Logo", "LoadingScreenScene" };
+    public static string[] SceneExceptions = { "MainMenu", "Logo", "LoadingScreenScene", "Bowling" };
     public static List<string> SceneExceptionList = new List<string>(SceneExceptions);
 
     public static void SaveGame()
