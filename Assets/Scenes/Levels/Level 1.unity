@@ -2166,7 +2166,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 516112160}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a807f5e814cbc5f4e84442de6b72e456, type: 3}
   m_Name: 
@@ -2478,6 +2478,11 @@ Prefab:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 516112168}
+    - target: {fileID: 114000013779083674, guid: dc990532c9eef8348b99712d28b9e6b5,
+        type: 2}
+      propertyPath: levelToLoad
+      value: Level 1 Dialogue
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc990532c9eef8348b99712d28b9e6b5, type: 2}
   m_IsPrefabParent: 0
@@ -2487,6 +2492,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 544859761}
   m_Script: {fileID: 11500000, guid: 3a853f3afe03d014698596dae9d814aa, type: 3}
+--- !u!1 &544859763 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000010451397536, guid: dc990532c9eef8348b99712d28b9e6b5,
+    type: 2}
+  m_PrefabInternal: {fileID: 544859761}
 --- !u!4 &550967415 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000013794431590, guid: c2a22ae9536cd3447b04f7ed90817852,
@@ -4811,7 +4821,7 @@ Prefab:
         type: 2}
       propertyPath: transitionBox
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 544859763}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a2bfbe828b7ad2d43815543fd8254957, type: 2}
   m_IsPrefabParent: 0

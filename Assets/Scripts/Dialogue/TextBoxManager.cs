@@ -107,7 +107,7 @@ public class TextBoxManager : MonoBehaviour
 				if (secondVoiceOverAudioSource.isPlaying)
 					secondVoiceOverAudioSource.Stop ();
 			}            
-		} else if (!voiceOverAudioSource.isPlaying) 
+		} else if (voiceOverAudioSource.clip != null && !voiceOverAudioSource.isPlaying) 
 		{
 			DisableTextBox ();
 			cancelTyping = true;

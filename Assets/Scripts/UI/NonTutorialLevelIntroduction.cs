@@ -9,8 +9,17 @@ public class NonTutorialLevelIntroduction : MonoBehaviour {
 	private Color _color;
 	public bool skipIntro;
 	// Use this for initialization
-	void Start () {
-		buttonManagerScript.enterCutscene ();
+	void Start ()
+    {
+        if(buttonManagerScript == null)
+        {
+            Debug.LogError("Button Manager Unassigned in NonTutorial Level Introduction");
+        }
+        else
+        {
+            buttonManagerScript.enterCutscene();
+        }
+		
 		if (skipIntro == true) 
 		{
 			blackScreen.color = Color.clear;

@@ -1185,6 +1185,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1000013533848180, guid: dc990532c9eef8348b99712d28b9e6b5,
     type: 2}
   m_PrefabInternal: {fileID: 1927195813}
+--- !u!114 &357420649 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000013024907684, guid: dc990532c9eef8348b99712d28b9e6b5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1927195813}
+  m_Script: {fileID: 11500000, guid: 697151570580a7c458e6fdf7eb29db28, type: 3}
 --- !u!1001 &362296838
 Prefab:
   m_ObjectHideFlags: 0
@@ -2127,7 +2133,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 516112160}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a807f5e814cbc5f4e84442de6b72e456, type: 3}
   m_Name: 
@@ -4564,7 +4570,7 @@ Prefab:
         type: 2}
       propertyPath: transitionBox
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1927195814}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a2bfbe828b7ad2d43815543fd8254957, type: 2}
   m_IsPrefabParent: 0
@@ -4948,7 +4954,7 @@ Prefab:
         type: 2}
       propertyPath: textBoxManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 357420649}
     - target: {fileID: 114000013509998226, guid: 9cc872d5d4821f8428a3e31e4a8e5264,
         type: 2}
       propertyPath: commentaryDialogueBox
@@ -4986,7 +4992,7 @@ Prefab:
     - target: {fileID: 114000013509998226, guid: 9cc872d5d4821f8428a3e31e4a8e5264,
         type: 2}
       propertyPath: skipIntro
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 82000012493165404, guid: 9cc872d5d4821f8428a3e31e4a8e5264,
         type: 2}
@@ -4997,6 +5003,21 @@ Prefab:
         type: 2}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 223000013962977602, guid: 9cc872d5d4821f8428a3e31e4a8e5264,
+        type: 2}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 223000013962977602, guid: 9cc872d5d4821f8428a3e31e4a8e5264,
+        type: 2}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 516112165}
+    - target: {fileID: 223000013962977602, guid: 9cc872d5d4821f8428a3e31e4a8e5264,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: -1245657825
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9cc872d5d4821f8428a3e31e4a8e5264, type: 2}
@@ -5641,7 +5662,7 @@ Prefab:
     - target: {fileID: 212000014028641060, guid: b0b7fba286815dc44b0ba11b680392c4,
         type: 2}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114000013312837990, guid: b0b7fba286815dc44b0ba11b680392c4,
         type: 2}
@@ -7879,9 +7900,38 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 82000012488289402, guid: dc990532c9eef8348b99712d28b9e6b5,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82000013230137336, guid: dc990532c9eef8348b99712d28b9e6b5,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013779083674, guid: dc990532c9eef8348b99712d28b9e6b5,
+        type: 2}
+      propertyPath: levelToLoad
+      value: Level 0 TutorialDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000014096803600, guid: dc990532c9eef8348b99712d28b9e6b5, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011959955260, guid: dc990532c9eef8348b99712d28b9e6b5,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc990532c9eef8348b99712d28b9e6b5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1927195814 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000010451397536, guid: dc990532c9eef8348b99712d28b9e6b5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1927195813}
 --- !u!1001 &1936360843
 Prefab:
   m_ObjectHideFlags: 0

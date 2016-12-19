@@ -17,7 +17,7 @@ public class TriggerLevelEndCutscene : MonoBehaviour
     private GameObject mapIcon;
     private bool movePlayer = false;
     private float distToTarget;
-    private const float arrivalDist = 0.5f;
+    private const float arrivalDist = 1.0f;
 
     public float lookRotation = -90.0f;
     private Quaternion dockRotation;
@@ -65,7 +65,8 @@ public class TriggerLevelEndCutscene : MonoBehaviour
             if(distToTarget <= arrivalDist)
             {
                 _player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                if(playerRotation == null)
+                _player.GetComponent<Rigidbody2D>().angularVelocity = 0;
+                if (playerRotation == null)
                 { playerRotation = _player.transform.rotation; }
 
                 _player.transform.rotation = Quaternion.Lerp(playerRotation, dockRotation, Time.deltaTime*rotationSpeed);

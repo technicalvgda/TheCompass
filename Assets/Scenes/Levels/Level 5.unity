@@ -932,7 +932,7 @@ Prefab:
         type: 2}
       propertyPath: transitionBox
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1103033890}
     - target: {fileID: 114000013703507622, guid: 7597b4dac1288f04cb1bf7a6fb33966a,
         type: 2}
       propertyPath: isCommentaryTrigger
@@ -4430,7 +4430,7 @@ Prefab:
         type: 2}
       propertyPath: transitionBox
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1103033890}
     - target: {fileID: 114000013703507622, guid: 7597b4dac1288f04cb1bf7a6fb33966a,
         type: 2}
       propertyPath: isCommentaryTrigger
@@ -4901,7 +4901,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 516112160}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a807f5e814cbc5f4e84442de6b72e456, type: 3}
   m_Name: 
@@ -7784,7 +7784,7 @@ Prefab:
         type: 2}
       propertyPath: transitionBox
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1103033890}
     - target: {fileID: 114000013703507622, guid: 7597b4dac1288f04cb1bf7a6fb33966a,
         type: 2}
       propertyPath: isCommentaryTrigger
@@ -8906,7 +8906,7 @@ Prefab:
         type: 2}
       propertyPath: transitionBox
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1103033890}
     - target: {fileID: 114000013703507622, guid: 7597b4dac1288f04cb1bf7a6fb33966a,
         type: 2}
       propertyPath: isCommentaryTrigger
@@ -9835,7 +9835,7 @@ Prefab:
         type: 2}
       propertyPath: transitionBox
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1103033890}
     - target: {fileID: 114000013703507622, guid: 7597b4dac1288f04cb1bf7a6fb33966a,
         type: 2}
       propertyPath: isCommentaryTrigger
@@ -10471,6 +10471,11 @@ Prefab:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 516112168}
+    - target: {fileID: 114000013779083674, guid: dc990532c9eef8348b99712d28b9e6b5,
+        type: 2}
+      propertyPath: levelToLoad
+      value: Level 5 Dialogue
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc990532c9eef8348b99712d28b9e6b5, type: 2}
   m_IsPrefabParent: 0
@@ -10486,6 +10491,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1103033887}
   m_Script: {fileID: 11500000, guid: 3a853f3afe03d014698596dae9d814aa, type: 3}
+--- !u!1 &1103033890 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000010451397536, guid: dc990532c9eef8348b99712d28b9e6b5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1103033887}
 --- !u!4 &1122078859 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000010555197692, guid: a639f13b11404a04ca136cdcd1021fd6,
@@ -14712,7 +14722,7 @@ Prefab:
         type: 2}
       propertyPath: transitionBox
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1103033890}
     - target: {fileID: 114000013703507622, guid: 7597b4dac1288f04cb1bf7a6fb33966a,
         type: 2}
       propertyPath: isCommentaryTrigger
@@ -17159,7 +17169,7 @@ Prefab:
         type: 2}
       propertyPath: transitionBox
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1103033890}
     - target: {fileID: 114000013703507622, guid: 7597b4dac1288f04cb1bf7a6fb33966a,
         type: 2}
       propertyPath: isCommentaryTrigger
