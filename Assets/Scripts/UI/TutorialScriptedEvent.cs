@@ -88,8 +88,10 @@ public class TutorialScriptedEvent : MonoBehaviour {
 				textBoxManager.endAtLine = 0;
 				textBoxManager.setSpeakerNameText (speakers [i]);
 				textBoxManager.EnableTextBox ();
-				if (textBoxManager.speakerText.text != "Pilot")					
+				if (textBoxManager.speakerText.text != "Pilot")
 					textBoxManager.setVoiceOverSourceClip (audioClips [i]);
+				else
+					textBoxManager.setVoiceOverSourceClip (null);
 				i++;
 			} 
 
