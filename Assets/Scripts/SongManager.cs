@@ -16,7 +16,7 @@ public class SongManager : MonoBehaviour {
     public AudioSource audio1;
     public AudioSource audio2;
 
-    float MAX_VOLUME = 1;
+    float MAX_VOLUME = 0.3f;
 
     private bool checkVolume = false;
     
@@ -24,8 +24,8 @@ public class SongManager : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        PlayerPrefs.SetFloat("MSTRSlider", 1);
-        PlayerPrefs.SetFloat("BGSlider", 1);
+        PlayerPrefs.SetFloat("MSTRSlider", 0.3f);
+        PlayerPrefs.SetFloat("BGSlider", 0.3f);
         MAX_VOLUME = SoundSettingCompare("BGSlider");
         audio2.volume = 0f;
         audio1.volume = MAX_VOLUME;
@@ -64,7 +64,7 @@ public class SongManager : MonoBehaviour {
         MAX_VOLUME = SoundSettingCompare("BGSlider");
         if (audio2.isPlaying)
         {
-            audio2.volume = MAX_VOLUME;
+            audio2.volume = MAX_VOLUME ;
         }
         else if(audio1.isPlaying)
         {
